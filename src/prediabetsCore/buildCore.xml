@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Core Compile" default="fdt.invoke.launchConfiguration">
+	<target name="fdt.invoke.launchConfiguration">
+		 <fdt.invoke.launchConfiguration file=".settings/launch/MainCore.launch" mode="debug" />
+	</target>
+</project>

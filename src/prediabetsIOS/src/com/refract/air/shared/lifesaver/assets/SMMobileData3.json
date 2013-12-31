@@ -1,0 +1,1126 @@
+{
+  "success": "result for api/fsm_descriptor/module/3/device/mobile",
+  "data": {
+    "meta": {
+      "module": "3",
+      "device": "mobile",
+      "graphmode": "nodes",
+      "num_interactions": 50,
+      "death_video": "LS3_death_video",
+      "death_video_message_box": null,
+      "accelerometer_error": "We can't track device motion.\nPress the pads below",
+      "start_state": "LS3_p2",
+      "scene_select": [
+        "LS3_p5",
+        "LS3_p6",
+        "LS3_p12",
+        "LS3_p28",
+        "LS3_p37",
+        "LS3_p44",
+        "LS3_p53",
+        "LS3_p68",
+        "LS3_p88",
+        "LS3_p90",
+        "LS3_p91",
+        "LS3_p98",
+        "LS3_p106",
+        "LS3_p115",
+        "LS3_p122",
+        "LS3_p134"
+      ],
+      "captions": [],
+      "state_dict": [
+        "LS3_p2",
+        "LS3_p5",
+        "LS3_p6",
+        "LS3_p10",
+        "LS3_p12",
+        "LS3_p19",
+        "LS3_p23",
+        "LS3_p28",
+        "LS3_p37",
+        "LS3_p39",
+        "LS3_p44",
+        "LS3_p50",
+        "LS3_p53",
+        "LS3_p57",
+        "LS3_p60",
+        "LS3_p62",
+        "LS3_p63",
+        "LS3_p68",
+        "LS3_p70",
+        "LS3_p81",
+        "LS3_p88",
+        "LS3_p90",
+        "LS3_p91",
+        "LS3_p98",
+        "LS3_p99",
+        "LS3_p101",
+        "LS3_p106",
+        "LS3_p107",
+        "LS3_p115",
+        "LS3_p122",
+        "LS3_p134"
+      ],
+      "score_states": {
+        "LS3_p5": 2,
+        "LS3_p6": 2,
+        "LS3_p10": 2,
+        "LS3_p12": 2,
+        "LS3_p19": 2,
+        "LS3_p23": 2,
+        "LS3_p28": 2,
+        "LS3_p37": 2,
+        "LS3_p39": 2,
+        "LS3_p44": 2,
+        "LS3_p88": 2,
+        "LS3_p90": 2,
+        "LS3_p91": 2,
+        "LS3_p98": 2,
+        "LS3_p99": 2,
+        "LS3_p101": 2,
+        "LS3_p106": 2,
+        "LS3_p107": 2
+      },
+      "score_tot": 18,
+      "grey_states": [
+        "LS3_p91",
+        "LS3_p106",
+        "LS3_p107",
+        "LS3_p115"
+      ],
+      "num_states": 31,
+      "load_vars": [
+        "DATE",
+        "ZZ"
+      ],
+      "interaction_map": {
+        "start": 1,
+        "start_refresh": 1,
+        "choice": 41,
+        "choice_target": 2,
+        "choice_img": 2,
+        "cpr_long": 1,
+        "none": 1,
+        "end": 1
+      }
+    },
+    "states": {
+      "LS3_p2": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS3_p5",
+            "interaction_type": "start",
+            "interaction_meta": "load_vars=[DATE]",
+            "copy": "",
+            "video_name": "LS3_p2_p5",
+            "message_box": null,
+            "choice_x": 0,
+            "choice_y": 0,
+            "clip_length": 30800,
+            "trigger": 21500
+          },
+          {
+            "final_state": "LS3_p5",
+            "interaction_type": "start_refresh",
+            "interaction_meta": "load_vars=[DATE]",
+            "copy": "",
+            "video_name": "LS3_p2_p5",
+            "message_box": null,
+            "choice_x": 0,
+            "choice_y": 0,
+            "clip_length": 30800,
+            "trigger": 21500
+          }
+        ]
+      },
+      "LS3_p5": {
+        "state_txt": "Do you try to help?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS3_p5",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "No - run and find an expert"
+            },
+            "video_name": "LS3_p140_p140",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 55520,
+            "trigger": 50520
+          },
+          {
+            "final_state": "LS3_p6",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Yes - you always try to help"
+            },
+            "video_name": "LS3_p5_p6",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 7000,
+            "trigger": 10
+          }
+        ],
+        "prev_state": "LS3_p2"
+      },
+      "LS3_p6": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS3_p6",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Run to him now"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 12760,
+            "trigger": 5500
+          },
+          {
+            "final_state": "LS3_p10",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Check for danger then go to him"
+            },
+            "video_name": "LS3_p6_p10",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 12760,
+            "trigger": 5500
+          }
+        ],
+        "prev_state": "LS3_p5"
+      },
+      "LS3_p10": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS3_p12",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Try to get a response"
+            },
+            "video_name": "LS3_p11_p12",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 10000,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS3_p10",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Try to find help"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 10000,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS3_p6"
+      },
+      "LS3_p12": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 8,
+        "timer_refresher": 8,
+        "interactions": [
+          {
+            "final_state": "LS3_p19",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Shake shoulders gently - ask loudly ARE YOU OK?"
+            },
+            "video_name": "LS3_p13_p19",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 14320,
+            "trigger": 6320
+          },
+          {
+            "final_state": "LS3_p12",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Tap face gently - ask quietly ARE YOU OK?"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 14320,
+            "trigger": 6320
+          }
+        ],
+        "prev_state": "LS3_p10"
+      },
+      "LS3_p19": {
+        "state_txt": "Is he responding?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS3_p19",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Yes, he's responding"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 9000,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS3_p23",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "No, not responding"
+            },
+            "video_name": "LS3_p19_p23",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 9000,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS3_p12"
+      },
+      "LS3_p23": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS3_p28",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Turn him on his back, open his airway"
+            },
+            "video_name": "LS3_p24_p28",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 15040,
+            "trigger": 7040
+          },
+          {
+            "final_state": "LS3_p23",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Turn him on his side"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 15040,
+            "trigger": 7040
+          }
+        ],
+        "prev_state": "LS3_p19"
+      },
+      "LS3_p28": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS3_p37",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Open his airway, tilt head and lift chin"
+            },
+            "video_name": "LS3_p28_p37",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 12400,
+            "trigger": 4400
+          },
+          {
+            "final_state": "LS3_p28",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Start CPR"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 12400,
+            "trigger": 4400
+          }
+        ],
+        "prev_state": "LS3_p23"
+      },
+      "LS3_p37": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS3_p37",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Listen for normal breathing"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 11600,
+            "trigger": 1600
+          },
+          {
+            "final_state": "LS3_p39",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Look, listen & feel for normal breathing"
+            },
+            "video_name": "LS3_p38_p39",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 11600,
+            "trigger": 1600
+          }
+        ],
+        "prev_state": "LS3_p28"
+      },
+      "LS3_p39": {
+        "state_txt": "For how long?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS3_p39",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "For up to 60 seconds"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 11360,
+            "trigger": 1720
+          },
+          {
+            "final_state": "LS3_p44",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "For up to 10 seconds"
+            },
+            "video_name": "LS3_p39_p44",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 11360,
+            "trigger": 1720
+          }
+        ],
+        "prev_state": "LS3_p37"
+      },
+      "LS3_p44": {
+        "state_txt": "Is he breathing normally?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 9,
+        "timer_refresher": 9,
+        "interactions": [
+          {
+            "final_state": "LS3_p50",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Yes"
+            },
+            "video_name": "LS3_p47_p50",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 24400,
+            "trigger": 16000
+          },
+          {
+            "final_state": "LS3_p44",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "No"
+            },
+            "video_name": "LS3_p45_p45",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 18880,
+            "trigger": 8500
+          }
+        ],
+        "prev_state": "LS3_p39"
+      },
+      "LS3_p50": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS3_p53",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Take off his glasses"
+            },
+            "video_name": "LS3_p51_p53",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 6600,
+            "trigger": 2520
+          }
+        ],
+        "prev_state": "LS3_p44"
+      },
+      "LS3_p53": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 3,
+        "timer_refresher": 3,
+        "interactions": [
+          {
+            "final_state": "LS3_p57",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Pull this arm out"
+            },
+            "video_name": "LS3_p53_p57",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 6920,
+            "trigger": 2920
+          }
+        ],
+        "prev_state": "LS3_p50"
+      },
+      "LS3_p57": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS3_p60",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Pull this arm across his chest"
+            },
+            "video_name": "LS3_p58_p60",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 5960,
+            "trigger": 880
+          }
+        ],
+        "prev_state": "LS3_p53"
+      },
+      "LS3_p60": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS3_p62",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Grasp knee and pull up"
+            },
+            "video_name": "LS3_p61_p62",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 5640,
+            "trigger": 640
+          }
+        ],
+        "prev_state": "LS3_p57"
+      },
+      "LS3_p62": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS3_p63",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Hold this hand against his cheek"
+            },
+            "video_name": "LS3_p62_p63",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 6040,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS3_p60"
+      },
+      "LS3_p63": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS3_p68",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Roll him to you onto his side"
+            },
+            "video_name": "LS3_p64_p68",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 7080,
+            "trigger": 2020
+          }
+        ],
+        "prev_state": "LS3_p62"
+      },
+      "LS3_p68": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS3_p70",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Put thigh at a right angle"
+            },
+            "video_name": "LS3_p68_p70",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 5920,
+            "trigger": 1920
+          }
+        ],
+        "prev_state": "LS3_p63"
+      },
+      "LS3_p70": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS3_p81",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Tilt head up to keep airway open"
+            },
+            "video_name": "LS3_p70_p81",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 8000,
+            "trigger": 3000
+          }
+        ],
+        "prev_state": "LS3_p68"
+      },
+      "LS3_p81": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS3_p88",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Check if he's still breathing normally"
+            },
+            "video_name": "LS3_p82_p88",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 23080,
+            "trigger": 17080
+          }
+        ],
+        "prev_state": "LS3_p70"
+      },
+      "LS3_p88": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS3_p88",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Tell him to get some water"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 16600,
+            "trigger": 10560
+          },
+          {
+            "final_state": "LS3_p90",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Tell him to call an ambulance"
+            },
+            "video_name": "LS3_p89_p90",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 16600,
+            "trigger": 10560
+          }
+        ],
+        "prev_state": "LS3_p81"
+      },
+      "LS3_p90": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS3_p91",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Start CPR "
+            },
+            "video_name": "LS3_p90_p91",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 22720,
+            "trigger": 16720
+          },
+          {
+            "final_state": "LS3_p90",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Get him a blanket "
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 22720,
+            "trigger": 16720
+          }
+        ],
+        "prev_state": "LS3_p88"
+      },
+      "LS3_p91": {
+        "state_txt": "Must you do mouth-to-mouth?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 9,
+        "timer_refresher": 9,
+        "interactions": [
+          {
+            "final_state": "LS3_p98",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false,class=grey",
+            "copy": {
+              "main": "No, you don't have to"
+            },
+            "video_name": "LS3_p91_p98",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 22280,
+            "trigger": 12500
+          },
+          {
+            "final_state": "LS3_p91",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true,class=grey",
+            "copy": {
+              "main": "Yes, you must"
+            },
+            "video_name": "LS3_p91_p91",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 24480,
+            "trigger": 13500
+          }
+        ],
+        "prev_state": "LS3_p90"
+      },
+      "LS3_p98": {
+        "state_txt": "Where do you press?",
+        "state_txt_x": 50,
+        "state_txt_y": 4,
+        "timer": 8,
+        "timer_refresher": 8,
+        "interactions": [
+          {
+            "final_state": "LS3_p99",
+            "interaction_type": "choice_target",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "You press here"
+            },
+            "video_name": "LS3_p98_p99",
+            "message_box": null,
+            "choice_x": 60,
+            "choice_y": 42,
+            "clip_length": 5960,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS3_p98",
+            "interaction_type": "choice_target",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "You press here"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 75,
+            "choice_y": 65,
+            "clip_length": 5960,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS3_p91"
+      },
+      "LS3_p99": {
+        "state_txt": "How do you press?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS3_p99",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "At an angle, arms bent"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 9000,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS3_p101",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Straight down, arms straight"
+            },
+            "video_name": "LS3_p100_p101",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 9000,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS3_p98"
+      },
+      "LS3_p101": {
+        "state_txt": "How do you put your fingers?",
+        "state_txt_x": 50,
+        "state_txt_y": 4,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS3_p101",
+            "interaction_type": "choice_img",
+            "interaction_meta": "wrong=true,src=p101_closed",
+            "copy": {
+              "main": "Closed"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 30,
+            "choice_y": 75,
+            "clip_length": 17880,
+            "trigger": 10880
+          },
+          {
+            "final_state": "LS3_p106",
+            "interaction_type": "choice_img",
+            "interaction_meta": "wrong=false,src=p101_interlocked",
+            "copy": {
+              "main": "Interlocked"
+            },
+            "video_name": "LS3_p101_p106",
+            "message_box": null,
+            "choice_x": 70,
+            "choice_y": 75,
+            "clip_length": 17880,
+            "trigger": 10880
+          }
+        ],
+        "prev_state": "LS3_p99"
+      },
+      "LS3_p106": {
+        "state_txt": "How do you push?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS3_p106",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true,class=grey",
+            "copy": {
+              "main": "8-9 cm, 1 time every 2 seconds"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 8000,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS3_p107",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false,class=grey",
+            "copy": {
+              "main": "5-6 cm, 2 times a second"
+            },
+            "video_name": "LS3_p106_p107",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 8000,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS3_p101"
+      },
+      "LS3_p107": {
+        "state_txt": "What about his ribs?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS3_p107",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true,class=grey",
+            "copy": {
+              "main": "Go easy - don't break ribs!"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 34640,
+            "trigger": 26000
+          },
+          {
+            "final_state": "LS3_p115",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false,class=grey",
+            "copy": {
+              "main": "Push hard - don't worry about ribs!"
+            },
+            "video_name": "LS3_p107_p115_phablet",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 34640,
+            "trigger": 26000
+          }
+        ],
+        "prev_state": "LS3_p106"
+      },
+      "LS3_p115": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS3_p122",
+            "interaction_type": "cpr_long",
+            "interaction_meta": "feedback=1,class=grey",
+            "copy": {
+              "main": "For 2 minutes\nmove your device down\n5-6 cm and then up again\n2 times a second",
+              "alt": "We can't track device motion.\nPress the pads below"
+            },
+            "video_name": "LS3_p116_p122",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 119840,
+            "trigger": -1
+          }
+        ],
+        "prev_state": "LS3_p107"
+      },
+      "LS3_p122": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 96,
+        "timer_refresher": 96,
+        "interactions": [
+          {
+            "final_state": "LS3_p134",
+            "interaction_type": "none",
+            "interaction_meta": "load_vars=[ZZ]",
+            "copy": "",
+            "video_name": "LS3_p122_p134",
+            "message_box": [
+              {
+                "enter": 10000,
+                "exit": 13000,
+                "copy": "ACCURACY OF YOUR CPR: {ZZ}% - GOOD",
+                "color": "0xffffff"
+              },
+              {
+                "enter": 37040,
+                "exit": 44400,
+                "copy": "THE PARAMEDICS RESTARTED PETER'S HEART.\nAFTER TIME IN HOSPITAL, HE MADE A COMPLETE RECOVERY.\nWITHOUT YOU, HE WOULD HAVE DIED.",
+                "color": "0xffffff"
+              }
+            ],
+            "choice_x": 0,
+            "choice_y": 0,
+            "clip_length": 44960,
+            "trigger": -1
+          }
+        ],
+        "prev_state": "LS3_p115"
+      },
+      "LS3_p134": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 36,
+        "timer_refresher": 36,
+        "interactions": [
+          {
+            "final_state": "LS3_p134",
+            "interaction_type": "end",
+            "interaction_meta": "",
+            "copy": "",
+            "video_name": "",
+            "message_box": null,
+            "choice_x": 0,
+            "choice_y": 0,
+            "clip_length": 0,
+            "trigger": 0
+          }
+        ],
+        "prev_state": "LS3_p122"
+      }
+    }
+  }
+}

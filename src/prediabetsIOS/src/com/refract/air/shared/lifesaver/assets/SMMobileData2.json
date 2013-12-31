@@ -1,0 +1,1495 @@
+{
+  "success": "result for api/fsm_descriptor/module/2/device/mobile",
+  "data": {
+    "meta": {
+      "module": "2",
+      "device": "mobile",
+      "graphmode": "nodes",
+      "num_interactions": 69,
+      "death_video": "LS2_death_video",
+      "death_video_message_box": null,
+      "accelerometer_error": "Sorry we can't track your device motion.\nPlease just press the two pads below",
+      "start_state": "LS2_p2",
+      "scene_select": [
+        "LS2_p7",
+        "LS2_p8",
+        "LS2_p16",
+        "LS2_p20",
+        "LS2_p25",
+        "LS2_p27PRE",
+        "LS2_p33",
+        "LS2_p35",
+        "LS2_p39",
+        "LS2_p45",
+        "LS2_p50",
+        "LS2_p57",
+        "LS2_p64",
+        "LS2_p66",
+        "LS2_p69",
+        "LS2_p78"
+      ],
+      "captions": [],
+      "state_dict": [
+        "LS2_p2",
+        "LS2_p7",
+        "LS2_p8",
+        "LS2_p12",
+        "LS2_p13",
+        "LS2_p16",
+        "LS2_p18",
+        "LS2_p20",
+        "LS2_p21",
+        "LS2_p25",
+        "LS2_p26",
+        "LS2_p27",
+        "LS2_p27PRE",
+        "LS2_p29PRE",
+        "LS2_p29",
+        "LS2_p31",
+        "LS2_p33",
+        "LS2_p35",
+        "LS2_p36",
+        "LS2_p39",
+        "LS2_p40",
+        "LS2_p42",
+        "LS2_p45",
+        "LS2_p46",
+        "LS2_p48",
+        "LS2_p50",
+        "LS2_p51",
+        "LS2_p57",
+        "LS2_p59PRE",
+        "LS2_p59",
+        "LS2_p61",
+        "LS2_p64",
+        "LS2_p66",
+        "LS2_p69PRE",
+        "LS2_p69",
+        "LS2_p72",
+        "LS2_p74",
+        "LS2_p76",
+        "LS2_p78"
+      ],
+      "score_states": {
+        "LS2_p7": 2,
+        "LS2_p8": 2,
+        "LS2_p12": 2,
+        "LS2_p13": 2,
+        "LS2_p16": 2,
+        "LS2_p18": 2,
+        "LS2_p20": 2,
+        "LS2_p21": 2,
+        "LS2_p25": 2,
+        "LS2_p26": 2,
+        "LS2_p27": 3,
+        "LS2_p29PRE": 2,
+        "LS2_p36": 2,
+        "LS2_p39": 2,
+        "LS2_p40": 2,
+        "LS2_p42": 2,
+        "LS2_p45": 2,
+        "LS2_p46": 2,
+        "LS2_p48": 2,
+        "LS2_p50": 2,
+        "LS2_p51": 3,
+        "LS2_p59PRE": 2,
+        "LS2_p69PRE": 2,
+        "LS2_p69": 2,
+        "LS2_p72": 2,
+        "LS2_p74": 2,
+        "LS2_p76": 2
+      },
+      "score_tot": 27,
+      "grey_states": [
+        "LS2_p21",
+        "LS2_p25",
+        "LS2_p26",
+        "LS2_p27PRE",
+        "LS2_p36",
+        "LS2_p57",
+        "LS2_p59",
+        "LS2_p69"
+      ],
+      "num_states": 39,
+      "load_vars": [
+        "DATE"
+      ],
+      "interaction_map": {
+        "start": 1,
+        "start_refresh": 1,
+        "choice": 52,
+        "choice_img": 4,
+        "oneshot": 10,
+        "end": 1
+      }
+    },
+    "states": {
+      "LS2_p2": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p7",
+            "interaction_type": "start",
+            "interaction_meta": "load_vars=[DATE]",
+            "copy": "",
+            "video_name": "LS2_p2_p7",
+            "message_box": null,
+            "choice_x": 0,
+            "choice_y": 0,
+            "clip_length": 81360,
+            "trigger": 73480
+          },
+          {
+            "final_state": "LS2_p7",
+            "interaction_type": "start_refresh",
+            "interaction_meta": "load_vars=[DATE]",
+            "copy": "",
+            "video_name": "LS2_p2_p7",
+            "message_box": null,
+            "choice_x": 0,
+            "choice_y": 0,
+            "clip_length": 81360,
+            "trigger": 73480
+          }
+        ]
+      },
+      "LS2_p7": {
+        "state_txt": "Do you try to help?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p7",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "No - they're just messing around"
+            },
+            "video_name": "LS2_p86",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 67680,
+            "trigger": 62680
+          },
+          {
+            "final_state": "LS2_p8",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Yes - always try to help"
+            },
+            "video_name": "LS2_p7_p8",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 9880,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p2"
+      },
+      "LS2_p8": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 8,
+        "timer_refresher": 8,
+        "interactions": [
+          {
+            "final_state": "LS2_p8",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Run to her now"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 12680,
+            "trigger": 7720
+          },
+          {
+            "final_state": "LS2_p12",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Check for danger then go to her"
+            },
+            "video_name": "LS2_p8_p12",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 12680,
+            "trigger": 7720
+          }
+        ],
+        "prev_state": "LS2_p7"
+      },
+      "LS2_p12": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p12",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Give abdominal thrusts"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 5000,
+            "trigger": 10
+          },
+          {
+            "final_state": "LS2_p13",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Ask 'are you choking?' "
+            },
+            "video_name": "LS2_p12_p13",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 5000,
+            "trigger": 10
+          }
+        ],
+        "prev_state": "LS2_p8"
+      },
+      "LS2_p13": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p13",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Give her some water"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 29280,
+            "trigger": 22000
+          },
+          {
+            "final_state": "LS2_p16",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Tell her to cough"
+            },
+            "video_name": "LS2_p14_p16",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 29280,
+            "trigger": 22000
+          }
+        ],
+        "prev_state": "LS2_p12"
+      },
+      "LS2_p16": {
+        "state_txt": "What's next?",
+        "state_txt_x": 50,
+        "state_txt_y": 4,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p18",
+            "interaction_type": "choice_img",
+            "interaction_meta": "wrong=false,src=p14_back_blows",
+            "copy": {
+              "main": "Give back blows"
+            },
+            "video_name": "LS2_p17_p18",
+            "message_box": null,
+            "choice_x": 30,
+            "choice_y": 75,
+            "clip_length": 5000,
+            "trigger": 10
+          },
+          {
+            "final_state": "LS2_p16",
+            "interaction_type": "choice_img",
+            "interaction_meta": "wrong=true,src=p14_ab_thrusts",
+            "copy": {
+              "main": "Give abdominal thrusts"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 70,
+            "choice_y": 75,
+            "clip_length": 5000,
+            "trigger": 10
+          }
+        ],
+        "prev_state": "LS2_p13"
+      },
+      "LS2_p18": {
+        "state_txt": "What Now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p18",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Stand directly behind her"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 12680,
+            "trigger": 5080
+          },
+          {
+            "final_state": "LS2_p20",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Stand to her side and slightly behind her"
+            },
+            "video_name": "LS2_p19_p20",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 12680,
+            "trigger": 5080
+          }
+        ],
+        "prev_state": "LS2_p16"
+      },
+      "LS2_p20": {
+        "state_txt": "Lean her forwards - how far?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS2_p21",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Well forwards so food can fall out"
+            },
+            "video_name": "LS2_p20_p21",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 8000,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p20",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Just a little so she can breathe"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 8000,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p18"
+      },
+      "LS2_p21": {
+        "state_txt": "How do you stop her falling?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p21",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true,class=grey",
+            "copy": {
+              "main": "Hold her shoulders"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 10200,
+            "trigger": 4200
+          },
+          {
+            "final_state": "LS2_p25",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false,class=grey",
+            "copy": {
+              "main": "Support her with one hand"
+            },
+            "video_name": "LS2_p21_p22",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 10200,
+            "trigger": 4200
+          }
+        ],
+        "prev_state": "LS2_p20"
+      },
+      "LS2_p25": {
+        "state_txt": "Where do you aim for?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p26",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false,class=grey",
+            "copy": {
+              "main": "Between the shoulder blades"
+            },
+            "video_name": "LS2_p25_p26",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 10000,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p25",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true,class=grey",
+            "copy": {
+              "main": "The lower back"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 10000,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p21"
+      },
+      "LS2_p26": {
+        "state_txt": "How do you hold your hand?",
+        "state_txt_x": 50,
+        "state_txt_y": 4,
+        "timer": 8,
+        "timer_refresher": 8,
+        "interactions": [
+          {
+            "final_state": "LS2_p26",
+            "interaction_type": "choice_img",
+            "interaction_meta": "wrong=true,src=p26_fist,class=grey",
+            "copy": {
+              "main": "A fist"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 30,
+            "choice_y": 75,
+            "clip_length": 8000,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p27",
+            "interaction_type": "choice_img",
+            "interaction_meta": "wrong=false,src=p26_bent,class=grey",
+            "copy": {
+              "main": "Bent back heel down "
+            },
+            "video_name": "LS2_p26_p27",
+            "message_box": null,
+            "choice_x": 70,
+            "choice_y": 75,
+            "clip_length": 8000,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p25"
+      },
+      "LS2_p27": {
+        "state_txt": "How many blows do you give?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p27",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Up to 3"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 20,
+            "choice_y": 70,
+            "clip_length": 12440,
+            "trigger": 6500
+          },
+          {
+            "final_state": "LS2_p27PRE",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Up to 5"
+            },
+            "video_name": "LS2_p28_p28_phablet",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 12440,
+            "trigger": 6500
+          },
+          {
+            "final_state": "LS2_p27",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Up to 10"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 80,
+            "choice_y": 70,
+            "clip_length": 12440,
+            "trigger": 6500
+          }
+        ],
+        "prev_state": "LS2_p26"
+      },
+      "LS2_p27PRE": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p29PRE",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=zm,class=grey",
+            "copy": {
+              "main": "To give a sharp blow, quickly move your device down",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p29_p29",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 9760,
+            "trigger": 2560
+          }
+        ],
+        "prev_state": "LS2_p27"
+      },
+      "LS2_p29PRE": {
+        "state_txt": "What Now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p29PRE",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Give another back blow"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 8440,
+            "trigger": 3440
+          },
+          {
+            "final_state": "LS2_p29",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Check if the food's come out"
+            },
+            "video_name": "LS2_check_food_backblow",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 8440,
+            "trigger": 3440
+          }
+        ],
+        "prev_state": "LS2_p27PRE"
+      },
+      "LS2_p29": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p31",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=zm",
+            "copy": {
+              "main": "To give another blow and check, quickly move your device down",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p30_p31",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 9840,
+            "trigger": 2920
+          }
+        ],
+        "prev_state": "LS2_p29PRE"
+      },
+      "LS2_p31": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p33",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=zm",
+            "copy": {
+              "main": "To give another blow and check, quickly move your device down",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p32_p33",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 10040,
+            "trigger": 2680
+          }
+        ],
+        "prev_state": "LS2_p29"
+      },
+      "LS2_p33": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p35",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=zm",
+            "copy": {
+              "main": "To give another blow and check, quickly move your device down",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p33_p34",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 11360,
+            "trigger": 3640
+          }
+        ],
+        "prev_state": "LS2_p31"
+      },
+      "LS2_p35": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 7,
+        "timer_refresher": 7,
+        "interactions": [
+          {
+            "final_state": "LS2_p36",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=zm",
+            "copy": {
+              "main": "To give another blow and check, quickly move your device down",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p35_p36",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 10400,
+            "trigger": 2200
+          }
+        ],
+        "prev_state": "LS2_p33"
+      },
+      "LS2_p36": {
+        "state_txt": "5 done - what now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 10,
+        "timer_refresher": 10,
+        "interactions": [
+          {
+            "final_state": "LS2_p39",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false,class=grey",
+            "copy": {
+              "main": "Give abdominal thrusts"
+            },
+            "video_name": "LS2_p38_p39",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 19720,
+            "trigger": 16320
+          },
+          {
+            "final_state": "LS2_p36",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true,class=grey",
+            "copy": {
+              "main": "Give another back blow"
+            },
+            "video_name": "LS2_p37",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 19280,
+            "trigger": 7500
+          }
+        ],
+        "prev_state": "LS2_p35"
+      },
+      "LS2_p39": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 3,
+        "timer_refresher": 3,
+        "interactions": [
+          {
+            "final_state": "LS2_p39",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Stand next to her"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 5760,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p40",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Stand behind her"
+            },
+            "video_name": "LS2_p39_p40",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 5760,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p36"
+      },
+      "LS2_p40": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p42",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Put your arms around her upper body"
+            },
+            "video_name": "LS2_p40_p42",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 6040,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p40",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Tilt her head upwards"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 6040,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p39"
+      },
+      "LS2_p42": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p42",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Make her stand straight"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 6920,
+            "trigger": 2000
+          },
+          {
+            "final_state": "LS2_p45",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Make her lean forwards"
+            },
+            "video_name": "LS2_p43_p45",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 6920,
+            "trigger": 2000
+          }
+        ],
+        "prev_state": "LS2_p40"
+      },
+      "LS2_p45": {
+        "state_txt": "What do you do with this hand?",
+        "state_txt_x": 50,
+        "state_txt_y": 20,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p46",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Make it into a fist"
+            },
+            "video_name": "LS2_p45_p46",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 8760,
+            "trigger": 2000
+          },
+          {
+            "final_state": "LS2_p45",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Keep it flat"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 8760,
+            "trigger": 2000
+          }
+        ],
+        "prev_state": "LS2_p42"
+      },
+      "LS2_p46": {
+        "state_txt": "Where do you put your fist?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p48",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Between belly button & bottom of breastbone"
+            },
+            "video_name": "LS2_p46_p47",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 7280,
+            "trigger": 2500
+          },
+          {
+            "final_state": "LS2_p46",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Below her belly button"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 7280,
+            "trigger": 2500
+          }
+        ],
+        "prev_state": "LS2_p45"
+      },
+      "LS2_p48": {
+        "state_txt": "What does your other hand do?",
+        "state_txt_x": 50,
+        "state_txt_y": 20,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p50",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Grasp your fist tightly"
+            },
+            "video_name": "LS2_p48_p50",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 7760,
+            "trigger": 2720
+          },
+          {
+            "final_state": "LS2_p48",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Make another fist"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 7760,
+            "trigger": 2720
+          }
+        ],
+        "prev_state": "LS2_p46"
+      },
+      "LS2_p50": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p50",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Pull sharply backwards"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 5920,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p51",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Pull sharply inwards and upwards"
+            },
+            "video_name": "LS2_p50_p51",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 5920,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p48"
+      },
+      "LS2_p51": {
+        "state_txt": "How many times?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p57",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Up to 5"
+            },
+            "video_name": "LS2_p52_p54_phablet",
+            "message_box": null,
+            "choice_x": 20,
+            "choice_y": 70,
+            "clip_length": 9960,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p51",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Up to 4"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 9960,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p51",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Up to 2"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 80,
+            "choice_y": 70,
+            "clip_length": 9960,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p50"
+      },
+      "LS2_p57": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 8,
+        "timer_refresher": 8,
+        "interactions": [
+          {
+            "final_state": "LS2_p59PRE",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=al,class=grey",
+            "copy": {
+              "main": "To pull up sharply, pull up your device quickly",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p58_p59",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 7920,
+            "trigger": 2300
+          }
+        ],
+        "prev_state": "LS2_p51"
+      },
+      "LS2_p59PRE": {
+        "state_txt": "What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p59PRE",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Give another thrust"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 8960,
+            "trigger": 3960
+          },
+          {
+            "final_state": "LS2_p59",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Check if the food's come out"
+            },
+            "video_name": "LS2_check_food_thrust",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 8960,
+            "trigger": 3960
+          }
+        ],
+        "prev_state": "LS2_p57"
+      },
+      "LS2_p59": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p61",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=al,class=grey",
+            "copy": {
+              "main": "To pull up sharply and check, pull up your device quickly",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p60_p61",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 7200,
+            "trigger": 2160
+          }
+        ],
+        "prev_state": "LS2_p59PRE"
+      },
+      "LS2_p61": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p64",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=al",
+            "copy": {
+              "main": "To pull up sharply and check, pull up your device quickly",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p61_p62",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 7200,
+            "trigger": 2200
+          }
+        ],
+        "prev_state": "LS2_p59"
+      },
+      "LS2_p64": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 4,
+        "timer_refresher": 4,
+        "interactions": [
+          {
+            "final_state": "LS2_p66",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=al",
+            "copy": {
+              "main": "To pull up sharply and check, pull up your device quickly",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p65_p65",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 7000,
+            "trigger": 1960
+          }
+        ],
+        "prev_state": "LS2_p61"
+      },
+      "LS2_p66": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p69PRE",
+            "interaction_type": "oneshot",
+            "interaction_meta": "keys=al",
+            "copy": {
+              "main": "To pull up sharply and check, pull up your device quickly",
+              "alt": "Sorry we can't track your device motion.\nPlease just press the two pads below"
+            },
+            "video_name": "LS2_p65_p66",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 20,
+            "clip_length": 9240,
+            "trigger": 4240
+          }
+        ],
+        "prev_state": "LS2_p64"
+      },
+      "LS2_p69PRE": {
+        "state_txt": "5 done - what now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p69PRE",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Pull up and check again"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 19360,
+            "trigger": 13360
+          },
+          {
+            "final_state": "LS2_p69",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Give back blows"
+            },
+            "video_name": "LS2_p66_p69",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 19360,
+            "trigger": 13360
+          }
+        ],
+        "prev_state": "LS2_p66"
+      },
+      "LS2_p69": {
+        "state_txt": "What Now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p69",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true,class=grey",
+            "copy": {
+              "main": "Tell her to get some water"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 9960,
+            "trigger": 3960
+          },
+          {
+            "final_state": "LS2_p72",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false,class=grey",
+            "copy": {
+              "main": "Tell her to call for an ambulance"
+            },
+            "video_name": "LS2_p70_p72",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 9960,
+            "trigger": 3960
+          }
+        ],
+        "prev_state": "LS2_p69PRE"
+      },
+      "LS2_p72": {
+        "state_txt": "She's unconscious. What now?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 5,
+        "timer_refresher": 5,
+        "interactions": [
+          {
+            "final_state": "LS2_p74",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "Start CPR"
+            },
+            "video_name": "LS2_p72_p74",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 7960,
+            "trigger": 1000
+          },
+          {
+            "final_state": "LS2_p72",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "Give up to 5 blows on the back"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 7960,
+            "trigger": 1000
+          }
+        ],
+        "prev_state": "LS2_p69"
+      },
+      "LS2_p74": {
+        "state_txt": "How fast do you press?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p76",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "2 times a second"
+            },
+            "video_name": "LS2_p74_p76",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 9480,
+            "trigger": 2480
+          },
+          {
+            "final_state": "LS2_p74",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "1 time a second"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 9480,
+            "trigger": 2480
+          }
+        ],
+        "prev_state": "LS2_p72"
+      },
+      "LS2_p76": {
+        "state_txt": "How far do you press?",
+        "state_txt_x": 50,
+        "state_txt_y": 40,
+        "timer": 6,
+        "timer_refresher": 6,
+        "interactions": [
+          {
+            "final_state": "LS2_p78",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "5-6 cm"
+            },
+            "video_name": "LS2_p77_p78",
+            "message_box": [
+              {
+                "enter": 43800,
+                "exit": 47520,
+                "copy": "YOU DID IT.",
+                "color": "0xffffff"
+              }
+            ],
+            "choice_x": 50,
+            "choice_y": 55,
+            "clip_length": 48040,
+            "trigger": -1
+          },
+          {
+            "final_state": "LS2_p76",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=true",
+            "copy": {
+              "main": "3-4 cm"
+            },
+            "video_name": "WG",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 70,
+            "clip_length": 48040,
+            "trigger": -1
+          }
+        ],
+        "prev_state": "LS2_p74"
+      },
+      "LS2_p78": {
+        "state_txt": "",
+        "state_txt_x": 0,
+        "state_txt_y": 0,
+        "timer": 39,
+        "timer_refresher": 39,
+        "interactions": [
+          {
+            "final_state": "LS2_p78",
+            "interaction_type": "end",
+            "interaction_meta": "",
+            "copy": "",
+            "video_name": "",
+            "message_box": null,
+            "choice_x": 0,
+            "choice_y": 0,
+            "clip_length": 0,
+            "trigger": 0
+          }
+        ],
+        "prev_state": "LS2_p76"
+      }
+    }
+  }
+}

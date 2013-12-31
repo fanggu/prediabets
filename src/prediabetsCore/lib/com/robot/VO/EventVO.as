@@ -1,0 +1,1 @@
+package com.robot.VO {	/**	 * @author roboot	 */	public class EventVO 	{		public var listener:* ; 		public var eventOver:String ; 		public var eventOut:String ; 		public var eventPress:String ; 		public var callOver:Function; 		public var callOut:Function ; 		public var callPress:Function ; 		public var id:String ; 	}}

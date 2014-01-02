@@ -1,4 +1,4 @@
-package com.refract.air.shared.lifesaver.stateMachine {
+package com.refract.air.shared.prediabets.stateMachine {
 	import com.refract.prediabets.stateMachine.SMModel;
 
 	import flash.utils.ByteArray;

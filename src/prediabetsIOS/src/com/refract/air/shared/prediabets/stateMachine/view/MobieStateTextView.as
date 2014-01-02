@@ -1,4 +1,4 @@
-package com.refract.air.shared.lifesaver.stateMachine.view {
+package com.refract.air.shared.prediabets.stateMachine.view {
 	import com.refract.prediabets.AppSettings;
 	import com.refract.prediabets.logger.Logger;
 	import com.refract.prediabets.stateMachine.view.StateTxtView;

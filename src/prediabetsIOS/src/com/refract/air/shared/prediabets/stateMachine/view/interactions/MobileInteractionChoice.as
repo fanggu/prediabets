@@ -1,4 +1,4 @@
-package com.refract.air.shared.lifesaver.stateMachine.view.interactions {
+package com.refract.air.shared.prediabets.stateMachine.view.interactions {
 	import com.refract.prediabets.stateMachine.view.interactions.InteractionChoice;
 	/**
 	 * @author kanish

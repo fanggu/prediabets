@@ -9,10 +9,10 @@ package {
 	import com.refract.air.shared.components.legal.TabletLegal;
 	import com.refract.air.shared.components.medicalquestions.TabletMedicalQuestions;
 	import com.refract.air.shared.data.StoredData;
-	import com.refract.air.shared.lifesaver.stateMachine.MobileSMController;
-	import com.refract.air.shared.lifesaver.stateMachine.SMModelMobile;
-	import com.refract.air.shared.lifesaver.stateMachine.view.MobieStateTextView;
-	import com.refract.air.shared.lifesaver.stateMachine.view.interactions.MobileInteractionQP;
+	import com.refract.air.shared.prediabets.stateMachine.MobileSMController;
+	import com.refract.air.shared.prediabets.stateMachine.SMModelMobile;
+	import com.refract.air.shared.prediabets.stateMachine.view.MobieStateTextView;
+	import com.refract.air.shared.prediabets.stateMachine.view.interactions.MobileInteractionQP;
 	import com.refract.prediabets.AppSettings;
 	import com.refract.prediabets.ClassFactory;
 	import com.refract.prediabets.assets.AssetManager;

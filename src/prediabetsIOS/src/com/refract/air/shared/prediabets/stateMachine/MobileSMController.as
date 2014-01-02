@@ -1,4 +1,4 @@
-package com.refract.air.shared.lifesaver.stateMachine {
+package com.refract.air.shared.prediabets.stateMachine {
 	import com.refract.prediabets.stateMachine.SMController;
 	import com.refract.prediabets.stateMachine.SMVars;
 	import com.refract.prediabets.stateMachine.flags.Flags;

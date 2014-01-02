@@ -53,7 +53,6 @@ package com.refract.prediabets
 		protected var _smView : SMView;
 		protected var _smController : SMController;
 		
-		protected var _quickSM:Boolean = false;
 		protected var _nextStory:int = -1 ;
 		public function get nextStory():int {return _nextStory;}
 		public function set nextStory(story:int):void { _nextStory = story;}
@@ -80,22 +79,19 @@ package com.refract.prediabets
 		public function init() : void
 		{
 			createSoundMachine() ; 
-			//SoundMixer.soundTransform = new SoundTransform(0);
-			
 			createUI();
 			createNav();
-			createSM();		
+			createStateMachine();		
 			
 			DispatchManager.addEventListener( Flags.DRAW_VIDEO_STATUS ,onDrawVideoStatus  ) ;
-			DispatchManager.addEventListener( SceneSelectorEvent.QUESTION_SELECTED ,onQuestionSelected  ) ;
-			
-			createQuestionsDictionary() ;
-			
+			DispatchManager.addEventListener(Flags.START_MOVIE , onStartMovie  );
+			DispatchManager.addEventListener(Flags.APP_ACTIVATE, onAppActivated);
+			DispatchManager.addEventListener(Flags.APP_DEACTIVATE, onAppDeactivated);
 			
 			initSWFAddress();
 		}
 		
-		protected function createSM() : void
+		protected function createStateMachine() : void
 		{
 			//*state machine main view
 			_smView = new ClassFactory.SM_VIEW();
@@ -131,21 +127,22 @@ package com.refract.prediabets
 			_nav = new ClassFactory.NAV();
 			_main.addChild(_nav);
 			
-			DispatchManager.addEventListener(Flags.APP_ACTIVATE, onAppActivated);
-			DispatchManager.addEventListener(Flags.APP_DEACTIVATE, onAppDeactivated);
+			
 			
 			DispatchManager.addEventListener(MenuEvent.MENU_SHOW,onMenuShow);
 			DispatchManager.addEventListener(MenuEvent.MENU_HIDE,onMenuHide);
-			DispatchManager.addEventListener(MenuEvent.MENU_SELECTED,onMenuSelected);
+
 			DispatchManager.addEventListener(SceneSelectorEvent.BUTTON_SELECTED,onSceneSelectorSelected);
 			DispatchManager.addEventListener(Nav.NO_MORE_OVERLAYS,onNoMoreOverlays);
 			DispatchManager.addEventListener(SceneSelectorEvent.QUESTION_SELECTED,onBeginModuleQuestions);
 		//	_nav.addEventListener(Nav.SHOW_SCENE_SELECTOR,onSceneSelector);
 		//	_smController.start();
+		
+		
+			
 		}
 			
 		protected function onAppActivated(evt:Event = null):void{
-			Logger.general(this,"activate");
 			TweenMax.resumeAll();
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED,{value:Header.LS_LOGO}));
 			
@@ -156,13 +153,10 @@ package com.refract.prediabets
 			onMenuHide();
 		}
 		
-		protected function onAppDeactivated(evt:Event = null):void{
-			Logger.general(this,"deactivate");
+		protected function onAppDeactivated(evt:Event = null):void
+		{
 			onMenuShow();
 			TweenMax.pauseAll(true,true,true);
-			
-		//	DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED,{value:Header.LS_LOGO}));
-		//	onMenuShow();
 		}	
 			
 		protected function onMenuHide(evt:Event = null):void{
@@ -183,19 +177,7 @@ package com.refract.prediabets
 			new SoundMachine() ; 
 		}
 		
-		protected function createQuestionsDictionary() : void {
-			_dictQuestions = new Dictionary( true ) ; 
-		}
-		protected function onQuestionSelected( evt : SceneSelectorEvent ) : void {
-			_dictQuestions[evt.id] = true ;  
-		}
-		public function get nrQuestionSelected() : int {
-			var n:int = 0;
-    		for (var key:* in _dictQuestions){
-        		n++;
-    		}
-    		return n;
-		}
+
 
 		protected function onKeyDown(event : KeyboardEvent) : void {
 			if( event.charCode == Keyboard.SPACE)
@@ -210,7 +192,8 @@ package com.refract.prediabets
 		protected function setState(path:Array,checkFS:Boolean = true):void {
 			if(currentPath[0] != path[0] || path[0] == AppSections.INTRO.split(":")[1]){
 				
-				switch("SECTION:"+path[0]){
+				switch("SECTION:"+path[0])
+				{
 					case(AppSections.MODULE_LS1):
 					case(AppSections.MODULE_LS2):
 					case(AppSections.MODULE_LS3):
@@ -263,14 +246,9 @@ package com.refract.prediabets
 						DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
 					
 				}
+				currentPath = path.concat();
+				previousPath = currentPath;
 				
-				//if(currentPath[0] != path[0]){
-					currentPath = path.concat();
-					previousPath = currentPath;
-				//}
-					if(lastMajor != "INTRO" && _intro){
-					//	destroyIntro();
-					}
 			}
 		}
 
@@ -307,115 +285,63 @@ package com.refract.prediabets
 			AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
 		}
 
-		protected function addOverlay(path:String,suppressAnim:Boolean = false) : void {
-			//Logger.log(Logger.SWF_ADDRESS,"ADDING OVERLAY",path);
+		protected function addOverlay(path:String,suppressAnim:Boolean = false) : void 
+		{
 			_nav.addSection(path,suppressAnim);
 		}
 		
 		
-		protected function onNoMoreOverlays(evt:Event):void{
+		protected function onNoMoreOverlays(evt:Event):void
+		{
 			var out:String = "";
-			if(lastMajor == AppSections.RESULTS && nextStory == 3){
+			if(lastMajor == AppSections.RESULTS && nextStory == 3)
+			{
 				out = "intro";
 				setSWFAddress(AppSections.INTRO);	
-			}else if(lastMajor == AppSections.RESULTS){
+			}
+			else if(lastMajor == AppSections.RESULTS)
+			{
 				//setSWFAddress(AppSections.INTRO);	
 				out = "results";
 				addOverlay(AppSections.RESULTS.split(":")[1],true);
-			}else if (lastMajor == AppSections.SIGN_UP.split(":")[1]){
+			}
+			else if (lastMajor == AppSections.SIGN_UP.split(":")[1])
+			{
 			//	
 				
 				out = "nothing";
-			}else{
+			}
+			else
+			{
 				out = lastMajor;
 				setSWFAddress("SECTION:"+lastMajor);
 			}
-			Logger.log(Logger.SWF_ADDRESS, "No More Overlays "+ out);
-			
-			/*if(_nextStory == -1){
-				if(_status == AppSections.INTRO){
-					setSWFAddress(AppSections.INTRO);
-				}
-			}else{
-				beginModule();SWFAddress
-			}*/
 		}
 
-		protected function createIntro():void{
-			if(!_intro){
+		protected function createIntro():void
+		{
+			if(!_intro)
+			{
 				_nextStory = -1;
 				DispatchManager.dispatchEvent(new Event(Flags.SM_RESET));
 				DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
 				VideoLoader.i.stopVideo();
-				DispatchManager.addEventListener(Intro.INTRO_ENDED, onIntroEnded);
 				_intro  = new ClassFactory.INTRO();
 				_status = AppSections.INTRO;
 				_ui.addChild(_intro);
 				DispatchManager.dispatchEvent(new Event(Flags.HIDE_FOOTER_PLAY_PAUSE));
-			}else{
-				
+			}
+			else
+			{
 				DispatchManager.dispatchEvent(new Event(Flags.UN_FREEZE));
 			}
 		//	_nav.addOverlay(ClassFactory.INTRO);
 		}		
 		
-		protected function onIntroEnded(evt:Event):void{
-			DispatchManager.removeEventListener(Intro.INTRO_ENDED, onIntroEnded);
-			_nav.showMenu();
-		}
 		
-		protected function onMenuSelected(evt:MenuEvent):void{
-			_nav.hideMenu();
-			
-			/*			
-			if(_stories[evt.menuItem] != "SECTION:"+SWFAddress.getPathNames()[0] ){
-				_nextStory = evt.menuItem;
-				nextStoryState = null;
-				if(!UserModel.isLoggedIn){ //and in sign up
-					if(SWFAddress.getPathNames()[0] != AppSections.SIGN_UP.split(":")[1]){
-						_nav.removeCurrentOverlay();
-						setSWFAddress(AppSections.SIGN_UP);
-					}
-				}else{
-					_nav.removeCurrentOverlay();
-					setSWFAddress(_stories[evt.menuItem]);
-				}
-			}
-			*/
-			
-			if(_stories[evt.menuItem] != "SECTION:"+SWFAddress.getPathNames()[0] || lastMajor == AppSections.RESULTS){
-			//	Logger.log(Logger.SWF_ADDRESS,"IF1:",_stories[evt.menuItem] != "SECTION:"+SWFAddress.getPathNames()[0],lastMajor == AppSections.RESULTS);
-				_nextStory = evt.menuItem;
-				nextStoryState = null;
-				if(SWFAddress.getPathNames()[0] != AppSections.SIGN_UP.split(":")[1]){
-				//	Logger.log(Logger.SWF_ADDRESS,"IF2:",SWFAddress.getPathNames()[0] != AppSections.SIGN_UP.split(":")[1]);
-					if(!UserModel.isLoggedIn && AppSettings.DEVICE == AppSettings.DEVICE_PC){ //and in sign up
-				//		Logger.log(Logger.SWF_ADDRESS,"IF3:",!UserModel.isLoggedIn,AppSettings.DEVICE == AppSettings.DEVICE_PC);
-					//	_nav.removeCurrentOverlay();
-						setSWFAddress(AppSections.SIGN_UP);
-					}else{
-				//		Logger.log(Logger.SWF_ADDRESS,"ELSE3:",!UserModel.isLoggedIn,AppSettings.DEVICE == AppSettings.DEVICE_PC);
-						if(lastMajor == AppSections.RESULTS && _stories[evt.menuItem] == "SECTION:"+SWFAddress.getPathNames()[0]){
-				//			 Logger.log(Logger.SWF_ADDRESS,"IF4",lastMajor == AppSections.RESULTS, _stories[evt.menuItem] == "SECTION:"+SWFAddress.getPathNames()[0]);
-							 _nextStory = -1;
-						//	 Logger.log(Logger.SWF_ADDRESS,"RESULTS && story is same");
-							 beginModule();
-						}else{
-				//			Logger.log(Logger.SWF_ADDRESS,"ELSE4,",lastMajor == AppSections.RESULTS, _stories[evt.menuItem] == "SECTION:"+SWFAddress.getPathNames()[0]);
-							_nav.removeCurrentOverlay();
-							setSWFAddress(_stories[evt.menuItem]);
-						}
-					}
-				}else if(UserModel.isLoggedIn){ //and in sign up
-				//	Logger.log(Logger.SWF_ADDRESS,"ELSE IF2:",UserModel.isLoggedIn);
-						_nav.removeCurrentOverlay();
-						setSWFAddress(_stories[evt.menuItem]);
-					
-				}
-			}else{
-				//Logger.log(Logger.SWF_ADDRESS,"ELSE1",_stories[evt.menuItem] != "SECTION:"+SWFAddress.getPathNames()[0],lastMajor == AppSections.RESULTS);
-			}
-			
+		private function onStartMovie( evt : Event ) : void
+		{
+			setSWFAddress(_stories[ 1 ]);
 		}
 		
 		protected function destroyIntro():void{
@@ -462,21 +388,14 @@ package com.refract.prediabets
 			DispatchManager.removeEventListener(Login.SIGNUP_ENDED,onSignUpEnded);
 			var ns:int = nextStory;
 			
-			if(ns == -1){
+			if(ns == -1)
+			{
 				setSWFAddress(AppSections.INTRO);
-			}else{
-			//	nextStory = -1;
+			}
+			else
+			{
 				setSWFAddress(_stories[ns]);
 			}
-		//	_nav.removeCurrentOverlay();
-			/*
-			if(nextStory == 4)
-			{
-				setSWFAddress(AppSections.REAL_STORIES);
-			}else{
-				setSWFAddress(AppSections['MODULE_LS'+nextStory]);
-			}*/
-		//	beginModule();
 		}
 		
 		protected function onSceneSelectorSelected(event : SceneSelectorEvent) : void {
@@ -552,8 +471,9 @@ package com.refract.prediabets
 						}));
 					}
 //*/
-				}else{
-					Logger.log(Logger.SWF_ADDRESS, "goModule: Scene Selector Questions");
+				}
+				else
+				{
 					BackendResponder.apiLog("/ls6/scene_selector");
 					_smController.startQuestions();
 				}
@@ -602,51 +522,32 @@ package com.refract.prediabets
 		 */
 		protected function initSWFAddress():void
 		{
-            SWFAddress.addEventListener(SWFAddressEvent.INIT, handleSWFAddress);
+            SWFAddress.addEventListener(SWFAddressEvent.INIT , handleSWFAddress);
             SWFAddress.addEventListener(SWFAddressEvent.CHANGE, handleSWFAddress);
         }
 		
-		public function setSWFAddress(path:String='', depth:int=0):void {
+		public function setSWFAddress(path:String='', depth:int=0):void 
+		{
 			path = path.split(":")[1];
 			var value:String = path;
-         /*   if (scope.currentState != '' && scope.currentState != null) {
-                value += scope.currentState.toLowerCase();
-            }*/
-          Logger.log(Logger.SWF_ADDRESS,"VALUE: "+value+" path: "+SWFAddress.getPathNames()[depth]+" LAST MAJOR: "+lastMajor);
-		  if (value != SWFAddress.getPathNames()[depth] || path == AppSections.INTRO) {
-                Logger.log(Logger.SWF_ADDRESS,"VALUE: "+value);
+
+		  	if (value != SWFAddress.getPathNames()[depth] || path == AppSections.INTRO) 
+			{
 			    var parts:Array = new Array();
                 if (path != '') parts.push(path);
-              //  if (value != '') parts.push(value);
                 SWFAddress.setValue('/' + parts.join('/'));
             }
         }
         
-        protected function handleSWFAddress(event:SWFAddressEvent, depth:int=0):void {
-       /*     var value:String = toTitleCase(event.pathNames.length > depth ? event.pathNames[depth] : '');
-              if (scope.currentState != value) {
-                scope.currentState = value;
-            } */
-            var title:String = 'LifeSaver';
-			var titleArray:Array;
-			var j:int,len:int;
-            for (var i:int = 0; i < event.pathNames.length; i++) {
-				titleArray = event.pathNames[i].split("_");
-                title += ' » ';
-				for(j = 0, len = titleArray.length; j < len; ++j){
-					title += toTitleCase(titleArray[j]) + " ";
-				}
-            }
-            SWFAddress.setTitle(title);
+        protected function handleSWFAddress(event:SWFAddressEvent, depth:int=0):void 
+		{
+            //SWFAddress.setTitle(title);
 			
-			if(event.pathNames[0] == undefined){
-				if(SWFAddress.getPath() == "/"){
-					if(!_quickSM){
-						//	createIntro();
-						setSWFAddress(AppSections.INTRO);
-					}else{
-						setSWFAddress(AppSections.MODULE_LS1);
-					}
+			if(event.pathNames[0] == undefined)
+			{
+				if(SWFAddress.getPath() == "/")
+				{
+					setSWFAddress(AppSections.INTRO);
 					return;
 				}
 			}

@@ -103,9 +103,14 @@ package com.refract.prediabets.components.nav {
 		
 		protected function onClick(evt:MouseEvent):void{
 			var type:int = int((evt.currentTarget as MenuButton).type);
-			if(UserModel.getModuleStats(type).isDownloaded){
+			if(UserModel.getModuleStats(type).isDownloaded)
+			{
+				trace("::Menu:: -a-")
 				DispatchManager.dispatchEvent(new MenuEvent(MenuEvent.MENU_SELECTED,type));
-			}else{
+			}
+			else
+			{
+				trace("::Menu:: -b-")
 			//	(evt.currentTarget as MenuButton).listenForDownload();
 				DispatchManager.dispatchEvent(new MenuEvent(MenuEvent.MENU_LOAD_MODULE,type));
 			}

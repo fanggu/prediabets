@@ -4,6 +4,7 @@ package com.refract.prediabets.stateMachine.flags {
 	 */
 	public class Flags 
 	{
+		public static const START_MOVIE							: String = 'startMovie' ; 
 		//**comm with External UI
 		public static const UPDATE_UI_PROGRESS 					: String = 'updateProgress' ; 		
 		

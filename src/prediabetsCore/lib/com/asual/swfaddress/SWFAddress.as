@@ -103,8 +103,9 @@ package com.asual.swfaddress {
             if (typeof SWFAddress['onChange'] == 'function' || _dispatcher.hasEventListener(SWFAddressEvent.CHANGE) || 
                 typeof SWFAddress['onExternalChange'] == 'function' || _dispatcher.hasEventListener(SWFAddressEvent.EXTERNAL_CHANGE)) {
                 _initTimer.stop();
-                SWFAddress._init = true;
+				SWFAddress._init = true;
                 SWFAddress._setValueInit(_getValue());
+				
             }
         }
         
@@ -425,7 +426,8 @@ package com.asual.swfaddress {
             if (SWFAddress._value == value) return;
             SWFAddress._value = value;
             _call('SWFAddress.setValue', value);
-            if (SWFAddress._init) {
+            if (SWFAddress._init) 
+			{
                 _dispatchEvent(SWFAddressEvent.CHANGE);
                 _dispatchEvent(SWFAddressEvent.INTERNAL_CHANGE);
             } else {

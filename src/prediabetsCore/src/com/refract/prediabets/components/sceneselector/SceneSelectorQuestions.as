@@ -76,7 +76,7 @@ package com.refract.prediabets.components.sceneselector {
 			text2.htmlText= SMSettings.OF ;
 			text3.htmlText = SMSettings.WATCHED ;
 			
-			text_nr1.htmlText = String(AppController.i.nrQuestionSelected) ;
+			//text_nr1.htmlText = String(AppController.i.nrQuestionSelected) ;
 			text_nr2.htmlText = '12' ;
 			
 			_tempSprite = new Sprite() ; 

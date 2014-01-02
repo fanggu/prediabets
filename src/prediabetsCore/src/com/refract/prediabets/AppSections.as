@@ -5,7 +5,6 @@ package com.refract.prediabets {
 	public class AppSections {
 		
 		public static const INTRO:String = "SECTION:INTRO";
-		public static const SIGN_UP:String = "SECTION:SIGN_UP";
 		public static const MODULE_LS1:String = "SECTION:JAKE";
 		public static const MODULE_LS2:String = "SECTION:REBECCA";
 		public static const MODULE_LS3:String = "SECTION:PETER";

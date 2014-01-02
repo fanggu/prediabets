@@ -1,5 +1,4 @@
 package com.refract.air.shared.components.nav {
-	import com.refract.air.shared.components.nav.filmsmenu.FilmsMenu;
 	import com.refract.air.shared.components.nav.footer.MobileFooter;
 	import com.refract.air.shared.components.nav.sidemenu.SideMenu;
 	import com.refract.prediabets.AppController;
@@ -7,7 +6,6 @@ package com.refract.air.shared.components.nav {
 	import com.refract.prediabets.AppSettings;
 	import com.refract.prediabets.assets.AssetManager;
 	import com.refract.prediabets.components.events.FooterEvent;
-	import com.refract.prediabets.components.events.MenuEvent;
 	import com.refract.prediabets.components.nav.Footer;
 	import com.refract.prediabets.components.nav.Header;
 	import com.refract.prediabets.components.nav.Nav;
@@ -25,7 +23,6 @@ package com.refract.air.shared.components.nav {
 	public class MobileNav extends Nav {
 		
 		protected var _sideMenu:SideMenu;
-		protected var _filmsMenu:FilmsMenu;
 		
 		public function MobileNav() {
 			super();
@@ -84,7 +81,7 @@ package com.refract.air.shared.components.nav {
 			_closeButton.visible = false;
 		
 			addSideMenu();
-			addFilmsMenu();
+			
 			addBaseButtons();
 			
 			addEvents();
@@ -104,49 +101,21 @@ package com.refract.air.shared.components.nav {
 			addChild(_sideMenu);
 		}
 		
-		protected function addFilmsMenu():void{
-			_filmsMenu = new FilmsMenu();
-			addChildAt(_filmsMenu,numChildren-1);
-		}
+		
 		
 		private function addEvents():void{
-			_sideMenu.addEventListener(MenuEvent.MENU_HIDE, onMenuHidden);
-			_filmsMenu.addEventListener(MenuEvent.MENU_HIDE, onMenuHidden);
-			_sideMenu.addEventListener(MenuEvent.MENU_SHOW, onMenuShown);
-			_filmsMenu.addEventListener(MenuEvent.MENU_SHOW, onMenuShown);
+			
+			
 		}
 		
-		private function onMenuHidden(evt:Event):void{
-			if(!_sideMenu.shown && !_filmsMenu.shown){
-				DispatchManager.dispatchEvent(evt);
-			}
-		}
-		
-		private function onMenuShown(evt:Event):void{
-			if(_sideMenu.shown || _filmsMenu.shown){
-				DispatchManager.dispatchEvent(evt);
-			}
-		}
-		
-		override public function showMenu():void{
-		//	_sideMenu.show();
-			_filmsMenu.show();
-			(_footer as MobileFooter).hideCenter();
-		}
-		
-		override public function hideMenu():void{
-		//	_sideMenu.hide();
-			_filmsMenu.hide();
-			(_footer as MobileFooter).showCenter();
-		}
-		
+
 		override protected function onNavClicked(evt : FooterEvent) : void{
 			var obj:Object = evt.info;
 			switch(obj.value){
 				case(Header.LS_LOGO):
 					AppController.i.setSWFAddress(AppSections.INTRO);
 					_sideMenu.shown ? _sideMenu.hide() : true;
-					_filmsMenu.shown ? hideMenu() : true;
+					//_filmsMenu.shown ? hideMenu() : true;
 					removeCurrentOverlay();
 				//	_menu.shown ? _menu.hide() : _menu.show();
 				//	_header.setProgressBar((Math.round(Math.random()*3))*33.3/100);
@@ -156,7 +125,7 @@ package com.refract.air.shared.components.nav {
 					_sideMenu.shown ? _sideMenu.hide() : _sideMenu.show();
 					break;
 				case(MobileFooter.FILMS):
-					_filmsMenu.shown ? hideMenu() : showMenu();
+					//_filmsMenu.shown ? hideMenu() : showMenu();
 					break;
 				default:
 					super.onNavClicked(evt);

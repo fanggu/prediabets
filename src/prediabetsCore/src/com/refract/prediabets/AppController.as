@@ -7,10 +7,8 @@ package com.refract.prediabets
 	import com.refract.prediabets.assets.TextManager;
 	import com.refract.prediabets.backend.BackendResponder;
 	import com.refract.prediabets.components.events.FooterEvent;
-	import com.refract.prediabets.components.events.MenuEvent;
 	import com.refract.prediabets.components.events.SceneSelectorEvent;
 	import com.refract.prediabets.components.intro.Intro;
-	import com.refract.prediabets.components.login.Login;
 	import com.refract.prediabets.components.nav.Header;
 	import com.refract.prediabets.components.nav.Nav;
 	import com.refract.prediabets.components.results.Results;
@@ -59,7 +57,15 @@ package com.refract.prediabets
 		
 		protected var _stories:Array = ["",AppSections.MODULE_LS1, AppSections.MODULE_LS2, AppSections.MODULE_LS3, AppSections.REAL_STORIES];
 		
-		protected var _interactiveSections:Array = [AppSections.MODULE_LS1, AppSections.MODULE_LS2, AppSections.MODULE_LS3, AppSections.REAL_STORIES,AppSections.SIGN_UP,AppSections.FEEDBACK,AppSections.LOGIN];
+		protected var _interactiveSections:Array = 
+		[
+			AppSections.MODULE_LS1
+			, AppSections.MODULE_LS2
+			, AppSections.MODULE_LS3
+			, AppSections.REAL_STORIES
+			, AppSections.FEEDBACK
+			, AppSections.LOGIN
+		];
 		
 		protected var _nextStoryState:String = null;
 		public function get nextStoryState() : String { return _nextStoryState; }
@@ -113,33 +119,24 @@ package com.refract.prediabets
 		protected function onFSChange(evt:FullScreenEvent):void{
 			if(evt.fullScreen && _interactiveSections.indexOf("SECTION:"+currentPath[0]) != -1){
 				DispatchManager.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, fsAcceptedOrNot);
-				onMenuShow();
+				
 				AppSettings.checkFSStatus();
 			}
 		}
 		
 		protected function fsAcceptedOrNot(evt:Event):void{
 			DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, fsAcceptedOrNot);
-			onMenuHide();
+			
 		}
 		
 		protected function createNav():void{
 			_nav = new ClassFactory.NAV();
 			_main.addChild(_nav);
-			
-			
-			
-			DispatchManager.addEventListener(MenuEvent.MENU_SHOW,onMenuShow);
-			DispatchManager.addEventListener(MenuEvent.MENU_HIDE,onMenuHide);
 
 			DispatchManager.addEventListener(SceneSelectorEvent.BUTTON_SELECTED,onSceneSelectorSelected);
 			DispatchManager.addEventListener(Nav.NO_MORE_OVERLAYS,onNoMoreOverlays);
 			DispatchManager.addEventListener(SceneSelectorEvent.QUESTION_SELECTED,onBeginModuleQuestions);
-		//	_nav.addEventListener(Nav.SHOW_SCENE_SELECTOR,onSceneSelector);
-		//	_smController.start();
-		
-		
-			
+
 		}
 			
 		protected function onAppActivated(evt:Event = null):void{
@@ -149,29 +146,14 @@ package com.refract.prediabets
 			if(VideoLoader.i){
 				VideoLoader.i.reattachStageVideo();
 			}
-			
-			onMenuHide();
 		}
 		
 		protected function onAppDeactivated(evt:Event = null):void
 		{
-			onMenuShow();
 			TweenMax.pauseAll(true,true,true);
 		}	
 			
-		protected function onMenuHide(evt:Event = null):void{
-			if(_nav.overlayShown){
-				
-			}else{
-				DispatchManager.dispatchEvent(new Event(Flags.UN_FREEZE));
-				DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_UNPAUSE));
-			}
-		}
-		
-		protected function onMenuShow(evt:Event = null):void{
-			DispatchManager.dispatchEvent(new Event(Flags.FREEZE));
-			DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_PAUSE));
-		}
+
 			
 		protected function createSoundMachine() : void {
 			new SoundMachine() ; 
@@ -212,17 +194,7 @@ package com.refract.prediabets
 							}
 						 
 						break;
-					case(AppSections.SIGN_UP):
-						removeCurrentSection();	
-						if(!UserModel.isLoggedIn){
-							lastMajor = path[0];
-							createSignUp();
-							AppSettings.stage.removeEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
-						}else{
-							setSWFAddress(AppSections.INTRO);
-						}
-						DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
-						break;
+					
 					case(AppSections.ABOUT):
 					case(AppSections.CREDITS):
 					case(AppSections.EMERGENCY_INFO):
@@ -256,9 +228,6 @@ package com.refract.prediabets
 			switch("SECTION:"+currentPath[0]){
 				case(AppSections.INTRO):
 					destroyIntro();
-					break;
-				case(AppSections.SIGN_UP):
-					//_nav.removeCurrentOverlay();
 					break;
 				case(AppSections.MODULE_LS1):
 				case(AppSections.MODULE_LS2):
@@ -304,12 +273,6 @@ package com.refract.prediabets
 				//setSWFAddress(AppSections.INTRO);	
 				out = "results";
 				addOverlay(AppSections.RESULTS.split(":")[1],true);
-			}
-			else if (lastMajor == AppSections.SIGN_UP.split(":")[1])
-			{
-			//	
-				
-				out = "nothing";
 			}
 			else
 			{
@@ -377,15 +340,9 @@ package com.refract.prediabets
 			statusMC.mouseEnabled = false ; 
 			statusMC.buttonMode = false ; 
 		}
-		
-		protected function createSignUp():void{
-			_status = AppSections.SIGN_UP;
-			_nav.addOverlay(ClassFactory.SIGN_UP);
-			DispatchManager.addEventListener(Login.SIGNUP_ENDED,onSignUpEnded);
-		}
-		
-		protected function onSignUpEnded(evt:Event):void{
-			DispatchManager.removeEventListener(Login.SIGNUP_ENDED,onSignUpEnded);
+
+		protected function onSignUpEnded(evt:Event):void
+		{
 			var ns:int = nextStory;
 			
 			if(ns == -1)
@@ -508,8 +465,6 @@ package com.refract.prediabets
 			if(UserModel.getModuleStats(3).isComplete){
 				DispatchManager.removeEventListener(Results.CONTINUE,onResultsContinue);
 				setSWFAddress(AppSections.PROFILE);
-			}else{
-				_nav.showMenu();
 			}
 		}
 

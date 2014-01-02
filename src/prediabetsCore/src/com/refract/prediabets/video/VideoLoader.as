@@ -321,7 +321,6 @@ package com.refract.prediabets.video {
 					if(paused){
 						DispatchManager.dispatchEvent( new BooleanEvent( Flags.DRAW_VIDEO_STATUS ,true ) ) ;
 						DispatchManager.dispatchEvent( new BooleanEvent( Flags.UPDATE_PLAY_BUTTON , true)) ;
-						AppController.i.nav.hideMenu();
 						resumeVideo();
 						
 					}else{

@@ -7,7 +7,6 @@ package com.refract.prediabets.components.nav {
 	import com.refract.prediabets.assets.AssetManager;
 	import com.refract.prediabets.components.events.FooterEvent;
 	import com.refract.prediabets.components.intro.Intro;
-	import com.refract.prediabets.components.login.Login;
 	import com.refract.prediabets.components.sceneselector.SceneSelectorQuestions;
 	import com.refract.prediabets.components.shared.LSButton;
 	import com.refract.prediabets.stateMachine.flags.Flags;
@@ -38,7 +37,8 @@ package com.refract.prediabets.components.nav {
 		protected var _footer : Footer;
 		
 		public function get footer():Footer{ return _footer; }
-		protected var _menu:Menu;
+		
+		
 		
 		protected var _overlayShown:Boolean = false;
 		public function get overlayShown():Boolean {return _overlayShown;}
@@ -120,9 +120,7 @@ package com.refract.prediabets.components.nav {
 			_closeButton.addEventListener(MouseEvent.CLICK, onClose);
 			_closeButton.visible = false;
 			
-			_menu = new Menu();
-			addChild(_menu);
-		//	_menu.show();
+			
 		
 		
 			_header = new ClassFactory.HEADER();
@@ -138,9 +136,6 @@ package com.refract.prediabets.components.nav {
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onSMEnd);
 			
 			DispatchManager.addEventListener(CLOSE_OVERLAY, removeCurrentOverlay);
-			DispatchManager.addEventListener(UserModel.USER_LOGGED_IN,onLoggedIn);
-			DispatchManager.addEventListener(UserModel.USER_LOGGED_OUT,onLoggedOut);
-			
 			
 			DispatchManager.addEventListener(AppSettings.REQUEST_FULL_SCREEN_INTERACTIVE, onFSIRequest);
 			
@@ -159,16 +154,7 @@ package com.refract.prediabets.components.nav {
 		protected function onSMEnd(evt:Event):void{
 			stopShowHandler();
 		}
-		
-		
-		protected function onLoggedIn(evt:Event):void{
-			_menu.refreshMenuLocks();
-		}
-		
-		protected function onLoggedOut(evt:Event):void{
-			_menu.refreshMenuLocks();
-		}
-		
+
 		
 		protected function startShowHandler():void{
 			_footer.addEventListener(MouseEvent.MOUSE_OVER,onMouseOverForAutoHide);
@@ -228,13 +214,11 @@ package com.refract.prediabets.components.nav {
 			switch(obj.value){
 				case(Header.LS_LOGO):
 					AppController.i.setSWFAddress(AppSections.INTRO);
-					_menu.shown ? _menu.hide() : true;
 					removeCurrentOverlay();
-				//	_menu.shown ? _menu.hide() : _menu.show();
-				//	_header.setProgressBar((Math.round(Math.random()*3))*33.3/100);
+				
 					break;
 				case(Footer.MENU):
-					_menu.shown ? _menu.hide() : _menu.show();
+					
 					break;
 				case(AppSections.SCENE_SELECTOR):
 					//DispatchManager.dispatchEvent(new Event( Flags.SM_RESET)) ;
@@ -323,15 +307,6 @@ package com.refract.prediabets.components.nav {
 		}
 		
 
-		public function showMenu():void{
-			if(!_menu.shown) _menu.show();
-		}
-
-		public function hideMenu() : void 
-		{
-			if(_menu.shown) _menu.hide();
-		}
-		
 		protected var fadeTime:Number = 0.5;
 		
 		public function addSection(name:String,suppressAnim:Boolean = false):void{
@@ -363,13 +338,6 @@ package com.refract.prediabets.components.nav {
 				case(AppSections.EMERGENCY_INFO):
 					addOverlay(ClassFactory.EMERGENCY_INFO);
 					break;
-				case(AppSections.LOGIN):
-					if(UserModel.isLoggedIn){
-						addOverlay(ClassFactory.LOGOUT);
-					}else{
-						addOverlay(ClassFactory.LOGIN);
-					}
-					break;
 				case(AppSections.PROFILE):
 					addOverlay(ClassFactory.PROFILE);
 					break;
@@ -384,22 +352,6 @@ package com.refract.prediabets.components.nav {
 		
 		protected function onBackToVideo(evt:Event):void{	
 			removeCurrentOverlay();
-			
-//			if( _prevOverlay is SceneSelector)
-//			{
-
-//				if( AppController.i.nextStory != 4)
-//					{
-//						addOverlay(ClassFactory.SCENE_SELECTOR);
-//						DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.HIGHLIGHT_BUTTON,{buttonID:AppSections.SCENE_SELECTOR}));
-//					}
-//					else
-//					{
-//						
-//						addOverlay(ClassFactory.SCENE_SELECTOR_QUESTIONS);
-//						//DispatchManager.dispatchEvent(new Event( Flags.SM_RESET)) ;
-//					}
-//			}
 			if( _prevOverlay is SceneSelectorQuestions && AppController.i.nextStory == 4)
 			{
 				_prevOverlay = null ; 
@@ -421,7 +373,6 @@ package com.refract.prediabets.components.nav {
 			DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_PAUSE));
 			
 			_overlayShown = true;
-			hideMenu();
 			if(overlay == ClassFactory.RESULTS){
 				_currentOverlay = new overlay(supressAnim);
 			}else{
@@ -456,12 +407,6 @@ package com.refract.prediabets.components.nav {
 
 			switch( overlay )
 			{
-				case ClassFactory.SIGN_UP :
-					if(!Login(_currentOverlay).isSignUp){
-						DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.ADD_FOOTER_ITEM,{position:FooterEvent.BOTTOM_MIDDLE,button:_backToVideo}));
-					}
-					
-				break;
 				case ClassFactory.RESULTS:
 				break;
 				case ClassFactory.SCENE_SELECTOR_QUESTIONS :

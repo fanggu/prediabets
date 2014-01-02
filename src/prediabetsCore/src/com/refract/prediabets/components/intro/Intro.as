@@ -74,7 +74,7 @@ package com.refract.prediabets.components.intro {
 		
 		protected function endIntro():void{
 			DispatchManager.removeEventListener(NetStatusEvent.NET_STATUS, onNetStatus);
-			onIntroEnded() ;// MenuEvent(MenuEvent.MENU_SELECTED,2));
+			onIntroEnded() ;
 		}
 
 		protected function onIntroEnded(evt : MenuEvent = null) : void 

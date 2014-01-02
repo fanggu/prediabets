@@ -10,13 +10,10 @@ package com.refract.prediabets {
 	import com.refract.prediabets.components.gettheapp.GetTheApp;
 	import com.refract.prediabets.components.intro.Intro;
 	import com.refract.prediabets.components.legal.Legal;
-	import com.refract.prediabets.components.login.Login;
-	import com.refract.prediabets.components.login.Logout;
 	import com.refract.prediabets.components.medicalquestions.MedicalQuestions;
 	import com.refract.prediabets.components.nav.Footer;
 	import com.refract.prediabets.components.nav.Header;
 	import com.refract.prediabets.components.nav.Nav;
-	import com.refract.prediabets.components.nav.menu.MenuButton;
 	import com.refract.prediabets.components.profile.Profile;
 	import com.refract.prediabets.components.profile.ProfileButton;
 	import com.refract.prediabets.components.results.Results;
@@ -42,7 +39,6 @@ package com.refract.prediabets {
 		public static var NAV:Class = Nav;
 		public static var INTRO:Class = Intro;
 		public static var VIDEO_LOADER:Class = VideoLoader;
-		public static var SIGN_UP:Class = Login;
 		public static var ABOUT:Class = About;
 		public static var CREDITS : Class = Credits;
 		public static var LEGAL : Class = Legal;
@@ -59,18 +55,12 @@ package com.refract.prediabets {
 		public static var EMERGENCY_INFO_LANDING : Class = EmergencyInfoLanding;
 		public static var EMERGENCY_INFO_COLLAPSED : Class = EmergencyInfoCollapsed;
 		public static var EMERGENCY_INFO_CHOKING : Class = EmergencyInfoChoking;
-		public static var LOGIN : Class = Login;
 		public static var PROFILE : Class = Profile;
-		public static var LOGOUT : Class = Logout;
 		
 		public static var FOOTER : Class = Footer;
 		public static var HEADER : Class = Header;
 		
-		/*
-		 * Modules
-		 */
 		public static var MODULE_MODEL:Class = ModuleModel;
-		public static var MENU_BUTTON:Class = MenuButton;
 		public static var PROFILE_BUTTON : Class = ProfileButton;
 		
 		//**STATE MACHINE

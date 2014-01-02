@@ -86,8 +86,8 @@ package {
 			
 		}
 		
-		protected function setAppClasses():void{
-			ClassFactory.APP_CONTROLLER = MobileAppController;
+		protected function setAppClasses():void
+		{
 			
 			//ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
 			ClassFactory.INTERACTION_QP = MobileInteractionQP;

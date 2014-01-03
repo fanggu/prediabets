@@ -22,30 +22,14 @@ package {
 		private function onStage(evt:Event):void{
 			this.removeEventListener(Event.ADDED_TO_STAGE,onStage);
 			
-			setAppSettings();
 			setAppClasses();
 			
 			var mainCore : MainCore = new MainCore(); 
 			addChild ( mainCore ) ;
 		}
 		
-		
-		private function setAppSettings():void{
-			
-			AppSettings.stage = stage;
-			var dataURL:String = AppSettings.getFlashVar("dataURL");
-			if(dataURL && dataURL != ""){
-	//			trace("data path set to: " + dataURL)
-				AppSettings.DATA_PATH = dataURL;
-			}else{
-				
-				AppSettings.DATA_PATH = "../data/";
-	//			trace("data path set to default: " + AppSettings.DATA_PATH)
-			}
-			
-		}
-		
-		private function setAppClasses():void{
+		private function setAppClasses():void
+		{
 			ClassFactory.VIDEO_LOADER = WebVideoLoader;
 			
 		}

@@ -42,7 +42,7 @@ package com.refract.prediabets {
 //		public static var DARK_GREY:int = 0x737877;
 		public static var WHITE:int = 0xffffff;
 		
-		public static var DATA_PATH:String = "./../../../../website/data/";
+		public static var DATA_PATH:String = "data/" ; // "./../../../../website/data/";
 		
 		
 		public static const TABLET_THRESHOLD:Number = 6.5;

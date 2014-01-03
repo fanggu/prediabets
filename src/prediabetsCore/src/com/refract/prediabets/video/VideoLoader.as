@@ -402,7 +402,7 @@ package com.refract.prediabets.video {
 		}
 		public function update( nameVideo : String ) : void
 		{
-			
+			trace('::update:: ' , nameVideo )
 			if(_netStream){
 					_netStream.removeEventListener(NetStatusEvent.NET_STATUS, videoStatus);
 					_netStream.pause();
@@ -444,6 +444,7 @@ package com.refract.prediabets.video {
 			if(_simpleVidAvailable){
 				_failedToPlay = false;
 				var url:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+_url+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+				trace('::createVideo url::' , url )
 				var items:Array = _bulkLoader.items;
 				var totalItems:int = items.length;
 				var videoItem:VideoItem;

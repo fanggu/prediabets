@@ -22,10 +22,9 @@ package com.refract.prediabets.components.nav {
 	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
 
-	/**
-	 * @author kanish
-	 */
-	public class Nav extends Sprite {
+	
+	public class Nav extends Sprite 
+	{
 		
 		public static const CLOSE_OVERLAY:String = "CLOSE_OVERLAY";
 		
@@ -53,16 +52,17 @@ package com.refract.prediabets.components.nav {
 		
 		protected var _backToVideo:LSButton;
 		//protected var _coverBt : LSButton ;
-		
-		
-		public function Nav() {
-			addEventListener(Event.ADDED_TO_STAGE, init);
-		}
 		protected var _closeButton:LSButton;
 		
-		protected function init(evt:Event):void{
+		public function Nav() 
+		{
+			addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		
+		protected function init(evt:Event):void
+		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			
 			
 			_overlayLayer = new Sprite();
 			addChild(_overlayLayer);

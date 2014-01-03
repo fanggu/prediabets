@@ -2,7 +2,6 @@ package {
 	import pl.mateuszmackowiak.nativeANE.NativeDialogEvent;
 	import pl.mateuszmackowiak.nativeANE.alert.NativeAlert;
 
-	import com.refract.air.shared.MobileAppController;
 	import com.refract.air.shared.components.emergencyinfo.TabletEmergencyInfoChoking;
 	import com.refract.air.shared.components.emergencyinfo.TabletEmergencyInfoCollapsed;
 	import com.refract.air.shared.components.feedback.TabletFeedback;

@@ -1,22 +1,17 @@
 package com.refract.prediabets.stateMachine {
 	import com.greensock.TweenMax;
-	import com.refract.prediabets.AppSections;
 	import com.refract.prediabets.AppSettings;
 	import com.refract.prediabets.ClassFactory;
-	import com.refract.prediabets.components.events.FooterEvent;
-	import com.refract.prediabets.logger.Logger;
 	import com.refract.prediabets.stateMachine.VO.CoinVO;
 	import com.refract.prediabets.stateMachine.events.BooleanEvent;
 	import com.refract.prediabets.stateMachine.events.ObjectEvent;
 	import com.refract.prediabets.stateMachine.events.StateEvent;
 	import com.refract.prediabets.stateMachine.flags.Flags;
 	import com.refract.prediabets.stateMachine.timer.SMTimer;
-	import com.refract.prediabets.user.UserModel;
 	import com.refract.prediabets.video.VideoLoader;
 	import com.robot.comm.DispatchManager;
 
 	import flash.display.Shape;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.NetStatusEvent;
 	import flash.events.TimerEvent;
@@ -82,6 +77,7 @@ package com.refract.prediabets.stateMachine {
 			
 			createEnterFrameLoop();
 			createModel();	
+			
 		}
 		
 		//***
@@ -103,8 +99,7 @@ package com.refract.prediabets.stateMachine {
 			_model.selectedInteraction= 0 ;
 			if( _initObject.selectedState == null)
 			{
-				_model.selectedState = _model.initState ; 
-				if( UserModel.getUserInfo().refresher ) _model.selectedInteraction = 1 ; 
+				_model.selectedState = _model.initState ;  
 			}
 			else
 			{
@@ -136,29 +131,7 @@ package com.refract.prediabets.stateMachine {
 			SMScore.me.addStarOnSceneSelect( );
 		}
 		
-		public function startQuestions() : void
-		{
-			SMScore.reset() ; 
-			SMVars.reset() ;
-			
-			//createListeners();
-			_initObject = {};
-			_initObject.footerBar = new Sprite();  
-			
-			dispatchStartEvents() ; 
-			
-			_death = false ; 
-			_model.init( 6 ) ; 
-			
-			var addressObj : Object = new Object() ; 
-			addressObj.value = AppSections.SCENE_SELECTOR_QUESTIONS; 
-			
-			VideoLoader.i.pauseVideo() ;
-			DispatchManager.dispatchEvent( new Event( Flags.FAST_CLEAR_SOUNDS) ) ; 
-			DispatchManager.dispatchEvent( new FooterEvent( FooterEvent.FOOTER_CLICKED, addressObj) ) ;
-			
-			
-		}
+	
 		private function dispatchStartEvents() : void
 		{
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.STATE_MACHINE_START, _initObject ) ) ;
@@ -263,16 +236,9 @@ package com.refract.prediabets.stateMachine {
 					}
 					else
 					{
-						if(UserModel.getUserInfo().refresher )
-						{
-							
-							_model.selectedInteraction= 1 ; 
-							
-						}
-						else
-						{
-							_model.selectedInteraction= 0 ; 
-						}
+						
+						_model.selectedInteraction= 0 ; 
+						
 						_model.selectedState = _model.state.prev_state ;
 						stateMachineTransition() ; 
 					}
@@ -708,7 +674,7 @@ package com.refract.prediabets.stateMachine {
 			DispatchManager.removeEventListener( Event.ENTER_FRAME , scheduler) ;
 			if( address == 'menu')
 			{
-				startQuestions() ; 
+				 
 				return ;
 			}
 			if( address != _model.selectedState )

@@ -95,7 +95,6 @@ package com.refract.prediabets.video {
 		public function VideoLoader(){
 			super();
 			_i = this;
-			
 			setBulkLoader();
 			
 			
@@ -347,11 +346,14 @@ package com.refract.prediabets.video {
 		}
 		
 		protected function onResize(evt:Event = null):void{
-			_simpleVid.resize(stage.stageWidth,stage.stageHeight-AppSettings.RESERVED_HEIGHT);
-			if(_videoClickListener){
+			//_simpleVid.resize( stage.stageWidth , stage.stageHeight - AppSettings.RESERVED_FOOTER_HEIGHT) //-AppSettings.RESERVED_HEIGHT ) ;
+			_simpleVid.resize( stage.stageWidth , stage.stageHeight -AppSettings.RESERVED_HEIGHT ) ;
+			if(_videoClickListener)
+			{
 				drawVideoClickListener();
 			}
-			if(_loader){
+			if(_loader)
+			{
 				_loader.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2;
 				_loader.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2;
 			}
@@ -359,7 +361,6 @@ package com.refract.prediabets.video {
 	
 		protected function onSimpleStageVideoStatus(evt:SimpleStageVideoEvent):void{
 			_simpleVid.removeEventListener(SimpleStageVideoEvent.STATUS, onSimpleStageVideoStatus);
-		//	_simpleVid.toggle(false);
 			_hardwareDecoding = evt.hardwareDecoding;
 			_hardwareCompositing = evt.hardwareCompositing;
 			_fullGPU = evt.fullGPU;
@@ -402,35 +403,14 @@ package com.refract.prediabets.video {
 		}
 		public function update( nameVideo : String ) : void
 		{
-			trace('::update:: ' , nameVideo )
-			if(_netStream){
-					_netStream.removeEventListener(NetStatusEvent.NET_STATUS, videoStatus);
-					_netStream.pause();
-					_netStream.seek(0);
-				} 
-				createVideo( nameVideo );
-			
-			/*
-				if(nameVideo != _url){
-					if(_netStream){
-						_netStream.removeEventListener(NetStatusEvent.NET_STATUS, videoStatus);
-						_netStream.pause();
-						_netStream.seek(0);
-					} 
-					createVideo( nameVideo );
-					
-				}else{
-					if(_netStream){
-						_netStream.resume();
-						_simpleVid.reattachStageVideo();
-					}
-				//	str = " already added";
-				}
-			*/
+			if(_netStream)
+			{
+				_netStream.removeEventListener(NetStatusEvent.NET_STATUS, videoStatus);
+				_netStream.pause();
+				_netStream.seek(0);
+			} 
+			createVideo( nameVideo );
 			videoAddress = nameVideo ; 
-			//Logger.log(Logger.VIDEO,nameVideo);
-			//DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_DEBUG_PANEL_VIDEO, nameVideo + str));
-			
 		}	
 		
 		public function resetVideo() : void
@@ -444,7 +424,6 @@ package com.refract.prediabets.video {
 			if(_simpleVidAvailable){
 				_failedToPlay = false;
 				var url:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+_url+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
-				trace('::createVideo url::' , url )
 				var items:Array = _bulkLoader.items;
 				var totalItems:int = items.length;
 				var videoItem:VideoItem;
@@ -459,7 +438,6 @@ package com.refract.prediabets.video {
 				if(videoItem){
 					videoItem.pausedAtStart = false;
 				}
-				//_netStream = videoItem != null ? videoItem.stream : _backupNetStream;
 				
 				if( videoItem != null )
 				{
@@ -491,15 +469,12 @@ package com.refract.prediabets.video {
 						_netStream.play(url);
 					}
 				}
-				
-				
+
 				
 				onResize();
-				//Logger.log(Logger.VIDEO,"PLAYING VIDEO",url);
 				paused = false ;
 				
 			}else{
-			//	Logger.log(Logger.VIDEO,"notsimplevideo");
 				_failedToPlay = true;
 				addChild(_simpleVid);
 			}
@@ -526,18 +501,6 @@ package com.refract.prediabets.video {
 			//TweenMax.to( _loader , .5 , { alpha : 0} )
 		}
 		
-//		
-//		private function onTimerEvent(e:Event):void 
-//		{
-//		  var percent:Number = Math.round(_netStream.bufferLength/_netStream.bufferTime100 * 100);
-//		  if (percent >= 95 )// && contains(_loader)) 
-//		  {
-//		     hideLoader() ;
-//		  }
-//		  if (percent < 25 ) //&& !contains(bufferLoop)) {
-//		    	showLoader() ;
-//		  }
-//		}
 		protected function videoStatus( event : NetStatusEvent ) : void
 		{
 			//Logger.log(Logger.VIDEO,"NET STATUS:",event.info.code);

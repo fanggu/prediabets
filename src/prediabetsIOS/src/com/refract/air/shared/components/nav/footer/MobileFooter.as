@@ -2,14 +2,11 @@ package com.refract.air.shared.components.nav.footer {
 	import com.greensock.TweenMax;
 	import com.refract.prediabets.AppController;
 	import com.refract.prediabets.AppSettings;
-	import com.refract.prediabets.components.events.FooterEvent;
-	import com.refract.prediabets.components.nav.Footer;
-	import com.refract.prediabets.components.nav.header.HeaderScoreBar;
-	import com.refract.prediabets.components.shared.LSButton;
+	import com.refract.prediabets.nav.Footer;
+	import com.refract.prediabets.nav.events.FooterEvent;
+	import com.refract.prediabets.sections.utils.LSButton;
 	import com.refract.prediabets.stateMachine.events.ObjectEvent;
 	import com.refract.prediabets.stateMachine.flags.Flags;
-	import com.refract.prediabets.user.ModuleModel;
-	import com.refract.prediabets.user.UserModel;
 	import com.robot.comm.DispatchManager;
 
 	import flash.display.Sprite;

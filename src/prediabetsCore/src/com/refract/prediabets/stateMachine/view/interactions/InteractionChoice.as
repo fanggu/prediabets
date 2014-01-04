@@ -4,7 +4,7 @@ package com.refract.prediabets.stateMachine.view.interactions {
 	import com.refract.prediabets.AppSettings;
 	import com.refract.prediabets.assets.AssetManager;
 	import com.refract.prediabets.assets.TextManager;
-	import com.refract.prediabets.components.shared.LSButton;
+	import com.refract.prediabets.sections.utils.LSButton;
 	import com.refract.prediabets.stateMachine.SMSettings;
 	import com.refract.prediabets.stateMachine.SMVars;
 	import com.refract.prediabets.stateMachine.flags.Flags;

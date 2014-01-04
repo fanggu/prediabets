@@ -151,7 +151,7 @@
             "choice_x": 0,
             "choice_y": 0,
             "clip_length": 70880,
-            "trigger": 66500
+            "trigger": 1500
           },
           {
             "final_state": "LS1_p8",

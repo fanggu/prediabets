@@ -5,11 +5,11 @@ package com.refract.air.shared.components.nav {
 	import com.refract.prediabets.AppSections;
 	import com.refract.prediabets.AppSettings;
 	import com.refract.prediabets.assets.AssetManager;
-	import com.refract.prediabets.components.events.FooterEvent;
-	import com.refract.prediabets.components.nav.Footer;
-	import com.refract.prediabets.components.nav.Header;
-	import com.refract.prediabets.components.nav.Nav;
-	import com.refract.prediabets.components.shared.LSButton;
+	import com.refract.prediabets.nav.Footer;
+	import com.refract.prediabets.nav.Header;
+	import com.refract.prediabets.nav.Nav;
+	import com.refract.prediabets.nav.events.FooterEvent;
+	import com.refract.prediabets.sections.utils.LSButton;
 	import com.robot.comm.DispatchManager;
 
 	import flash.display.Bitmap;

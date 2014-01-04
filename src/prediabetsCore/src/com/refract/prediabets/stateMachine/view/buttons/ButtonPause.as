@@ -1,6 +1,6 @@
 package com.refract.prediabets.stateMachine.view.buttons {
 	import com.refract.prediabets.assets.AssetManager;
-	import com.refract.prediabets.components.shared.LSButton;
+	import com.refract.prediabets.sections.utils.LSButton;
 	import com.refract.prediabets.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 

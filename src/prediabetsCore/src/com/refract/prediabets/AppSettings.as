@@ -88,11 +88,14 @@ package com.refract.prediabets {
 		public static var VIDEO_RIGHT:Number = 0;
 		public static var VIDEO_TOP:Number = 0;
 		public static var VIDEO_BOTTOM:Number = 0;
-
-		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 40;
-		public static var RESERVED_FOOTER_HEIGHT_DEFAULT:int = 40;
-		public static var RESERVED_HEADER_HEIGHT:int = RESERVED_HEADER_HEIGHT_DEFAULT;
-		public static var RESERVED_FOOTER_HEIGHT:int = RESERVED_FOOTER_HEIGHT_DEFAULT;
+		
+		//public static var RESERVED_HEADER_HEIGHT_TOP:int = 10;
+		//public static var RESERVED_HEADER_HEIGHT_BOTTOM:int = 80;
+		
+		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 20;
+		public static var RESERVED_FOOTER_HEIGHT_DEFAULT:int = 90;
+		public static var RESERVED_HEADER_HEIGHT:int = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
+		public static var RESERVED_FOOTER_HEIGHT:int = RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
 		public static var RESERVED_HEIGHT:int = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
 		public static const RESERVED_SIDE_BORDER:int = 30;
 		
@@ -175,9 +178,9 @@ package com.refract.prediabets {
 				VIDEO_WIDTH = (_stage.stageHeight - RESERVED_HEIGHT)*SIXTEEN_NINE_RATIO;
 				VIDEO_HEIGHT = (_stage.stageHeight - RESERVED_HEIGHT);
 				VIDEO_IS_STAGE_WIDTH = false;
-				VIDEO_LEFT = _stage.stageWidth/2 - VIDEO_WIDTH/2;
+				VIDEO_LEFT = _stage.stageWidth/2 - VIDEO_WIDTH/2 ;
 				VIDEO_RIGHT = VIDEO_LEFT + VIDEO_WIDTH;
-				VIDEO_TOP = RESERVED_HEADER_HEIGHT;
+				VIDEO_TOP = RESERVED_HEADER_HEIGHT ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 			}
 			
@@ -244,8 +247,8 @@ package com.refract.prediabets {
 			
 			Logger.general("Device looks like: ", DEVICE, "size is", inches, "with dpi",dpi, "and reported dpi",reportedDpi, "and scale factor",FONT_SCALE_FACTOR);
 			if(DEVICE == DEVICE_TABLET){
-				RESERVED_FOOTER_HEIGHT = RESERVED_FOOTER_HEIGHT_DEFAULT*FONT_SCALE_FACTOR;
-				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT_DEFAULT*FONT_SCALE_FACTOR;	
+				RESERVED_FOOTER_HEIGHT = RESERVED_FOOTER_HEIGHT*FONT_SCALE_FACTOR;
+				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT*FONT_SCALE_FACTOR;	
 			}else{
 				RESERVED_FOOTER_HEIGHT = 0;
 				RESERVED_HEADER_HEIGHT = 0;

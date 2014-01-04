@@ -5,7 +5,7 @@ package com.refract.prediabets.stateMachine.view.buttons
 	import com.greensock.easing.Quint;
 	import com.refract.prediabets.AppSettings;
 	import com.refract.prediabets.assets.TextManager;
-	import com.refract.prediabets.components.shared.LSButton;
+	import com.refract.prediabets.sections.utils.LSButton;
 	import com.refract.prediabets.stateMachine.SMSettings;
 	import com.refract.prediabets.stateMachine.VO.CoinVO;
 	import com.refract.prediabets.stateMachine.events.ObjectEvent;

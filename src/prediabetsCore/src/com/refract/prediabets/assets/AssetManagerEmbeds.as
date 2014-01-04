@@ -232,10 +232,6 @@ package com.refract.prediabets.assets {
 		[Embed(source="../../../../../assets/img/scene_select/LS6_12.jpg")] public var SS_LS6_12 : Class;
 
 
-
-		[Embed(source="../../../../../assets/img/overlay_bkgs/07.jpg")] public var BKG_07 : Class;
-		[Embed(source="../../../../../assets/img/overlay_bkgs/08.jpg")] public var BKG_08 : Class;
-		
 		/*
 		 * 
 		 * Profile

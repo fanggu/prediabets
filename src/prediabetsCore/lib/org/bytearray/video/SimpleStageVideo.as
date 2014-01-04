@@ -125,7 +125,8 @@ package org.bytearray.video
 		 */		
 		public function resize (width:uint=0, height:uint=0):void
 		{	
-			_width = width, _height = height;
+			_width = width ;
+			_height = height ;
 			
 			if ( _stageVideoInUse )	
 				_sv.viewPort = getVideoRect(_sv.videoWidth, _sv.videoHeight);
@@ -134,7 +135,8 @@ package org.bytearray.video
 				_rc = getVideoRect(_video.videoWidth, _video.videoHeight);
 				_video.width = _rc.width;
 				_video.height = _rc.height;
-				_video.x = _rc.x, _video.y = _rc.y;
+				_video.x = _rc.x ;
+				_video.y = _rc.y ;
 			}
 		}
 		
@@ -298,16 +300,19 @@ package org.bytearray.video
 			
 			videoWidth *= scaling, videoHeight *= scaling;
 			var posX:Number = stage.stageWidth - videoWidth >> 1;
-			var posY:Number = stage.stageHeight - videoHeight >> 1;
+			//var posY:Number = stage.stageHeight - videoHeight >> 1;//AppSettings.RESERVED_HEADER_HEIGHT ; //stage.stageHeight - videoHeight >> 1;
+			var posY:Number = AppSettings.VIDEO_TOP ; 
 			
-				
-			if(AppSettings.DEVICE == AppSettings.DEVICE_MOBILE){
-//					posY = 0;//stage.stageHeight;
+			/*
+			if(AppSettings.DEVICE == AppSettings.DEVICE_MOBILE)
+			{
 				posY = (stage.stageHeight-AppSettings.RESERVED_FOOTER_HEIGHT) - videoHeight >> 1;
 			}
+			 * 
+			 */
 			
-			_videoRect.x = posX;
-			_videoRect.y = posY;
+			_videoRect.x = posX ;
+			_videoRect.y = posY ;
 			_videoRect.width = videoWidth;
 			_videoRect.height = videoHeight;
 			

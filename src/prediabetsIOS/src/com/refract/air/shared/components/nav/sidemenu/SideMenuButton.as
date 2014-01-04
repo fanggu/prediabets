@@ -1,7 +1,7 @@
 package com.refract.air.shared.components.nav.sidemenu {
 	import com.greensock.TweenMax;
 	import com.refract.prediabets.AppSettings;
-	import com.refract.prediabets.components.shared.LSButton;
+	import com.refract.prediabets.sections.utils.LSButton;
 
 	import flash.display.Shape;
 	import flash.events.Event;

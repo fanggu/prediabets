@@ -2,10 +2,10 @@ package com.refract.air.shared.components.nav.sidemenu {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Back;
 	import com.refract.prediabets.AppSections;
-	import com.refract.prediabets.components.events.FooterEvent;
-	import com.refract.prediabets.components.events.MenuEvent;
-	import com.refract.prediabets.components.nav.Header;
-	import com.refract.prediabets.components.shared.LSButton;
+	import com.refract.prediabets.nav.Header;
+	import com.refract.prediabets.nav.events.FooterEvent;
+	import com.refract.prediabets.nav.events.MenuEvent;
+	import com.refract.prediabets.sections.utils.LSButton;
 	import com.refract.prediabets.stateMachine.events.StateEvent;
 	import com.refract.prediabets.stateMachine.flags.Flags;
 	import com.refract.prediabets.video.VideoLoader;

@@ -2,9 +2,8 @@ package com.refract.prediabets.web {
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.BulkProgressEvent;
 
-	import com.refract.prediabets.AppSettings;
-	import com.refract.prediabets.backend.BackendResponder;
-	import com.refract.prediabets.logger.Logger;
+	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.logger.Logger;
 	import com.refract.prediabets.web.preloader.PreloaderAssets;
 	import com.refract.prediabets.web.preloader.PreloaderSplash;
 

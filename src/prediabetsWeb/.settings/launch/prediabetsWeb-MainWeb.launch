@@ -17,7 +17,7 @@
 <intAttribute key="PLAYER_WIDTH" value="1024"/>
 <stringAttribute key="POST_COMPILE_ANT" value=""/>
 <stringAttribute key="PRE_COMPILE_ANT" value=""/>
-<stringAttribute key="PROJECT_NAME" value="prediabetsWeb"/>
+<stringAttribute key="PROJECT_NAME" value="prediabetesWeb"/>
 <booleanAttribute key="START_DEBUGGER" value="true"/>
 <booleanAttribute key="START_SWF_ENABLED" value="true"/>
 <stringAttribute key="START_SWF_LOCATION" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetsWeb.swf"/>
@@ -25,7 +25,7 @@
 <booleanAttribute key="SUPPRESS_EXCEPTION_POPUP" value="true"/>
 <booleanAttribute key="USE_PROJECT_COMPILER_ARGUMENTS" value="false"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/prediabetsWeb"/>
+<listEntry value="/prediabetesWeb"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>

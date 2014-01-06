@@ -1,6 +1,6 @@
 package {
-	import com.refract.prediabets.AppSettings;
-	import com.refract.prediabets.ClassFactory;
+	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabets.web.video.WebVideoLoader;
 
 	import flash.display.Sprite;

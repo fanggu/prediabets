@@ -1,10 +1,10 @@
 package {
-	import com.refract.prediabets.AppController;
-	import com.refract.prediabets.AppSettings;
-	import com.refract.prediabets.ClassFactory;
-	import com.refract.prediabets.assets.AssetManager;
-	import com.refract.prediabets.assets.FontManager;
-	import com.refract.prediabets.assets.TextManager;
+	import com.refract.prediabetes.AppController;
+	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.ClassFactory;
+	import com.refract.prediabetes.assets.AssetManager;
+	import com.refract.prediabetes.assets.FontManager;
+	import com.refract.prediabetes.assets.TextManager;
 
 	import flash.display.Sprite;
 	import flash.display.StageAlign;

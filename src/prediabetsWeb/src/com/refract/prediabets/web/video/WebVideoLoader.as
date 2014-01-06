@@ -1,5 +1,5 @@
 package com.refract.prediabets.web.video {
-	import com.refract.prediabets.video.VideoLoader;
+	import com.refract.prediabetes.video.VideoLoader;
 	public class WebVideoLoader extends VideoLoader 
 	{
 		public function WebVideoLoader() 

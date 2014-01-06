@@ -4,8 +4,8 @@
 	
 package org.bytearray.video
 {
-	import com.refract.prediabets.AppSettings;
-	import com.refract.prediabets.logger.Logger;
+	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.logger.Logger;
 
 	import org.bytearray.video.events.SimpleStageVideoEvent;
 	import org.bytearray.video.events.SimpleStageVideoToggleEvent;

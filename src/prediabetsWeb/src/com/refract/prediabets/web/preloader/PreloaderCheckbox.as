@@ -1,5 +1,5 @@
 package com.refract.prediabets.web.preloader {
-	import com.refract.prediabets.AppSettings;
+	import com.refract.prediabetes.AppSettings;
 
 	import flash.display.Shape;
 	import flash.display.Sprite;

@@ -16,6 +16,7 @@ package {
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.logger.Logger;
+	import com.refract.prediabetes.nav.IOSNav;
 	import com.refract.prediabetes.user.UserModel;
 	import com.refract.prediabetes.video.VideoLoader;
 
@@ -73,6 +74,7 @@ package {
 			AppSettings.stage = stage;
 			AppSettings.DATA_PATH = "file://";
 			AppSettings.PLATFORM = AppSettings.PLATFORM_IOS;
+			AppSettings.RESERVED_HEADER_HEIGHT_DEFAULT = 60 ; 
 			
 			setScreenRatio();
 			
@@ -87,33 +89,8 @@ package {
 				ext = "flv";
 			}
 			
-			
-			/*
-			var ext:String = "f4v";
-			
-			var localPath:String = "Lifesaver/video/"+ext+"/";
-			LocalModuleModel.STORAGE_DIR = File.userDirectory;
-			VideoLoader.VIDEO_BASE_URL = LocalModuleModel.STORAGE_DIR.nativePath + "/" + localPath ;
-			VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR = "_800"+ext;
-			VideoLoader.VIDEO_FILE_EXT = "."+ext ; 
-			
-			var newFile:File = LocalModuleModel.STORAGE_DIR.resolvePath(localPath + "intro" + VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR + VideoLoader.VIDEO_FILE_EXT);
-			Logger.log(Logger.FILE_LOADING,"NEW INTRO FILE:" + newFile.nativePath);
-			if(!newFile.exists){
-				var file:File = File.applicationDirectory.resolvePath("video/"+ext+"/intro"+VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR+VideoLoader.VIDEO_FILE_EXT);
-				Logger.log(Logger.FILE_LOADING,"INTRO FILE: " + file.nativePath);
-				file.copyTo(newFile,true);
-			}
-			 */
-			
-			
-			
 			var localPath:String = "video/"+ext+"/";
-		//	LocalModuleModel.STORAGE_DIR = File.documentsDirectory;
 			LocalModuleModel.STORAGE_DIR = File.cacheDirectory;
-			
-			
-			//trace(NativeApplication.nativeApplication.runtimeVersion)
 			VideoLoader.VIDEO_BASE_URL = LocalModuleModel.STORAGE_DIR.nativePath + "/" + localPath ;
 			VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR = "_800"+ext;
 			VideoLoader.VIDEO_FILE_EXT = "."+ext ; 
@@ -134,6 +111,7 @@ package {
 		protected function setAppClasses():void{
 			//ClassFactory.APP_CONTROLLER = MobileAppController;
 			
+			ClassFactory.NAV = IOSNav ; 
 			ClassFactory.MODULE_MODEL = LocalModuleModel;
 			//ClassFactory.MENU_BUTTON = LoadedMenuButton;
 			ClassFactory.VIDEO_LOADER   = IOSVideoLoader;

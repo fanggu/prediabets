@@ -69,7 +69,7 @@ package com.refract.prediabetes.nav {
 
 			_header = new ClassFactory.HEADER();
 			addChild(_header);
-			_header.alpha = 0 ; 
+			_header.visible = false ; 
 			_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			
 			_footer = new ClassFactory.FOOTER();

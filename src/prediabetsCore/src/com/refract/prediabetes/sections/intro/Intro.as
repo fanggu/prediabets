@@ -11,9 +11,6 @@ package com.refract.prediabetes.sections.intro {
 	import flash.events.MouseEvent;
 	import flash.events.NetStatusEvent;
 
-	/**
-	 * @author kanish
-	 */
 	public class Intro extends Sprite 
 	{
 		public static const INTRO_VIDEO_PAUSE:String = "INTRO_VIDEO_PAUSE";

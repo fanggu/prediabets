@@ -5,9 +5,7 @@ package com.refract.air.shared.sections.feedback {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
-	/**
-	 * @author kanish
-	 */
+
 	public class TabletFeedback extends Sprite {
 		
 		

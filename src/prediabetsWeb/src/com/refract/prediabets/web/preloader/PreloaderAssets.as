@@ -5,9 +5,7 @@ package com.refract.prediabets.web.preloader {
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	/**
-	 * @author kanish
-	 */
+
 	public class PreloaderAssets {
 		
 		public var VIDEO_WIDTH:Number = 0;

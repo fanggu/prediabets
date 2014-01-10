@@ -11,9 +11,6 @@ package com.refract.prediabetes.nav.footer {
 	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
 
-	/**
-	 * @author kanish
-	 */
 	public class FullScreenButton extends Sprite {
 		
 		private var colour:uint = AppSettings.GREY;

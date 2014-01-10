@@ -10,9 +10,6 @@ package com.refract.prediabetes.sections.utils {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
 	public class LSInputBox extends Sprite {
 		private var _copy:TextField;
 		private var _copyID:String;

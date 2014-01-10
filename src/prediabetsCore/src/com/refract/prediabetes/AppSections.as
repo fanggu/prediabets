@@ -1,7 +1,5 @@
 package com.refract.prediabetes {
-	/**
-	 * @author kanish
-	 */
+
 	public class AppSections {
 		
 		public static const INTRO:String = "SECTION:INTRO";

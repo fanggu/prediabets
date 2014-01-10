@@ -11,9 +11,7 @@ package com.refract.air.shared.prediabetes.video
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class IOSVideoLoader extends VideoLoader {
 		
 		public function IOSVideoLoader() {

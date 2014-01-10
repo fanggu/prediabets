@@ -8,9 +8,7 @@ package com.refract.prediabetes.sections.social {
 	import flash.events.Event;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class ShareBar extends Sprite {
 		
 		

@@ -8,9 +8,6 @@ package com.refract.prediabetes.sections.feedback {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
 	public class BookACourse extends GeneralOverlay {
 		private var _bodyText:TextField;
 		private var _bodyHeader:TextField;

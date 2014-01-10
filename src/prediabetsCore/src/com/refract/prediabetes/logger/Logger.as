@@ -1,8 +1,6 @@
 package com.refract.prediabetes.logger {
 	import com.refract.prediabetes.AppSettings;
-	/**
-	 * @author kanish
-	 */
+
 	public class Logger {
 		
 		public static const PRELOADER:String = "PRELOADER";

@@ -9,9 +9,6 @@ package com.refract.prediabets.web.preloader {
 	import flash.geom.ColorTransform;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
 	public class PreloaderSplash extends Sprite {
 		
 		public static const CONTINUE:String = "PRELOADER_SPLASH_CONTINUE";

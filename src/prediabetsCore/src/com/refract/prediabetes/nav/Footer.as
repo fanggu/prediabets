@@ -16,9 +16,7 @@ package com.refract.prediabetes.nav {
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class Footer extends Sprite {
 		
 		//Flags

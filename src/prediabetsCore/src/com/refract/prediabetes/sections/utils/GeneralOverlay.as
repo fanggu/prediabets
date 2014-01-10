@@ -7,9 +7,7 @@ package com.refract.prediabetes.sections.utils {
 	import flash.events.Event;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class GeneralOverlay extends Sprite {
 		
 		public static var BODY_WIDTH:int = 890;

@@ -1,8 +1,6 @@
 package com.refract.air.shared.data {
 	import flash.net.SharedObject;
-	/**
-	 * @author kanish
-	 */
+
 	public class StoredData {
 		
 		public function StoredData(){}

@@ -1,7 +1,5 @@
 package com.refract.air.shared {
-	/**
-	 * @author kanish
-	 */
+
 	public class MobileSettings {
 		
 		

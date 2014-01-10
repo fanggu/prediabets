@@ -14,9 +14,7 @@ package com.refract.prediabetes {
 	import flash.system.Capabilities;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
-	/**
-	 * @author kanish
-	 */
+
 	public class AppSettings {
 		
 		public static var USER_LOGGED_IN_INIT : Boolean = false ; 

@@ -12,9 +12,7 @@ package com.refract.prediabetes.nav.footer {
 	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class SoundButton extends Sprite {
 		
 		private var colour:uint = AppSettings.GREY;

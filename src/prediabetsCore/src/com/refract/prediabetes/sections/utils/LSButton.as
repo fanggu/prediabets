@@ -18,9 +18,6 @@ package com.refract.prediabetes.sections.utils {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
 	public class LSButton extends Sprite {
 		protected var _copy:TextField;
 		protected var _copyID:String;

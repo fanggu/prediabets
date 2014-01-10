@@ -6,9 +6,6 @@ package com.refract.prediabets.web.preloader {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 
-	/**
-	 * @author kanish
-	 */
 	public class PreloaderCheckbox extends Sprite {
 		
 		private var _centre:Shape;

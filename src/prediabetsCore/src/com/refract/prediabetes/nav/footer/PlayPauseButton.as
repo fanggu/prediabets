@@ -11,9 +11,7 @@ package com.refract.prediabetes.nav.footer {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	/**
-	 * @author kanish
-	 */
+
 	public class PlayPauseButton extends Sprite {
 		
 		private var pauseBtn:Bitmap;

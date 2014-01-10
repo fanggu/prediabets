@@ -4,9 +4,6 @@ package com.refract.air.shared.sections.legal {
 
 	import flash.events.Event;
 
-	/**
-	 * @author kanish
-	 */
 	public class TabletLegal extends Legal {
 		public function TabletLegal() {
 			super();

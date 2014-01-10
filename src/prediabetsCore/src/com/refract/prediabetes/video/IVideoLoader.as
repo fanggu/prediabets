@@ -1,8 +1,6 @@
 package com.refract.prediabetes.video {
 	import flash.media.Video;
-	/**
-	 * @author kanish
-	 */
+
 	public interface IVideoLoader {
 		
 		function checkStorageforVideo(filename:String):void;

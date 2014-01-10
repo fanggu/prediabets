@@ -14,9 +14,7 @@ package com.refract.prediabetes {
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionQP;
 	import com.refract.prediabetes.video.VideoLoader;
-	/**
-	 * @author kanish
-	 */
+
 	public class ClassFactory {
 		
 		public static var APP_CONTROLLER:Class = AppController;

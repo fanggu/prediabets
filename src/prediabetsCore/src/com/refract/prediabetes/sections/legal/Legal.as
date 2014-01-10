@@ -4,9 +4,7 @@ package com.refract.prediabetes.sections.legal {
 
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class Legal extends GeneralOverlay {
 		
 		private var _bodyText:TextField;

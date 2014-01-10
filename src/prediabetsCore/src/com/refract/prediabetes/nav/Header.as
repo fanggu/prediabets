@@ -11,9 +11,7 @@ package com.refract.prediabetes.nav {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class Header extends Sprite {
 		
 		

@@ -6,9 +6,7 @@ package com.refract.prediabetes.sections.social {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class Share extends Sprite 
 	{	
 		private var _shareBar:ShareBar;

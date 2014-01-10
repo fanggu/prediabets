@@ -1,9 +1,7 @@
 package com.refract.prediabetes.nav.events {
 	import flash.events.Event;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class MenuEvent extends Event {
 		public static const MENU_LOAD_MODULE:String = "MENU_LOAD_MODULE";
 		public static const MENU_LOAD_ERROR:String = "MENU_LOAD_ERROR";

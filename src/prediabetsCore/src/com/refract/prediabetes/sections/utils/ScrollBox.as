@@ -13,9 +13,7 @@ package com.refract.prediabetes.sections.utils {
 	import flash.events.TransformGestureEvent;
 	import flash.geom.Rectangle;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class ScrollBox extends Sprite {
 		private var _w:Number;
 		private var _h:Number;

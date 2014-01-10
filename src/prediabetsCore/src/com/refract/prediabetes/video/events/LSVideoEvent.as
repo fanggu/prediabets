@@ -3,9 +3,6 @@ package com.refract.prediabetes.video.events {
 	
 
 
-	/**
-	 * @author kanish
-	 */
 	public class LSVideoEvent extends Event {
 		
 		public static const VIDEO_READY:String = "VIDEO_READY";

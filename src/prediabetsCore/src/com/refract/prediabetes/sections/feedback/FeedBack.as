@@ -16,9 +16,7 @@ package com.refract.prediabetes.sections.feedback {
 	import flash.net.URLLoader;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class FeedBack extends Sprite {
 		
 		private var _title:TextField;

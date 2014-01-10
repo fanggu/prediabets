@@ -1,7 +1,4 @@
 package com.refract.prediabetes.assets {
-	/**
-	 * @author kanish
-	 */
 	public dynamic class AssetManagerEmbeds {
 		//**Json
 		[Embed(source="../../../../../assets/json/SMdata1.json",mimeType="application/octet-stream")]

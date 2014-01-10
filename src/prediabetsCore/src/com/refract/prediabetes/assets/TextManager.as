@@ -6,9 +6,7 @@ package com.refract.prediabetes.assets {
 	import flash.display.DisplayObjectContainer;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	/**
-	 * @author kanish
-	 */
+
 	public class TextManager {
 		
 		private static var _i:TextManager;

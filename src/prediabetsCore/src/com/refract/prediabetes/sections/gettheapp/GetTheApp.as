@@ -10,9 +10,7 @@ package com.refract.prediabetes.sections.gettheapp {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
-	/**
-	 * @author kanish
-	 */
+
 	public class GetTheApp extends Sprite {
 		
 		protected var _headerStyle:Object = {fontSize:72};

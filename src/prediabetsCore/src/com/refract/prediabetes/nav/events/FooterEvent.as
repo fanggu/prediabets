@@ -1,9 +1,6 @@
 package com.refract.prediabetes.nav.events {
 	import flash.events.Event;
 
-	/**
-	 * @author kanish
-	 */
 	public class FooterEvent extends Event {
 		
 		public static const FOOTER_CLICKED:String = "FOOTER_CLICKED";

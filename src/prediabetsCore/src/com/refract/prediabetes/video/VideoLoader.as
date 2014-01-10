@@ -28,9 +28,6 @@ package com.refract.prediabetes.video {
 	import flash.net.NetStream;
 
 
-	/**
-	 * @author kanish
-	 */
 	public class VideoLoader extends Sprite /* implements IVideoLoader */ {
 		
 		public static const BulkLoaderID:String = "Videos";

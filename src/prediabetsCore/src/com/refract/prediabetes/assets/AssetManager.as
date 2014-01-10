@@ -2,9 +2,6 @@ package com.refract.prediabetes.assets {
 	import br.com.stimuli.loading.BulkLoader;
 
 	import flash.display.MovieClip;
-	/**
-	 * @author kanish
-	 */
 	public class AssetManager {
 	
 		/*

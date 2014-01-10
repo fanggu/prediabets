@@ -15,9 +15,7 @@ package com.refract.prediabets.web {
 	import flash.net.URLLoader;
 
 	[SWF(width='1280', height='800', backgroundColor='#000000', frameRate='25')]
-	/**
-	 * @author kanish
-	 */
+
 	public class PreloaderWeb extends Sprite {
 		private var _assets : PreloaderAssets;
 		private var _bulkLoader : BulkLoader;

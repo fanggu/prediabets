@@ -7,7 +7,7 @@ package com.refract.air.shared.data {
 		
 		public function StoredData(){}
 		
-		public static const APP_ID:String = "LifeSaverApp";
+		public static const APP_ID:String = "PrediabetesApp";
 		
 		private static var _so:SharedObject;
 		public static function get so():SharedObject{

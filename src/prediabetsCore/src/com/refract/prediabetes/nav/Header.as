@@ -56,8 +56,7 @@ package com.refract.prediabetes.nav {
 			DispatchManager.addEventListener(Flags.SM_ACTIVE, onSMEvent);
 			DispatchManager.addEventListener(Flags.SM_NOT_ACTIVE, onSMEvent);
 			
-			DispatchManager.addEventListener(FooterEvent.ADD_FOOTER_ITEM, addFooterItem);
-			DispatchManager.addEventListener(FooterEvent.REMOVE_FOOTER_ITEM, removeFooterItem);
+			
 			DispatchManager.addEventListener(FooterEvent.HIGHLIGHT_BUTTON, highlightHeaderButton);
 			
 			stage.addEventListener(Event.RESIZE,onResize);
@@ -182,43 +181,6 @@ package com.refract.prediabetes.nav {
 			}
 		}
 		
-		private function addFooterItem(evt:FooterEvent):void{
-			var item:DisplayObject = evt.info.button;
-			
-			var cont:Sprite;
-			switch(evt.info.position){
-				case(FooterEvent.TOP_LEFT):
-					break;
-				case(FooterEvent.TOP_MIDDLE):
-					break;
-				case(FooterEvent.TOP_RIGHT):
-					cont = _rightSide;
-					item.y = _buttonY;
-					_rightSide.addChildAt(item,0);
-					break;
-			}
-			onResize();
-		}
-		
-
-		private function removeFooterItem(evt:FooterEvent):void{
-			var item:DisplayObject = evt.info.button;
-			var cont:Sprite;
-			switch(evt.info.position){
-				case(FooterEvent.TOP_LEFT):
-					break;
-				case(FooterEvent.TOP_MIDDLE):
-					break;
-				case(FooterEvent.TOP_RIGHT):
-					if(item && _rightSide.contains(item)){
-						_rightSide.removeChild(item);
-						cont = _rightSide;
-					}
-					break;
-				default:
-			}
-			onResize();
-		}
 
 		private function onResize(evt:Event = null) : void {
 			graphics.clear();

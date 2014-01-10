@@ -2,8 +2,8 @@ package com.refract.prediabetes {
 	import com.refract.prediabetes.nav.Footer;
 	import com.refract.prediabetes.nav.Header;
 	import com.refract.prediabetes.nav.Nav;
-	import com.refract.prediabetes.sections.bookacourse.BookACourse;
 	import com.refract.prediabetes.sections.feedback.FeedBack;
+	import com.refract.prediabetes.sections.findoutmore.FindOutMore;
 	import com.refract.prediabetes.sections.intro.Intro;
 	import com.refract.prediabetes.sections.legal.Legal;
 	import com.refract.prediabetes.sections.social.Share;
@@ -13,7 +13,6 @@ package com.refract.prediabetes {
 	import com.refract.prediabetes.stateMachine.view.StateTxtView;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionQP;
-	import com.refract.prediabetes.user.ModuleModel;
 	import com.refract.prediabetes.video.VideoLoader;
 	/**
 	 * @author kanish
@@ -28,12 +27,13 @@ package com.refract.prediabetes {
 		public static var LEGAL : Class = Legal;
 		public static var FEEDBACK: Class = FeedBack;
 		public static var SHARE : Class = Share;		
-		public static var BOOK_A_COURSE : Class = BookACourse;
+		//public static var BOOK_A_COURSE : Class = BookACourse;
+		public static var FIND_OUT_MORE : Class = FindOutMore;
 		
 		public static var FOOTER : Class = Footer;
 		public static var HEADER : Class = Header;
 		
-		public static var MODULE_MODEL : Class = ModuleModel;
+		//public static var MODULE_MODEL : Class = ModuleModel;
 		
 		
 		//**STATE MACHINE

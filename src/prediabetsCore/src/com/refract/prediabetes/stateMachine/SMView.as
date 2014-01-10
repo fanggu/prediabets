@@ -80,7 +80,7 @@ package com.refract.prediabetes.stateMachine
 			addChild( _messageBoxContView );
 			
 			addChild( _countDownCont ) ;
-			//addChild( _debugView );
+			addChild( _debugView );
 			addChild( _lockButtonsView );
 			addChild( _overlayView );
 			addChild( _balloonView );

@@ -5,12 +5,12 @@ package com.refract.prediabetes.video {
 
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
-	import com.refract.prediabetes.AppController;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.logger.Logger;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.events.BooleanEvent;
+	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.refract.prediabetes.video.events.LSVideoEvent;
 	import com.robot.comm.DispatchManager;
@@ -44,7 +44,7 @@ package com.refract.prediabetes.video {
 		public static function get i():VideoLoader{ return _i; }
 		public static function set i(vl:VideoLoader):void{ _i = vl;} 
 		
-		public static var VIDEO_BASE_URL:String = "video/flv/";
+		public static var VIDEO_BASE_URL:String = "video/flv/1024/";
 		public static var VIDEO_FILE_FORMAT_DESCRIPTOR:String = "";
 		public static function get VIDEO_FILE_EXT():String { return _VIDEO_FILE_EXT;}
 		public static function set VIDEO_FILE_EXT(s:String):void{ _VIDEO_FILE_EXT = s; AppSettings.VIDEO_FILE_EXT = _VIDEO_FILE_EXT;}
@@ -423,7 +423,30 @@ package com.refract.prediabetes.video {
 	  		_url = nameVideo;
 			if(_simpleVidAvailable){
 				_failedToPlay = false;
-				var url:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+_url+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+				var url : String ; 
+				DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ; 
+				/*
+				 
+			 	var localPath:String = "video/flv/";
+				var videoBaseUrl : String = MainIOS.STORAGE_DIR.nativePath + "/" + localPath ;
+			 	
+			 	
+			 	 * 
+			 	 */
+			 
+				if( _url == AppSettings.INTRO_URL && AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
+				{
+					var ext : String = "flv" ;
+					var videoFileFormatDescriptor : String = "_800"+ext;
+					var videoFileExt = "."+ext ;
+					url = AppSettings.APP_DATA_PATH + AppSettings.APP_VIDEO_BASE_URL +_url+videoFileFormatDescriptor+videoFileExt;
+				}
+				else
+				{
+					url = AppSettings.DATA_PATH+VIDEO_BASE_URL+_url+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+				}
+				
+				
 				var items:Array = _bulkLoader.items;
 				var totalItems:int = items.length;
 				var videoItem:VideoItem;
@@ -503,7 +526,7 @@ package com.refract.prediabetes.video {
 		
 		protected function videoStatus( event : NetStatusEvent ) : void
 		{
-			trace('event.info.code :' , event.info.code)
+			//trace('event.info.code :' , event.info.code)
 			//Logger.log(Logger.VIDEO,"NET STATUS:",event.info.code);
 			switch (event.info.code) 
 		    { 

@@ -670,7 +670,8 @@ package com.refract.prediabetes.stateMachine {
 		}
 		
 		protected function updateState( address : String , cleanUI : Boolean = true) : void
-		{	
+		{	if( address == 'dont_know')
+				trace('YEAH')
 			DispatchManager.removeEventListener( Event.ENTER_FRAME , scheduler) ;
 			if( address == 'menu')
 			{
@@ -715,12 +716,15 @@ package com.refract.prediabetes.stateMachine {
 			}
 			
 			
-			_model.selectedState = address ; 
+			_model.selectedState = address 
+			/*; 
 			if( _model.sceneSelect.indexOf(address) != -1)	
 			{
 				//DispatchManager.dispatchEvent( new StateEvent( Flags.STATE_ACTIVATED , address ) ) ;	
 				_model.stateActivate( address ) ; 
 			}
+			 * 
+			 */
 			
 	
 			var stateObject : Object = _model.state;
@@ -739,8 +743,7 @@ package com.refract.prediabetes.stateMachine {
 					
 			 createInteractions( );
 			 DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , SMSettings.QUESTIONS_FADE_IN) );			
-			
-			 //DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_DEBUG_PANEL_STATE, _model.selectedState ));
+			 DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_DEBUG_PANEL_STATE, _model.selectedState ));
 
 			var progress : int = _model.progress ;
 			if( progress > 0)
@@ -797,6 +800,7 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function createTimer( totTimerCount : int) : void
 		{
+			/*
 			_flashWhite = false ;
 			_initCountDownTimer = SMVars.me.getSMTimer() ; 
 			_totCountDownTime = totTimerCount*1000;
@@ -807,6 +811,8 @@ package com.refract.prediabetes.stateMachine {
 			_delayCounter= new SMTimer( (SMSettings.SHOW_DELAY*SMSettings.COUNTER_START_DELAY )*1000 , 1 ) ; 
 			_delayCounter.start() ;
 			_delayCounter.addEventListener(TimerEvent.TIMER_COMPLETE, createTimerDelay );
+			 * 
+			 */
 		}
 		
 		private function createTimerDelay( evt : TimerEvent) : void

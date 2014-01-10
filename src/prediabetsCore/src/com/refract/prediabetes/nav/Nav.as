@@ -31,7 +31,7 @@ package com.refract.prediabetes.nav {
 		protected var _prevOverlay : Sprite;
 		private var _blackGraphics : Sprite ; 
 		
-		protected var _backToVideo:LSButton;
+		//protected var _backToVideo:LSButton;
 		
 		protected var _fadeInTime:Number = 0.5;
 		protected var _fadeOutTime:Number = 2;
@@ -59,20 +59,13 @@ package com.refract.prediabetes.nav {
 			var style:Object = {};
 			style.fontSize = 13;
 			style.align = "left";
-			
-			_backToVideo = new LSButton("footer_back_to_video",style);
-			addChild(_backToVideo);
-			_backToVideo.graphics.beginFill(0x000000,1);
-			_backToVideo.graphics.drawRect(0,0,_backToVideo.width,_backToVideo.height);
-			removeChild(_backToVideo);
-			_backToVideo.addEventListener(MouseEvent.CLICK, onBackToVideo);
 
 			_header = new ClassFactory.HEADER();
 			addChild(_header);
-			_header.visible = false ; 
+			//_header.visible = false ; 
 			_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			
-			_footer = new ClassFactory.FOOTER();
+			_footer = new ClassFactory.FOOTER( this );
 			addChild(_footer);
 			DispatchManager.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			
@@ -131,22 +124,18 @@ package com.refract.prediabetes.nav {
 			_header.hideAllBtns(_fadeOutTime);
 		}
 		
-		public function addSection(name:String,suppressAnim:Boolean = false):void{
-			switch("SECTION:"+name){
-				
+		public function addSection( name:String ):void
+		{
+			switch("SECTION:"+name)
+			{	
 				case(AppSections.LEGAL):
 					addOverlay(ClassFactory.LEGAL);
 					break;
-				
-				case(AppSections.FEEDBACK):
-					addOverlay(ClassFactory.FEEDBACK);
-					break;
-				
 				case(AppSections.SHARE):
 					addOverlay(ClassFactory.SHARE);
 					break;
-				case(AppSections.BOOK_A_COURSE):
-					addOverlay(ClassFactory.BOOK_A_COURSE);
+				case(AppSections.FIND_OUT_MORE):
+					addOverlay(ClassFactory.FIND_OUT_MORE);
 					break;
 			}
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.HIGHLIGHT_BUTTON,{buttonID:"SECTION:"+name}));
@@ -167,16 +156,18 @@ package com.refract.prediabetes.nav {
 			
 			DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_PAUSE));
 			
+			//_backToVideo.visible = false ; 
+			
 			_overlayShown = true;
 			_currentOverlay = new overlay();
 			
 			_overlayLayer.addChild(_currentOverlay);
 			_currentOverlay.alpha = 0;
 
-			TweenMax.to(_backToVideo,fadeTime,{autoAlpha:1});
+			_footer.showBackToVideo() ; 
 			TweenMax.to(_currentOverlay,fadeTime,{autoAlpha:1});
 
-			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.ADD_FOOTER_ITEM,{position:FooterEvent.BOTTOM_MIDDLE,button:_backToVideo}));
+			//DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.ADD_FOOTER_ITEM,{position:FooterEvent.BOTTOM_MIDDLE,button:_backToVideo}));
 			onResize();
 		}
 
@@ -186,8 +177,10 @@ package com.refract.prediabetes.nav {
 				_blackGraphics.graphics.clear();
 				
 				TweenMax.to(_currentOverlay,fadeTime,{autoAlpha:0,onComplete:overlayRemoved,onCompleteParams:[_currentOverlay]});
-				TweenMax.to(_backToVideo,fadeTime,{autoAlpha:0});
-				//TweenMax.to(_coverBt,fadeTime,{autoAlpha:0});
+				
+				_footer.hideBackToVideo() ; 
+				//DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.REMOVE_FOOTER_ITEM,{position:FooterEvent.BOTTOM_MIDDLE,button:_backToVideo}));
+				
 				if(!hasNextOverlay){
 					_currentOverlay = null;
 					_overlayShown = false;
@@ -217,9 +210,9 @@ package com.refract.prediabetes.nav {
 			stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 		}
 		
-		protected function onFSInteractiveAccepted(evt:FullScreenEvent):void{
-			//AppSettings.FullScreenInteractiveAllowed = true;
-			
+		protected function onFSInteractiveAccepted(evt:FullScreenEvent):void
+		{
+			//AppSettings.FullScreenInteractiveAllowed = true;	
 		}
 		
 		protected function onNavClicked(evt : FooterEvent) : void 
@@ -231,18 +224,19 @@ package com.refract.prediabetes.nav {
 					removeCurrentOverlay();
 					break;
 		
-				case(AppSections.LEGAL):
+				case('legal'):
 					AppController.i.setSWFAddress(AppSections.LEGAL);
 					break;
 			
-				case(AppSections.BOOK_A_COURSE):
-					AppController.i.setSWFAddress(AppSections.BOOK_A_COURSE);
+				case('findOutMore'):
+					AppController.i.setSWFAddress(AppSections.FIND_OUT_MORE);
 					break;
-				case(AppSections.FEEDBACK):
-					AppController.i.setSWFAddress(AppSections.FEEDBACK);
+				case(AppSections.START_AGAIN ):
+					onBackToVideo( ) ; 
+					AppController.i.setSWFAddress(AppSections.INTRO);
 					break;
 				
-				case(AppSections.SHARE):
+				case('share'):
 					AppController.i.setSWFAddress(AppSections.SHARE);
 					break;
 				
@@ -263,8 +257,9 @@ package com.refract.prediabetes.nav {
 				_blackGraphics.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
 			}
 		}
-		protected function onBackToVideo(evt:Event):void
+		public function onBackToVideo( ):void
 		{	
+			trace('remove current ovelay')
 			removeCurrentOverlay();
 		}
 		

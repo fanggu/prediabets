@@ -426,6 +426,7 @@ package com.asual.swfaddress {
             if (SWFAddress._value == value) return;
             SWFAddress._value = value;
             _call('SWFAddress.setValue', value);
+			trace('value : ' , value)
             if (SWFAddress._init) 
 			{
                 _dispatchEvent(SWFAddressEvent.CHANGE);

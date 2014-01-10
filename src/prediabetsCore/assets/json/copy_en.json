@@ -1,14 +1,63 @@
 {
     "success": "result for api/fsm_descriptor/module/1",
-    "data": [{
+    "data": 
+    [{
         "flash_id": "placeholder_dummy_copysmall",
         "copy_en": "dummy copy",
         "font": "BEBASNEUE",
         "bold": false,
         "colour": "WHITE"
-    }, {
+    }, 
+    {
+        "flash_id": "startAgain",
+        "copy_en": "START AGAIN",
+        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "bold": false,
+        "colour": "GREY"
+    }, 
+    
+    {
+        "flash_id": "findOutMore",
+        "copy_en": "FIND OUT MORE",
+        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "bold": false,
+        "colour": "GREY"
+    }, 
+
+    {
+        "flash_id": "share",
+        "copy_en": "SHARE",
+        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "bold": false,
+        "colour": "GREY"
+    }, 
+
+    {
+        "flash_id": "legal",
+        "copy_en": "LEGAL",
+        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "bold": false,
+        "colour": "GREY"
+    }, 
+
+     {
+        "flash_id": "findoutmore_title",
+        "copy_en": "FIND OUT MORE",
+        "font": "BEBASNEUE",
+        "colour": "WHITE"
+    }, 
+
+    {
+        "flash_id": "page_book_a_course_copy",
+        "copy_en": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magpteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esspisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.e cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "font": "AKZIDENZG_MEDIUM",
+        "colour": "GREY"
+    },
+
+
+    {
         "flash_id": "footer_00_lslogo",
-        "copy_en": "LIFESAVER",
+        "copy_en": "PREDIABETS",
         "font": "BEBASNEUE",
         "bold": false,
         "colour": "WHITE"
@@ -24,13 +73,9 @@
         "font": "AKZIDENZG_BOLD_CONDENSED",
         "bold": false,
         "colour": "GREY"
-    }, {
-        "flash_id": "footer_03_book_a_course",
-        "copy_en": "BOOK A COURSE",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
+    }, 
+    
+    {
         "flash_id": "footer_04_get_the_app",
         "copy_en": "GET THE APP",
         "font": "AKZIDENZG_BOLD_CONDENSED",
@@ -66,13 +111,9 @@
         "font": "AKZIDENZG_BOLD_CONDENSED",
         "bold": false,
         "colour": "GREY"
-    }, {
-        "flash_id": "footer_09_share",
-        "copy_en": "SHARE",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
+    }, 
+
+    {
         "flash_id": "footer_10_scene_selector",
         "copy_en": "SCENE SELECTOR",
         "font": "AKZIDENZG_BOLD_CONDENSED",
@@ -81,12 +122,6 @@
     }, {
         "flash_id": "footer_11_profile",
         "copy_en": "PROFILE",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
-        "flash_id": "footer_12_feedback",
-        "copy_en": "FEEDBACK",
         "font": "AKZIDENZG_BOLD_CONDENSED",
         "bold": false,
         "colour": "GREY"
@@ -1112,12 +1147,9 @@
         "copy_en": "Lifesaver is available as a free app for iPhone, iPad - and for Android phones and tablets. Because you'll move your device up and down to do CPR, the app version is actually better then this website at teaching you CPR. And of course, it means you can take Lifesaver with you everywhere. So please, give it a go.",
         "font": "AKZIDENZG_MEDIUM",
         "colour": "GREY"
-    }, {
-        "flash_id": "page_book_a_course_title",
-        "copy_en": "BOOK A COURSE",
-        "font": "BEBASNEUE",
-        "colour": "WHITE"
-    }, {
+    }, 
+
+    {
         "flash_id": "page_book_a_course_subtitle",
         "copy_en": "FIND A CPR COURSE",
         "font": "AKZIDENZG_CONDENSED",
@@ -1127,12 +1159,9 @@
         "copy_en": "GO TO RCUK WEBSITE",
         "font": "AKZIDENZG_MEDIUM_CONDENSED_ALT",
         "colour": "WHITE"
-    }, {
-        "flash_id": "page_book_a_course_copy",
-        "copy_en": "Please click on the link below to go to a page on the website of the Resuscitation Council (UK).\nThis page will give you links to a wide range of organisations in the UK that deliver face-to-face CPR training.",
-        "font": "AKZIDENZG_MEDIUM",
-        "colour": "GREY"
-    }, {
+    }, 
+  
+    {
         "flash_id": "page_about_title",
         "copy_en": "About the Resuscitation Council (UK)",
         "font": "BEBASNEUE",

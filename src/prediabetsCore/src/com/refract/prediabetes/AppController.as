@@ -55,13 +55,7 @@ package com.refract.prediabetes
 			, AppSections.MODULE_LS3
 		];
 		
-		protected var _interactiveSections:Array = 
-		[
-			AppSections.MODULE_LS1
-			, AppSections.MODULE_LS2
-			, AppSections.MODULE_LS3
-			, AppSections.FEEDBACK
-		];
+		
 		
 		protected var _nextStoryState:String = null;
 		public function get nextStoryState() : String { return _nextStoryState; }
@@ -115,7 +109,9 @@ package com.refract.prediabetes
 		
 		protected function onFSChange(evt:FullScreenEvent):void
 		{
-			if(evt.fullScreen && _interactiveSections.indexOf("SECTION:"+currentPath[0]) != -1){
+			//if(evt.fullScreen && _interactiveSections.indexOf("SECTION:"+currentPath[0]) != -1){
+			if(evt.fullScreen )
+			{
 				DispatchManager.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, fsAcceptedOrNot);
 				
 				AppSettings.checkFSStatus();
@@ -193,10 +189,10 @@ package com.refract.prediabetes
 					
 					
 					
-					case(AppSections.FEEDBACK):
+					case(AppSections.START_AGAIN):
 					case(AppSections.LEGAL):
 					case(AppSections.SHARE):
-					case(AppSections.BOOK_A_COURSE):
+					case(AppSections.FIND_OUT_MORE):
 						addOverlay(path[0]);
 						AppSettings.stage.removeEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
 						break;
@@ -226,20 +222,20 @@ package com.refract.prediabetes
 					//story, do nothing
 					break;
 				
-				case(AppSections.FEEDBACK):
+				case(AppSections.START_AGAIN):
 				case(AppSections.LEGAL):
 				case(AppSections.SHARE):
-				case(AppSections.BOOK_A_COURSE):
+				case(AppSections.FIND_OUT_MORE):
 					
-					//overlay, do nothing
+					
 					break;
 			}
 			AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
 		}
 
-		protected function addOverlay(path:String,suppressAnim:Boolean = false) : void 
+		protected function addOverlay(path:String ) : void 
 		{
-			_nav.addSection(path,suppressAnim);
+			_nav.addSection( path );
 		}
 		
 		

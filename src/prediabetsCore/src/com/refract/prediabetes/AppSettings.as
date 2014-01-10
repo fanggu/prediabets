@@ -24,6 +24,7 @@ package com.refract.prediabetes {
 		public static const USE_LIVE_BACKEND_ON_DEBUG:Boolean = false;
 		
 		public static const INTRO_URL : String = 'd01_intro' ; 
+		public static var APP_VIDEO_BASE_URL : String ; 
 		
 		/*
 		 * LOADED CONSTANTS FROM SETTINGS FILE or FLASHVARS
@@ -40,10 +41,11 @@ package com.refract.prediabetes {
 		public static var LIGHT_GREY:int =0xcdcdcd;
 		public static var GREY:int = 0x868989;
 		public static var DARK_GREY:int = 0x4d4d4d;
-//		public static var DARK_GREY:int = 0x737877;
 		public static var WHITE:int = 0xffffff;
 		
+		//public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ; // "./../../../../website/data/";
 		public static var DATA_PATH:String = "data/" ; // "./../../../../website/data/";
+		public static var APP_DATA_PATH : String = "file://";
 		
 		
 		public static const TABLET_THRESHOLD:Number = 6.5;
@@ -173,7 +175,7 @@ package com.refract.prediabetes {
 				VIDEO_IS_STAGE_WIDTH = true;
 				VIDEO_LEFT = 0;
 				VIDEO_RIGHT = VIDEO_WIDTH;
-				VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2;
+				VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2 - RESERVED_HEIGHT/2 ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 			}else{ //stage width greater than stage height -> fit to height
 				VIDEO_WIDTH = (_stage.stageHeight - RESERVED_HEIGHT)*SIXTEEN_NINE_RATIO;

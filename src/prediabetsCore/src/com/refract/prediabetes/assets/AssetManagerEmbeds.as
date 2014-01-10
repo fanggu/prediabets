@@ -6,13 +6,6 @@ package com.refract.prediabetes.assets {
 		//**Json
 		[Embed(source="../../../../../assets/json/SMdata1.json",mimeType="application/octet-stream")]
 		private var SM1Json : Class;
-		[Embed(source="../../../../../assets/json/SMdata2.json",mimeType="application/octet-stream")]
-		private var SM2Json : Class;
-		[Embed(source="../../../../../assets/json/SMdata3.json",mimeType="application/octet-stream")]
-		private var SM3Json : Class;
-		[Embed(source="../../../../../assets/json/SMdata6.json",mimeType="application/octet-stream")]
-		private var SM6Json : Class;
-		
 		
 		[Embed(source="../../../../../assets/json/copy_en.json",mimeType="application/octet-stream")] private var CopyJSON : Class;
 		

@@ -7,28 +7,26 @@ package {
 	import com.refract.air.shared.prediabetes.stateMachine.SMModelMobile;
 	import com.refract.air.shared.prediabetes.stateMachine.view.MobieStateTextView;
 	import com.refract.air.shared.prediabetes.stateMachine.view.interactions.MobileInteractionQP;
-	import com.refract.air.shared.prediabetes.video.IOSVideoLoader;
 	import com.refract.air.shared.sections.feedback.TabletFeedback;
 	import com.refract.air.shared.sections.legal.TabletLegal;
-	import com.refract.air.shared.user.LocalModuleModel;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.assets.TextManager;
-	import com.refract.prediabetes.logger.Logger;
 	import com.refract.prediabetes.nav.IOSNav;
-	import com.refract.prediabetes.user.UserModel;
+	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.refract.prediabetes.video.VideoLoader;
+	import com.robot.comm.DispatchManager;
+	import com.robot.geom.Box;
 
 	import flash.desktop.NativeApplication;
 	import flash.desktop.SystemIdleMode;
 	import flash.display.Loader;
 	import flash.display.Sprite;
-	import flash.display.StageDisplayState;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.filesystem.File;
 	import flash.net.URLRequest;
-	import flash.system.Capabilities;
 	import flash.text.TextField;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
@@ -41,6 +39,7 @@ package {
 	[SWF( backgroundColor='#FFFFFF', frameRate='25')]
 	public class MainIOS extends Sprite 
 	{
+		public static var STORAGE_DIR:File;
 		
 		protected var _bkg:Loader;
 		
@@ -72,33 +71,30 @@ package {
 			
 			//set the global stage and global resize
 			AppSettings.stage = stage;
-			AppSettings.DATA_PATH = "file://";
+			AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; 
 			AppSettings.PLATFORM = AppSettings.PLATFORM_IOS;
 			AppSettings.RESERVED_HEADER_HEIGHT_DEFAULT = 60 ; 
+			//AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ; // "./../../../../website/data/";
 			
 			setScreenRatio();
-			
+			/*
 			var ext:String = "mp4";
 			// If we're not mobile show the top bar in ios and use flv
 			if(AppSettings.DEVICE != AppSettings.DEVICE_MOBILE){
 				stage.displayState = StageDisplayState.NORMAL;
 				ext = "flv";
 			}
-			var isIPhone5:Boolean = unescape(Capabilities.serverString).indexOf("iPhone5") != -1; 
-			if(isIPhone5){
-				ext = "flv";
-			}
-			
+
 			var localPath:String = "video/"+ext+"/";
-			LocalModuleModel.STORAGE_DIR = File.cacheDirectory;
-			VideoLoader.VIDEO_BASE_URL = LocalModuleModel.STORAGE_DIR.nativePath + "/" + localPath ;
+			MainIOS.STORAGE_DIR = File.cacheDirectory;
+			VideoLoader.VIDEO_BASE_URL = MainIOS.STORAGE_DIR.nativePath + "/" + localPath ;
 			VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR = "_800"+ext;
 			VideoLoader.VIDEO_FILE_EXT = "."+ext ; 
 			
-			var storageFolder:File = LocalModuleModel.STORAGE_DIR.resolvePath("video");
+			var storageFolder:File = MainIOS.STORAGE_DIR.resolvePath("video");
 			storageFolder.preventBackup = true;
 			
-			var newFile:File = LocalModuleModel.STORAGE_DIR.resolvePath(localPath + AppSettings.INTRO_URL+ VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR + VideoLoader.VIDEO_FILE_EXT);
+			var newFile:File = MainIOS.STORAGE_DIR.resolvePath(localPath + AppSettings.INTRO_URL+ VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR + VideoLoader.VIDEO_FILE_EXT);
 			newFile.preventBackup = true;
 			Logger.log(Logger.FILE_LOADING,"NEW INTRO FILE:" + newFile.nativePath);
 			if(!newFile.exists){
@@ -106,15 +102,38 @@ package {
 				Logger.log(Logger.FILE_LOADING,"INTRO FILE: " + file.nativePath);
 				file.copyTo(newFile,true);
 			}
+			 * 
+			 */
+			 
+			 VideoLoader.VIDEO_BASE_URL = "video/flv/800/" ; 
+			 var ext : String = "flv" ; 
+			 var localPath:String = "video/flv/";
+			 MainIOS.STORAGE_DIR = File.cacheDirectory;
+			 AppSettings.APP_VIDEO_BASE_URL = MainIOS.STORAGE_DIR.nativePath + "/" + localPath ;
+			 var videoFileFormatDescriptor : String = "_800"+ext;
+			 var videoFileExt = "."+ext ;
+			 var storageFolder:File = MainIOS.STORAGE_DIR.resolvePath("video");
+			 storageFolder.preventBackup = true;
+			 var newFile:File = MainIOS.STORAGE_DIR.resolvePath(localPath + AppSettings.INTRO_URL+ videoFileFormatDescriptor + videoFileExt);
+			 newFile.preventBackup = true;
+			 if(!newFile.exists){
+				var file:File = File.applicationDirectory.resolvePath(localPath + AppSettings.INTRO_URL+videoFileFormatDescriptor+videoFileExt);
+				file.copyTo(newFile,true);
+			}
+			
+			var fix_ext : String = 'flv' ;
+			VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR = "_800"+fix_ext;
+			VideoLoader.VIDEO_FILE_EXT = '.flv' ; 
+			 
 		}
 		
 		protected function setAppClasses():void{
 			//ClassFactory.APP_CONTROLLER = MobileAppController;
 			
 			ClassFactory.NAV = IOSNav ; 
-			ClassFactory.MODULE_MODEL = LocalModuleModel;
+			//ClassFactory.MODULE_MODEL = LocalModuleModel;
 			//ClassFactory.MENU_BUTTON = LoadedMenuButton;
-			ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
+			//ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
 			ClassFactory.INTERACTION_QP = MobileInteractionQP;
 			ClassFactory.SM_MODEL = SMModelMobile ; 
 			ClassFactory.STATE_TXT_VIEW = MobieStateTextView; 
@@ -185,7 +204,6 @@ package {
 		}
 		
 		protected function getBackendData():void{
-		//	BackendResponder.initialize(run,run);
 			run();
 		}
 
@@ -197,10 +215,17 @@ package {
 			var mainCore : MainCore = new MainCore() ; 
 			addChild ( mainCore ) ;
 			
-			UserModel.getModuleStats(1).unlocked = true;
-			UserModel.getModuleStats(2).unlocked = true;
-			UserModel.getModuleStats(3).unlocked = true;
-			UserModel.getModuleStats(4).unlocked = true;
+			var skipButton : Box = new Box( 120 , 40 , 0xfff000 ) ; 
+			addChild( skipButton ) ; 
+			skipButton.x = 40 ; 
+			skipButton.y = 40 ; 
+			skipButton.addEventListener( MouseEvent.CLICK, onTouchPress ) ; 
+		}
+
+		private function onTouchPress(event : MouseEvent) : void 
+		{
+			trace('ON TOUCH SKIP PRESSED')
+			DispatchManager.dispatchEvent(new Event(Flags.START_MOVIE));
 		}
 		
 		

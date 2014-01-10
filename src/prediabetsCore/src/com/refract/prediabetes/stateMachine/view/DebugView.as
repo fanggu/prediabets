@@ -53,7 +53,7 @@ package com.refract.prediabetes.stateMachine.view {
 			myTextField.y = 0 ;
 			myTextField.x = 0 ; 
 			myTextField.mouseEnabled = false ;
-			myTextField.textColor = 0x000000;
+			myTextField.textColor = 0xFFFFFF;
 			
 			return myTextField ; 	
 		}
@@ -63,7 +63,7 @@ package com.refract.prediabetes.stateMachine.view {
 			panel = new Sprite() ; 
 			panel.graphics.lineStyle( 1 , 0x999999 ) ;
 			panel.graphics.beginFill( 0x999999 );
-			panel.graphics.drawRect( 0, 0, 250, 200 );
+			panel.graphics.drawRect( 0, 0, 200, 150 );
 			panel.graphics.endFill( );
 			addChild( panel );
 			panel.alpha = .5 ;
@@ -82,7 +82,7 @@ package com.refract.prediabetes.stateMachine.view {
 		private function onResize(evt:Event = null):void{
 		//	panel.x = 10;
 			panel.x = AppSettings.VIDEO_LEFT + 10;
-			panel.y = AppSettings.VIDEO_HEIGHT - 40;	
+			panel.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT / 2; 	
 		}
 	}
 }

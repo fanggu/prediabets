@@ -435,7 +435,7 @@ package com.refract.prediabetes.video {
 				{
 					var ext : String = "flv" ;
 					var videoFileFormatDescriptor : String = "_800"+ext;
-					var videoFileExt = "."+ext ;
+					var videoFileExt: String = "."+ext ;
 					url = AppSettings.APP_DATA_PATH + AppSettings.APP_VIDEO_BASE_URL +_url+videoFileFormatDescriptor+videoFileExt;
 				}
 				else
@@ -585,7 +585,8 @@ package com.refract.prediabetes.video {
 				setBulkLoader();
 			}
 			var url:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+name+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
-			if((_bulkLoader.getProgressForItems([url])) != null && _bulkLoader.getProgressForItems([url]).itemsTotal == 0){
+			if((_bulkLoader.getProgressForItems([url])) != null && _bulkLoader.getProgressForItems([url]).itemsTotal == 0)
+			{
 				_bulkLoader.add(url,{id:url,type:"video",pausedAtStart:true});
 				_bulkLoader.start();
 			}else{

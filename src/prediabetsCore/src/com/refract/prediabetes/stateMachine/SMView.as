@@ -2,7 +2,6 @@ package com.refract.prediabetes.stateMachine
 {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Sine;
-	import com.refract.prediabetes.AppSections;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.assets.AssetManager;
@@ -21,7 +20,6 @@ package com.refract.prediabetes.stateMachine
 	import com.robot.geom.Box;
 
 	import flash.display.Bitmap;
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -43,7 +41,6 @@ package com.refract.prediabetes.stateMachine
 		private var _balloonView : Sprite ;
 		private var _lockButtonsView : Sprite;
 		private var _lockButtonsQ : Sprite;
-		private var _redFilter : MovieClip;
 		private var _blackCut : Box;
 		
 		private var _countDownCont : Sprite ; 
@@ -102,10 +99,7 @@ package com.refract.prediabetes.stateMachine
 			_overlayView = new Sprite() ; 
 			_balloonView = new Sprite ; 
 			_countDownCont = new Sprite() ; 
-			
-			
-			createRedFilter() ; 	
-			//createPauseButton() ; 
+			 
 			createLockButtonsQ();
 			createBlackCut() ; 
 		}
@@ -154,9 +148,6 @@ package com.refract.prediabetes.stateMachine
 			
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
-			
-			DispatchManager.addEventListener(Flags.UPDATE_RED_FILTER , onUpdateRedFilter);
-			DispatchManager.addEventListener(Flags.UPDATE_REMOVE_RED_FILTER , onUpdateRemoveRedFilter);
 			
 			DispatchManager.addEventListener(Flags.UPDATE_CUT_BLACK, onUpdateCutBlack);
 			DispatchManager.addEventListener(Flags.UPDATE_CUT_BLACK_LONG, onUpdateCutBlackLong);
@@ -215,8 +206,6 @@ package com.refract.prediabetes.stateMachine
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
 			
-			DispatchManager.removeEventListener(Flags.UPDATE_RED_FILTER , onUpdateRedFilter);
-			DispatchManager.removeEventListener(Flags.UPDATE_REMOVE_RED_FILTER , onUpdateRemoveRedFilter);
 			
 			DispatchManager.removeEventListener(Flags.UPDATE_CUT_BLACK, onUpdateCutBlack);
 			DispatchManager.removeEventListener(Flags.UPDATE_CUT_BLACK_LONG, onUpdateCutBlackLong );
@@ -290,11 +279,7 @@ package com.refract.prediabetes.stateMachine
 		{
 			DispatchManager.dispatchEvent( new Event( Flags.CLOSE_QUESTIONS ) ) ; 
 		}
-		private function onRemoveLS6CloseButton( evt : Event ) : void
-		{
-			
-		}
-		
+
 		
 		private function onDrawBalloon( evt : OverlayEvent) : void
 		{
@@ -327,27 +312,7 @@ package com.refract.prediabetes.stateMachine
 					
 				break;
 				
-				case Flags.SLIDE_Y:
-					_uiView.createSlide(interaction) ; 
-				break;
-				
-				case Flags.SLIDE_X:
-					_uiView.createSlide(interaction) ; 
-				break;
-				
-				case Flags.CPR_STANDARD:
-					_uiView.createQPInteraction( interaction ) ; 
-				break;
-				case Flags.CPR_LINEAR:
-					_uiView.createQPInteraction( interaction ) ; 
-				break;
-				case Flags.CPR_LONG:
-					_uiView.createQPInteraction( interaction ) ; 
-				break;
-				case Flags.ONESHOT:
-					_uiView.createQPInteraction( interaction ) ; 
-				break;
-								
+					
 				default :
 				//
 				break;
@@ -526,8 +491,6 @@ package com.refract.prediabetes.stateMachine
 		{
 			_uiView.cleanUI() ;	
 			
-			
-			if( _redFilter.parent ) _videoOverlayView.removeChild( _redFilter );
 			removeCountDownTimerTxt() ; 
 				
 				
@@ -588,32 +551,6 @@ package com.refract.prediabetes.stateMachine
 		}
 
 
-		private function onUpdateRedFilter(event : Event) : void 
-		{
-			_videoOverlayView.addChild( _redFilter ) ;  
-			_redFilter.visible = true ; 
-			_redFilter.alpha = 1 ; 
-			_redFilter.gotoAndPlay(0);
-			//_redFilter.alpha = 0 ; 
-			//TweenMax.to( _redFilter , .25 , { alpha:SMSettings.ALPHA_RED_FILTER , canBePaused:true } ) ; 
-			onResize();
-		}
-		private function onUpdateRemoveRedFilter( event : Event ): void
-		{
-			//if( _redFilter.parent ) _videoOverlayView.removeChild( _redFilter) ; 
-			TweenMax.to( _redFilter , .3 , { alpha : 0 , onComplete: removeRedFilter , canBePaused:true} ) ;
-		}
-		
-		
-		
-		
-		
-		private function removeRedFilter( ) : void
-		{
-			if( _redFilter.parent ) _videoOverlayView.removeChild( _redFilter) ;
-		}
-		
-		
 		//** [UTILITIES]
 		
 		private function createCountDownTimerTxt() : void 
@@ -648,31 +585,7 @@ package com.refract.prediabetes.stateMachine
 			}
 		}
 		
-		//**red filter
-		private function createRedFilter() : void
-		{
-			//_redFilter = new Box( 1,1,0xff0000);
-			
-			
-			//_redFilter = AssetManagerEmbeds.g
-			_redFilter = AssetManager.getEmbeddedAsset("RedFilter") ;
-			/*
-			_redFilter = new Sprite() ; 
-			var fillType:String = GradientType.RADIAL;
-     		var colors:Array = [SMSettings.DEEP_RED , SMSettings.DEEP_RED];
-     		var alphas:Array = [.2, 1];
-     		var ratios:Array = [155, 255];
-     		var matr:Matrix = new Matrix();
-     		matr.createGradientBox(1000, 1000, 0, 0, 0);
-     		var spreadMethod:String = SpreadMethod.PAD;
-     		_redFilter.graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod);       
-     		_redFilter.graphics.drawRect(0,0,1000,1000);
-			
-			_redFilter.mouseEnabled = false ; 
-			_redFilter.mouseChildren = false ; 
-			 * 
-			 */
-		}
+
 		
 		//**lock buttons
 		private function createLockButtonsQ() : void 
@@ -701,26 +614,7 @@ package com.refract.prediabetes.stateMachine
 				square.y = AppSettings.VIDEO_TOP ;
 			}
 		}
-		private function resizeSquareFilter() : void
-		{
-			/*
-			var fillType:String = GradientType.RADIAL;
-     		var colors:Array = [SMSettings.DEEP_RED, 0xffffff];
-     		var alphas:Array = [1, 0];
-     		var ratios:Array = [0, 255];
-     		var matr:Matrix = new Matrix();
-     		matr.createGradientBox(AppSettings.VIDEO_WIDTH , AppSettings.VIDEO_HEIGHT , 0, 0, 0);
-     		var spreadMethod:String = SpreadMethod.PAD;
-     		_redFilter.graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod);       
-     		_redFilter.graphics.drawRect(0,0,AppSettings.VIDEO_WIDTH ,AppSettings.VIDEO_HEIGHT );
-     		 * 
-     		 */
-			 _redFilter.width = AppSettings.VIDEO_WIDTH  + 1; //* 1.5; 
-				_redFilter.height = AppSettings.VIDEO_HEIGHT ;//* 1.5; 
-				_redFilter.x = AppSettings.VIDEO_LEFT + _redFilter.width/2 ;//+10;
-				_redFilter.y = AppSettings.VIDEO_TOP + _redFilter.height/2  ;//+ 25  ;
-		}
-		
+
 		//**cut black transitions
 		private function reverse( ) : void
 		{
@@ -746,7 +640,6 @@ package com.refract.prediabetes.stateMachine
 		private function onFadeOut( evt : Event = null ) : void
 		{
 			if( _countDownCont ) fadeOut( _countDownCont  );
-			if( _redFilter ) fadeOut( _redFilter  );
 			if( _stateTxtView ) fadeOut( _stateTxtView ) ; 
 		}
 		private function onSpeedFadeOut( evt : Event = null ) : void
@@ -757,7 +650,6 @@ package com.refract.prediabetes.stateMachine
 				TweenMax.killTweensOf( _countDownCont ) ;
 				speedFadeOut( _countDownCont  );
 			}
-			if( _redFilter ) speedFadeOut( _redFilter  );
 			if( _stateTxtView ) speedFadeOut( _stateTxtView ) ; 
 		}
 		
@@ -776,7 +668,6 @@ package com.refract.prediabetes.stateMachine
 		//**RESIZE
 		private function onResize( evt : Event = null ) : void
 		{
-			resizeSquareFilter(  );
 			resizeSquare( _lockButtonsQ );
 			resizeSquare( _blackCut );
 			

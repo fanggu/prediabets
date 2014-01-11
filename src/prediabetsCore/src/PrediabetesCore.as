@@ -15,9 +15,9 @@ package {
 	/**
 	 * @author robertocascavilla
 	 */
-	public class MainCore extends Sprite 
+	public class PrediabetesCore extends Sprite 
 	{	
-		public function MainCore() 
+		public function PrediabetesCore() 
 		{
 			new FontManager();
 			addEventListener( Event.ADDED_TO_STAGE , init ) ; 

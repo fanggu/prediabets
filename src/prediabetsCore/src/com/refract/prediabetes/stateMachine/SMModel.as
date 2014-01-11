@@ -1,7 +1,6 @@
 package com.refract.prediabetes.stateMachine 
 {
 	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.stateMachine.flags.Flags;
 
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;

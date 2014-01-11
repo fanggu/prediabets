@@ -212,7 +212,7 @@ package {
 			removeChild(_bkg);
 			_bkg = null;
 			
-			var mainCore : MainCore = new MainCore() ; 
+			var mainCore : PrediabetesCore = new PrediabetesCore() ; 
 			addChild ( mainCore ) ;
 			
 			var skipButton : Box = new Box( 120 , 40 , 0xfff000 ) ; 

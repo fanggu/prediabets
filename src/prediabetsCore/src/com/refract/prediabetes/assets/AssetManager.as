@@ -57,7 +57,8 @@ package com.refract.prediabetes.assets {
 			_bulk = new BulkLoader(DefaultLoader);
 		}
 		
-		protected function addLoad(url:String,options:Object = null):void{
+		protected function addLoad(url:String,options:Object = null):void
+		{
 			_bulk.add(url,options);
 		}
 		

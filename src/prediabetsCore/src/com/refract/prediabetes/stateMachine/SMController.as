@@ -31,7 +31,6 @@ package com.refract.prediabetes.stateMachine {
 			return _model;
 		}
 		
-		//private var _countDownTimer : SMTimer;
 		private var _transitionTimer : SMTimer;
 		private var _slowTimeTimer : SMTimer;
 		private var _delayCounter : SMTimer;
@@ -48,7 +47,6 @@ package com.refract.prediabetes.stateMachine {
 		private var _wrongVideo : Boolean;
 		
 		private var _initObject : Object ;
-		
 		
 		private var _counterTime : Number;
 		private var _initCountDownTimer : Number;
@@ -87,15 +85,12 @@ package com.refract.prediabetes.stateMachine {
 			createListeners();
 			
 			SMVars.reset() ;
-			
-			//DispatchManager.dispatchEvent(new Event ( Flags.UNFREEZE_BUTTONS ) );
 			DispatchManager.dispatchEvent(new Event ( Flags.UN_FREEZE ) );
 		
 			_initObject = obj ; 
 			_death = false ; 
 			_model.init( _initObject.module ) ; 
 			
-			//_model.selectedState = _initObject.selectedState == null ?  _model.initState : _initObject.selectedState;
 			_model.selectedInteraction= 0 ;
 			if( _initObject.selectedState == null)
 			{
@@ -105,33 +100,23 @@ package com.refract.prediabetes.stateMachine {
 			{
 				_model.selectedState = _initObject.selectedState ; 
 			}
-			
-			 
-			
-			
+
 			dispatchStartEvents() ; 
 			
 			if( _initObject.selectedState != null )
 			{
 				_model.selectedState = _initObject.selectedState ;
 				transitionPrevState() ; 
-				setTimeout(delayAddStar, 100 ) ; 
 			}
 			else
 			{
 				stateMachineTransition();
-				SMScore.reset() ; 
 			}
 			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) ) ; 
 
 			
 		}
-		private function delayAddStar() : void
-		{
-			SMScore.me.addStarOnSceneSelect( );
-		}
-		
-	
+
 		private function dispatchStartEvents() : void
 		{
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.STATE_MACHINE_START, _initObject ) ) ;
@@ -270,6 +255,12 @@ package com.refract.prediabetes.stateMachine {
 			}
 		}
 		
+		public function goNext() : void
+		{
+			var interaction : Object = _model.interaction ; 
+			updateState( interaction.final_state ) ;
+		}
+		
 		private function createModel() : void
 		{
 			_model = new ClassFactory.SM_MODEL() ; 
@@ -278,10 +269,7 @@ package com.refract.prediabetes.stateMachine {
 		private function createListeners() : void
 		{	
 			DispatchManager.addEventListener(Flags.INSERT_COIN , onInsertCoin);
-			//DispatchManager.addEventListener(Flags.TRANSITION , onTransition);
 			DispatchManager.addEventListener(Flags.UNLOCK_AFTER_INTERACTION , onUnlockAfterInteraction);
-			
-			//DispatchManager.addEventListener(Flags.DEACTIVATE_BUTTON , onDeActivateButton);
 			
 			DispatchManager.addEventListener(Flags.FREEZE , onFreeze);
 			DispatchManager.addEventListener(Flags.UN_FREEZE , onUnFreeze); 
@@ -289,7 +277,6 @@ package com.refract.prediabetes.stateMachine {
 			DispatchManager.addEventListener(Flags.NO_STARS , onDie); 
 			
 			DispatchManager.addEventListener(Flags.CPR_SLOW_TIME , callCPRSlowTime); 
-			DispatchManager.addEventListener(Flags.DEACTIVATE_BUTTON , onDeactivateButton); 
 			
 			DispatchManager.addEventListener(Flags.SM_RESET , reset); 
 			
@@ -308,7 +295,6 @@ package com.refract.prediabetes.stateMachine {
 			
 			DispatchManager.removeEventListener(Flags.NO_STARS , onDie);
 			DispatchManager.removeEventListener(Flags.CPR_SLOW_TIME , callCPRSlowTime);
-			DispatchManager.removeEventListener(Flags.DEACTIVATE_BUTTON , onDeactivateButton); 
 			
 			DispatchManager.removeEventListener(Flags.UPDATE_PLAY_BUTTON, onUpdatePlayButton) ;
 			DispatchManager.removeEventListener(Flags.SM_RESET , reset); 
@@ -425,139 +411,77 @@ package com.refract.prediabetes.stateMachine {
 				
 				default:
 					 _model.selectedInteraction = int(coinObj.btName);
-					 if(  _model.selectedModule != 6) 
-					 {
-						//SMScore.me.addTotSpeed( _counterTime );
-					 	
-						if( SMVars.me.tempTotChoice > 1 )
-					 	{
-							SMScore.me.insertCoin( coinObj) ;
-						}
-						else
-						{
-							SMScore.me.pSendScore() ;
-						}
-					 }
 					 var interaction : Object = _model.interaction ; 
-					 if( interaction.video_name == Flags.WG )
-					 {
-						DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS )) ;
+					
+					if( coinObj.wrong )
+					{
 						_answerCounter = 0 ; 
 						removeTimers( ) ; 
-						callWG() ;
-						DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_BUTTON_SOUND , SMSettings.BUTTON_SOUND_WRONG) ); 
-						DispatchManager.dispatchEvent(new Event(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE));
-					 }
-					 else
-					 {
-						if( coinObj.wrong )
-						{
-							_answerCounter = 0 ; 
-							removeTimers( ) ; 
-							
-							_wrongVideo = true ; 
-							_retainVideo = VideoLoader.i.videoAddress ; 
-							
-							//VideoLoader.i.stopVideo() ; 
-							//VideoLoader.i.cancelLoadRequest( _retainVideo ) ;
-							//VideoLoader.i.pauseVideo() ;
-							_model.selectedInteraction = int(coinObj.btName);	
-							
-							DispatchManager.dispatchEvent(new Event( Flags.DEACTIVATE_VIDEO_RUN) );
-							
-							DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO, interaction.video_name));
-							DispatchManager.dispatchEvent(new Event( Flags.FADEOUT) ); 
-							
-							
-							activateTrigger();
+						
+						_wrongVideo = true ; 
+						_retainVideo = VideoLoader.i.videoAddress ; 
+						_model.selectedInteraction = int(coinObj.btName);	
+						
+						DispatchManager.dispatchEvent(new Event( Flags.DEACTIVATE_VIDEO_RUN) );
+						
+						DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO, interaction.video_name));
+						DispatchManager.dispatchEvent(new Event( Flags.FADEOUT) ); 
+						
+						
+						activateTrigger();
 
-							DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS )) ; 
-							DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_BUTTON_SOUND , SMSettings.BUTTON_SOUND_WRONG) );
-							
-							if( interaction.message_box != null)
-							{
-								DispatchManager.dispatchEvent(new ObjectEvent(Flags.UPDATE_MESSAGE_BOX, interaction));
-							} 
+						DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS )) ; 
+						DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_BUTTON_SOUND , SMSettings.BUTTON_SOUND_WRONG) );
+						
+						if( interaction.message_box != null)
+						{
+							DispatchManager.dispatchEvent(new ObjectEvent(Flags.UPDATE_MESSAGE_BOX, interaction));
+						} 
+					}
+					else
+					{
+						_wrongVideo = false ; 
+						_retainVideo = null ; 
+						removeTimers( ) ; 
+						_answerCounter ++;
+						if( !coinObj.oneShot )
+						{
+							_transitionTimer = new SMTimer( SMSettings.RIGHT_ANSWER_TIMER , 1 ) ; 
+							_transitionTimer.start() ;
+							_transitionTimer.addEventListener(TimerEvent.TIMER_COMPLETE, rightAnswerCompleted );
 						}
 						else
 						{
-							_wrongVideo = false ; 
-							_retainVideo = null ; 
-							removeTimers( ) ; 
-							_answerCounter ++;
-							SMScore.me.addTotSpeed( _counterTime );
-							if( !coinObj.oneShot )
-							{
-								_transitionTimer = new SMTimer( SMSettings.RIGHT_ANSWER_TIMER , 1 ) ; 
-								_transitionTimer.start() ;
-								_transitionTimer.addEventListener(TimerEvent.TIMER_COMPLETE, rightAnswerCompleted );
-							}
-							else
-							{
-								rightAnswerCompleted( ) ; 
-							}
-							DispatchManager.dispatchEvent(new Event( Flags.FADEOUT) ); 
-							if( SMVars.me.tempTotChoice > 1)
-							{
-								var successString : String = SMSettings.SCORE_OK ; 
-								/*
-								if (_answerCounter == 1)
-								{
-									successString = SMSettings.SCORE_TRY_HARDER;
-								}
-								else if (_answerCounter == 2)
-								{
-									successString = SMSettings.SCORE_NOT_GREAT;
-								}
-								else if (_answerCounter == 3)
-								{
-									successString = SMSettings.SCORE_OK;
-								}
-								else if (_answerCounter == 4)
-								{
-									successString = SMSettings.SCORE_VERY_GOOD;
-								}
-								else if (_answerCounter >= 5)
-								{
-									successString = SMSettings.SCORE_EXCELLENT;
-								}
-								 * 
-								 */
-								 if (_answerCounter == 1)
-								{
-									successString = SMSettings.OK;
-								}
-								else if (_answerCounter == 2)
-								{
-									successString = SMSettings.GOOD;
-								}
-								else if (_answerCounter == 3)
-								{
-									successString = SMSettings.SCORE_EXCELLENT ;
-								}
-								_answerCounter = 0 ; 
-								DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_VIEW_COUNTDOWN_TEXT , successString ) ) ;
-							}
-							DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS )) ; 
-							DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_BUTTON_SOUND , SMSettings.BUTTON_SOUND_GOOD) ); 
-							DispatchManager.dispatchEvent(new Event(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE));
+							rightAnswerCompleted( ) ; 
 						}
-				 	}
+						DispatchManager.dispatchEvent(new Event( Flags.FADEOUT) ); 
+						if( SMVars.me.tempTotChoice > 1)
+						{
+							var successString : String = SMSettings.SCORE_OK ; 
+							 if (_answerCounter == 1)
+							{
+								successString = SMSettings.OK;
+							}
+							else if (_answerCounter == 2)
+							{
+								successString = SMSettings.GOOD;
+							}
+							else if (_answerCounter == 3)
+							{
+								successString = SMSettings.SCORE_EXCELLENT ;
+							}
+							_answerCounter = 0 ; 
+							DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_VIEW_COUNTDOWN_TEXT , successString ) ) ;
+						}
+						DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS )) ; 
+						DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_BUTTON_SOUND , SMSettings.BUTTON_SOUND_GOOD) ); 
+						DispatchManager.dispatchEvent(new Event(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE));
+					}
+				 	
 				break ;
 			}
 		}
-		
-		private function onDeactivateButton( evt : StateEvent ) : void
-		{
-			var btName : String = evt.stringParam ; 
-			
-			var stateObject : Object = _model.state ;
-			var interaction : Object = _model.getInteraction( _model.selectedState, int(btName) ) ; 
-			interaction.deactivate = true ; 
-			_model.setState( stateObject , _model.selectedState ) ; 
-		}
-		
-		
+
 		
 		private function rightAnswerCompleted( evt : TimerEvent = null ) : void
 		{
@@ -585,18 +509,7 @@ package com.refract.prediabetes.stateMachine {
 			DispatchManager.dispatchEvent( new Event( Flags.CLEAR_SOUNDS) ) ; 
 			var interaction : Object = _model.interaction;
 			var videoName : String  = interaction.video_name ; 
-			//Logger.log(Logger.STATE_MACHINE,videoName);
-			if( videoName == Flags.WG) 
-			{ 
-				_wgActivated = true ; 
-				callSlowTime(  ) ; 
-				return ; 
-			}
-			
 
-			//if( interaction.message_box != null )
-				//_activateMessageBox = true ; 
-			
 			if( videoName.length > 0)
 			{
 				DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI));
@@ -636,10 +549,6 @@ package com.refract.prediabetes.stateMachine {
 			{
 				_preTrigger = interaction.trigger ; 
 			}
-			else
-			{
-				//_preTrigger = interaction.trigger ;
-			}
 			var tempTrigger : int = interaction.trigger ;
 			
 			if( tempTrigger == interaction.clip_length) 
@@ -670,12 +579,10 @@ package com.refract.prediabetes.stateMachine {
 		}
 		
 		protected function updateState( address : String , cleanUI : Boolean = true) : void
-		{	if( address == 'dont_know')
-				trace('YEAH')
+		{	
 			DispatchManager.removeEventListener( Event.ENTER_FRAME , scheduler) ;
 			if( address == 'menu')
 			{
-				 
 				return ;
 			}
 			if( address != _model.selectedState )
@@ -694,39 +601,8 @@ package com.refract.prediabetes.stateMachine {
 				DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI));
 			
 			_activateMessageBox = false ; 
-
-			var prevFinalState : String = _model.selectedState ; 
-			var interaction : Object = _model.getInteraction( _model.selectedState , _model.selectedInteraction ) ; 
 			
-			var interactionCheckCPR : Object = _model.getInteraction( _model.selectedState , 0 ) ; 
-			if( interactionCheckCPR)
-			{
-				if
-				( 
-					interactionCheckCPR.interaction_type == Flags.CPR
-					|| interactionCheckCPR.interaction_type == Flags.CPR_LINEAR
-					|| interactionCheckCPR.interaction_type == Flags.CPR_LONG
-					|| interactionCheckCPR.interaction_type == Flags.ONESHOT
-				)
-				{
-					if( !SMVars.me.accelerometerAble ) 
-						SMVars.me.QP_PRE_RUN = true ; 
-				}
-			
-			}
-			
-			
-			_model.selectedState = address 
-			/*; 
-			if( _model.sceneSelect.indexOf(address) != -1)	
-			{
-				//DispatchManager.dispatchEvent( new StateEvent( Flags.STATE_ACTIVATED , address ) ) ;	
-				_model.stateActivate( address ) ; 
-			}
-			 * 
-			 */
-			
-	
+			_model.selectedState = address ; 
 			var stateObject : Object = _model.state;
 			if( _model.greyStates.indexOf(_model.selectedState) != -1)
 			{
@@ -758,8 +634,6 @@ package com.refract.prediabetes.stateMachine {
 			}
 			
 			VideoLoader.i.deactivateClickPause() ; 
-			
-			SMScore.me.updateState(stateObject);
 		}
 		private function requestVideos() : void
 		{
@@ -776,43 +650,10 @@ package com.refract.prediabetes.stateMachine {
 					VideoLoader.i.requestLoad( video_name ) ;
 				}
 			}
-			
-			/*
-			//trace('_model.state.prevState ' , _model.state.prev_state)		
-			if( _model.getState( _model.state.prev_state ))
-			{
-				var prevInteractions : Array = _model.getState( _model.state.prev_state ).interactions ;
-				i = 0 ; 
-				l = interactions.length ; 
-				for( i = 0 ; i < l ; i ++)
-				{
-					video_name  = interactions[i].video_name ;
-					if( video_name.length > 0 && video_name != Flags.WG )
-					{
-						//trace('cancel video name ' , video_name)
-						VideoLoader.i.cancelLoadRequest( video_name ) ;
-					}
-				}
-			}
-			 * 
-			 */
 		}
 		
 		private function createTimer( totTimerCount : int) : void
 		{
-			/*
-			_flashWhite = false ;
-			_initCountDownTimer = SMVars.me.getSMTimer() ; 
-			_totCountDownTime = totTimerCount*1000;
-			_totTimerCount = totTimerCount ;
-			
-			createCountDownTimer() ; 
-			
-			_delayCounter= new SMTimer( (SMSettings.SHOW_DELAY*SMSettings.COUNTER_START_DELAY )*1000 , 1 ) ; 
-			_delayCounter.start() ;
-			_delayCounter.addEventListener(TimerEvent.TIMER_COMPLETE, createTimerDelay );
-			 * 
-			 */
 		}
 		
 		private function createTimerDelay( evt : TimerEvent) : void
@@ -826,8 +667,6 @@ package com.refract.prediabetes.stateMachine {
 				DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_BAR_TIMER, String( _totTimerCount) ) ) ;
 				
 				_countDownTimerOn = true ;
-				
-				DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_LOOP_SOUND , SMSettings.TIMER_LOOP) );
 			}
 			
 		}
@@ -847,7 +686,6 @@ package com.refract.prediabetes.stateMachine {
 				_slowTimeTimer.stop() ;
 				_slowTimeTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, timerCompleted ) ;
 				_slowTimeTimer = null ; 
-				DispatchManager.dispatchEvent(new Event(Flags.UPDATE_REMOVE_RED_FILTER )) ;
 			}
 			if( _transitionTimer ) 
 			{
@@ -862,15 +700,7 @@ package com.refract.prediabetes.stateMachine {
 				_delayCounter = null ;
 			}
 		}
-		private function createCountDownTimer( evt : Event = null) : void
-		{
-			_counterTime = 0 ; 
-			var valueReverse : Number = _totCountDownTime ;
-			var value : String = createCountDownString( valueReverse) ;
-			DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_COUNTDOWN_TIMER, value));
-			
-	
-		}
+
 		private function updateCountDownTimer( evt : Event = null) : void
 		{
 			_counterTime = SMVars.me.getSMTimer() - _initCountDownTimer ; 
@@ -891,10 +721,6 @@ package com.refract.prediabetes.stateMachine {
 				_flashWhite = true ; 
 				DispatchManager.dispatchEvent(new Event(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_WHITE));
 			}
-			//else
-				//DispatchManager.dispatchEvent(new Event(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE));
-				
-			
 		}
 		private function createCountDownString( valueReverse : Number ) : String
 		{
@@ -929,107 +755,17 @@ package com.refract.prediabetes.stateMachine {
 		{
 			_answerCounter = 0 ; 
 			DispatchManager.dispatchEvent( new Event( Flags.CLEAR_SOUNDS));
-			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_RED_FILTER )) ;
 			
 			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE));
 			
 			_slowTimeTimer = new SMTimer( SMSettings.TIME_SLOWTIME_DELAY , 1 ) ; 
 			_slowTimeTimer.start() ;
 			_slowTimeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, slowTimerCompleted );
-			
-			if( SMVars.me.tooSlowCounter == 0)
-			{
-				var voiceOverAddress : String = SMSettings.WTS_VOICE_OVER ; 
-				var rn : int = Math.random()*12 + 1 ; 
-				voiceOverAddress = voiceOverAddress + String(rn);
-				DispatchManager.dispatchEvent( new StateEvent(Flags.UPDATE_SOUND , voiceOverAddress )) ; 
-			}
-			
+	
 			SMVars.me.tooSlowCounter++ ;
-			
-			
-			SMScore.me.addTotSpeed( _counterTime );
-			
-			SMScore.me.updateSlowTime() ; 
-			//setTimeout( testOnDie, 2);
 			DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_COUNTDOWN_TEXT , SMSettings.T_TOO_SLOW));
-			
-			//trace(' slow time. W interaction : ' , interaction.)
-			var interactionCheckCPR : Object = _model.getInteraction( _model.selectedState , 0 ) ; 
-			switch( interactionCheckCPR.interaction_type )
-			{
-				case Flags.ONESHOT :
-					SMVars.me.accelerometerAble = false ;
-				break ;
-				case Flags.CPR_LINEAR :
-					SMVars.me.accelerometerAble = false ;
-				break ;
-				case Flags.CPR_LONG :
-					SMVars.me.accelerometerAble = false ;
-				break ; 
-				default :
-				
-			}
-			/*
-			if( interactionCheckCPR)
-			{
-				Logger.log(Logger.STATE_MACHINE," SLOW TIME interactionCheckCPR.interaction_type :" , interactionCheckCPR.interaction_type );
-				if
-				(
-				 	interactionCheckCPR.interaction_type == Flags.ONESHOT
-				)
-				{
-					SMVars.me.accelerometerAble = false ; 
-				}
-				
-				
-//				if
-//				( 
-//					interactionCheckCPR.interaction_type == Flags.CPR
-//					|| interactionCheckCPR.interaction_type == Flags.CPR_LINEAR
-//					|| interactionCheckCPR.interaction_type == Flags.CPR_LONG
-//					|| interactionCheckCPR.interaction_type == Flags.ONESHOT
-//				)
-//				{
-//					trace('setting qp pre run TRUE ' , SMVars.me.accelerometerAble)
-//					if( !SMVars.me.accelerometerAble ) 
-//						SMVars.me.QP_PRE_RUN = true ; 
-//				}
-			
-			}
-			 * 
-			 */
-			
 		}
-		private function testOnDie() : void
-		{
-			DispatchManager.dispatchEvent( new Event( Flags.NO_STARS ) ) ; 
-		}
-		private function callWG( ) : void
-		{
-			removeTimer( ) ; 
-			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_RED_FILTER )) ;
-			
-			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE));
-			
-			_slowTimeTimer = new SMTimer( SMSettings.TIME_SLOWTIME_DELAY , 1 ) ; 
-			_slowTimeTimer.start() ;
-			_slowTimeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, slowTimerCompleted );
-			
-			if(SMVars.me.tryAgainCounter == 0 )
-			{
-				var voiceOverAddress : String = SMSettings.WG_VOICE_OVER; 
-				var rn : int = Math.random()*12 + 1 ; 
-				voiceOverAddress = voiceOverAddress + String(rn);
-				DispatchManager.dispatchEvent( new StateEvent(Flags.UPDATE_SOUND , voiceOverAddress )) ; 
-			}
-			SMVars.me.tryAgainCounter++ ;
-			
-			DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_COUNTDOWN_TEXT, SMSettings.T_TRY_AGAIN));
-		}
-		
-		
-		
+
 		private function callRetainVideo( ) : void
 		{
 			DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO, _retainVideo));
@@ -1047,9 +783,7 @@ package com.refract.prediabetes.stateMachine {
 				_slowTimeTimer = null ; 
 			}
 			if( !_death)
-			{
-				DispatchManager.dispatchEvent(new Event(Flags.UPDATE_REMOVE_RED_FILTER )) ;
-				
+			{	
 				var stateObject : Object = _model.state ; 
 				createTimer( stateObject.timer ) ; 
 				
@@ -1060,17 +794,8 @@ package com.refract.prediabetes.stateMachine {
 					
 						if( _wrongVideo)
 						{
-							//VideoLoader.i.pauseVideo() ;
-							
-							//setTimeout(setVideoBack, 50) ;
 							DispatchManager.dispatchEvent( new Event(Flags.UPDATE_CUT_BLACK_LONG ) )  ; 
-							
-							//VideoLoader.i.stopVideo() ; 
-							//DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO, _retainVideo));
-							//setVideoBack() ;
-							//callRetainVideo() ; 
 							setTimeout(callRetainVideo , 270 ) ; 
-							//setTimeout(setVideoBack , 280 ) ; 
 						}
 						else
 						{
@@ -1093,7 +818,6 @@ package com.refract.prediabetes.stateMachine {
 			}
 			else
 			{
-				//SMScore.me.addStarAfterDie();
 				DispatchManager.dispatchEvent( new Event( Flags.UPDATE_UI ) ) ; 
 				DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO, _model.deathVideo));
 
@@ -1109,9 +833,6 @@ package com.refract.prediabetes.stateMachine {
 				{
 					DispatchManager.dispatchEvent(new ObjectEvent(Flags.UPDATE_MESSAGE_BOX, interaction));
 				}
-				//SMScore.reset() ;
-				
-				
 			}
 		}
 
@@ -1162,66 +883,6 @@ package com.refract.prediabetes.stateMachine {
 					updateState( _model.interaction.final_state ) ; 
 				}
 			}
-			
-			
-			/*
-			//** create message box, if there is one
-			if( _activateMessageBox)
-			{
-				if( _model.getMBoxTriggerEvent() <= SMVars.me.nsStreamTime)
-				{
-					_activateMessageBox = false ; 
-					_timerRemoveMessageBox = SMVars.me.nsStreamTime + _model.interaction.mbox_duration ;
-					var messageBox : String = _model.interaction.message_box ; 
-					var loadVarsIndexOf : int = _model.interaction.interaction_meta.indexOf('load_vars') ; 
-					if( loadVarsIndexOf >= 0)
-					{
-						var pattern:RegExp = /-?[A-Z]+/g;
-						var arr : Array = _model.interaction.interaction_meta.match(pattern);
-						var i : int = 0 ; 
-						var l : int = arr.length ; 
-						var tempRegExp : RegExp ; 
-						var tempString : String ; 
-						
-						for( i = 0 ; i < l ; i++)
-						{
-							tempString = '{' + arr[i] + '}' ; 
-							tempRegExp =  new RegExp(tempString);
-							
-							switch( arr[i])
-							{
-								case 'XX' : 
-									messageBox = messageBox.replace( tempRegExp , String( SMVars.me.qp_counter )) ; 
-								break ;
-								case 'YY' :
-									messageBox = messageBox.replace( tempRegExp , String( SMVars.me.qp_timer )) ;
-								break ; 
-								case 'ZZ' : 
-									messageBox = messageBox.replace( tempRegExp , String( SMVars.me.latest_accuracy )) ;
-								break ;
-								case 'DATE' :
-									messageBox ='' ; 
-								break ;
-							}
-						}
-						
-						DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_MESSAGE, messageBox));
-					}
-				}
-			}
-			else
-			{
-				_timerRemoveMessageBox = -1 ; 
-			}
-			if( _timerRemoveMessageBox > 0)
-			{
-				if( _timerRemoveMessageBox < SMVars.me.nsStreamTime)
-				{
-					DispatchManager.dispatchEvent(new Event(Flags.REMOVE_VIEW_MESSAGE ));
-				}
-			}
-			 * 
-			 */
 		}
 		
 		//**detect end of video

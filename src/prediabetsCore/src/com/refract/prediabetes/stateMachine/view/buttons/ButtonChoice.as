@@ -28,7 +28,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 	{
 		private var _interaction : Object;
 		private var _value : Boolean  ;
-		public var img : Sprite ;
 		private var _txtBalloon : Sprite;
 		private var _txtField : TextField;
 		public function ButtonChoice(copyID:String, props:Object = null, w:Number = 0,h:Number = 0, useArrow:Boolean = false) 
@@ -40,7 +39,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			AppSettings.stage.addEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
 			DispatchManager.addEventListener(Flags.TEXT_FEEDBACK , onTextFeedback); 
-			DispatchManager.addEventListener( Flags.CHOICE_SELECTED , onChoiceSelected) ;
 			
 			_interaction = interaction ; 
 			
@@ -62,29 +60,14 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			
 			addEventListener(MouseEvent.CLICK, btPressed); 
 			addEventListener(MouseEvent.ROLL_OVER, btRollOver); 
-			if( img ) 
-			{
-				img.addEventListener(MouseEvent.CLICK, btPressed) ; 
-				img.useHandCursor = true ; 
-				img.buttonMode = true ; 
-				//img.scaleX = img.scaleY = AppSettings.RATIO ;
-			}
+
 			
 			if(  _interaction.deactivate)
 			{
 				deActivate() ; 
 			}
 		}
-		
-		private function onChoiceSelected( evt : Event ) : void
-		{
-			if( img ) 
-			{
-				img.removeEventListener(MouseEvent.CLICK, btPressed) ; 
-				img.useHandCursor = false ; 
-				img.buttonMode = false ; 
-			}
-		}
+
 		override public function deActivate() : void
 		{
 			super.deActivate();	
@@ -97,8 +80,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		private function onFadeOut( evt : Event ) : void
 		{
-			TweenMax.to( this , .3 , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY , onComplete : destroy, canBePaused:true } ) ; 
-			if( img ) TweenMax.to( img , .3 , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY ,canBePaused:true } ) ; 	
+			TweenMax.to( this , .3 , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY , onComplete : destroy, canBePaused:true } ) ;  	
 			
 			removeEvents() ; 
 			removeEventListener(MouseEvent.CLICK, btPressed); 
@@ -106,7 +88,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		private function btPressed( evt : MouseEvent ) : void
 		{
-			//var bt : Sprite = evt.currentTarget as Sprite ;
 			var btObj : CoinVO = new CoinVO() ; 
 			btObj.btName = name ; 
 			btObj.wrong = _value ; 
@@ -114,24 +95,12 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			if( _value ) 
 			{ 
 				deActivate() ;
-				if( img ) 
-				{
-					img.removeEventListener(MouseEvent.CLICK, btPressed) ; 
-					img.useHandCursor = false ; 
-					img.buttonMode = false ; 
-				}
-				
-				DispatchManager.dispatchEvent( new StateEvent(Flags.DEACTIVATE_BUTTON , name)) ; 
 			}
 			else
 			{
 				activate() ; 
-				DispatchManager.dispatchEvent( new Event(Flags.CHOICE_SELECTED ) ) ; 
 			}			
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.INSERT_COIN, btObj));
-			
-			
-			
 		}
 		
 		
@@ -167,12 +136,9 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			_txtField  = TextManager.makeText( SMSettings.FONT_COUNTDOWN , null , style) ;
 			_txtField.text = str ; 
 			_txtField.textColor = 0xffffff ;
-			//txtField.x = this.width/2 ; 
 			
 			_txtBalloon.addChild( circBack ) ;
 			_txtBalloon.addChild( _txtField ) ; 
-			//circBack.x = circBack.width/2 - 3 ;
-			//circBack.y = circBack.height/2 - 3;
 			_txtField.x = - _txtField.width/2 ;
 			_txtField.y = - _txtField.height/2 ;
 			circBack.alpha = .7 ;
@@ -195,28 +161,11 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		{
 			x = ( _interaction.choice_x * AppSettings.VIDEO_WIDTH) / 100 - width/2 + AppSettings.VIDEO_LEFT;
 			y = ( _interaction.choice_y * AppSettings.VIDEO_HEIGHT) / 100 + AppSettings.VIDEO_TOP;
-			
-			//if( AppSettings.RATIO > 1.2 )
-				//	y = y - img.height/2 ; 
-					
-			if( img )
-			{
-				img.y = y - SMSettings.CHOICE_IMG_DISTANCE ; 
-				img.x = x ;
-				
-				var diff : Number = ( width - img.width) ;
-				img.x = x + diff/2 ; 
-				img.y = y -SMSettings.CHOICE_IMG_DISTANCE ;
-				
-				//img.y = img.y - 200 ; 
-			}
-			
 		}
 		
 		override public function destroy() : void
 		{
 			super.destroy() ; 
-			DispatchManager.removeEventListener( Flags.CHOICE_SELECTED , onChoiceSelected) ;
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 			DispatchManager.removeEventListener(Flags.TEXT_FEEDBACK , onTextFeedback); 
@@ -230,7 +179,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		public function dispose() : void
 		{
-			DispatchManager.removeEventListener( Flags.CHOICE_SELECTED , onChoiceSelected) ;
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 			DispatchManager.removeEventListener(Flags.TEXT_FEEDBACK , onTextFeedback); 

@@ -24,7 +24,7 @@ package {
 			
 			setAppClasses();
 			
-			var mainCore : MainCore = new MainCore(); 
+			var mainCore : PrediabetesCore = new PrediabetesCore(); 
 			addChild ( mainCore ) ;
 		}
 		

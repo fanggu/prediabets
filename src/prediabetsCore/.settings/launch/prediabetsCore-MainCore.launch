@@ -6,7 +6,7 @@
 <booleanAttribute key="DISABLE_COMPILE_PROCESS" value="false"/>
 <booleanAttribute key="KILL_PREVIOUS_VIEWER" value="true"/>
 <stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
-<stringAttribute key="MAIN_CLASS" value="src/MainCore.as"/>
+<stringAttribute key="MAIN_CLASS" value="src/PrediabetesCore.as"/>
 <stringAttribute key="OUTPUT" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetsCore.swf"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_EXTERNS" value="false"/>

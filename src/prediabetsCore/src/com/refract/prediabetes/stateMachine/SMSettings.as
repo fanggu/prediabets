@@ -61,8 +61,6 @@ package com.refract.prediabetes.stateMachine {
 		
 		//**general strings
 		public static const T_COUNTDOWN                   : String ='00:' ; 
-		public static const WTS_VOICE_OVER                : String ='WTS_' ;
-		public static const WG_VOICE_OVER                 : String ='WG_' ;
 		
 		//**Colors
 		public static const DEEP_RED                      : uint = 0xc45252 ; 
@@ -86,7 +84,5 @@ package com.refract.prediabetes.stateMachine {
 		public static const BUTTON_SOUND_WRONG            : String = 'BUTTON_SOUND_WRONG' ;
 		public static const QUESTIONS_FADE_IN             : String = 'Questions_Fade_Up' ; 
 		public static const QUESTIONS_ROLLOVER            : String = 'Questions_Rollover' ; 
-		public static const TIMER_LOOP                    : String = 'Timer_Loop' ; 
-		public static const SLIDE_LOOP : String = 'LS1_slide_audio_loop_slomo' ;
 	}
 }

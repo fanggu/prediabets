@@ -5,8 +5,6 @@ package com.refract.prediabetes.stateMachine.view {
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
-	import com.refract.prediabetes.stateMachine.view.interactions.InteractionQP;
-	import com.refract.prediabetes.stateMachine.view.interactions.InteractionSlide;
 	import com.robot.comm.DispatchManager;
 
 	import flash.display.Sprite;
@@ -98,21 +96,6 @@ package com.refract.prediabetes.stateMachine.view {
 		}
 		
 
-		public function createSlide( interaction:Object ) : void
-		{
-			var slide : InteractionSlide = new InteractionSlide( interaction ) ;
-			addChild( slide ) ;   
-		}
-		
-
-		
-		
-		public function createQPInteraction( interaction : Object ) : void
-		{
-			var interactionQP : InteractionQP = new ClassFactory.INTERACTION_QP( interaction ) ; 
-			addChild( interactionQP ) ; 
-		}
-		
 		public function createChoice( interaction : Object ) : void
 		{
 			if( !_liveInteractions ) _liveInteractions = new Array() ; 

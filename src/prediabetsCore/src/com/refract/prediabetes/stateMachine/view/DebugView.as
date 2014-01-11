@@ -1,8 +1,10 @@
 package com.refract.prediabetes.stateMachine.view {
 	import com.refract.prediabetes.AppSettings;
-
+	import com.refract.prediabetes.stateMachine.SMController;
+	import com.robot.geom.Box;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -27,9 +29,22 @@ package com.refract.prediabetes.stateMachine.view {
 			stage.addEventListener(Event.RESIZE, onResize);
 			createDebugWindow() ;
 			
+			createGoNextDebug() ; 
+			
 			onResize() ; 
 		}
 		
+		private function createGoNextDebug() : void
+		{
+			var goNext : Box = new Box( 50 , 50 , 0xff0099 ) ; 
+			panel.addChild( goNext ) ;
+			goNext.y = 200 ; 
+			goNext.addEventListener(MouseEvent.CLICK, goNextState ) ; 
+		}
+		private function goNextState( evt : MouseEvent ) : void
+		{
+			SMController.me.goNext() ; 
+		}
 		
 		public function updateState( message : String ) : void
 		{

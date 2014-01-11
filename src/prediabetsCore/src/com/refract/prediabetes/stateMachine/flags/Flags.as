@@ -62,9 +62,6 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const SPEED_FADEOUT	  						: String = 'speedFadeOut' ;
 		
 		
-		public static const UPDATE_RED_FILTER 					: String = 'updateRedFilter';
-		public static const UPDATE_REMOVE_RED_FILTER 				: String = 'updateRemoveRedFilter';
-		
 		public static const UPDATE_WRONG_CHOICE 					: String = 'updateWrongChoice';
 		
 		//**Sounds
@@ -77,9 +74,7 @@ package com.refract.prediabetes.stateMachine.flags {
 		
 		public static const CLEAR_SOUNDS							: String = 'clearSounds' ; 
 		public static const FAST_CLEAR_SOUNDS						: String = 'fastClearSounds' ; 
-		
-		public static const DEACTIVATE_BUTTON 					: String = 'deActivateButton' ; 
-		
+		 
 		public static const SM_RESET 								: String = 'SmReset' ; 
 		
 		public static const SM_ACTIVE								: String = 'SmActive' ;

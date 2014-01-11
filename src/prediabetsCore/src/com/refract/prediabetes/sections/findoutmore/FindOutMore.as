@@ -42,7 +42,7 @@ package com.refract.prediabetes.sections.findoutmore
 		private function launchCoursePage(event : MouseEvent) : void {
 			
 			
-			AppSettings.goToLink(AppSettings.COURSE_URL);
+			//AppSettings.goToLink(AppSettings.COURSE_URL);
 			if(stage.displayState != StageDisplayState.NORMAL && AppSettings.DEVICE == AppSettings.DEVICE_PC){
 				stage.displayState = StageDisplayState.NORMAL;
 			}

@@ -34,7 +34,7 @@ package com.refract.prediabetes
 		
 		protected var _status:String;
 		
-		protected var _main : MainCore ;
+		protected var _main : PrediabetesCore ;
 		protected var _nav : Nav;
 		public function get nav():Nav {return _nav;}
 		protected var _intro : Intro;
@@ -66,7 +66,7 @@ package com.refract.prediabetes
 		protected var lastMajor:String = "";
 		
 		protected var _dictQuestions : Dictionary ; 
-		public function AppController( main : MainCore)
+		public function AppController( main : PrediabetesCore)
 		{
 			_i = this;
 			_main = main ; 

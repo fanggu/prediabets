@@ -23,25 +23,6 @@ package com.refract.prediabets.web.preloader {
 		private const SIXTEEN_NINE_RATIO:Number = 16/9;
 		
 		
-		//		[Embed(source="../../../../../../../lifeSaverCore/assets/img/preloaderbkg_flat.jpg")]
-		[Embed(source="../../../../../../../prediabetsCore/assets/img/preloaderbkg.jpg")]
-		public var BKG : Class;
-		
-		[Embed(source="../../../../../../../prediabetsCore/assets/img/Lifesaver.png")]
-		public var LifeSaverLogo : Class;
-		
-		[Embed(source="../../../../../../../prediabetsCore/assets/img/politeloader.png")]
-		public var PoliteLoader : Class;
-		
-		[Embed(source="../../../../../../../prediabetsCore/assets/img/unit9.png")]
-		public var Unit9Logo : Class;
-		
-		[Embed(source="../../../../../../../prediabetsCore/assets/img/resuscitation_council_logo.png")]
-		public var RCUKLogo : Class;
-		
-		
-		[Embed(source="../../../../../../../prediabetsCore/assets/img/preloader_redArrow.png")]
-		public var RedArrow : Class;
 		
 		[Embed(	source="./../../../../../../../prediabetsCore/src/com/refract/prediabets/assets/fonts/BebasNeue.otf", 
 				fontName = "bebasPreloader", 
@@ -247,12 +228,7 @@ package com.refract.prediabets.web.preloader {
 		}
 		
 		public function destroy():void{
-			BKG = null;
-			LifeSaverLogo = null;
-			PoliteLoader = null;
-			Unit9Logo = null;
-			RCUKLogo = null;
-			RedArrow = null;
+			
 			BebasNeuePreloader = null;
 			AkzidenzGroteskMediumCondAltPreloader = null;
 			AkzidenzGroteskBoldCondPreloader = null;

@@ -23,16 +23,7 @@ package com.refract.prediabetes {
 		
 		public static const INTRO_URL : String = 'd01_intro' ; 
 		public static var APP_VIDEO_BASE_URL : String ; 
-		
-		/*
-		 * LOADED CONSTANTS FROM SETTINGS FILE or FLASHVARS
-		 */
-		public static var COURSE_URL : String = "http://www.resus.org.uk/pages/CPRtrain.htm";
-		public static var ITUNES_LINK : String = ""; //"http://www.itunes.com";
-		public static var ITUNES_TAB_LINK : String = ""; //"http://www.apple.com";
-		public static var PLAY_LINK : String = ""; //"http://play.google.com";
-		public static var PLAY_TAB_LINK : String = "";//"http://www.google.com";
-		
+
 		public static var LOCALE:String = "en";
 		
 		public static var RED:int = 0xc45252;
@@ -221,23 +212,13 @@ package com.refract.prediabetes {
 
 		public static function setScreenRatio(isTablet:Boolean = true) : void {
 			var dpi:Number = Capabilities.screenDPI;
-	//		var dpWide:Number = stage.stageWidth*160/dpi;
 			var inchesWide:Number = stage.fullScreenWidth/dpi;
-			var inchesHigh:Number = stage.fullScreenHeight/dpi;
-		//	Logger.general(this,"DPI",dpi)
-		//	Logger.general(this,"width",stage.fullScreenWidth)
-		//	Logger.general(this,"height",stage.fullScreenHeight)	
-		//	Logger.general(this,"inchesWide",inchesWide)
-		//	Logger.general(this,"inchesHigh",inchesHigh)		
+			var inchesHigh:Number = stage.fullScreenHeight/dpi;	
 			inchesWide *= inchesWide;
 			inchesHigh *= inchesHigh;
 			var inches:Number = Math.sqrt(inchesWide + inchesHigh);
 			DEVICE = (isTablet) ? DEVICE_TABLET : DEVICE_MOBILE;
-//			DEVICE = (inches > TABLET_THRESHOLD) ? DEVICE_TABLET : DEVICE_MOBILE;
-			Logger.general(DEVICE);
-		//	Logger.general("Size:",inches)
 		
-			
 			var serverString:String = unescape(Capabilities.serverString); 
 			var reportedDpi:Number = Number(serverString.split("&DP=", 2)[1]);
 			
@@ -255,23 +236,7 @@ package com.refract.prediabetes {
 				RESERVED_HEADER_HEIGHT = 0;
 			}
 			RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
-			
-			/*
-			 * DPIs
-			 * PC: 72
-			 * iPad: 132
-			 * Samsung Galaxy Note 10.1 : 149
-			 * Motorola Xoom: 160
-			 * Acer Iconia Tab A700: 224
-			 * Asus Transformer Pad Infinity: 224
-			 * iPad Retina: 264
-			 * Samsung Nexus 10: 300
-			 * 
-			 */
-			
-		//	12:72::x:264
-		//	12*164/72 = 44
-			
+
 			if(dpi >= 300){
 				var rat300:Number = DEVICE == DEVICE_TABLET ? 2.672972973 : 1.75;
 				FONT_SIZES[12] = 12*rat300;
@@ -314,31 +279,7 @@ package com.refract.prediabetes {
 				FONT_SIZES[12] = 14;
 				FONT_SIZES[13] = 14;
 				
-			}else{
-				/* these are the default values
-				FONT_SIZES[12] = 12;
-				FONT_SIZES[13] = 13;
-				FONT_SIZES[14] = 14;
-				FONT_SIZES[15] = 15;
-				FONT_SIZES[16] = 16;
-				FONT_SIZES[18] = 18;
-				FONT_SIZES[20] = 20;
-				FONT_SIZES[22] = 22;
-				FONT_SIZES[24] = 24;
-				FONT_SIZES[30] = 30;
-				FONT_SIZES[32] = 32;
-				FONT_SIZES[36] = 36;
-				FONT_SIZES[48] = 48;
-				FONT_SIZES[54] = 54;
-				FONT_SIZES[72] = 72;
-				FONT_SIZES[100] = 100;
-			//	 */
 			}
-			
-			
-		//	Logger.general(this,serverString);
-		//	Logger.general(this,reportedDpi);
-		//	Logger.general(this,stage.fullScreenWidth,stage.fullScreenHeight);
 		}
 		
 		private static var _stageCover:Sprite;
@@ -381,7 +322,6 @@ package com.refract.prediabetes {
 		
 		private static function onFSInteractiveAccepted(evt:FullScreenEvent):void{
 			FullScreenInteractiveAllowed = true;
-			Logger.general("FULL SCREEN ALLOWED");
 			removeStageCover();
 		}
 		

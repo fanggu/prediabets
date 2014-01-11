@@ -1192,21 +1192,6 @@
         "font": "AKZIDENZG_CONDENSED",
         "colour": "WHITE"
     }, {
-        "flash_id": "page_credits_unit9_header",
-        "copy_en": "UNIT9 PRODUCTION TEAM",
-        "font": "AKZIDENZG_CONDENSED",
-        "colour": "RED"
-    }, {
-        "flash_id": "page_credits_unit9_titles",
-        "copy_en": "Director\nTechnical Director\nExecutive Producer\nProducer\nProject Manager\nTech Lead\nDeveloper\nDeveloper\nLead Designer\nAssistant Designer\nQuality Assurance\nAssistant Editor\nAssistant Editor\nMusic\nUser experience\nAnimation\nMarketing\nMarketing\nBehind the scenes film\nSpecial thanks to",
-        "font": "AKZIDENZG_CONDENSED",
-        "colour": "GREY"
-    }, {
-        "flash_id": "page_credits_unit9_names",
-        "copy_en": "Martin Percy\nYates Buckley\nPiero Frescobaldi\nPietro Matteucci\nJenny Lam\nThomas Alisi\nKanish Patel\nRoberto Cascavilla\nJarrod Castaing\nKanda Faraj\nJonas Simkus\nFrancesco Bernabei\nCole Paviour\nSteve Nolan\nMichael Ho\nMartin Oliver\nLina Franke\nEmily Bell\nKelly Armstrong\nAlex Burt, Anne Jolly (SADS UK)",
-        "font": "AKZIDENZG_CONDENSED",
-        "colour": "WHITE"
-    }, {
         "flash_id": "page_credits_medical_advice_header",
         "copy_en": "MEDICAL ADVICE",
         "font": "AKZIDENZG_CONDENSED",

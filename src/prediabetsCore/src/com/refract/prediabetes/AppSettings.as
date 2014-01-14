@@ -36,6 +36,7 @@ package com.refract.prediabetes {
 		public static var DATA_PATH:String = "data/" ; // "./../../../../website/data/";
 		public static var APP_DATA_PATH : String = "file://";
 		
+		public static var SLOW_TIME_DELAY : int = 8000 ; 
 		
 		public static const TABLET_THRESHOLD:Number = 6.5;
 		
@@ -53,9 +54,11 @@ package com.refract.prediabetes {
 		
 		public static const BUTTON_HIT_AREA_ALPHA:Number = 0;
 		public static const BUTTON_HIT_AREA_EDGE:int = 10;
-		public static const BUTTON_HIT_AREA_WIDTH:int = BUTTON_HIT_AREA_EDGE << 1;
+		public static const BUTTON_HIT_AREA_WIDTH:int = BUTTON_HIT_AREA_EDGE << 1 ;
 		
-		public static var VIDEO_FILE_EXT:String = ".flv";
+		public static var VIDEO_FILE_EXT:String = ".f4v" ;
+		public static var VIDEO_BASE_URL : String = "video/f4v/1024/" ;
+		public static var VIDEO_FILE_FORMAT_DESCRIPTOR:String = "";
 		
 		
 		

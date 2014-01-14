@@ -7,7 +7,6 @@ package com.refract.prediabetes.video {
 	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.logger.Logger;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.events.BooleanEvent;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
@@ -27,25 +26,19 @@ package com.refract.prediabetes.video {
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 
-
-	public class VideoLoader extends Sprite /* implements IVideoLoader */ {
+	public class VideoLoader extends Sprite 
+	{
 		
 		public static const BulkLoaderID:String = "Videos";
 		
-		
-		public static const VIDEO_WIDTH:int = 800;
-		public static const VIDEO_HEIGHT:int = 450;
+		public static const VIDEO_WIDTH:int = 1024;
+		public static const VIDEO_HEIGHT:int = 576;
 		
 		private static var _i : VideoLoader;
 		private var _lastPos : Number;
 		public static function get i():VideoLoader{ return _i; }
 		public static function set i(vl:VideoLoader):void{ _i = vl;} 
 		
-		public static var VIDEO_BASE_URL:String = "video/flv/1024/";
-		public static var VIDEO_FILE_FORMAT_DESCRIPTOR:String = "";
-		public static function get VIDEO_FILE_EXT():String { return _VIDEO_FILE_EXT;}
-		public static function set VIDEO_FILE_EXT(s:String):void{ _VIDEO_FILE_EXT = s; AppSettings.VIDEO_FILE_EXT = _VIDEO_FILE_EXT;}
-		private static var _VIDEO_FILE_EXT:String = ".flv";
 		
 		public static function set defaultLoadingOrder(newOrder:Array):void{ _defaultLoadingOrder = newOrder; }
 		public static function get defaultLoadingOrder():Array{ return _defaultLoadingOrder; }
@@ -55,8 +48,7 @@ package com.refract.prediabetes.video {
 		protected var _loadingOrder:Array;
 		public function set loadingOrder(newOrder:Array):void{ _loadingOrder = newOrder; }
 		public function get loadingOrder():Array{ return _loadingOrder; }
-		
-//		private var _loader:Loader;
+
 		public function get url():String {return _url;}
 		protected var _url:String;
 		protected var _currentStep:int = 0;
@@ -113,23 +105,32 @@ package com.refract.prediabetes.video {
 		}
 		public function playVideo()  : void
 		{
+			trace('::playVideo::')
 			paused = false ; 
-			//DispatchManager.dispatchEvent( new Event( Flags.FREEZE_SOUNDS )) ; 
-			if( _netStream) _netStream.resume() ; 
+			if( _netStream) 
+			{
+				
+				_netStream.resume() ; 
+			}
 		}
 		public function resumeVideo()  : void
 		{
+			trace('::resumeVideo::')
 			paused = false ; 
-			//DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE_SOUNDS )) ; 
 			if( _netStream){
 				 _netStream.resume() ; 
 			}
-			//_simpleVid.reattachStageVideo();
 		}
 		public function rePlayVideo( url : String) : void
 		{
+			trace('::rePlayVideo::')
 			paused = false ; 
-			if( _netStream) _netStream.play(AppSettings.DATA_PATH+VIDEO_BASE_URL+_url + VIDEO_FILE_FORMAT_DESCRIPTOR + VIDEO_FILE_EXT);
+			if( _netStream) 
+				_netStream.play(
+					AppSettings.DATA_PATH
+					+ AppSettings.VIDEO_BASE_URL+_url 
+					+ AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR 
+					+ AppSettings.VIDEO_FILE_EXT);
 		}
 		public function seek( time : Number ) : void
 		{
@@ -148,75 +149,18 @@ package com.refract.prediabetes.video {
 			{
 				_netStream.seek( time ) ; 
 				paused = false ; 
-				//_netStream.resume() ; 
-			}
-		}
-		
-		
-		/*
-		public function loadVideo(url:String):void{
-			_url = url;
-			_currentStep = 0;
-			attemptLoadVideo();
-			
-		}
-		
-		protected function attemptLoadVideo():void{
-			switch(loadingOrder[_currentStep]){
-				case(LSVideoEvent.CHECK_STORAGE):
-				break;
-				case(LSVideoEvent.DOWNLOAD_AND_STORE_VIDEO):
-				break;
-				case(LSVideoEvent.STREAM_VIDEO_AND_STORE):
-				break;
-				case(LSVideoEvent.LOAD_FROM_STORAGE):
-				break;
-				default://LSVideoEvent.STREAM_VIDEO_ONLY
-					streamVideo(_url,onStreamReady);
-				
 			}
 		}
 
-		public function checkStorageforVideo(filename : String) : void {
-			//if video is in storage
-			dispatchEvent(new LSVideoEvent(LSVideoEvent.VIDEO_READY,filename));
-			//else
-		}
-
-		public function loadVideoFromStorage(filename : String, callback : Function) : void {
-		}
-
-		public function preloadAndStoreVideo(filename : String, callback : Function) : void {
-		}
-
-		public function streamVideo(filename : String, callback : Function) : void {
-			
-		}
-	
-		protected function onStreamReady():void{
-			
-		}
-
-		public function streamAndStoreVideo(filename : String, callback : Function) : void {
-		}
-		*/
-		/*
-		 * 
-		 * INIT Stuff
-		 * 
-		 */
 		 
 		protected function preInit( evt : Event ) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, preInit);
 			
-			
 			DispatchManager.addEventListener(Flags.DEACTIVATE_VIDEO_RUN, deActivateVideoRun );
 			DispatchManager.addEventListener(Flags.ACTIVATE_VIDEO_RUN, onActivateVideoRun );
-			//DispatchManager.addEventListener(Flags.UPDATE_WRONG , onUpdateWrong) ;
 			
 			_simpleVidAvailable = false;
-			
 			
 			_simpleVid = new SimpleStageVideo(AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT);
 			_simpleVid.addEventListener(Event.INIT, onInit);
@@ -249,23 +193,11 @@ package com.refract.prediabetes.video {
 			_videoClickListener = new Sprite();
 			addChild(_videoClickListener);
 			drawVideoClickListener();
-			
-			
-			
-		//	this.addEventListener(Event.ENTER_FRAME, ef);
-			
-			//stage.addEventListener(StageVideoAvailabilityEvent.STAGE_VIDEO_AVAILABILITY, onStageVideoState);
 		}
 		
 		public function setBlackOn() : void
 		{
 			
-		}
-		private function ef(evt:Event):void{
-			if(!paused){
-			//	Logger.log(Logger.VIDEO,stage.stageVideos[0].videoWidth,stage.stageVideos[0].videoHeight);
-				
-			}
 		}
 
 		protected function drawVideoClickListener():void{
@@ -361,18 +293,14 @@ package com.refract.prediabetes.video {
 			_hardwareDecoding = evt.hardwareDecoding;
 			_hardwareCompositing = evt.hardwareCompositing;
 			_fullGPU = evt.fullGPU;
-			Logger.log(Logger.VIDEO,"StageVideoAvailable:",_simpleVid.available);
-			Logger.log(Logger.VIDEO,"Hardware Decoding:",_hardwareDecoding);
-			Logger.log(Logger.VIDEO,"Hardware Compositing:",_hardwareCompositing);
-			Logger.log(Logger.VIDEO,"Full GPU",_fullGPU);
+			
+			trace( "StageVideoAvailable:",_simpleVid.available ) ;
+			trace( "Hardware Decoding:",_hardwareDecoding);
+			trace( "Hardware Compositing:",_hardwareCompositing);
+			trace( "Full GPU",_fullGPU);
 		}
 		
-		
-		/*
-		 * 
-		 * Once the video is loaded
-		 * 
-		 */
+
 		private function onActivateVideoRun( evt : Event =null ) : void
 		{
 			_deActivate = false ; 
@@ -380,6 +308,7 @@ package com.refract.prediabetes.video {
 		}
 		private function deActivateVideoRun( evt : Event = null) : void
 		{
+			
 			_deActivate = true ; 
 			DispatchManager.removeEventListener(Event.ENTER_FRAME , run ) ; 
 			SMVars.me.nsStreamTime = 0 ; 
@@ -440,10 +369,15 @@ package com.refract.prediabetes.video {
 				}
 				else
 				{
-					url = AppSettings.DATA_PATH+VIDEO_BASE_URL+_url+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+					url = 
+						AppSettings.DATA_PATH
+						+AppSettings.VIDEO_BASE_URL
+						+_url
+						+AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR
+						+AppSettings.VIDEO_FILE_EXT;
 				}
 				
-				
+				trace('URL :' , url )
 				var items:Array = _bulkLoader.items;
 				var totalItems:int = items.length;
 				var videoItem:VideoItem;
@@ -454,6 +388,19 @@ package com.refract.prediabetes.video {
 						videoItem = items[i] as VideoItem;
 					}
 				} 
+				
+				/*
+				if( videoItem )
+				{
+					 trace('videoItem.metadata ' , videoItem.metaData )
+					 for( var mc in videoItem.metaData )
+					{
+						trace('mc ' , mc )
+					}
+				}
+				 * 
+				 */
+				
 				
 				if(videoItem){
 					videoItem.pausedAtStart = false;
@@ -469,17 +416,21 @@ package com.refract.prediabetes.video {
 				}
 				
 				
+				
 				if(videoItem && !_netStream)
 				{
     				_bulkLoader.loadNow(url);
     				_netStream = videoItem.stream;
 				}
+				
+				
+				
 				if( _netStream ) 
 				{
 					_netStream.addEventListener(NetStatusEvent.NET_STATUS, videoStatus);
 					_netStream.bufferTime = 4;
 					_simpleVid.attachNetStream(_netStream);
-	
+					
 					if( videoItem != null)
 					{
 						_netStream.resume() ; 
@@ -489,7 +440,23 @@ package com.refract.prediabetes.video {
 						_netStream.play(url);
 					}
 				}
-
+				
+				/*
+				trace('yeee')
+				
+				var netClient:Object = new Object();
+				netClient.onMetaData = function(meta:Object)
+				{
+						//if( Function(this.onMetaData )) this.onMetaData = {} ; 
+				        trace('DURATION :'  , meta.duration);
+						for( var mc in meta)
+						{
+							//trace('mc ' , mc)
+						}
+				};
+				_netStream.client = netClient;
+				 * 
+				 */
 				
 				onResize();
 				paused = false ;
@@ -563,7 +530,7 @@ package com.refract.prediabetes.video {
 		            //deActivateVideoRun();
 		            break; 
 				case "NetStream.Play.StreamNotFound":
-					Logger.log(Logger.VIDEO,"Stream Not Found: ", AppSettings.DATA_PATH+VIDEO_BASE_URL+_url+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT);
+					
 					break;
 				case "NetStream.Seek.InvalidTime":
 					seek( _lastPos );
@@ -584,7 +551,12 @@ package com.refract.prediabetes.video {
 			if(!_bulkLoader){
 				setBulkLoader();
 			}
-			var url:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+name+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+			var url:String = 
+				AppSettings.DATA_PATH
+				+AppSettings.VIDEO_BASE_URL
+				+name
+				+AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR
+				+AppSettings.VIDEO_FILE_EXT;
 			if((_bulkLoader.getProgressForItems([url])) != null && _bulkLoader.getProgressForItems([url]).itemsTotal == 0)
 			{
 				_bulkLoader.add(url,{id:url,type:"video",pausedAtStart:true});
@@ -597,7 +569,13 @@ package com.refract.prediabetes.video {
 		public function cancelLoadRequest(name:String):void
 		{
 			if(_bulkLoader){
-				var url:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+name+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+				var url:String = 
+					AppSettings.DATA_PATH
+					+AppSettings.VIDEO_BASE_URL
+					+name
+					+AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR
+					+AppSettings.VIDEO_FILE_EXT;
+					
 				var item:LoadingItem = _bulkLoader.get(url);
 				if(item != null && item._isLoading)
 				{

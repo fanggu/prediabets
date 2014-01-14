@@ -1,11 +1,8 @@
 package com.refract.prediabetes.stateMachine.view {
-	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.assets.TextManager;
-	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
-	import com.robot.comm.DispatchManager;
 
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -18,19 +15,12 @@ package com.refract.prediabetes.stateMachine.view {
 	public class UIView extends Sprite 
 	{
 		private var _myChoiceTimer : TextField ; 
-		private var _initTime : Number;
-		private var _totTime : Number;
-		private var _bar : Sprite;
-		private var _endWidthBar : int;
-		private var _countDownCont : Sprite;
-		
 		private var _interactionCont : Sprite ; 
 		
 		private var _liveInteractions : Array ;
 		
 		public function UIView() 
 		{
-			_bar = createSquare( 0xc45252  , 1 , 8) ; 
 			_interactionCont = new Sprite() ; 
 			addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
 		}
@@ -40,12 +30,7 @@ package com.refract.prediabetes.stateMachine.view {
 			removeEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
 			stage.addEventListener(Event.RESIZE,onResize);
 		}
-	
-		public function setCountDownContainer( container : Sprite ) : void
-		{
-			_countDownCont = container ; 
-		}
-		
+
 		
 		
 		public function cleanUI() : void
@@ -81,17 +66,8 @@ package com.refract.prediabetes.stateMachine.view {
 					//try{this.removeChild( child);}catch(e:*){}
 //				}
 			}	
-			var lenCountDown : int = _countDownCont.numChildren ;
-			for( i = 0 ; i < lenCountDown ; i++)
-			{
-				child = _countDownCont.getChildAt(0);
-				//**removing is still possible
-				try{_countDownCont.removeChild( child);}catch(e:*){}	
-			}
-			TweenMax.to( _countDownCont, 0 , { tint:null , canBePaused:true} );
-			TweenMax.killTweensOf(_countDownCont);	
+
 			_myChoiceTimer = null ; 
-			
 			_liveInteractions = null ; 
 		}
 		
@@ -106,60 +82,7 @@ package com.refract.prediabetes.stateMachine.view {
 		}
 		
 		
-		public function showBarTimer( totTimerCount : String ) : void
-		{
-			_initTime = SMVars.me.getSMTimer() ;
-			_totTime = int( totTimerCount ) * 1000 ;
-			
-			_countDownCont.addChild( _bar ) ;  
-			
-			_bar.x = 0 ; 
-			_bar.y = 0 ; 
-			
-			_bar.width = 0 ; 
-			_endWidthBar = AppSettings.VIDEO_WIDTH ; 
-			DispatchManager.addEventListener( Event.ENTER_FRAME , barRun) ; 
-		}
 		
-		
-		private function barRun( evt : Event ) : void
-		{
-			var diffTime : Number = SMVars.me.getSMTimer() - _initTime ; 
-			
-			var percTime : Number = (diffTime * 100) / _totTime ; 
-			
-			_bar.width = ( percTime * _endWidthBar ) / 100 ;
-			if( diffTime >= _totTime)
-			{
-				DispatchManager.removeEventListener( Event.ENTER_FRAME , barRun) ; 
-				
-			}
-		}
-		
-		public function updateBarRemove() : void
-		{
-			DispatchManager.removeEventListener( Event.ENTER_FRAME , barRun) ; 
-			stage.removeEventListener(Event.RESIZE,onResize);
-		}
-		
-		private function createMyChoiceTimer() : void 
-		{
-			_myChoiceTimer = createText( "00:00" , 'countDown' , 48 ) ;
-			_myChoiceTimer.textColor = 0xc45252 ;  
-		}
-		
-//		
-//		public function createStateText( stateObjectText : Object) : void
-//		{
-//			if( _stateTxtView )
-//			{
-//				if( _stateTxtView.parent)
-//					removeChild( _stateTxtView );
-//				 _stateTxtView = null ; 
-//			}
-//			_stateTxtView  = new StateTxtView( stateObjectText ) ; 
-//			addChild( _stateTxtView ) ;   
-//		}
 
 		
 		public function createMessageBox( message : String ) : void
@@ -247,7 +170,6 @@ package com.refract.prediabetes.stateMachine.view {
 		
 		private function onResize(evt : Event = null ) : void
 		{ 
-			_endWidthBar = AppSettings.VIDEO_WIDTH ; 
 			if( _myChoiceTimer ) 
 				_myChoiceTimer.x = AppSettings.VIDEO_WIDTH/2 -  _myChoiceTimer.width / 2 ; 
 		}

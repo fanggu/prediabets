@@ -7,7 +7,6 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.utils.setTimeout;
 
 	/**
 	 * @author robertocascavilla
@@ -93,10 +92,7 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 						case 'YY' :
 							copy = copy.replace( tempRegExp , String( SMVars.me.qp_timer )) ;
 						break ; 
-						case 'ZZ' : 
-							copy = copy.replace( tempRegExp , String( SMVars.me.latest_accuracy )) ;
-							if( SMVars.me.latest_accuracy == 0) copy = '' ; 
-						break ;
+						
 						case 'DATE' :
 						
 							var today_date:Date = new Date();

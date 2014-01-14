@@ -10,8 +10,7 @@ package com.refract.prediabetes.stateMachine {
 		public var nsStreamTime : Number ; 
 		public var qp_counter : int ; 
 		public var qp_timer : int ; 
-		public var qp_accuracy : int ;
-		public var latest_accuracy : int ; 
+ 
 		public var nrCpR : int ; 
 		public var tempTotChoice : int ; 
 		public var maxButtonSize : Number ; 
@@ -48,8 +47,8 @@ package com.refract.prediabetes.stateMachine {
 			
 			_me.qp_counter = 0 ; 
 			_me.qp_timer = 0 ;  
-			_me.qp_accuracy = 0 ; 
-			_me.latest_accuracy = 0 ;  
+			
+			  
 			_me.nrCpR = 0 ; 
 			_me.accelerometerErrorCopy = false ; 
 		

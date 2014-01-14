@@ -350,7 +350,7 @@ package com.refract.prediabetes
 				if(nextStory != 4)
 				{				
 					DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onStateMachineEnd);	
-					_smController.start({module:nextStory,footerBar: _nav.footer.progressBar,selectedState:nextStoryState});
+					_smController.start({module:nextStory,selectedState:nextStoryState});
 
 				}
 

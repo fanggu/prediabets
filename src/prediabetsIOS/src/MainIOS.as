@@ -6,7 +6,6 @@ package {
 	import com.refract.air.shared.prediabetes.stateMachine.MobileSMController;
 	import com.refract.air.shared.prediabetes.stateMachine.SMModelMobile;
 	import com.refract.air.shared.prediabetes.stateMachine.view.MobieStateTextView;
-	import com.refract.air.shared.prediabetes.stateMachine.view.interactions.MobileInteractionQP;
 	import com.refract.air.shared.sections.feedback.TabletFeedback;
 	import com.refract.air.shared.sections.legal.TabletLegal;
 	import com.refract.prediabetes.AppSettings;
@@ -15,7 +14,6 @@ package {
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.nav.IOSNav;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
-	import com.refract.prediabetes.video.VideoLoader;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
 
@@ -105,7 +103,10 @@ package {
 			 * 
 			 */
 			 
-			 VideoLoader.VIDEO_BASE_URL = "video/flv/800/" ; 
+			 AppSettings.VIDEO_BASE_URL = "video/flv/1024/" ; 
+			 AppSettings.VIDEO_FILE_EXT = ".flv" ;
+			 AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR = "";
+			 
 			 var ext : String = "flv" ; 
 			 var localPath:String = "video/flv/";
 			 MainIOS.STORAGE_DIR = File.cacheDirectory;
@@ -120,10 +121,6 @@ package {
 				var file:File = File.applicationDirectory.resolvePath(localPath + AppSettings.INTRO_URL+videoFileFormatDescriptor+videoFileExt);
 				file.copyTo(newFile,true);
 			}
-			
-			var fix_ext : String = 'flv' ;
-			VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR = "_800"+fix_ext;
-			VideoLoader.VIDEO_FILE_EXT = '.flv' ; 
 			 
 		}
 		
@@ -134,8 +131,7 @@ package {
 			//ClassFactory.MODULE_MODEL = LocalModuleModel;
 			//ClassFactory.MENU_BUTTON = LoadedMenuButton;
 			//ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
-			ClassFactory.INTERACTION_QP = MobileInteractionQP;
-			ClassFactory.SM_MODEL = SMModelMobile ; 
+			//ClassFactory.SM_MODEL = SMModelMobile ; 
 			ClassFactory.STATE_TXT_VIEW = MobieStateTextView; 
 			ClassFactory.SM_CONTROLLER = MobileSMController ; 
 			

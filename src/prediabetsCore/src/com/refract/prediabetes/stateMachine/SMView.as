@@ -107,8 +107,6 @@ package com.refract.prediabetes.stateMachine
 		private function onStart( event : ObjectEvent ) : void
 		{
 			_initObject = event.object ; 
-			_uiView.setCountDownContainer( _initObject.footerBar) ; 
-			
 			createListeners() ; 
 		}
 		
@@ -136,18 +134,18 @@ package com.refract.prediabetes.stateMachine
 			DispatchManager.addEventListener(Flags.UPDATE_UI, onUpdateUI);
 			
 			
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER, onUpdateCountdownTimer);
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_CPR_LONG, onUpdateCountdownTimerCprLong);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER, onUpdateCountdownTimer);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_CPR_LONG, onUpdateCountdownTimerCprLong);
 			
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TEXT, onUpdateCountdownText);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TEXT, onUpdateCountdownText);
 			
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_WHITE, onUpdateCountdownTimerWhite);
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE, onUpdateCountdownStopWhite);
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE, onUpdateCountdownForceRemove ) ;
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_WHITE, onUpdateCountdownTimerWhite);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE, onUpdateCountdownStopWhite);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE, onUpdateCountdownForceRemove ) ;
 			
 			
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
 			
 			DispatchManager.addEventListener(Flags.UPDATE_CUT_BLACK, onUpdateCutBlack);
 			DispatchManager.addEventListener(Flags.UPDATE_CUT_BLACK_LONG, onUpdateCutBlackLong);
@@ -197,14 +195,14 @@ package com.refract.prediabetes.stateMachine
 			DispatchManager.removeEventListener(Flags.UPDATE_UI, onUpdateUI);
 			
 			
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER, onUpdateCountdownTimer);
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TEXT, onUpdateCountdownText);
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_WHITE, onUpdateCountdownTimerWhite);
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE, onUpdateCountdownStopWhite);
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE, onUpdateCountdownStopWhite);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER, onUpdateCountdownTimer);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TEXT, onUpdateCountdownText);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_WHITE, onUpdateCountdownTimerWhite);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE, onUpdateCountdownStopWhite);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE, onUpdateCountdownStopWhite);
 			
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
 			
 			
 			DispatchManager.removeEventListener(Flags.UPDATE_CUT_BLACK, onUpdateCutBlack);

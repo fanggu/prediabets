@@ -196,7 +196,8 @@ package br.com.stimuli.loading.loadingtypes {
         /**
          *   @private
          */
-        internal function onVideoMetadata(evt : *):void{
+        internal function onVideoMetadata(evt : *):void
+		{
             _metaData = evt;
         };
 

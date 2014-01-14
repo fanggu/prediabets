@@ -1,12 +1,14 @@
 package com.refract.prediabetes.nav {
 	import com.greensock.TweenMax;
-	import com.refract.prediabetes.AppSections;
+	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.nav.events.FooterEvent;
 	import com.refract.prediabetes.nav.footer.FullScreenButton;
 	import com.refract.prediabetes.nav.footer.PlayPauseButton;
 	import com.refract.prediabetes.nav.footer.SoundButton;
 	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.stateMachine.SMVars;
+	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
@@ -46,7 +48,11 @@ package com.refract.prediabetes.nav {
 		protected var _footerTopCenter:Sprite;
 		private var _footerTopRight : Sprite;
 		
-		private var _nav : Nav ; 
+		private var _nav : Nav ;
+		private var _clip_length : Number;
+		private var _progressBarBox : Box;
+		
+		private var _tween : Boolean ; 
 
 		public function Footer( nav : Nav ) 
 		{
@@ -73,6 +79,8 @@ package com.refract.prediabetes.nav {
 			DispatchManager.addEventListener(FooterEvent.HIGHLIGHT_BUTTON, highlightFooterButton);
 			DispatchManager.addEventListener(Flags.SHOW_FOOTER_PLAY_PAUSE, togglePauseShown);
 			DispatchManager.addEventListener(Flags.HIDE_FOOTER_PLAY_PAUSE, togglePauseShown);
+			DispatchManager.addEventListener(Flags.ACTIVATE_PROGRESS_BAR , activateProgressBar);
+			DispatchManager.addEventListener(Flags.DE_ACTIVATE_PROGRESS_BAR , deActivateProgressBar);
 			
 			onResize();
 		}
@@ -105,8 +113,7 @@ package com.refract.prediabetes.nav {
 		
 		private function createProgressBar() : void
 		{
-			_progressBar = new Sprite();
-			addChild(_progressBar);
+			
 		}
 		private function createFooterBackgrounds() : void
 		{
@@ -202,6 +209,49 @@ package com.refract.prediabetes.nav {
 			_playPauseButton.id = PLAY_PAUSE;
 			
 			_playPauseButton.visible = false;
+			
+			_progressBar = new Sprite();
+			_footerTopCenter.addChild(_progressBar);
+			_progressBar.y = -_progressBar.height /2 ; 
+			
+			var progressBarBackground : Box = new Box( 506 , 12 , 0x00ff00) ; 
+			_progressBarBox  = new Box( 500 , 10 , 0xfff000 ) ; 
+			
+			//_bar = createSquare( 0xc45252  , 1 , 8) ; 
+			
+			_progressBar.addChild( progressBarBackground ) ;
+			_progressBar.addChild( _progressBarBox ) ;  
+			_progressBarBox.x = 3 ;
+			_progressBarBox.y = 1 ; 
+			
+			_progressBar.x = - _progressBar.width / 2 ; 
+		}
+		
+		
+		
+		private function createSquare( color : uint , w : int , h : int  , alpha : Number = 1 , corner_w : Number = 1 , corner_h : Number = 1) : Sprite
+		{
+			/*
+			var spr:Sprite = new Sprite();
+			spr.graphics.lineStyle( 0 , color ) ;
+			spr.graphics.beginFill( color );
+			spr.graphics.drawRect( 0, 0, w, h );
+			spr.graphics.endFill( );
+			spr.alpha = alpha ; 
+			spr.x = -spr.width/2 ;
+			spr.y = -spr.height/2;
+			return spr ; 
+			 * 
+			 */
+			
+			var spr:Sprite = new Sprite();
+			spr.graphics.beginFill(color);
+			spr.graphics.drawRoundRect(0 , 0 , w , h , corner_w , corner_h );
+			spr.graphics.endFill( );
+			spr.alpha =  alpha ; 
+			spr.x = -spr.width/2 ;
+			spr.y = -spr.height/2;
+			return spr ; 
 		}
 		
 		public function showBackToVideo() : void
@@ -247,16 +297,6 @@ package com.refract.prediabetes.nav {
 		{
 		
 		}
-		
-		
-
-		
-		
-		protected function onFlashFooter(evt:FooterEvent):void
-		{
-			
-		}
-		
 
 		
 		
@@ -266,6 +306,35 @@ package com.refract.prediabetes.nav {
 		 * CLICKS
 		 * 
 		 */
+		 
+		private function activateProgressBar( evt : ObjectEvent ) : void
+		{		
+			_tween = evt.object.tween ; 
+			_clip_length = Number( evt.object.clip_length ) ;
+			 
+			addEventListener( Event.ENTER_FRAME , onProgressBar) ;
+		}
+		private function deActivateProgressBar( evt : Event ) : void
+		{
+			removeEventListener( Event.ENTER_FRAME , onProgressBar) ;
+		}
+		private function onProgressBar( evt : Event ) : void
+		{
+			var perc : Number ; 
+			if( _tween )
+			{
+				removeEventListener( Event.ENTER_FRAME , onProgressBar) ;
+				_progressBarBox.scaleX = 0 ; 
+				TweenMax.to( _progressBarBox , _clip_length / 1000 ,{ scaleX : 1 , ease : Linear.easeNone } ) ; 
+				trace('yes? ' , _clip_length )
+			}
+			else
+			{
+				perc = (SMVars.me.nsStreamTime * 100 ) / _clip_length ; 
+				_progressBarBox.scaleX = perc / 100 ; 
+			}
+			
+		}
 		private function onBackToVideo(evt:Event):void
 		{	
 			_nav.onBackToVideo( ) ; 
@@ -275,11 +344,13 @@ package com.refract.prediabetes.nav {
 			var thisGuy:String = (evt.currentTarget as LSButton).id;
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED ,{value:thisGuy}));
 		}
-		
+		/*
 		public function get progressBar():Sprite 
 		{ 
 			return _progressBar; 
 		}
+		 * 
+		 */
 		
 		public function destroy():void
 		{

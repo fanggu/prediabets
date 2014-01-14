@@ -21,21 +21,16 @@ package com.refract.prediabetes.stateMachine
 		private var _dictStatesNumber : Dictionary ; 
 		private var _dictAnswers : Dictionary ; 
 		
-		public var sceneSelect : Array ; 
-		public var greyStates : Array ; 
-		public var captions : Object ; 
-		public var accelerometer_error_copy : String ; 
-		
 		public var selectedState : String ; 
 		public var selectedInteraction : int ;
 		public var initState : String ;
 		public var endState : String ;
-		public var totStates : int ; 
-		public var totQuestions : int ;
+		//public var totStates : int ; 
+		//public var totQuestions : int ;
 		public var selectedModule : int ; 
-		public var deathVideo : String ; 
-		public var death_message_box : Array ;
-		public var scoreTot : int ; 
+		//public var deathVideo : String ; 
+		//public var death_message_box : Array ;
+		//public var scoreTot : int ; 
 		
 		private var _newModule : Boolean ; 
 		
@@ -71,26 +66,20 @@ package com.refract.prediabetes.stateMachine
 			
 			initState = jsonObject.data.meta.start_state ; 
 			
-			accelerometer_error_copy = jsonObject.data.meta.accelerometer_error ; 
-			deathVideo = jsonObject.data.meta.death_video ;
-			scoreTot = jsonObject.data.meta.score_tot ; 
-			if( deathVideo != 'false' )
-			{
-				endState = jsonObject.data.meta.state_dict[jsonObject.data.meta.state_dict.length -1 ] ; 
-				death_message_box = jsonObject.data.meta.death_video_message_box ; 
-			}
-			totStates =  jsonObject.data.meta.state_dict.length;
-			totQuestions = jsonObject.data.meta.tot_questions ;
-			sceneSelect=  jsonObject.data.meta.scene_select ;
-			captions = jsonObject.data.meta.captions ; 
-			greyStates= jsonObject.data.meta.grey_states ; 
-			 
+			
+			endState = jsonObject.data.meta.state_dict[jsonObject.data.meta.state_dict.length -1 ] ; 
+			
+			
+			
+			 /*
 			var i : int ;
 			for( i = 0 ; i < totStates ; i++)
 			{
 				var nameState : String = jsonObject.data.meta.state_dict[i] ;
 				_dictStatesNumber[ nameState ] = i ;
 			}
+			 * 
+			 */
 			for( var state :String in jsonObject.data.states)
 			{
 				_dictStates[state] = jsonObject.data.states[state];
@@ -140,11 +129,14 @@ package com.refract.prediabetes.stateMachine
 			return _dictStates[selectedState];
 		}
 		
+		/*
 		public function get progress() : int
 		{
 			var value : int = ( _dictStatesNumber[selectedState] * 100 ) / (totStates-1) ; 
 			return value ; 
 		}
+		 * 
+		 */
 		public function getState( address:String ) : Object
 		{
 			return _dictStates[address] ;  

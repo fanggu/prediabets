@@ -6,7 +6,9 @@ package com.refract.prediabetes.stateMachine.flags {
 	{
 		public static const START_MOVIE							: String = 'startMovie' ; 
 		//**comm with External UI
-		public static const UPDATE_UI_PROGRESS 					: String = 'updateProgress' ; 		
+		//public static const UPDATE_UI_PROGRESS 					: String = 'updateProgress' ; 
+		public static const ACTIVATE_PROGRESS_BAR 				: String = 'activateProgressBar' ; 
+		public static const DE_ACTIVATE_PROGRESS_BAR 				: String = 'deActivateProgressBar' ; 		
 		
 		public static const FREEZE 								: String = 'freeze' ; 
 		public static const UN_FREEZE 							: String = 'unfreeze' ; 
@@ -22,22 +24,22 @@ package com.refract.prediabetes.stateMachine.flags {
 		//**
 		public static const UPDATE_SIZE_BUTTON 					: String = 'updateSizeButton' ; 
 		//public static var UPDATE_STATE 						: String = 'updateState';
-		public static const UNLOCK_AFTER_INTERACTION 				: String = 'unlockAfterInteraction' ; 
+		//public static const UNLOCK_AFTER_INTERACTION 				: String = 'unlockAfterInteraction' ; 
 		public static const UPDATE_TRANSITION 					: String = 'updateTransition';
 		//public static var EXEC_TRANSITION 					: String = 'execTransition'
 		public static const UPDATE_VIEW_TRANSITION 				: String = 'updateViewTransition';
 		public static const UPDATE_VIEW_INTERACTIONS				: String = 'updateViewInteractions';
 		//public static var UPDATE_VIEW_INTERACTIONS_WG			: String = 'updateViewInteractionsWg';
 		public static const UPDATE_VIEW_VIDEO 					: String = 'updateViewVideo' ;
-		public static const UPDATE_VIEW_COUNTDOWN_TIMER 			: String = 'updateViewCountdownTimer';
-		public static const UPDATE_VIEW_COUNTDOWN_TIMER_CPR_LONG : String ='updateViewCounterdownTimerCprLong' ; 
-		public static const UPDATE_VIEW_COUNTDOWN_TEXT 			: String = 'updateViewCountdownText' ;
-		public static const CREATE_COUNTDOWN_TIMER 				: String = 'createCountdownTimer' ;
-		public static const UPDATE_VIEW_COUNTDOWN_TIMER_WHITE		: String = 'updateViewCountdownTimerWhite' ; 
-		public static const UPDATE_VIEW_COUNTDOWN_STOP_WHITE 		: String = 'updateViewCountdownStopWhite' ; 
-		public static const UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE 	: String = 'UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE' ;
-		public static const UPDATE_VIEW_BAR_TIMER 				: String = 'updateViewBarTimer';
-		public static const UPDATE_VIEW_BAR_REMOVE 				: String = 'updateViewBarRemove';
+		//public static const UPDATE_VIEW_COUNTDOWN_TIMER 			: String = 'updateViewCountdownTimer';
+		//public static const UPDATE_VIEW_COUNTDOWN_TIMER_CPR_LONG : String ='updateViewCounterdownTimerCprLong' ; 
+		//public static const UPDATE_VIEW_COUNTDOWN_TEXT 			: String = 'updateViewCountdownText' ;
+		//public static const CREATE_COUNTDOWN_TIMER 				: String = 'createCountdownTimer' ;
+		//public static const UPDATE_VIEW_COUNTDOWN_TIMER_WHITE		: String = 'updateViewCountdownTimerWhite' ; 
+		//public static const UPDATE_VIEW_COUNTDOWN_STOP_WHITE 		: String = 'updateViewCountdownStopWhite' ; 
+		//public static const UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE 	: String = 'UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE' ;
+		//public static const UPDATE_VIEW_BAR_TIMER 				: String = 'updateViewBarTimer';
+		//public static const UPDATE_VIEW_BAR_REMOVE 				: String = 'updateViewBarRemove';
 		
 		public static const UPDATE_MESSAGE_BOX 					: String = 'updateMessageBox' ; 
 		public static const UPDATE_VIEW_STATE_TEXT 				: String = 'updateViewStateText';
@@ -95,10 +97,6 @@ package com.refract.prediabetes.stateMachine.flags {
 		//**comm with internal UI
 		public static const UPDATE_UI 							: String = 'updateUI';
 		
-		
-		//States
-		public static const SLOW_TIME 							: String = 'slowTime';
-		public static const CPR_SLOW_TIME 						: String = 'cprSlowTime';
 		
 		
 		public static const SHOW_FOOTER_PLAY_PAUSE				: String = 'SHOW_FOOTER_PLAY_PAUSE';

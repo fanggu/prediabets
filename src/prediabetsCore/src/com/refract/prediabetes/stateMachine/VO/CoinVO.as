@@ -7,7 +7,6 @@ package com.refract.prediabetes.stateMachine.VO {
 		
 		public var wrong : Boolean ; 
 		public var btName : String ; 
-		public var oneShot : Boolean = false ; 
 		public function CoinVO()
 		{
 			

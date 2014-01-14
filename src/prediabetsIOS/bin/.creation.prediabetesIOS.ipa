@@ -1,7 +1,7 @@
 /Users/otlabs/io/work/SDKs/flex_sdk_4.6.nov/bin/adt
 -package
 -target
-ipa-debug
+ipa-debug-interpreter
 -listen
 7936
 -storetype

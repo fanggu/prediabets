@@ -19,9 +19,10 @@ package com.refract.prediabetes.stateMachine {
 		public static const CPR_STEP_MS                   : int = 500 ; 
 		public static const CPR_GAP_LONG_MS               : int = 120 ; 
 		
-		public static const TIME_SLOWTIME_DELAY           : int = 3000 ; 
+		//public static const TIME_SLOWTIME_DELAY           : int = 3000 ; 
 		public static const RIGHT_ANSWER_TIMER            : int = 1000 ; 
 		public static const BUTTON_FADE_DELAY             : Number = 1 ; 
+		public static const SLOW_DOWN_TIMER_X			  : int = 6000 ;  			  
 		
 		public static const ALPHA_RED_FILTER              : Number = .7 ; 
 		public static const SHOW_DELAY                    : Number = .2 ; 

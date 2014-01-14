@@ -27,7 +27,11 @@ package com.refract.air.shared.prediabetes.video
 	  		_url = nameVideo;
 			if(_simpleVidAvailable)
 			{	
-				var url:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+_url+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+				var url:String = 
+					AppSettings.DATA_PATH 
+					+ AppSettings.VIDEO_BASE_URL 
+					+ _url+AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR 
+					+ AppSettings.VIDEO_FILE_EXT;
 				trace('url :' , url )
 				if( !_simpleVid )
 				{
@@ -112,7 +116,12 @@ package com.refract.air.shared.prediabetes.video
 				_netStream.close() ;
 				_netStream.close() ;
 				_netStream = null ; 
-				var urlTemp:String = AppSettings.DATA_PATH+VIDEO_BASE_URL+nameVideo+VIDEO_FILE_FORMAT_DESCRIPTOR+VIDEO_FILE_EXT;
+				var urlTemp:String = 
+					AppSettings.DATA_PATH 
+					+ AppSettings.VIDEO_BASE_URL 
+					+ nameVideo 
+					+ AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR 
+					+ AppSettings.VIDEO_FILE_EXT;
 				_bulkLoader.remove( urlTemp ) ; 
 				
 			} 

@@ -24,12 +24,12 @@ package com.refract.prediabetes.sections.findoutmore
 			_header = TextManager.makeText("findoutmore_title",this,_headerStyle);
 			_bodyStyle.mouseEnabled = true;
 			_bodyStyle.selectable = true;
-			_bodyHeader = TextManager.makeText("page_book_a_course_subtitle", _body,_bodySubtitleStyle);
-			_bodyText = TextManager.makeText("page_book_a_course_copy", _body,_bodyStyle); 
+			_bodyHeader = TextManager.makeText("page_findoutmore_subtitle", _body,_bodySubtitleStyle);
+			_bodyText = TextManager.makeText("page_findoutmore_copy", _body,_bodyStyle); 
 			_bodyText.y = _header.height+5;
 			
 			var buttonStyle:Object = {fontSize:36};
-			_bookBtn = new LSButton("page_book_a_course_link",buttonStyle,100,50,true,false);
+			_bookBtn = new LSButton("page_findoutmore_link",buttonStyle,100,50,true,false);
 			addChild(_bookBtn);
 			_bookBtn.addEventListener(MouseEvent.CLICK, launchCoursePage);
 			

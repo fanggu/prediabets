@@ -34,7 +34,7 @@ package {
 
 	 * @author robertocascavilla
 	 */
-	[SWF( backgroundColor='#FFFFFF', frameRate='25')]
+	//[SWF( backgroundColor='#FFFFFF', frameRate='25')]
 	public class MainIOS extends Sprite 
 	{
 		public static var STORAGE_DIR:File;
@@ -111,7 +111,7 @@ package {
 			 var localPath:String = "video/flv/";
 			 MainIOS.STORAGE_DIR = File.cacheDirectory;
 			 AppSettings.APP_VIDEO_BASE_URL = MainIOS.STORAGE_DIR.nativePath + "/" + localPath ;
-			 var videoFileFormatDescriptor : String = "_800"+ext;
+			 var videoFileFormatDescriptor : String = "";
 			 var videoFileExt = "."+ext ;
 			 var storageFolder:File = MainIOS.STORAGE_DIR.resolvePath("video");
 			 storageFolder.preventBackup = true;

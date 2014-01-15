@@ -43,12 +43,7 @@ package com.refract.prediabetes.stateMachine.flags {
 		
 		public static const UPDATE_MESSAGE_BOX 					: String = 'updateMessageBox' ; 
 		public static const UPDATE_VIEW_STATE_TEXT 				: String = 'updateViewStateText';
-		public static const UPDATE_CUT_BLACK 					: String = "updateCutBlack";
-		public static const UPDATE_CUT_BLACK_LONG 				: String = "updateCutBlackLong" ; 
-		public static const UPDATE_CUT_BLACK_SUPER_LONG 		: String = 'updateCutBlackSuperLong' ; 
-		public static const REMOVE_CUT_BLACK_SUPER_LONG 		: String = 'removeCutBlackSuperLong' ; 
-		public static const ADD_LS6_CLOSE_BUTTON 				: String = 'addLS6CloseButton' ;
-		//public static const REMOVE_LS6_CLOSE_BUTTON 			: String = 'removeLS6CloseButton' ;
+		
 		public static const CLOSE_QUESTIONS 					: String = 'closeQuestions' ; 
 		
 		public static const UPDATE_PLAY_BUTTON 					: String ='updatePlayButton';
@@ -56,15 +51,9 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const STATE_ACTIVATED 						: String = 'stateActivated' ;
 		
 		public static const UV_PASS_INIT_OBJECT 					: String = 'uvPassInitObject' ; 
-		//public static var START				 					: String = 'start' ; 
-		//public static var END				 					: String = 'end' ; 
-		
 		//public static var DEACTIVATE_BUTTON  					: String = 'deactivateButton' ; 
 		public static const FADEOUT	  							: String = 'fadeOut' ;
 		public static const SPEED_FADEOUT	  						: String = 'speedFadeOut' ;
-		
-		
-		public static const UPDATE_WRONG_CHOICE 					: String = 'updateWrongChoice';
 		
 		//**Sounds
 		public static const UPDATE_SOUND 							: String = 'updateSound' ; 
@@ -81,7 +70,7 @@ package com.refract.prediabetes.stateMachine.flags {
 		
 		public static const SM_ACTIVE								: String = 'SmActive' ;
 		public static const SM_NOT_ACTIVE 							: String = 'SmNotActive';
-		public static const SCENE_SELECTOR_ACTIVE					: String = 'SCENE_SELECTOR_ACTIVE' ;
+		public static const SM_KILL 								: String = 'smKill' ;
 		
 		//**STATE MACHINE LISTENER
 		public static const INSERT_COIN 							: String = 'insertCoin' ;
@@ -97,37 +86,13 @@ package com.refract.prediabetes.stateMachine.flags {
 		//**comm with internal UI
 		public static const UPDATE_UI 							: String = 'updateUI';
 		
-		
-		
 		public static const SHOW_FOOTER_PLAY_PAUSE				: String = 'SHOW_FOOTER_PLAY_PAUSE';
 		public static const HIDE_FOOTER_PLAY_PAUSE				: String = 'HIDE_FOOTER_PLAY_PAUSE';
 		
-		
-		
 		//INTERACTION LIST
-		public static const ONESHOT 								: String = 'oneshot' ;
-		public static const CPR_LINEAR 							: String = 'cpr_linear' ;
-		public static const CPR_STANDARD 							: String = 'cpr_standard' ;
-		public static const CPR_LONG	 							: String = 'cpr_long' ;
-		public static const CPR									: String = 'cpr' ; 
 		public static const CHOICE 								: String = 'choice' ;
-		public static const CHOICE_IMG 							: String = 'choice_img' ;
-		public static const CHOICE_TARGET 						: String = 'choice_target' ;
 		public static const NONE 									: String = 'none' ;
-		public static const SLIDE_X 								: String = 'slide_x' ;
-		public static const SLIDE_Y 								: String = 'slide_y' ;
 		
-		public static const QP 									: String = 'QP' ; 
-		
-		
-		
-		public static const WG 									: String = 'WG' ; 
-		
-		public static const TEXT_FEEDBACK 						: String = 'textFeedback' ; 
-		public static const UPDATE_SCORE 							: String = 'updateScore' ;
-		public static const NO_STARS						: String = 'noStars'; 
-		
-		public static const SM_KILL 							: String = 'smKill' ;
 		//DEBUG
 		public static const UPDATE_DEBUG_PANEL_VIDEO 				: String = 'updateDebugPanelVideo' ;
 		public static const UPDATE_DEBUG_PANEL_STATE 				: String = 'updateDebugPanelState' ;

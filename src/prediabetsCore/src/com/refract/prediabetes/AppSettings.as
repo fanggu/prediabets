@@ -15,15 +15,12 @@ package com.refract.prediabetes {
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 
-	public class AppSettings {
-		
-		public static var USER_LOGGED_IN_INIT : Boolean = false ; 
+	public class AppSettings 
+	{
 		public static const DEBUG : Boolean = false;
-		public static const USE_LIVE_BACKEND_ON_DEBUG:Boolean = false;
+		public static const INTRO_URL : String = 'd01_intro_part_1' ; 
 		
-		public static const INTRO_URL : String = 'd01_intro' ; 
 		public static var APP_VIDEO_BASE_URL : String ; 
-
 		public static var LOCALE:String = "en";
 		
 		public static var RED:int = 0xc45252;
@@ -32,26 +29,9 @@ package com.refract.prediabetes {
 		public static var DARK_GREY:int = 0x4d4d4d;
 		public static var WHITE:int = 0xffffff;
 		
-		//public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ; // "./../../../../website/data/";
-		public static var DATA_PATH:String = "data/" ; // "./../../../../website/data/";
+		public static var DATA_PATH:String = "data/" ; 
 		public static var APP_DATA_PATH : String = "file://";
-		
-		public static var SLOW_TIME_DELAY : int = 8000 ; 
-		
-		public static const TABLET_THRESHOLD:Number = 6.5;
-		
-		public static const PERFECT_ANSWER_SPEED : Number = 2.3;
-		public static const MAX_ANSWER_TIME : Number = 10.0;
-		
-		/*
-		 * PRESET CONSTANTS
-		 */
-		
-		public static const MAX_WIDTH:int = 1024;
-		public static const MAX_HEIGHT:int = 768;
-		public static const MIN_WIDTH:int = 800;
-		public static const MIN_HEIGHT:int = 450;
-		
+
 		public static const BUTTON_HIT_AREA_ALPHA:Number = 0;
 		public static const BUTTON_HIT_AREA_EDGE:int = 10;
 		public static const BUTTON_HIT_AREA_WIDTH:int = BUTTON_HIT_AREA_EDGE << 1 ;
@@ -60,21 +40,9 @@ package com.refract.prediabetes {
 		public static var VIDEO_BASE_URL : String = "video/f4v/1024/" ;
 		public static var VIDEO_FILE_FORMAT_DESCRIPTOR:String = "";
 		
-		
-		
 		public static const DEVICE_PC:String = "DEVICE_PC";
 		public static const DEVICE_TABLET:String = "DEVICE_TABLET";
-		public static const DEVICE_MOBILE:String = "DEVICE_MOBILE";
-		
-		
 		public static var DEVICE : String = "DEVICE_PC";
-		
-		public static const PLATFORM_PC:String = "PLATFORM_PC";
-		public static const PLATFORM_IOS:String = "PLATFORM_IOS";
-		public static const PLATFORM_ANDROID:String = "PLATFORM_ANDROID";
-		
-		public static var PLATFORM:String = PLATFORM_PC;
-		
 		
 		public static var VIDEO_WIDTH:Number = 0;
 		public static var VIDEO_HEIGHT:Number = 0;
@@ -129,10 +97,6 @@ package com.refract.prediabetes {
 		
 		public static var RATIO : Number = 1; 
 		
-		/*
-		 *	AWESOME OTHER STUFF 
-		 */
-		
 		private static var _stage : Stage;
 		
 		public static var FullScreenInteractiveAllowed : Boolean = false;
@@ -179,16 +143,6 @@ package com.refract.prediabetes {
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 			}
 			
-			if(DEVICE == DEVICE_MOBILE){
-				if(SIXTEEN_NINE_RATIO > stageRatio){ 
-					VIDEO_TOP = (stage.stageHeight-RESERVED_FOOTER_HEIGHT) - VIDEO_HEIGHT >> 1;
-					//VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2;
-					VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
-				}else{
-					VIDEO_TOP = RESERVED_HEADER_HEIGHT;
-					VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
-				}
-			}
 			
 			if(_stageCover && _stage.contains(_stageCover)){
 				_stageCover.graphics.clear();
@@ -220,7 +174,8 @@ package com.refract.prediabetes {
 			inchesWide *= inchesWide;
 			inchesHigh *= inchesHigh;
 			var inches:Number = Math.sqrt(inchesWide + inchesHigh);
-			DEVICE = (isTablet) ? DEVICE_TABLET : DEVICE_MOBILE;
+			if( isTablet ) 
+				DEVICE =  DEVICE_TABLET ; 
 		
 			var serverString:String = unescape(Capabilities.serverString); 
 			var reportedDpi:Number = Number(serverString.split("&DP=", 2)[1]);
@@ -295,7 +250,7 @@ package com.refract.prediabetes {
 		}
 		
 		public static function checkFSStatus():void{
-			if(_stage.displayState != StageDisplayState.NORMAL && !FullScreenInteractiveAllowed && PLATFORM == PLATFORM_PC){
+			if(_stage.displayState != StageDisplayState.NORMAL && !FullScreenInteractiveAllowed && DEVICE == DEVICE_PC){
 				
 				if(!_stageCover){
 					_stageCover = new Sprite();

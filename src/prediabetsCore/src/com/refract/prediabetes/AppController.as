@@ -24,70 +24,45 @@ package com.refract.prediabetes
 	import flash.events.FullScreenEvent;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
-	import flash.utils.Dictionary;
 
 	public class AppController 
 	{ 	
+		private static var _i:AppController;
 		
-		protected static var _i:AppController;
-		public static function get i():AppController{return _i;}
+		private var _status:String;
+		private var _main : PrediabetesCore ;
+		private var _nav : Nav;
+		private var _intro : Intro;
+		private var _ui:Sprite;
+		private var _smView : SMView;
+		private var _smController : SMController;
 		
-		protected var _status:String;
+		private var currentPath:Array = ["iAmNotAPath"];
+		private var previousPath:Array = ["iAmNotAPath"];
+		private var lastMajor:String = ""; 
 		
-		protected var _main : PrediabetesCore ;
-		protected var _nav : Nav;
-		public function get nav():Nav {return _nav;}
-		protected var _intro : Intro;
-	//	protected var _results: Results;
-		protected var _ui:Sprite;
-		protected var _smView : SMView;
-		protected var _smController : SMController;
-		
-		protected var _nextStory:int = -1 ;
-		public function get nextStory():int {return _nextStory;}
-		public function set nextStory(story:int):void { _nextStory = story;}
-		
-		protected var _stories:Array = 
-		[
-			""
-			,AppSections.MODULE_LS1
-			, AppSections.MODULE_LS2
-			, AppSections.MODULE_LS3
-		];
-		
-		
-		
-		protected var _nextStoryState:String = null;
-		public function get nextStoryState() : String { return _nextStoryState; }
-		public function set nextStoryState(nextStoryState : String) : void { _nextStoryState = nextStoryState; }
-		
-		protected var currentPath:Array = ["iAmNotAPath"];
-		protected var previousPath:Array = ["iAmNotAPath"];
-		protected var lastMajor:String = "";
-		
-		protected var _dictQuestions : Dictionary ; 
 		public function AppController( main : PrediabetesCore)
 		{
 			_i = this;
 			_main = main ; 
 		}
 		
+		//**init
 		public function init() : void
 		{
 			createSoundMachine() ; 
 			createUI();
 			createNav();
 			createStateMachine();		
-			
 			DispatchManager.addEventListener( Flags.DRAW_VIDEO_STATUS ,onDrawVideoStatus  ) ;
 			DispatchManager.addEventListener(Flags.START_MOVIE , onStartMovie  );
 			DispatchManager.addEventListener(Flags.APP_ACTIVATE, onAppActivated);
 			DispatchManager.addEventListener(Flags.APP_DEACTIVATE, onAppDeactivated);
-			
 			initSWFAddress();
 		}
-		
-		protected function createStateMachine() : void
+
+		//**Create Interactive Movie Manager ( StateMachine ) 
+		private function createStateMachine() : void
 		{
 			//*state machine main view
 			_smView = new ClassFactory.SM_VIEW();
@@ -97,17 +72,18 @@ package com.refract.prediabetes
 			
 		}
 		
-		protected function createUI():void
+		//**Create UI
+		private function createUI():void
 		{
 			_ui = new Sprite();
 			_main.addChild(_ui);
-			
 			
 			AppSettings._stageCoverCopy = TextManager.makeText("full_screen_blocker",null,{fontSize:24,align:"center"});
 			_main.stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
 		}
 		
-		protected function onFSChange(evt:FullScreenEvent):void
+		//**FS management
+		private function onFSChange(evt:FullScreenEvent):void
 		{
 			//if(evt.fullScreen && _interactiveSections.indexOf("SECTION:"+currentPath[0]) != -1){
 			if(evt.fullScreen )
@@ -118,19 +94,21 @@ package com.refract.prediabetes
 			}
 		}
 		
-		protected function fsAcceptedOrNot(evt:Event):void{
+		private function fsAcceptedOrNot(evt:Event):void{
 			DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, fsAcceptedOrNot);
 			
 		}
 		
-		protected function createNav():void{
+		//**Create Nav
+		private function createNav():void{
 			_nav = new ClassFactory.NAV();
 			_main.addChild(_nav);
 			DispatchManager.addEventListener(Nav.NO_MORE_OVERLAYS,onNoMoreOverlays);
 
 		}
 			
-		protected function onAppActivated(evt:Event = null):void{
+		//**on App Active and Deactive
+		private function onAppActivated(evt:Event = null):void{
 			TweenMax.resumeAll();
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED,{value:Header.LS_LOGO}));
 			
@@ -139,20 +117,18 @@ package com.refract.prediabetes
 			}
 		}
 		
-		protected function onAppDeactivated(evt:Event = null):void
+		private function onAppDeactivated(evt:Event = null):void
 		{
 			TweenMax.pauseAll(true,true,true);
 		}	
 			
-
-			
-		protected function createSoundMachine() : void {
+		//Create Sound Manager
+		private function createSoundMachine() : void {
 			new SoundMachine() ; 
 		}
 		
-
-
-		protected function onKeyDown(event : KeyboardEvent) : void {
+		//**Space bar clicked		
+		private function onKeyDown(event : KeyboardEvent) : void {
 			if( event.charCode == Keyboard.SPACE)
 			{
 				if( VideoLoader.i)
@@ -162,33 +138,25 @@ package com.refract.prediabetes
 			}
 		}
 		
-		protected function setState(path:Array,checkFS:Boolean = true):void {
+		private function setState(path:Array,checkFS:Boolean = true):void {
 			if(currentPath[0] != path[0] || path[0] == AppSections.INTRO.split(":")[1]){
 				
 				switch("SECTION:"+path[0])
 				{
-					case(AppSections.MODULE_LS1):
-					case(AppSections.MODULE_LS2):
-					case(AppSections.MODULE_LS3):
+					case(AppSections.INTERACTIVE_MOVIE):
 					
 						removeCurrentSection();	
-		//				if(UserModel.isModuleLocked(nextStory))
 						
-							if(lastMajor != path[0]){
-								AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
-								DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
-								lastMajor = path[0];
-								nextStory = -1;
-								nextStoryState = null;
-								beginModule();
-								AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
-							}
+						if(lastMajor != path[0]){
+							AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ; 
+							DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ;
+							lastMajor = path[0];
+							beginModule();
+							AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
+						}
 						 
 						break;
-					
-					
-					
-					
+	
 					case(AppSections.START_AGAIN):
 					case(AppSections.LEGAL):
 					case(AppSections.SHARE):
@@ -200,10 +168,12 @@ package com.refract.prediabetes
 					default://intro is default state so no break
 						lastMajor = path[0];
 						removeCurrentSection();	
+						DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ;
 						createIntro();
 						AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
-						DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
-					
+						
+						//DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
+						
 				}
 				currentPath = path.concat();
 				previousPath = currentPath;
@@ -211,14 +181,12 @@ package com.refract.prediabetes
 			}
 		}
 
-		protected function removeCurrentSection():void{
+		private function removeCurrentSection():void{
 			switch("SECTION:"+currentPath[0]){
 				case(AppSections.INTRO):
 					destroyIntro();
 					break;
-				case(AppSections.MODULE_LS1):
-				case(AppSections.MODULE_LS2):
-				case(AppSections.MODULE_LS3):
+				case(AppSections.INTERACTIVE_MOVIE):
 					//story, do nothing
 					break;
 				
@@ -233,25 +201,25 @@ package com.refract.prediabetes
 			AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
 		}
 
-		protected function addOverlay(path:String ) : void 
+		private function addOverlay(path:String ) : void 
 		{
 			_nav.addSection( path );
 		}
 		
 		
-		protected function onNoMoreOverlays(evt:Event):void
+		private function onNoMoreOverlays(evt:Event):void
 		{
 			var out:String = "";
 			out = lastMajor;
 			setSWFAddress("SECTION:"+lastMajor);
 		}
 
-		protected function createIntro():void
+		private function createIntro():void
 		{
 			if(!_intro)
 			{
-				_nextStory = -1;
-				DispatchManager.dispatchEvent(new Event(Flags.SM_RESET));
+				//_nextStory = -1;
+				DispatchManager.dispatchEvent(new Event(Flags.SM_RESET)) ; 
 				DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
 				VideoLoader.i.stopVideo();
 				_intro  = new ClassFactory.INTRO();
@@ -269,10 +237,10 @@ package com.refract.prediabetes
 		
 		private function onStartMovie( evt : Event ) : void
 		{
-			setSWFAddress(_stories[ 1 ]);
+			setSWFAddress( AppSections.INTERACTIVE_MOVIE );
 		}
 		
-		protected function destroyIntro():void{
+		private function destroyIntro():void{
 			if(_intro){
 				_intro.destroy();
 				_ui.removeChild(_intro);
@@ -280,7 +248,7 @@ package com.refract.prediabetes
 			}
 		}
 		
-		protected function onDrawVideoStatus( evt : BooleanEvent) : void
+		private function onDrawVideoStatus( evt : BooleanEvent) : void
 		{
 			var value :Boolean = evt.value ;
 			var statusMC : MovieClip ;
@@ -306,71 +274,35 @@ package com.refract.prediabetes
 			statusMC.buttonMode = false ; 
 		}
 
-		protected function onSignUpEnded(evt:Event):void
-		{
-			var ns:int = nextStory;
-			
-			if(ns == -1)
-			{
-				setSWFAddress(AppSections.INTRO);
-			}
-			else
-			{
-				setSWFAddress(_stories[ns]);
-			}
-		}
 
-		protected function beginModule(module:int = -1, scene:String = null):void{
+		private function beginModule( ):void
+		{
 			var paths:Array = SWFAddress.getPathNames();
-			var story:int = _stories.indexOf("SECTION:"+paths[0]);
-			if(nextStory != story || paths.length > 1 || scene != null)
-			{
-				nextStory = story;
-				if(scene == null)
-				{
-					nextStoryState = paths.length > 1 ? (paths[1] == "null" ? null : paths[1]) : null;	
-				}
-				else
-				{
-					nextStoryState = scene;
-				}
-			
-				_status = paths[0];
-			
-				_nav.removeCurrentOverlay();
-				destroyIntro();
-				DispatchManager.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);
-				AppSettings.checkFSStatus();
-			}
+			_status = paths[0];
+			_nav.removeCurrentOverlay();
+			destroyIntro();
+			DispatchManager.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);
+			AppSettings.checkFSStatus();
 		}
 		
-		protected function goModule(evt:Event):void
+		private function goModule(evt:Event):void
 		{
-				DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);
-				if(nextStory != 4)
-				{				
-					DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onStateMachineEnd);	
-					_smController.start({module:nextStory,selectedState:nextStoryState});
-
-				}
-
+			DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);					
+			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onStateMachineEnd);	
+			_smController.start({module:1,selectedState:null});
+			trace('sm called start')
 		}
 		
 		
-		protected function onStateMachineEnd(evt:ObjectEvent):void
+		private function onStateMachineEnd(evt:ObjectEvent):void
 		{	
 			trace('::onStateMachineEnd::')
 		}
 		
 
 
-		/*
-		 * 
-		 * SWF ADDRESS
-		 * 
-		 * 
-		 */
-		protected function initSWFAddress():void
+		//**SWFADDRESS 
+		private function initSWFAddress():void
 		{
             SWFAddress.addEventListener(SWFAddressEvent.INIT , handleSWFAddress);
             SWFAddress.addEventListener(SWFAddressEvent.CHANGE, handleSWFAddress);
@@ -389,10 +321,8 @@ package com.refract.prediabetes
             }
         }
         
-        protected function handleSWFAddress(event:SWFAddressEvent, depth:int=0):void 
+        private function handleSWFAddress(event:SWFAddressEvent, depth:int=0):void 
 		{
-            //SWFAddress.setTitle(title);
-			
 			if(event.pathNames[0] == undefined)
 			{
 				if(SWFAddress.getPath() == "/")
@@ -404,9 +334,38 @@ package com.refract.prediabetes
 			setState(event.pathNames);
         }
 		
-		public static function toTitleCase(str:String):String {
-            return str.substr(0,1).toUpperCase() + 
-                str.substr(1).toLowerCase();
-        }
+
+		
+		//**GET AND SET
+		public static function get i():AppController
+		{
+			return _i;
+		}
+		public function get nav():Nav 
+		{
+			return _nav;
+		}
+		
+		/*
+		public function get nextStoryState() : String 
+		{ 
+			return _nextStoryState; 
+		}
+		public function set nextStoryState(nextStoryState : String) : void 
+		{ 
+			_nextStoryState = nextStoryState; 
+		}
+		
+		public function get nextStory():int 
+		{
+			return _nextStory;
+		}
+		public function set nextStory(story:int):void 
+		{ 
+			_nextStory = story;
+		}
+		 * 
+		 */
+		
 	}
 }

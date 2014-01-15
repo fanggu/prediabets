@@ -186,8 +186,8 @@ package com.refract.prediabetes.sections.feedback {
 		}
 		
 		protected function onShowThanks():void{
-			_submit.text = TextManager.getDataListForId("signup_continue")["signup_continue"]["copy_"+AppSettings.LOCALE];
-			_submit.minW = 270;
+			//_submit.text = TextManager.getDataListForId("signup_continue")["signup_continue"]["copy_"+AppSettings.LOCALE];
+			//_submit.minW = 270;
 			
 			TweenMax.killTweensOf(_endLine);
 			TweenMax.to(_endLine,0.5,{autoAlpha:1});

@@ -8,6 +8,7 @@ package com.refract.prediabetes.stateMachine {
 		private static var _me : SMVars ; 
 		
 		public var nsStreamTime : Number ; 
+		public var nsStreamTimeAbs : Number ; 
 		public var qp_counter : int ; 
 		public var qp_timer : int ; 
  

@@ -102,14 +102,7 @@ package com.refract.prediabetes.assets {
 				gradientColor:"NONE"
 			};
 			
-			_data[SMSettings.FONT_REAL_STORIES]=
-			{
-				id:SMSettings.FONT_REAL_STORIES,
-				copy_en:"",
-				font: "AKZIDENZG_MEDIUM_CONDENSED_ALT",
-				colour:"WHITE",
-				gradientColor:"NONE"
-			}
+			
 			//** ROB ENDED
 			
 		}

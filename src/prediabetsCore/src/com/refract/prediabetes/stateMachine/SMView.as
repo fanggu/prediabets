@@ -41,7 +41,6 @@ package com.refract.prediabetes.stateMachine
 		private var _balloonView : Sprite ;
 		private var _lockButtonsView : Sprite;
 		private var _lockButtonsQ : Sprite;
-		private var _blackCut : Box;
 		
 		private var _countDownCont : Sprite ; 
 		
@@ -101,7 +100,6 @@ package com.refract.prediabetes.stateMachine
 			_countDownCont = new Sprite() ; 
 			 
 			createLockButtonsQ();
-			createBlackCut() ; 
 		}
 		
 		private function onStart( event : ObjectEvent ) : void
@@ -119,59 +117,22 @@ package com.refract.prediabetes.stateMachine
 		{
 			
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onEnd);
-			//**create interactions
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_INTERACTIONS, onUpdateInteractions);
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_INTERACTIONS_WG, onUpdateInteractionsWg);
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_VIDEO, onUpdateVideo);
-			
-			//**state text
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_STATE_TEXT , onUpdateStateText);
-			//**message box
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_MESSAGE, onUpdateMessage);
-			//DispatchManager.addEventListener(Flags.REMOVE_VIEW_MESSAGE, onRemoveMessage);
 			DispatchManager.addEventListener(Flags.UPDATE_MESSAGE_BOX, onUpdateMessageBox);
-			//**clean UI
 			DispatchManager.addEventListener(Flags.UPDATE_UI, onUpdateUI);
-			
-			
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER, onUpdateCountdownTimer);
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_CPR_LONG, onUpdateCountdownTimerCprLong);
-			
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TEXT, onUpdateCountdownText);
-			
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_WHITE, onUpdateCountdownTimerWhite);
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE, onUpdateCountdownStopWhite);
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE, onUpdateCountdownForceRemove ) ;
-			
-			
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
-			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
-			
-			DispatchManager.addEventListener(Flags.UPDATE_CUT_BLACK, onUpdateCutBlack);
-			DispatchManager.addEventListener(Flags.UPDATE_CUT_BLACK_LONG, onUpdateCutBlackLong);
-			DispatchManager.addEventListener(Flags.UPDATE_CUT_BLACK_SUPER_LONG, onUpdateCutBlackSuperLong);
-			DispatchManager.addEventListener(Flags.REMOVE_CUT_BLACK_SUPER_LONG, onRemoveCutBlackSuperLong);
-			
-			DispatchManager.addEventListener(Flags.ADD_LS6_CLOSE_BUTTON, onAddLS6CloseButton);
-			//DispatchManager.addEventListener(Flags.REMOVE_LS6_CLOSE_BUTTON, onRemoveLS6CloseButton);
-			
-			
-			
+
 			//**PAUSE
 			DispatchManager.addEventListener(Flags.FREEZE, onFreeze );
 			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze);
 			DispatchManager.addEventListener(Flags.FREEZE_BUTTONS, onFreeze );
 			DispatchManager.addEventListener(Flags.UNFREEZE_BUTTONS, onUnFreeze);
-			
 			AppSettings.stage.addEventListener(Event.RESIZE, onResize );
-			
 			DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut );
-			DispatchManager.addEventListener(Flags.SPEED_FADEOUT, onSpeedFadeOut );
-			
+			DispatchManager.addEventListener(Flags.SPEED_FADEOUT, onSpeedFadeOut );	
 			DispatchManager.addEventListener(OverlayEvent.DRAW_BALLOON, onDrawBalloon );
-			//DispatchManager.addEventListener( Flags.DRAW_VIDEO_STATUS ,onDrawVideoStatus  ) ; 
-			
-			//DispatchManager.addEventListener(Flags.TEXT_FEEDBACK, onTextFeedback );
+		
 			//**DEBUG PANEL UPDATE
 			DispatchManager.addEventListener(Flags.UPDATE_DEBUG_PANEL_STATE, onUpdateDebugPanelState);
 			DispatchManager.addEventListener(Flags.UPDATE_DEBUG_PANEL_VIDEO, onUpdateDebugPanelVideo);
@@ -179,56 +140,19 @@ package com.refract.prediabetes.stateMachine
 		
 		private function removeListeners() : void
 		{
-			
 			DispatchManager.removeEventListener(Flags.STATE_MACHINE_END , onEnd);
-			//**create interactions
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_INTERACTIONS, onUpdateInteractions);
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_INTERACTIONS_WG, onUpdateInteractionsWg);
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_VIDEO, onUpdateVideo);
-			
-			//**state text
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_STATE_TEXT, onUpdateStateText);
-			//**message box
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_MESSAGE, onUpdateMessage);
-			//DispatchManager.addEventListener(Flags.REMOVE_VIEW_MESSAGE, onRemoveMessage);
-			//**clean UI
 			DispatchManager.removeEventListener(Flags.UPDATE_UI, onUpdateUI);
-			
-			
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER, onUpdateCountdownTimer);
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TEXT, onUpdateCountdownText);
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_TIMER_WHITE, onUpdateCountdownTimerWhite);
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_STOP_WHITE, onUpdateCountdownStopWhite);
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_COUNTDOWN_FORCE_REMOVE, onUpdateCountdownStopWhite);
-			
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_TIMER, onUpdateBarTimer);
-			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_BAR_REMOVE, onUpdateBarRemove);
-			
-			
-			DispatchManager.removeEventListener(Flags.UPDATE_CUT_BLACK, onUpdateCutBlack);
-			DispatchManager.removeEventListener(Flags.UPDATE_CUT_BLACK_LONG, onUpdateCutBlackLong );
-			DispatchManager.removeEventListener(Flags.UPDATE_CUT_BLACK_SUPER_LONG, onUpdateCutBlackSuperLong);
-			DispatchManager.removeEventListener(Flags.REMOVE_CUT_BLACK_SUPER_LONG, onRemoveCutBlackSuperLong);
-			
-			DispatchManager.removeEventListener(Flags.ADD_LS6_CLOSE_BUTTON, onAddLS6CloseButton);
-			//DispatchManager.removeEventListener(Flags.REMOVE_LS6_CLOSE_BUTTON, onRemoveLS6CloseButton);
-			
-			//**PAUSE
 			DispatchManager.removeEventListener(Flags.FREEZE, onFreeze );
-			DispatchManager.removeEventListener(Flags.UN_FREEZE, onUnFreeze);
-			
+			DispatchManager.removeEventListener(Flags.UN_FREEZE, onUnFreeze);	
 			DispatchManager.removeEventListener(Flags.FREEZE_BUTTONS, onFreeze );
 			DispatchManager.removeEventListener(Flags.UNFREEZE_BUTTONS, onUnFreeze);
-			
 			AppSettings.stage.removeEventListener(Event.RESIZE, onResize );
-			
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );
-			
 			DispatchManager.removeEventListener(Flags.SPEED_FADEOUT, onSpeedFadeOut );
-			
 			DispatchManager.removeEventListener(OverlayEvent.DRAW_BALLOON, onDrawBalloon );
-			//DispatchManager.removeEventListener( Flags.DRAW_VIDEO_STATUS ,onDrawVideoStatus  ) ; 
-			//DispatchManager.removeEventListener(Flags.TEXT_FEEDBACK, onTextFeedback );
 			
 			//**DEBUG PANEL UPDATE
 			DispatchManager.removeEventListener(Flags.UPDATE_DEBUG_PANEL_STATE, onUpdateDebugPanelState);
@@ -294,14 +218,7 @@ package com.refract.prediabetes.stateMachine
 					_uiView.createChoice( interaction );	
 					SMVars.me.tempTotChoice++;
 				break ; 
-				case Flags.CHOICE_IMG :
-					_uiView.createChoice( interaction );	
-					SMVars.me.tempTotChoice++;
-				break ;
-				case Flags.CHOICE_TARGET :
-					_uiView.createChoice( interaction );	
-					SMVars.me.tempTotChoice++;
-				break ;
+				
 				
 				case Flags.NONE :
 					var btObj : CoinVO = new CoinVO() ; 
@@ -319,53 +236,6 @@ package com.refract.prediabetes.stateMachine
 
 		
 		//**LISTENERS ACTIONS
-
-		private function onUpdateCutBlack(event : Event) : void 
-		{	
-			_videoOverlayView.addChild( _blackCut ) ; 
-			TweenMax.killTweensOf( _blackCut  ) ; 
-			_blackCut.alpha = 0 ;
-			_blackCut.visible = true ; 
-			TweenMax.to( _blackCut , .3 , { alpha:1 , onComplete:reverse ,canBePaused:true}); 
-			
-			onResize() ; 
-		}
-		
-		private function onUpdateCutBlackLong(event : Event) : void 
-		{	
-			_videoOverlayView.addChild( _blackCut ) ; 
-			
-			TweenMax.killTweensOf( _blackCut  ) ; 
-			
-			_blackCut.alpha = 0 ;
-			_blackCut.visible = true ; 
-			TweenMax.to( _blackCut , .2 , { alpha:1 , onComplete:removeBlackCut ,canBePaused:true}); 
-			
-			onResize() ; 
-		}
-		private function removeBlackCut( ) : void
-		{
-			TweenMax.killTweensOf( _blackCut  ) ; 
-			TweenMax.to( _blackCut , .3 , { alpha:0 , delay : .3 , onComplete:devastate ,canBePaused:true}); 
-			onResize() ; 
-		}
-		
-		private function onUpdateCutBlackSuperLong( event : Event ) : void
-		{
-			_videoOverlayView.addChild( _blackCut ) ;
-			TweenMax.killTweensOf( _blackCut  ) ; 
-			_videoOverlayView.addChild( _blackCut ) ; 
-			_blackCut.alpha = 0 ;
-			_blackCut.visible = true ; 
-			TweenMax.to( _blackCut , .2 , { alpha:1 }) ; //, onComplete:removeBlackCut ,canBePaused:true}); 
-		}
-		private function onRemoveCutBlackSuperLong( event : Event ) : void
-		{
-			TweenMax.killTweensOf( _blackCut  ) ; 
-			TweenMax.to( _blackCut , .3 , { alpha:0 , delay : 0 , onComplete:devastate ,canBePaused:true}); 
-			onResize() ; 
-		}
-		
 		private function onUpdateInteractions( evt : ObjectEvent ) : void
 		{
 			var stateObject :Object = evt.object ; 
@@ -381,10 +251,6 @@ package com.refract.prediabetes.stateMachine
 				interaction.iter = i ; 
 				interaction.stateName = stateObject.name ; 
 				createInteraction( interaction );
-				if( interaction.interaction_type == Flags.CHOICE_IMG)
-				{
-					nrChoiceImg++ ; 
-				}
 			}
 			if( nrChoiceImg == 2)
 			{
@@ -395,60 +261,15 @@ package com.refract.prediabetes.stateMachine
 			}
 			DispatchManager.dispatchEvent( new Event( Flags.UPDATE_SIZE_BUTTON ) ) ; 
 		}
-		private function onUpdateCountdownTimerCprLong( evt : StateEvent ) : void
-		{
-			_cpr = true ;
-			onUpdateCountdown( evt.stringParam , 0 ) ; 
-		}
-		private function onUpdateCountdownTimer( evt : StateEvent ) : void
-		{
-			_cpr = false ;
-			onUpdateCountdown( evt.stringParam , SMSettings.SHOW_DELAY * 3 ) ; 
-		}
-		private function onUpdateCountdownText( evt : StateEvent ) : void
-		{
-			_cpr = false ;
-			 if(_countDownTimerTxt ) TweenMax.to( _countDownTimerTxt , 0 , { tint:0xffffff , canBePaused:true  } );
-			 onUpdateCountdown( evt.stringParam , 0 , true) ; 
-			 
-		}
-		private function onUpdateCountdown( value : String , mdelay : Number , text : Boolean = false ) : void
-		{
-			if( !_countDownTimerTxt )
-			{
-				createCountDownTimerTxt() ;				
-				_countDownCont.addChild( _countDownTimerTxt ) ; 
-				_countDownCont.alpha = 0 ;
-				text = true ; 
-			}
-			
-			_countDownCont.visible = true ; 
-			TweenMax.to( _countDownCont , .25 , { alpha:1 , delay : mdelay , canBePaused:true } );			
-			_countDownTimerTxt.text = value ;
-			
-			if(  text )
-			{
-				TweenMax.to( _countDownTimerTxt , .7 , { tint:SMSettings.DEEP_RED , delay : mdelay , ease : Sine.easeOut , canBePaused:true } );
-				text = false ;
-				TweenMax.to( _countDownCont , .25 , { alpha:0 , delay : mdelay + 2 , canBePaused:true } ); 
-			}
-			
-			onResize() ; 
-		}
+
 		
-		private function onUpdateCountdownTimerWhite( evt : Event ) : void
-		{
-			TweenMax.to( _countDownCont , .5 , { tint:0xffffff , repeat:-1, yoyo:true , canBePaused:true} );
-		}
+
 		private function onUpdateCountdownStopWhite( evt : Event = null  ) : void
 		{	 
 			TweenMax.killTweensOf( _countDownCont ) ;
 			TweenMax.to( _countDownCont, 0 , { tint:null , canBePaused:true} );
 		}
-		private function onUpdateCountdownForceRemove( evt : Event = null  ) : void
-		{	 
-			removeCountDownTimerTxt() ; 
-		}
+
 		private function onUpdateBarTimer( evt : StateEvent ) : void
 		{
 			var barH : Number = 8 * AppSettings.RATIO ; 
@@ -487,11 +308,7 @@ package com.refract.prediabetes.stateMachine
 		
 		private function onUpdateUI( evt : Event ) : void
 		{
-			_uiView.cleanUI() ;	
-			
-			removeCountDownTimerTxt() ; 
-				
-				
+			_uiView.cleanUI() ;		
 			if( _stateTxtView )
 			{
 				if( _stateTxtView.parent)
@@ -551,37 +368,6 @@ package com.refract.prediabetes.stateMachine
 
 		//** [UTILITIES]
 		
-		private function createCountDownTimerTxt() : void 
-		{ 		
-			var style:Object = 
-			{ 
-				fontSize:SMSettings.FONT_SIZE_COUNTDOWN
-				, align:TextFormatAlign.CENTER 
-				, autoSize : TextFieldAutoSize.CENTER 
-				, multiline: false
-				, wordWrap : false
-				//, width : 300
-			} ; 
-
-
-			var txtField : TextField = TextManager.makeText( SMSettings.FONT_COUNTDOWN , null , style) ;
-			txtField.text = "00:00" ; 
-			
-			_countDownTimerTxt = txtField ;//createText( "00:00" ,  , 48 ) ;
-			_countDownTimerTxt.textColor = 0xffffff ;   
-		}
-		
-		private function removeCountDownTimerTxt() : void
-		{
-			if( _countDownTimerTxt ) 
-			{
-				if( _countDownTimerTxt.parent)
-				{
-					_countDownTimerTxt.parent.removeChild( _countDownTimerTxt ) ; 
-					_countDownTimerTxt = null ; 
-				}
-			}
-		}
 		
 
 		
@@ -593,14 +379,7 @@ package com.refract.prediabetes.stateMachine
 			
 			
 		}
-		//**black cut
-		private function createBlackCut() : void
-		{
-			_blackCut = new Box( 1,1,0x000000 ); 
-			_blackCut.mouseChildren = false ;
-			_blackCut.mouseEnabled = false ; 
-		}
-		
+
 		
 		private function resizeSquare( square : Sprite )  : void
 		{
@@ -613,15 +392,6 @@ package com.refract.prediabetes.stateMachine
 			}
 		}
 
-		//**cut black transitions
-		private function reverse( ) : void
-		{
-			TweenMax.to( _blackCut , .5 , { alpha:0 , delay : SMSettings.CUTBLACK_DELAY , onComplete:devastate , canBePaused:true });
-		}
-		private function devastate( ) : void
-		{
-			_blackCut.parent.removeChild( _blackCut) ; 
-		}
 		//** /[UTILITIES]
 		
 		//**DEBUG
@@ -667,8 +437,6 @@ package com.refract.prediabetes.stateMachine
 		private function onResize( evt : Event = null ) : void
 		{
 			resizeSquare( _lockButtonsQ );
-			resizeSquare( _blackCut );
-			
 			onResizeCountDown() ; 
 			
 			if( _bar )

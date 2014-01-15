@@ -1,0 +1,420 @@
+Using Flex SDK 4.6 Debugger Adapter (Worker support).
+[Info] Listening to port 7935.
+[Info] Connection as server to player via 7935 established.
+DEVICE : DEVICE_PC
+[Loading] Loaded: Users:otlabs:io:work:projects:2014:01_prediabets:code:deploy:PrediabetsCore.swf
+DURATION : 48.11174603174603
+DURATION : 48
+StageVideoAvailable: true
+Hardware Decoding: true
+Hardware Compositing: true
+Full GPU true
+ --- 
+name Video  d40_q_petrol
+DURATION : 5.758548752834467
+DURATION : 5.64
+ --- 
+name Video  d31s_a1_wrong_book
+DURATION : 9.148662131519274
+DURATION : 9.04
+ --- 
+name Video  d31m_a3_right_doctor
+DURATION : 13.003174603174603
+DURATION : 12.88
+ --- 
+name Video  d31s_a2_wrong_surfing
+DURATION : 9.009342403628118
+DURATION : 8.88
+ --- 
+name Video  d56_q_fruit_juice
+DURATION : 6.501587301587302
+DURATION : 6.4
+ --- 
+name Video  d42_q_fuel_control
+DURATION : 8.870022675736962
+DURATION : 8.76
+ --- 
+name Video  d25m_yes_heart_disease
+DURATION : 30.232380952380954
+DURATION : 30.12
+ --- 
+name Video  d26m_no_heart_disease
+DURATION : 6.455147392290249
+DURATION : 6.32
+ --- 
+name Video  dx_dont_know
+DURATION : 15.557369614512472
+DURATION : 15.44
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d58_q_gym_sweaty
+DURATION : 12.585215419501134
+DURATION : 12.48
+ --- 
+name Video  d11m_choice_anyone_diabetes_already
+DURATION : 8.17342403628118
+DURATION : 8.04
+ --- 
+name Video  
+Error #2044: Unhandled NetStatusEvent:. level=error, code=NetStream.Play.StreamNotFound
+ --- 
+name Video  d27s_choice_overweight
+DURATION : 14.814331065759637
+DURATION : 14.68
+ --- 
+name Video  d53_a1_wrong_fancy_health
+DURATION : 10.402539682539683
+DURATION : 10.28
+ --- 
+name Video  d53_a3_right_less_pies
+DURATION : 20.619319727891156
+DURATION : 20.52
+ --- 
+name Video  d53_a2_wrong_broccoli
+DURATION : 11.656417233560092
+DURATION : 11.52
+ --- 
+name Video  d44_q_what_pd_called
+DURATION : 6.919546485260771
+DURATION : 6.8
+ --- 
+name Video  d57_a1_wrong_good_for_you
+DURATION : 16.300408163265306
+DURATION : 16.2
+ --- 
+name Video  d57_a2_right_lots_of_sugar
+DURATION : 52.569977324263036
+DURATION : 52.44
+ --- 
+name Video  d28s_yes_overweight
+DURATION : 36.03736961451247
+DURATION : 35.92
+ --- 
+name Video  d29s_no_overweight
+DURATION : 60.74340136054422
+DURATION : 60.6
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d54_q_where_sandwiches
+DURATION : 6.501587301587302
+DURATION : 6.4
+ --- 
+name Video  d47_a1_wrong_twenty
+DURATION : 12.956734693877552
+DURATION : 12.84
+ --- 
+name Video  d47_a2_wrong_ten
+DURATION : 14.582131519274377
+DURATION : 14.48
+ --- 
+name Video  d47_a3_right_five
+DURATION : 29.58222222222222
+DURATION : 29.44
+ --- 
+name Video  d33s_a1_wrong_dont_worry
+DURATION : 7.058866213151927
+DURATION : 6.92
+ --- 
+name Video  d33s_a2_right_too_late
+DURATION : 23.173514739229024
+DURATION : 23.04
+ --- 
+name Video  d03_choice_worry_about
+DURATION : 13.421133786848072
+DURATION : 13.28
+ --- 
+name Video  d51_a1_wrong_crash_diet
+DURATION : 7.151746031746032
+DURATION : 7.04
+ --- 
+name Video  d51_a3_right_eat_less
+DURATION : 12.07437641723356
+DURATION : 11.96
+ --- 
+name Video  d51_a2_wrong_chocolate
+DURATION : 9.148662131519274
+DURATION : 9.04
+ --- 
+name Video  d33m_a1_wrong_thats_true
+DURATION : 11.563537414965987
+DURATION : 11.44
+ --- 
+name Video  d33m_a2_right_load_of_rubbish
+DURATION : 61.67219954648526
+DURATION : 61.56
+ --- 
+name Video  d59_a1_wrong_pain_gain
+DURATION : 7.662585034013605
+DURATION : 7.56
+ --- 
+name Video  d59_a2_right_dont_have_to
+DURATION : 81.50204081632653
+DURATION : 81.4
+ --- 
+name Video  d55_a1_wrong_special_health
+DURATION : 6.501587301587302
+DURATION : 6.4
+ --- 
+name Video  d55_a2_right_chains
+DURATION : 6.501587301587302
+DURATION : 6.4
+ --- 
+name Video  d10m_myself
+DURATION : 15.232290249433106
+DURATION : 15.12
+ --- 
+name Video  d10s_someone_i_know
+DURATION : 20.897959183673468
+DURATION : 20.76
+ --- 
+name Video  d10_both
+DURATION : 15.232290249433106
+DURATION : 15.12
+ --- 
+name Video  d27m_choice_overweight
+DURATION : 13.978412698412699
+DURATION : 13.88
+ --- 
+name Video  d21s_choice_smoker
+DURATION : 2.461315192743764
+DURATION : 2.32
+ --- 
+name Video  d25s_yes_heart_disease
+DURATION : 44.95383219954648
+DURATION : 44.84
+ --- 
+name Video  d26s_no_heart_disease
+Error #2044: Unhandled NetStatusEvent:. level=error, code=NetStream.Play.StreamNotFound
+ --- 
+name Video  dx_dont_know
+DURATION : 15.557369614512472
+DURATION : 15.44
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d34s_choice_good_line
+DURATION : 5.712108843537415
+DURATION : 5.6
+ --- 
+name Video  d35s_choice_2_other_lines
+DURATION : 20.572879818594103
+DURATION : 20.44
+ --- 
+name Video  d35s_choice_2_other_lines
+DURATION : 20.572879818594103
+DURATION : 20.44
+ --- 
+name Video  d35s_choice_2_other_lines
+DURATION : 20.572879818594103
+DURATION : 20.44
+ --- 
+name Video  d35s_choice_1_dont_like
+DURATION : 52.94149659863945
+DURATION : 52.8
+ --- 
+name Video  d02_who_worry_about
+DURATION : 11.284897959183674
+DURATION : 11.16
+ --- 
+name Video  d31s_a1_wrong_book
+DURATION : 9.148662131519274
+DURATION : 9.04
+ --- 
+name Video  d31s_a3_right_doctor
+DURATION : 18.018684807256236
+DURATION : 17.88
+ --- 
+name Video  d31s_a2_wrong_surfing
+DURATION : 9.009342403628118
+DURATION : 8.88
+ --- 
+name Video  d20s_yes_have_already
+DURATION : 33.34385487528345
+DURATION : 33.24
+ --- 
+name Video  d20s_no_have_already
+DURATION : 5.990748299319728
+DURATION : 5.88
+ --- 
+name Video  dx_dont_know
+DURATION : 15.557369614512472
+DURATION : 15.44
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d49_a1_wrong_of_course
+DURATION : 13.374693877551021
+DURATION : 13.24
+ --- 
+name Video  d49_a2_right_no
+DURATION : 21.5481179138322
+DURATION : 21.44
+ --- 
+name Video  d32m_q_dont_want_doctor
+DURATION : 11.145578231292516
+DURATION : 11.04
+ --- 
+name Video  d24s_choice_heart_disease
+DURATION : 6.640907029478458
+DURATION : 6.52
+ --- 
+name Video  d30s_q_first_step
+DURATION : 5.6656689342403626
+DURATION : 5.56
+ --- 
+name Video  
+Error #2044: Unhandled NetStatusEvent:. level=error, code=NetStream.Play.StreamNotFound
+ --- 
+name Video  d43_a1_wrong_mr_t
+DURATION : 7.662585034013605
+DURATION : 7.52
+ --- 
+name Video  d43_a2_right_insulin_part_1
+DURATION : 63.901315192743766
+DURATION : 63.8
+ --- 
+name Video  d50_q_what_if_overweight
+DURATION : 5.572789115646258
+DURATION : 5.44
+ --- 
+name Video  d46_q_how_many_got
+DURATION : 6.176507936507937
+DURATION : 6.04
+ --- 
+name Video  d43_a2_right_insulin_part_2
+DURATION : 10.7740589569161
+DURATION : 10.64
+ --- 
+name Video  d24m_choice_heart_disease
+DURATION : 6.222947845804988
+DURATION : 6.08
+ --- 
+name Video  d41_a1_wrong_whisky
+DURATION : 9.148662131519274
+DURATION : 9.04
+ --- 
+name Video  d41_a3_right_glucose
+DURATION : 13.699773242630386
+DURATION : 13.56
+ --- 
+name Video  d41_a2_wrong_beer
+DURATION : 9.380861678004536
+DURATION : 9.28
+ --- 
+name Video  d48_q_skip_breakfast
+DURATION : 9.613061224489796
+DURATION : 9.48
+ --- 
+name Video  d22s_yes_smoker
+DURATION : 49.83002267573696
+DURATION : 49.72
+ --- 
+name Video  d23s_no_smoker
+DURATION : 5.61922902494331
+DURATION : 5.48
+ --- 
+name Video  dx_dont_know
+DURATION : 15.557369614512472
+DURATION : 15.44
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d11s_choice_anyone_diabetes_already
+DURATION : 9.845260770975056
+DURATION : 9.72
+ --- 
+name Video  d32s_q_dont_want_check
+DURATION : 7.476825396825397
+DURATION : 7.36
+ --- 
+name Video  d22m_yes_smoker
+DURATION : 30.743219954648527
+DURATION : 30.6
+ --- 
+name Video  d23m_no_smoker
+DURATION : 5.61922902494331
+DURATION : 5.48
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d29m_no_overweight_part_2
+DURATION : 17.04344671201814
+DURATION : 16.92
+ --- 
+name Video  d20m_yes_have_already
+DURATION : 20.526439909297054
+DURATION : 20.4
+ --- 
+name Video  d20m_no_have_already
+DURATION : 5.990748299319728
+DURATION : 5.88
+ --- 
+name Video  dx_dont_know
+DURATION : 15.557369614512472
+DURATION : 15.44
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d52_q_how_eat_healthily
+DURATION : 5.572789115646258
+DURATION : 5.44
+ --- 
+name Video  d58_q_gym_sweaty
+DURATION : 12.585215419501134
+DURATION : 12.48
+ --- 
+name Video  d30m_q_first_step
+DURATION : 5.851428571428571
+DURATION : 5.72
+ --- 
+name Video  d45_a1_wrong_time_bomb
+DURATION : 7.894784580498866
+DURATION : 7.76
+ --- 
+name Video  d45_a3_right_pre_diabetes
+DURATION : 5.61922902494331
+DURATION : 5.48
+ --- 
+name Video  d45_a2_wrong_pain_in_the
+DURATION : 8.730702947845804
+DURATION : 8.6
+ --- 
+name Video  d28m_yes_overweight
+DURATION : 20.572879818594103
+DURATION : 20.44
+ --- 
+name Video  d29m_no_overweight_part_1
+DURATION : 58.60716553287982
+DURATION : 58.48
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  dx_dont_want_to_say
+DURATION : 17.972244897959182
+DURATION : 17.84
+ --- 
+name Video  d21m_choice_smoker
+DURATION : 2.3219954648526078
+DURATION : 2.2

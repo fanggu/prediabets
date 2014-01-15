@@ -38,7 +38,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		{
 			AppSettings.stage.addEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
-			DispatchManager.addEventListener(Flags.TEXT_FEEDBACK , onTextFeedback); 
 			
 			_interaction = interaction ; 
 			
@@ -168,8 +167,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			super.destroy() ; 
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
-			DispatchManager.removeEventListener(Flags.TEXT_FEEDBACK , onTextFeedback); 
-			
 		}
 		
 		private function devastate( obj : TextField ) : void
@@ -181,7 +178,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		{
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
-			DispatchManager.removeEventListener(Flags.TEXT_FEEDBACK , onTextFeedback); 
 			
 			if( _txtField ) if( _txtField.parent ) _txtField.parent.removeChild( _txtField ) ;
 			if( _txtBalloon ) if( _txtBalloon.parent ) _txtBalloon.parent.removeChild( _txtBalloon ) ;

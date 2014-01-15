@@ -1,8 +1,8 @@
 package com.refract.prediabetes.assets {
 	public dynamic class AssetManagerEmbeds {
 		//**Json
-		[Embed(source="../../../../../assets/json/SMdata1.json",mimeType="application/octet-stream")]
-		private var SM1Json : Class;
+		[Embed(source="../../../../../assets/json/PrediabetesData.json",mimeType="application/octet-stream")]
+		private var AppDataJson : Class;
 		
 		[Embed(source="../../../../../assets/json/copy_en.json",mimeType="application/octet-stream")] private var CopyJSON : Class;
 		

@@ -191,7 +191,7 @@ package com.refract.prediabetes.sections.utils {
 			}else if(_initComplete && _body){
 				graphics.clear();
 				graphics.beginFill(0xff0000,AppSettings.BUTTON_HIT_AREA_ALPHA);
-				if(AppSettings.PLATFORM == AppSettings.PLATFORM_PC){
+				if(AppSettings.DEVICE == AppSettings.DEVICE_PC){
 					graphics.drawRect(0,0,body.width,body.height);
 				}else{
 					graphics.drawRect(-AppSettings.BUTTON_HIT_AREA_EDGE,-AppSettings.BUTTON_HIT_AREA_EDGE,body.width+AppSettings.BUTTON_HIT_AREA_WIDTH,body.height+AppSettings.BUTTON_HIT_AREA_WIDTH);

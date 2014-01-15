@@ -12,9 +12,7 @@ package {
 	import flash.events.Event;
 	import flash.utils.ByteArray;
 
-	/**
-	 * @author robertocascavilla
-	 */
+	[SWF( backgroundColor='#000000', frameRate='25')]
 	public class PrediabetesCore extends Sprite 
 	{	
 		public function PrediabetesCore() 

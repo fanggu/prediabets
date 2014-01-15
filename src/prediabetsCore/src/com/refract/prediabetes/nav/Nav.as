@@ -73,10 +73,17 @@ package com.refract.prediabetes.nav {
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_START, onSMStart);
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onSMEnd);
 			
+			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze);
+			
 			DispatchManager.addEventListener(AppSettings.REQUEST_FULL_SCREEN_INTERACTIVE, onFSIRequest);
 			
 			stage.addEventListener(Event.RESIZE,onResize);
 			onResize();
+		}
+
+		private function onUnFreeze(event : Event) : void 
+		{
+			removeCurrentOverlay(  ) ; 
 		}
 		
 		
@@ -154,7 +161,7 @@ package com.refract.prediabetes.nav {
 				removeCurrentOverlay(null,true);
 			}
 			
-			DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_PAUSE));
+			//DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_PAUSE));
 			
 			//_backToVideo.visible = false ; 
 			
@@ -186,7 +193,7 @@ package com.refract.prediabetes.nav {
 					_overlayShown = false;
 					
 					DispatchManager.dispatchEvent(new Event(Flags.UN_FREEZE));
-					DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_UNPAUSE));
+	//				DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_UNPAUSE));
 					DispatchManager.dispatchEvent(new Event(NO_MORE_OVERLAYS));
 					DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.HIGHLIGHT_BUTTON,{buttonID:null}));
 				}

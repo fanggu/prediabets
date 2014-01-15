@@ -33,14 +33,7 @@ package com.refract.prediabetes.stateMachine.view {
 		{
 			AppSettings.stage.addEventListener( Event.RESIZE , onResize ) ; 
 			var myfontSize : int = _fontSize ; 
-			if( stateObjectText.interactions)
-			{
-				if( stateObjectText.interactions[0].interaction_type == Flags.CHOICE_IMG)
-				{
-					 myfontSize = SMSettings.STATE_TXT_FONT_SIZE - 18 ;
-					 if( SMVars.me.mobile) this.visible = false ; 
-				}
-			}
+			
 			
 			var style:Object = 
 			{ 

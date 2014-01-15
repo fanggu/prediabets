@@ -102,18 +102,6 @@ package com.refract.prediabetes.nav {
 			_headerButtons[LS_LOGO] = lsButton;
 			lastButton = lsButton;
 			lsButton.addEventListener(MouseEvent.CLICK,onLogoClicked);
-			
-			
-			lsButton = new LSButton("footer_10_scene_selector",_textStyle);
-			_leftSide.addChild(lsButton);
-			lsButton.alpha = 0;
-			lsButton.visible = false;
-			
-			lsButton.x = lastButton.x + lastButton.width + _buttonSpace;
-			lsButton.y = _buttonY;
-			lsButton.addEventListener(MouseEvent.CLICK,headerButtonClick);
-			lastButton = lsButton;
-
 		}
 		
 		private function addMiddle():void{

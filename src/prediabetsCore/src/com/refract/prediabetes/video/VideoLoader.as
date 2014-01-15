@@ -18,6 +18,7 @@ package com.refract.prediabetes.video {
 	import org.bytearray.video.events.SimpleStageVideoEvent;
 
 	import flash.display.Bitmap;
+	import flash.display.BlendMode;
 	import flash.display.Graphics;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -36,6 +37,8 @@ package com.refract.prediabetes.video {
 		
 		private static var _i : VideoLoader;
 		private var _lastPos : Number;
+		private var _videoBackground : Sprite;
+		private var _videoBackgroundMask : Sprite;
 		public static function get i():VideoLoader{ return _i; }
 		public static function set i(vl:VideoLoader):void{ _i = vl;} 
 		
@@ -68,9 +71,6 @@ package com.refract.prediabetes.video {
 		
 		protected var _videoClickListener:Sprite;
 		
-		/*
-		 * Begin the rewrite 
-		 */
 		protected var _simpleVid:SimpleStageVideo;
 		protected var _simpleVidAvailable:Boolean;
 		protected var _failedToPlay:Boolean;
@@ -105,7 +105,6 @@ package com.refract.prediabetes.video {
 		}
 		public function playVideo()  : void
 		{
-			trace('::playVideo::')
 			paused = false ; 
 			if( _netStream) 
 			{
@@ -115,7 +114,6 @@ package com.refract.prediabetes.video {
 		}
 		public function resumeVideo()  : void
 		{
-			trace('::resumeVideo::')
 			paused = false ; 
 			if( _netStream){
 				 _netStream.resume() ; 
@@ -123,7 +121,6 @@ package com.refract.prediabetes.video {
 		}
 		public function rePlayVideo( url : String) : void
 		{
-			trace('::rePlayVideo::')
 			paused = false ; 
 			if( _netStream) 
 				_netStream.play(
@@ -156,6 +153,19 @@ package com.refract.prediabetes.video {
 		protected function preInit( evt : Event ) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, preInit);
+			
+			
+			_videoBackground = new Sprite();
+			addChild(_videoBackground);
+			
+			_videoBackgroundMask = new Sprite() ; 
+			addChild( _videoBackgroundMask ) ; 
+			
+			_videoBackground.blendMode = BlendMode.LAYER;
+			this.blendMode = BlendMode.LAYER ; 
+			_videoBackgroundMask.blendMode = BlendMode.ERASE;
+			
+			drawVideoBackground();
 			
 			DispatchManager.addEventListener(Flags.DEACTIVATE_VIDEO_RUN, deActivateVideoRun );
 			DispatchManager.addEventListener(Flags.ACTIVATE_VIDEO_RUN, onActivateVideoRun );
@@ -206,6 +216,18 @@ package com.refract.prediabetes.video {
 			g.beginFill(0xff0000,0);
 			g.drawRect(AppSettings.VIDEO_LEFT,AppSettings.VIDEO_TOP,AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT);
 		}
+		private function drawVideoBackground( ) : void
+		{
+			var g:Graphics = _videoBackground.graphics;
+			g.clear();
+			g.beginFill(0xffFFFF,1);
+			g.drawRect( 0 , 0 , stage.stageWidth , stage.stageHeight );
+			
+			var gg : Graphics = _videoBackgroundMask.graphics; 
+			gg.clear() ; 
+			gg.beginFill(0xff0099 , 1 ) ; 
+			gg.drawRect(AppSettings.VIDEO_LEFT,AppSettings.VIDEO_TOP,AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT );
+		}
 		
 		public function activateClickPause():void
 		{
@@ -246,7 +268,8 @@ package com.refract.prediabetes.video {
 		{
 			switch(evt.type){
 				case(MouseEvent.CLICK):
-					if(paused){
+					if(paused)
+					{
 						DispatchManager.dispatchEvent( new BooleanEvent( Flags.DRAW_VIDEO_STATUS ,true ) ) ;
 						DispatchManager.dispatchEvent( new BooleanEvent( Flags.UPDATE_PLAY_BUTTON , true)) ;
 						resumeVideo();
@@ -281,6 +304,11 @@ package com.refract.prediabetes.video {
 			{
 				drawVideoClickListener();
 			}
+			if( _videoBackground )
+			{
+				drawVideoBackground( ) ; 
+				//_videoBackgroundMask.y = 
+			}
 			if(_loader)
 			{
 				_loader.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2;
@@ -308,7 +336,6 @@ package com.refract.prediabetes.video {
 		}
 		private function deActivateVideoRun( evt : Event = null) : void
 		{
-			
 			_deActivate = true ; 
 			DispatchManager.removeEventListener(Event.ENTER_FRAME , run ) ; 
 			SMVars.me.nsStreamTime = 0 ; 
@@ -319,6 +346,8 @@ package com.refract.prediabetes.video {
 			{
 				if( _netStream)
 				SMVars.me.nsStreamTime = _netStream.time * 1000 ;
+				SMVars.me.nsStreamTimeAbs = SMVars.me.nsStreamTime ; 
+				//trace(SMVars.me.nsStreamTime)
 			}
 			else
 				SMVars.me.nsStreamTime =0 ; 
@@ -377,7 +406,7 @@ package com.refract.prediabetes.video {
 						+AppSettings.VIDEO_FILE_EXT;
 				}
 				
-				trace('URL :' , url )
+				//trace('URL :' , url )
 				var items:Array = _bulkLoader.items;
 				var totalItems:int = items.length;
 				var videoItem:VideoItem;
@@ -442,19 +471,9 @@ package com.refract.prediabetes.video {
 				}
 				
 				/*
-				trace('yeee')
-				
 				var netClient:Object = new Object();
-				netClient.onMetaData = function(meta:Object)
-				{
-						//if( Function(this.onMetaData )) this.onMetaData = {} ; 
-				        trace('DURATION :'  , meta.duration);
-						for( var mc in meta)
-						{
-							//trace('mc ' , mc)
-						}
-				};
 				_netStream.client = netClient;
+				netClient.onMetaData = metaHandler ;  
 				 * 
 				 */
 				
@@ -464,6 +483,15 @@ package com.refract.prediabetes.video {
 			}else{
 				_failedToPlay = true;
 				addChild(_simpleVid);
+			}
+		}
+		
+		private function metaHandler( meta : Object ) : void
+		{ 
+	        trace('DURATION :'  , meta.duration);
+			for( var mc in meta)
+			{
+				//trace('mc ' , mc)
 			}
 		}
 		

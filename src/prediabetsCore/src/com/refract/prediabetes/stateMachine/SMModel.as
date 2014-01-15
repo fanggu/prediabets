@@ -9,14 +9,6 @@ package com.refract.prediabetes.stateMachine
 	 */
 	public class SMModel 
 	{
-		/*
-		[Embed(source="../../../../../bin/data/flv/laptop_intro.flv" , mimeType="application/octet-stream")] private var LaptopVideo:Class;
-	    [Embed(source="../../../../../bin/data/flv/cheetah.flv" , mimeType="application/octet-stream")] private var CheetahVideo:Class;
-		[Embed(source="../../../../../bin/data/flv/ls_test1.flv" , mimeType="application/octet-stream")] private var LSVideo:Class;
-		[Embed(source="../../../../../bin/data/flv/ls_test1_400.flv" , mimeType="application/octet-stream")] private var LS_400_Video : Class;
-		*/
-		
-		
 		private var _dictStates : Dictionary ; 
 		private var _dictStatesNumber : Dictionary ; 
 		private var _dictAnswers : Dictionary ; 
@@ -25,68 +17,36 @@ package com.refract.prediabetes.stateMachine
 		public var selectedInteraction : int ;
 		public var initState : String ;
 		public var endState : String ;
-		//public var totStates : int ; 
-		//public var totQuestions : int ;
-		public var selectedModule : int ; 
-		//public var deathVideo : String ; 
-		//public var death_message_box : Array ;
-		//public var scoreTot : int ; 
-		
-		private var _newModule : Boolean ; 
-		
-		private var _activatedStates : Dictionary ;
+		public var slowStates : Array ; 
 		 
 		public function SMModel()
 		{
 			
 		}
 		
-		protected function getJsonObject( module : int  ) : Object
+		protected function getJsonObject( ) : Object
 		{
-			var bytes : ByteArray = AssetManager.getEmbeddedAsset( "SM" + module + 'Json' ) as ByteArray;
+			var bytes : ByteArray = AssetManager.getEmbeddedAsset( "AppDataJson" ) as ByteArray;
 			var jsonString : String = bytes.readUTFBytes( bytes.length) ;
 			var jsonObject : Object = JSON.parse(jsonString );
 			return jsonObject ; 
 		}
-		public function init( module : int ) : void
+		public function init( ) : void
 		{
-			var jsonObject : Object = getJsonObject( module) ; 
+			var jsonObject : Object = getJsonObject( ) ; 
 			
-			_newModule = false ; 
-			if( module != selectedModule)
-			{
-				_newModule = true ; 
-				selectedModule = module ;
-			}
 			_dictStates = new Dictionary( true );
 			_dictStatesNumber= new Dictionary( true );
 			_dictAnswers = new Dictionary( true ) ; 
-			
-			
-			
+
 			initState = jsonObject.data.meta.start_state ; 
-			
-			
 			endState = jsonObject.data.meta.state_dict[jsonObject.data.meta.state_dict.length -1 ] ; 
 			
-			
-			
-			 /*
-			var i : int ;
-			for( i = 0 ; i < totStates ; i++)
-			{
-				var nameState : String = jsonObject.data.meta.state_dict[i] ;
-				_dictStatesNumber[ nameState ] = i ;
-			}
-			 * 
-			 */
+			slowStates = jsonObject.data.meta.slow_down_states ; 
 			for( var state :String in jsonObject.data.states)
 			{
 				_dictStates[state] = jsonObject.data.states[state];
 			}
-			
-			
-			if( _newModule ) createActivatedStatesDictionary() ; 
 		}
 		
 		public function setAnswer( value : Boolean , address : String ) : void
@@ -105,18 +65,6 @@ package com.refract.prediabetes.stateMachine
 			}
 		}
 		
-		private function createActivatedStatesDictionary() : void
-		{
-			_activatedStates = new Dictionary( true ) ; 
-		}
-		public function stateActivate( address : String  ) : void
-		{
-			_activatedStates[ address ] = true ;  
-		}
-		public function get statesActivatedDict() : Dictionary
-		{
-			return _activatedStates ;
-		}
 		
 		public function setState( value : Object , address : String) : void
 		{
@@ -127,6 +75,11 @@ package com.refract.prediabetes.stateMachine
 			var stateObject : Object = _dictStates[selectedState] ; 
 			stateObject.name = selectedState ; 
 			return _dictStates[selectedState];
+		}
+		
+		public function get dictState() : Dictionary
+		{
+			return _dictStates ; 
 		}
 		
 		/*

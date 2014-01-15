@@ -1,6 +1,6 @@
 AnePlatforms//Id.lib/NativeAlert.ane=pl.mateuszmackowiak.nativeANE.NativeAlert
 AnePlatforms//Platforms.lib/NativeAlert.ane=iPhone-ARM,iPhone-x86,Windows-x86,Android-ARM,default
-AnesChanged=33
+AnesChanged=37
 com.powerflasher.fdt.core.CompatiblePlayers=AIR_Debug_Launcher
 com.powerflasher.fdt.core.CompilerArguments=-static-link-runtime-shared-libraries\=true\n-target-player\={playerVersion}\n-library-path+\="{flexSDK}/frameworks/locale/en_US"\n-default-size\=550,400
 com.powerflasher.fdt.core.DefaultOutputFolder=bin

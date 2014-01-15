@@ -44,7 +44,7 @@ package com.refract.prediabetes.nav.footer {
 			buttonMode = true;
 			
 			this.graphics.beginFill(0xff0000,AppSettings.BUTTON_HIT_AREA_ALPHA);
-			if(AppSettings.PLATFORM == AppSettings.PLATFORM_PC){
+			if(AppSettings.DEVICE == AppSettings.DEVICE_PC){
 				graphics.drawRect(0,0,width,height);
 			}else{
 				this.graphics.drawRect(-AppSettings.BUTTON_HIT_AREA_EDGE,-AppSettings.BUTTON_HIT_AREA_EDGE,width+AppSettings.BUTTON_HIT_AREA_WIDTH,height+AppSettings.BUTTON_HIT_AREA_WIDTH);
@@ -72,7 +72,9 @@ package com.refract.prediabetes.nav.footer {
 			if(pauseBtn.visible)
 			{
 				DispatchManager.dispatchEvent(new Event(Flags.FREEZE));
-			}else{
+			}
+			else
+			{
 				DispatchManager.dispatchEvent(new Event(Flags.UN_FREEZE));
 			}
 		}

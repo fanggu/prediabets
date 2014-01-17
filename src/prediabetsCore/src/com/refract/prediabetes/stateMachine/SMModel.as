@@ -16,6 +16,7 @@ package com.refract.prediabetes.stateMachine
 		public var selectedState : String ; 
 		public var selectedInteraction : int ;
 		public var initState : String ;
+		public var initButtonState : String ;
 		public var endState : String ;
 		public var slowStates : Array ; 
 		 
@@ -24,7 +25,7 @@ package com.refract.prediabetes.stateMachine
 			
 		}
 		
-		protected function getJsonObject( ) : Object
+		private function getJsonObject( ) : Object
 		{
 			var bytes : ByteArray = AssetManager.getEmbeddedAsset( "AppDataJson" ) as ByteArray;
 			var jsonString : String = bytes.readUTFBytes( bytes.length) ;
@@ -40,13 +41,25 @@ package com.refract.prediabetes.stateMachine
 			_dictAnswers = new Dictionary( true ) ; 
 
 			initState = jsonObject.data.meta.start_state ; 
-			endState = jsonObject.data.meta.state_dict[jsonObject.data.meta.state_dict.length -1 ] ; 
+			initButtonState = jsonObject.data.meta.init_button_state ;
+			endState = jsonObject.data.meta.end_state ; 
 			
 			slowStates = jsonObject.data.meta.slow_down_states ; 
 			for( var state :String in jsonObject.data.states)
 			{
 				_dictStates[state] = jsonObject.data.states[state];
+				//trace('state ' , state)
 			}
+			
+			var stateSlow : Object = {} ; 
+			var interaction : Object = {} ; 
+			interaction.final_state = '' ; 
+			interaction.interaction_type = 'none' ;
+			interaction.video_name = '' ;
+			interaction.trigger = -1  ;  
+			stateSlow.interactions = [interaction] ;
+
+			_dictStates[ SMSettings.STATE_SLOW ] = stateSlow ; 
 		}
 		
 		public function setAnswer( value : Boolean , address : String ) : void

@@ -23,6 +23,9 @@ package com.refract.prediabetes.assets {
 
 		[Embed(source="../../../../../assets/img/preloader_redArrow.png")] private var RedArrow : Class;
 		[Embed(source="../../../../../assets/img/pause.png")] private var Pause : Class;
+		[Embed(source="../../../../../assets/img/audio/audio_on.png")] private var AudioOn : Class;
+		[Embed(source="../../../../../assets/img/audio/audio_off.png")] private var AudioOff : Class;
+		[Embed(source="../../../../../assets/img/backward_button.png")] private var BackwardButton : Class;
 
 		
 		[Embed(source="../../../../../assets/img/social/facebook.png")] public var Facebook : Class;

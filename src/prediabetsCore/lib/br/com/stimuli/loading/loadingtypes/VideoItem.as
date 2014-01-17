@@ -8,7 +8,8 @@ package br.com.stimuli.loading.loadingtypes {
     import flash.utils.*;
 
     /** @private */
-    public class VideoItem extends LoadingItem {
+    public class VideoItem extends LoadingItem 
+	{
 
         // for video:
         private var nc:NetConnection;

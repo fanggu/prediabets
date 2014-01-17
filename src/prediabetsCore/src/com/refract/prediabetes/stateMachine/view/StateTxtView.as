@@ -34,7 +34,8 @@ package com.refract.prediabetes.stateMachine.view {
 			AppSettings.stage.addEventListener( Event.RESIZE , onResize ) ; 
 			var myfontSize : int = _fontSize ; 
 			
-			
+			var w : Number = SMSettings.STATE_TXT_MAX_W*AppSettings.RATIO ; 
+			if( stateObjectText.width ) w = stateObjectText.width ; 
 			var style:Object = 
 			{ 
 				fontSize: myfontSize
@@ -43,7 +44,7 @@ package com.refract.prediabetes.stateMachine.view {
 				, multiline: true
 				, wordWrap : true
 			//	, width: 500
-				, width : SMSettings.STATE_TXT_MAX_W*AppSettings.RATIO 
+				, width : w 
 			} ; 
 			
 			txt = TextManager.makeText( SMSettings.FONT_STATETXT ,  null , style) ;

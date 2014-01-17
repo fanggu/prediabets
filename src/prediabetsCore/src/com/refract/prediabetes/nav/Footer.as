@@ -1,4 +1,5 @@
 package com.refract.prediabetes.nav {
+	import com.refract.prediabetes.nav.footer.BackwardButton;
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
@@ -25,6 +26,7 @@ package com.refract.prediabetes.nav {
 		
 		//Flags
 		private const PLAY_PAUSE:String = "PLAY_PAUSE";
+		private const BACKWARD_BUTTON:String = "BACKWARD_BUTTON";
 		private const SOUND:String = "SOUND";
 		private const FULL_SCREEN:String = "FULL_SCREEN";
 		private const START_AGAIN:String = "startAgain";
@@ -35,7 +37,8 @@ package com.refract.prediabetes.nav {
 		private var _footerButtons : Dictionary ; 
 		//special buttons
 		private var _backToVideo:LSButton; 
-		private var _playPauseButton : PlayPauseButton ; 
+		private var _playPauseButton : PlayPauseButton ;
+		private var _backwardButton : BackwardButton ;  
 		
 		private var _buttonSpace:int = 12;
 		
@@ -90,6 +93,7 @@ package com.refract.prediabetes.nav {
 			DispatchManager.addEventListener(Flags.HIDE_FOOTER_PLAY_PAUSE, togglePauseShown);
 			DispatchManager.addEventListener(Flags.ACTIVATE_PROGRESS_BAR , activateProgressBar);
 			DispatchManager.addEventListener(Flags.DE_ACTIVATE_PROGRESS_BAR , deActivateProgressBar);
+			//DispatchManager.addEventListener(Flags.ON_FLV_METADATA , updateClipLength);
 			
 			DispatchManager.addEventListener(Flags.FREEZE , onFreeze);
 			DispatchManager.addEventListener(Flags.UN_FREEZE , onUnFreeze); 
@@ -205,15 +209,21 @@ package com.refract.prediabetes.nav {
 		}
 		private function createTopLeftFooter() : void
 		{
+			_backwardButton = new BackwardButton();
+			_footerTopLeft.addChild( _backwardButton );
+			_backwardButton.id = BACKWARD_BUTTON;
+			_backwardButton.visible = true;
+			
 			_playPauseButton = new PlayPauseButton();
 			_footerTopLeft.addChild( _playPauseButton );
 			_playPauseButton.id = PLAY_PAUSE;
 			_playPauseButton.visible = true;
+			_playPauseButton.x = _backwardButton.x + _backwardButton.width + 20  ; 
 			
 			
 			var snd:SoundButton = new SoundButton();
 			_footerTopLeft.addChild(snd);
-			snd.x = _playPauseButton.width + 20  ; 
+			snd.x = _playPauseButton.x + _playPauseButton.width + 20  ; 
 			snd.y = snd.height / 2 ; 
 			snd.id = SOUND;
 			
@@ -262,12 +272,8 @@ package com.refract.prediabetes.nav {
 			_backToVideo.addEventListener(MouseEvent.CLICK, onBackToVideo);
 			_backToVideo.visible = false ; 
 			_backToVideo.y = -40 ; 
-			
-			
 		}
-		
 
-		
 		public function showBackToVideo() : void
 		{
 			_backToVideo.visible = true ; 
@@ -279,13 +285,13 @@ package com.refract.prediabetes.nav {
 		
 		protected function togglePauseShown(evt:Event):void
 		{
-			switch(evt.type){
+			switch(evt.type)
+			{
 				case(Flags.SHOW_FOOTER_PLAY_PAUSE):
 					_playPauseButton.visible = true ; 
 				break;
 				default:
 					_playPauseButton.visible = true ; 
-					
 			}
 		}
 		
@@ -318,9 +324,11 @@ package com.refract.prediabetes.nav {
 		private function activateProgressBar( evt : ObjectEvent ) : void
 		{		
 			_tween = evt.object.tween ; 
-			_clip_length = Number( evt.object.clip_length ) 
-			if( _tween )
-				_clip_length = _clip_length + SMSettings.SLOW_TIMER_X ;
+			_clip_length = evt.object.clip_length ; 
+			 if( _tween )
+			{
+				_clip_length = _clip_length + SMSettings.SLOW_TIMER_X - 200 ;
+			}
 			 
 			addEventListener( Event.ENTER_FRAME , onProgressBar) ;
 		}
@@ -340,12 +348,23 @@ package com.refract.prediabetes.nav {
 			else
 			{
 				perc = (SMVars.me.nsStreamTimeAbs  ) / _clip_length ; 
+				//trace(_clip_length )
 				if( perc > 1 ) perc = 1 ; 
 				
 				_progressBarBox.scaleX = perc  ; 
 			}
 			
 		}
+		/*
+		private function updateClipLength( evt : ObjectEvent ) : void
+		{
+			_clip_length = Number( evt.object.clip_length )  ;
+		}
+		 * 
+		 */
+		
+		
+		
 		private function onBackToVideo(evt:Event):void
 		{	
 			_nav.onBackToVideo( ) ; 
@@ -424,6 +443,6 @@ package com.refract.prediabetes.nav {
 				this.y = stage.stageHeight - AppSettings.RESERVED_FOOTER_HEIGHT;
 			}
 		}
-		
+
 	}
 }

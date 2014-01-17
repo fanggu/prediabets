@@ -91,6 +91,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			btObj.btName = name ; 
 			btObj.wrong = _value ; 
 			
+			
 			if( _value ) 
 			{ 
 				deActivate() ;

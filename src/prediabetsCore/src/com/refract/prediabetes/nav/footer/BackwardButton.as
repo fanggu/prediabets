@@ -13,15 +13,13 @@ package com.refract.prediabetes.nav.footer {
 	import flash.media.SoundTransform;
 
 
-	public class SoundButton extends Sprite {
-		
-		private var colour:uint = AppSettings.GREY;
-		
+	public class BackwardButton extends Sprite 
+	{		
 		public var id : String;
-		private var audioOn : Bitmap;
-		private var audioOff : Bitmap;
+		private var backwardButton : Bitmap;
 		
-		public function SoundButton() {
+		public function BackwardButton() 
+		{
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -29,7 +27,6 @@ package com.refract.prediabetes.nav.footer {
 		{
 			drawBack() ; 
 			createStates() ;
-			drawStates();
 			
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOverOut);
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOverOut);
@@ -50,19 +47,8 @@ package com.refract.prediabetes.nav.footer {
 		}
 		private function createStates() : void
 		{
-			audioOn = AssetManager.getEmbeddedAsset("AudioOn");
-			audioOff = AssetManager.getEmbeddedAsset("AudioOff");
-			addChild( audioOn ) ; 
-			addChild( audioOff ) ; 
-		}
-		private function drawStates() : void
-		{
-			audioOn.visible = false ; 
-			audioOff.visible = false ; 
-			if(SoundMixer.soundTransform.volume != 0)
-				audioOn.visible = true ; 
-			else
-				audioOff.visible = true ; 
+			backwardButton = AssetManager.getEmbeddedAsset("BackwardButton");
+			addChild( backwardButton ) ; 
 		}
 
 		private function onMouseOverOut(evt : MouseEvent) : void 
@@ -79,17 +65,7 @@ package com.refract.prediabetes.nav.footer {
 		
 		private function onClick(evt:Event):void
 		{
-			DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralClick") );	
-			if(SoundMixer.soundTransform.volume != 0)
-			{
-				SoundMixer.soundTransform = new SoundTransform(0);
-				drawStates()
-			}
-			else
-			{
-				SoundMixer.soundTransform = new SoundTransform(1);
-				drawStates()
-			}
+			DispatchManager.dispatchEvent( new Event( Flags.ON_BACKWARD ) ) ; 
 		}
 	}
 }

@@ -1,4 +1,5 @@
-package com.refract.prediabetes.video {
+package com.refract.prediabetes.video 
+{
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
 	import br.com.stimuli.loading.loadingtypes.VideoItem;
@@ -9,6 +10,7 @@ package com.refract.prediabetes.video {
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.events.BooleanEvent;
+	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.refract.prediabetes.video.events.LSVideoEvent;
@@ -29,58 +31,40 @@ package com.refract.prediabetes.video {
 
 	public class VideoLoader extends Sprite 
 	{
-		
 		public static const BulkLoaderID:String = "Videos";
 		
 		public static const VIDEO_WIDTH:int = 1024;
 		public static const VIDEO_HEIGHT:int = 576;
+		protected static var _defaultLoadingOrder:Array = [ LSVideoEvent.STREAM_VIDEO_ONLY ];
 		
 		private static var _i : VideoLoader;
 		private var _lastPos : Number;
 		private var _videoBackground : Sprite;
 		private var _videoBackgroundMask : Sprite;
-		public static function get i():VideoLoader{ return _i; }
-		public static function set i(vl:VideoLoader):void{ _i = vl;} 
-		
-		
-		public static function set defaultLoadingOrder(newOrder:Array):void{ _defaultLoadingOrder = newOrder; }
-		public static function get defaultLoadingOrder():Array{ return _defaultLoadingOrder; }
-		
-		protected static var _defaultLoadingOrder:Array = [ LSVideoEvent.STREAM_VIDEO_ONLY ];
-		
+		private var _metaActive : Boolean ; 
+		private var _iterMetaFixBug : int ;
 		protected var _loadingOrder:Array;
-		public function set loadingOrder(newOrder:Array):void{ _loadingOrder = newOrder; }
-		public function get loadingOrder():Array{ return _loadingOrder; }
-
-		public function get url():String {return _url;}
 		protected var _url:String;
 		protected var _currentStep:int = 0;
-		
 		protected var _loader:Sprite;
-		
 		protected var _standardVideo : Boolean;
 		protected var _netConnection : NetConnection;
 		protected var _netStream : NetStream;
 		protected var _backupNetStream : NetStream;
-		
 		protected var _hardwareDecoding : Boolean;
 		protected var _hardwareCompositing : Boolean;
 		protected var _fullGPU : Boolean;
-		public var paused : Boolean  = true;
-		
-		
 		protected var _videoClickListener:Sprite;
-		
 		protected var _simpleVid:SimpleStageVideo;
 		protected var _simpleVidAvailable:Boolean;
 		protected var _failedToPlay:Boolean;
-		
 		protected var _bulkLoader:BulkLoader;
+		private var _deActivate : Boolean ;
+		protected var _blackOn : Boolean ;
 		
-		public var videoAddress : String;
-		private var _deActivate : Boolean ; 
-		
-		protected var _blackOn : Boolean ; 
+		public var paused : Boolean  = true;
+		public var videoAddress : String; 
+		 
 		public function VideoLoader(){
 			super();
 			_i = this;
@@ -119,7 +103,7 @@ package com.refract.prediabetes.video {
 				 _netStream.resume() ; 
 			}
 		}
-		public function rePlayVideo( url : String) : void
+		public function rePlayVideo( ) : void
 		{
 			paused = false ; 
 			if( _netStream) 
@@ -148,8 +132,6 @@ package com.refract.prediabetes.video {
 				paused = false ; 
 			}
 		}
-
-		 
 		protected function preInit( evt : Event ) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, preInit);
@@ -182,8 +164,11 @@ package com.refract.prediabetes.video {
 			_backupNetStream = new NetStream(_netConnection);
 			_backupNetStream.addEventListener(NetStatusEvent.NET_STATUS, videoStatus);
 	        _backupNetStream.client = {};
-			
 			_netStream = _backupNetStream;
+			
+			var netClient:Object = new Object();
+			_netStream.client = netClient;
+			netClient.onMetaData = metaHandler ; 
 			
 			_simpleVid.attachNetStream(_netStream);
 			
@@ -266,7 +251,8 @@ package com.refract.prediabetes.video {
 		}
 		private function onVideoClick(evt:Event):void
 		{
-			switch(evt.type){
+			switch(evt.type)
+			{
 				case(MouseEvent.CLICK):
 					if(paused)
 					{
@@ -285,20 +271,19 @@ package com.refract.prediabetes.video {
 			
 		}
 
-		protected function onInit(evt:Event):void{
+		protected function onInit(evt:Event):void
+		{
 			_simpleVid.removeEventListener(Event.INIT, onInit);
-			
-			
 			stage.addEventListener(Event.RESIZE,onResize);
-			
 			_simpleVidAvailable = true;
-			if(_url && _failedToPlay == true){
+			if(_url && _failedToPlay == true)
+			{
 				createVideo(_url);
 			}
 		}
 		
-		protected function onResize(evt:Event = null):void{
-			//_simpleVid.resize( stage.stageWidth , stage.stageHeight - AppSettings.RESERVED_FOOTER_HEIGHT) //-AppSettings.RESERVED_HEIGHT ) ;
+		protected function onResize(evt:Event = null):void
+		{
 			_simpleVid.resize( stage.stageWidth , stage.stageHeight -AppSettings.RESERVED_HEIGHT ) ;
 			if(_videoClickListener)
 			{
@@ -307,7 +292,6 @@ package com.refract.prediabetes.video {
 			if( _videoBackground )
 			{
 				drawVideoBackground( ) ; 
-				//_videoBackgroundMask.y = 
 			}
 			if(_loader)
 			{
@@ -375,20 +359,14 @@ package com.refract.prediabetes.video {
 		protected function createVideo( nameVideo : String) : void
 		{		
 			showLoader() ; 
+			_metaActive = true ;  
+			_iterMetaFixBug = 0 ; 
+			
 	  		_url = nameVideo;
-			if(_simpleVidAvailable){
+			if(_simpleVidAvailable)
+			{
 				_failedToPlay = false;
 				var url : String ; 
-				DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ; 
-				/*
-				 
-			 	var localPath:String = "video/flv/";
-				var videoBaseUrl : String = MainIOS.STORAGE_DIR.nativePath + "/" + localPath ;
-			 	
-			 	
-			 	 * 
-			 	 */
-			 
 				if( _url == AppSettings.INTRO_URL && AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
 				{
 					var ext : String = "flv" ;
@@ -406,7 +384,6 @@ package com.refract.prediabetes.video {
 						+AppSettings.VIDEO_FILE_EXT;
 				}
 				
-				//trace('URL :' , url )
 				var items:Array = _bulkLoader.items;
 				var totalItems:int = items.length;
 				var videoItem:VideoItem;
@@ -418,81 +395,61 @@ package com.refract.prediabetes.video {
 					}
 				} 
 				
-				/*
 				if( videoItem )
 				{
-					 trace('videoItem.metadata ' , videoItem.metaData )
-					 for( var mc in videoItem.metaData )
-					{
-						trace('mc ' , mc )
-					}
-				}
-				 * 
-				 */
-				
-				
-				if(videoItem){
-					videoItem.pausedAtStart = false;
+					 _metaActive = false ; 
+					 var obj : Object = {} ; obj.clip_length = Number( videoItem.metaData['duration'] ) * 1000  ;
+					 DispatchManager.dispatchEvent(new ObjectEvent( Flags.ON_FLV_METADATA , obj  ) ) ; 
 				}
 				
-				if( videoItem != null )
+				if(videoItem)
 				{
+					videoItem.pausedAtStart = false;
 					_netStream = videoItem.stream ;
 				}
 				else
 				{
 					_netStream = _backupNetStream ; 
 				}
+
+				_netStream.addEventListener(NetStatusEvent.NET_STATUS, videoStatus);
+				_netStream.bufferTime = 4;
+				_simpleVid.attachNetStream(_netStream);
 				
-				
-				
-				if(videoItem && !_netStream)
+				if( videoItem != null)
 				{
-    				_bulkLoader.loadNow(url);
-    				_netStream = videoItem.stream;
+					_netStream.resume() ; 
 				}
-				
-				
-				
-				if( _netStream ) 
+				else
 				{
-					_netStream.addEventListener(NetStatusEvent.NET_STATUS, videoStatus);
-					_netStream.bufferTime = 4;
-					_simpleVid.attachNetStream(_netStream);
-					
-					if( videoItem != null)
-					{
-						_netStream.resume() ; 
-					}
-					else
-					{
-						_netStream.play(url);
-					}
+					_netStream.play(url);
 				}
-				
-				/*
-				var netClient:Object = new Object();
-				_netStream.client = netClient;
-				netClient.onMetaData = metaHandler ;  
-				 * 
-				 */
-				
+
 				onResize();
 				paused = false ;
 				
-			}else{
+			}
+			else
+			{
 				_failedToPlay = true;
 				addChild(_simpleVid);
 			}
+			
+			DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ;
 		}
 		
 		private function metaHandler( meta : Object ) : void
 		{ 
-	        trace('DURATION :'  , meta.duration);
-			for( var mc in meta)
+			if( _metaActive )
 			{
-				//trace('mc ' , mc)
+				var obj = {} ; obj.clip_length = Number( meta.duration ) * 1000 ;
+				_iterMetaFixBug++ ;
+				if( _iterMetaFixBug > 1 )
+				{
+					DispatchManager.dispatchEvent(new ObjectEvent( Flags.ON_FLV_METADATA , obj ) ) ;
+				} 
 			}
+	        
 		}
 		
 		protected function showLoader():void
@@ -618,5 +575,14 @@ package com.refract.prediabetes.video {
 			_simpleVid.reattachStageVideo();
 		//	_simpleVid.toggle(true);
 		}
+		
+		
+		public static function get i():VideoLoader{ return _i; }
+		public static function set i(vl:VideoLoader):void{ _i = vl;} 
+		public function get url():String {return _url;}
+		public static function set defaultLoadingOrder(newOrder:Array):void{ _defaultLoadingOrder = newOrder; }
+		public static function get defaultLoadingOrder():Array{ return _defaultLoadingOrder; }
+		public function set loadingOrder(newOrder:Array):void{ _loadingOrder = newOrder; }
+		public function get loadingOrder():Array{ return _loadingOrder; }
 	}
 }

@@ -266,7 +266,6 @@ package com.refract.prediabetes.nav {
 		}
 		public function onBackToVideo( ):void
 		{	
-			trace('remove current ovelay')
 			removeCurrentOverlay();
 		}
 		

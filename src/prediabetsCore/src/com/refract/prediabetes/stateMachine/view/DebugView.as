@@ -36,9 +36,9 @@ package com.refract.prediabetes.stateMachine.view {
 		
 		private function createGoNextDebug() : void
 		{
-			var goNext : Box = new Box( 50 , 50 , 0xff0099 ) ; 
+			var goNext : Box = new Box( 50 , 120 , 0x990012 ) ; 
 			panel.addChild( goNext ) ;
-			goNext.y = 200 ; 
+			goNext.y = 60 ; 
 			goNext.addEventListener(MouseEvent.CLICK, goNextState ) ; 
 		}
 		private function goNextState( evt : MouseEvent ) : void
@@ -78,13 +78,10 @@ package com.refract.prediabetes.stateMachine.view {
 			panel = new Sprite() ; 
 			panel.graphics.lineStyle( 1 , 0x999999 ) ;
 			panel.graphics.beginFill( 0x999999 );
-			panel.graphics.drawRect( 0, 0, 200, 150 );
+			panel.graphics.drawRect( 0, 0, 300, 60 );
 			panel.graphics.endFill( );
 			addChild( panel );
 			panel.alpha = .5 ;
-			
-		//	panel.x = 10 ; 
-			panel.y = 690 ; 
 			
 			_myT =  createText('' ) ;
 			_myT.y = 10 ;
@@ -97,7 +94,7 @@ package com.refract.prediabetes.stateMachine.view {
 		private function onResize(evt:Event = null):void{
 		//	panel.x = 10;
 			panel.x = AppSettings.VIDEO_LEFT + 10;
-			panel.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT / 2; 	
+			panel.y = AppSettings.VIDEO_TOP + 20 ; 	
 		}
 	}
 }

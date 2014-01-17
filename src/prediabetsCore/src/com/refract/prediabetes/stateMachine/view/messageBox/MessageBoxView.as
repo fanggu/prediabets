@@ -8,9 +8,6 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 	import flash.display.Sprite;
 	import flash.events.Event;
 
-	/**
-	 * @author robertocascavilla
-	 */
 	public class MessageBoxView extends Sprite 
 	{
 		private var _valueObject : Object ;
@@ -27,10 +24,6 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 			DispatchManager.addEventListener( Event.ENTER_FRAME, run ) ;
 		}
 		
-		private function delayRunTime() : void
-		{
-			DispatchManager.addEventListener( Event.ENTER_FRAME, run ) ;		
-		}
 		
 		private function run( evt : Event ) : void
 		{
@@ -48,9 +41,10 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 		private function show() : void
 		{
 			var stateObjectText : Object = new Object() ; 
-			stateObjectText.state_txt = parseCopy() ; 
+			stateObjectText.state_txt = _valueObject.copy ; 
 			stateObjectText.state_txt_x = 50 ;
-			stateObjectText.state_txt_y = 70;
+			stateObjectText.state_txt_y = 40;
+			//stateObjectText.width = 400 ; 
 			
 			_stateTxtView  = new StateTxtView( stateObjectText , 30 ) ; 
 			_stateTxtView.updateColor( _valueObject.color ) ; 
@@ -66,53 +60,6 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 		}
 		
 		
-		private function parseCopy() : String
-		{
-			var copy : String = _valueObject.copy ;
-			var loadVarsIndexOf : int = _interaction_meta.indexOf('load_vars') ; 
-			if( loadVarsIndexOf >= 0)
-			{
-				var pattern:RegExp = /-?[A-Z]+/g;
-				var arr : Array = _interaction_meta.match(pattern);
-				var i : int = 0 ; 
-				var l : int = arr.length ; 
-				var tempRegExp : RegExp ; 
-				var tempString : String ; 
-						
-				for( i = 0 ; i < l ; i++)
-				{
-					tempString = '{' + arr[i] + '}' ; 
-					tempRegExp =  new RegExp(tempString);
-							
-					switch( arr[i])
-					{
-						case 'XX' : 
-							copy = copy.replace( tempRegExp , String( SMVars.me.qp_counter )) ; 
-						break ;
-						case 'YY' :
-							copy = copy.replace( tempRegExp , String( SMVars.me.qp_timer )) ;
-						break ; 
-						
-						case 'DATE' :
-						
-							var today_date:Date = new Date();
-							var thismonth:uint = today_date.getMonth();
-							//var today_time;
-							var currentTime:Date = new Date();
-							var minutes : Number = currentTime.getMinutes();
-							//var seconds : Number = currentTime.getSeconds();
-							//var hours : Number = currentTime.getHours() * 30 + currentTime.getMinutes() / 2;
-							var minutesString : String = String( minutes );
-							if( minutes < 10) minutesString = '0'+minutesString ;
-							var mnth:Array = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
-							copy = (today_date.getDate()+ ' ' + mnth[thismonth]+  ' '+today_date.getFullYear()+" "+ currentTime.getHours() + ':' + minutesString ); 
-							
-						break ;
-					}
-				}
-			}
-			return copy ; 
-		}
 		public function dispose() : void
 		{
 			DispatchManager.removeEventListener( Event.ENTER_FRAME, run ) ; 

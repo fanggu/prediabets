@@ -9,6 +9,8 @@ package com.refract.prediabetes.stateMachine.flags {
 		//public static const UPDATE_UI_PROGRESS 					: String = 'updateProgress' ; 
 		public static const ACTIVATE_PROGRESS_BAR 				: String = 'activateProgressBar' ; 
 		public static const DE_ACTIVATE_PROGRESS_BAR 				: String = 'deActivateProgressBar' ; 		
+		public static const ON_FLV_METADATA 					: String = 'onFLVMetaData' ; 
+		public static const ON_BACKWARD 						: String = 'onBackward' ; 
 		
 		public static const FREEZE 								: String = 'freeze' ; 
 		public static const UN_FREEZE 							: String = 'unfreeze' ; 
@@ -78,20 +80,24 @@ package com.refract.prediabetes.stateMachine.flags {
 		
 		public static const VIDEO_OVERLAY_END						: String = 'videoOverlayEnd' ;
 		
-		public static const ACTIVATE_VIDEO_RUN 					: String = 'activateVideoRun' ;
+		public static const ACTIVATE_VIDEO_RUN 						: String = 'activateVideoRun' ;
 		public static const DEACTIVATE_VIDEO_RUN 					: String = 'deActivateVideoRun' ;
 		
 		public static const EXEC_TIMER_SCHEDULER 					: String ='execTimerScheduler';
 		
 		//**comm with internal UI
-		public static const UPDATE_UI 							: String = 'updateUI';
+		public static const UPDATE_UI 								: String = 'updateUI';
+		public static const CREATE_INIT_BUTTON 						: String = 'createInitButton';
+		public static const REMOVE_INIT_BUTTON						: String = 'removeInitButton' ; 
 		
-		public static const SHOW_FOOTER_PLAY_PAUSE				: String = 'SHOW_FOOTER_PLAY_PAUSE';
-		public static const HIDE_FOOTER_PLAY_PAUSE				: String = 'HIDE_FOOTER_PLAY_PAUSE';
+		
+		public static const SHOW_FOOTER_PLAY_PAUSE					: String = 'SHOW_FOOTER_PLAY_PAUSE';
+		public static const HIDE_FOOTER_PLAY_PAUSE					: String = 'HIDE_FOOTER_PLAY_PAUSE';
 		
 		//INTERACTION LIST
-		public static const CHOICE 								: String = 'choice' ;
+		public static const CHOICE 									: String = 'choice' ;
 		public static const NONE 									: String = 'none' ;
+		public static const INIT_BUTTON 							: String = 'initButton' ; 
 		
 		//DEBUG
 		public static const UPDATE_DEBUG_PANEL_VIDEO 				: String = 'updateDebugPanelVideo' ;

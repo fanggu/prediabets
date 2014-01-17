@@ -290,7 +290,6 @@ package com.refract.prediabetes
 			DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);					
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onStateMachineEnd);	
 			_smController.start({module:1,selectedState:null});
-			trace('sm called start')
 		}
 		
 		

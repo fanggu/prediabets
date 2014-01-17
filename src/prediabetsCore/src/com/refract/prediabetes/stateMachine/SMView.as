@@ -1,11 +1,9 @@
 package com.refract.prediabetes.stateMachine 
 {
 	import com.greensock.TweenMax;
-	import com.greensock.easing.Sine;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.stateMachine.VO.CoinVO;
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
 	import com.refract.prediabetes.stateMachine.events.OverlayEvent;
@@ -14,6 +12,7 @@ package com.refract.prediabetes.stateMachine
 	import com.refract.prediabetes.stateMachine.view.DebugView;
 	import com.refract.prediabetes.stateMachine.view.StateTxtView;
 	import com.refract.prediabetes.stateMachine.view.UIView;
+	import com.refract.prediabetes.stateMachine.view.buttons.ButtonChoice;
 	import com.refract.prediabetes.stateMachine.view.messageBox.MessageBoxView;
 	import com.refract.prediabetes.video.VideoLoader;
 	import com.robot.comm.DispatchManager;
@@ -24,8 +23,6 @@ package com.refract.prediabetes.stateMachine
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormatAlign;
 
 
 	/**
@@ -47,14 +44,15 @@ package com.refract.prediabetes.stateMachine
 		private var _initObject : Object ;
 		private var _countDownTimerTxt : TextField;
 		private var _bar : Box;
-		private var _initTime : Number;
-		private var _totTime : int;
+		
+		
 		private var _endWidthBar : Number;
 		
 		private var _stateTxtView : StateTxtView;
 		private var _messageBoxContView : Sprite;
 		private var _cpr : Boolean;
 		private var _closeButton : Sprite;
+		private var _initButton : ButtonChoice ; 
 		//private var _flashWhite : Boolean ; 
 		
 		public function SMView()
@@ -99,6 +97,7 @@ package com.refract.prediabetes.stateMachine
 			_balloonView = new Sprite ; 
 			_countDownCont = new Sprite() ; 
 			 
+			createInitButton() ; 
 			createLockButtonsQ();
 		}
 		
@@ -111,17 +110,19 @@ package com.refract.prediabetes.stateMachine
 		private function createInitialListener() : void
 		{
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_START, onStart );
+			DispatchManager.addEventListener(Flags.CREATE_INIT_BUTTON, onAddInitButton);
+			DispatchManager.addEventListener(Flags.REMOVE_INIT_BUTTON, onRemoveInitButton);
 		}
 		
 		protected function createListeners() : void
 		{
-			
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onEnd);
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_INTERACTIONS, onUpdateInteractions);
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_VIDEO, onUpdateVideo);
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_STATE_TEXT , onUpdateStateText);
 			DispatchManager.addEventListener(Flags.UPDATE_MESSAGE_BOX, onUpdateMessageBox);
 			DispatchManager.addEventListener(Flags.UPDATE_UI, onUpdateUI);
+			
 
 			//**PAUSE
 			DispatchManager.addEventListener(Flags.FREEZE, onFreeze );
@@ -145,6 +146,8 @@ package com.refract.prediabetes.stateMachine
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_VIDEO, onUpdateVideo);
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_STATE_TEXT, onUpdateStateText);
 			DispatchManager.removeEventListener(Flags.UPDATE_UI, onUpdateUI);
+			DispatchManager.removeEventListener(Flags.CREATE_INIT_BUTTON, onAddInitButton);
+			DispatchManager.removeEventListener(Flags.REMOVE_INIT_BUTTON, onRemoveInitButton);
 			DispatchManager.removeEventListener(Flags.FREEZE, onFreeze );
 			DispatchManager.removeEventListener(Flags.UN_FREEZE, onUnFreeze);	
 			DispatchManager.removeEventListener(Flags.FREEZE_BUTTONS, onFreeze );
@@ -179,28 +182,7 @@ package com.refract.prediabetes.stateMachine
 		}
 		//**/[FREEZE AND UNFREEZE]
 
-		
-		private function onAddLS6CloseButton( evt : Event ) : void
-		{
-			_closeButton = new Sprite() ; 
-			var closeButtonBtm : Bitmap = AssetManager.getEmbeddedAsset("LS6CloseButton") ;
-			_closeButton.addChild( closeButtonBtm ) ; 
-			_uiView.addChild( _closeButton ) ; 
-			//onResize() ; 
-			
-			_closeButton.visible = false ; 
-			_closeButton.addEventListener(MouseEvent.MOUSE_DOWN, onCloseButton) ;
-			if( AppSettings.RATIO > 1.2)
-			{
-				_closeButton.scaleX = _closeButton.scaleY = AppSettings.RATIO ; 
-			}
-			onResize() ; 
-		}
 
-		private function onCloseButton(event : MouseEvent) : void 
-		{
-			DispatchManager.dispatchEvent( new Event( Flags.CLOSE_QUESTIONS ) ) ; 
-		}
 
 		
 		private function onDrawBalloon( evt : OverlayEvent) : void
@@ -270,42 +252,7 @@ package com.refract.prediabetes.stateMachine
 			TweenMax.to( _countDownCont, 0 , { tint:null , canBePaused:true} );
 		}
 
-		private function onUpdateBarTimer( evt : StateEvent ) : void
-		{
-			var barH : Number = 8 * AppSettings.RATIO ; 
-			if( ! _bar) _bar = new Box( 1 , barH , SMSettings.DEEP_RED); 
-			 
-			_initTime = SMVars.me.getSMTimer() ;
-			_totTime = int( evt.stringParam ) * 1000 ;
-			_countDownCont.addChild( _bar ) ;  
-			
-			_bar.x = 0 ; 
-			_bar.y = 0 ; 
-			
-			_bar.width = 0 ; 
-			_endWidthBar = AppSettings.VIDEO_WIDTH ; 
-			DispatchManager.addEventListener( Event.ENTER_FRAME , barRun) ; 
-		}
-		private function onUpdateBarRemove( evt : Event ) : void
-		{
-			DispatchManager.removeEventListener( Event.ENTER_FRAME , barRun) ; 
-			
-			if( _bar ) 
-				if( _bar.parent ) 
-					_countDownCont.removeChild( _bar ) ; 
-		}
-		
-		private function barRun( evt : Event ) : void
-		{
-			var diffTime : Number = SMVars.me.getSMTimer() - _initTime ; 
-			var percTime : Number = (diffTime * 100) / _totTime ; 
-			_bar.width = ( percTime * _endWidthBar ) / 100 ;
-			if( diffTime >= _totTime)
-			{
-				DispatchManager.removeEventListener( Event.ENTER_FRAME , barRun) ; 
-			}
-		}
-		
+
 		private function onUpdateUI( evt : Event ) : void
 		{
 			_uiView.cleanUI() ;		
@@ -329,6 +276,38 @@ package com.refract.prediabetes.stateMachine
 						child.dispose() ; 
 					}
 			}
+		}
+		
+		private function createInitButton( ) : void
+		{
+			_initButton = new ButtonChoice("buttonFont", { fontSize:32  }, SMSettings.MIN_BUTTON_SIZE, 70  , true);
+			addChild( _initButton ) ; 
+			var interaction : Object = {} ;
+			interaction.copy = {} ;
+			var main : String = 'CIAO BELLA CIAO' ; 
+			interaction.copy.main = main ; 
+			interaction.iter = Flags.INIT_BUTTON ; 
+			interaction.choice_x = 50 ; 
+			interaction.choice_y = 70 ; 
+			interaction.interaction_meta = "wrong=false" ; 
+			removeChild( _initButton ) ; 
+			_initButton.setButton( interaction ) ; 
+		}
+		private function onAddInitButton( evt : Event ) : void
+		{
+			if( !_initButton ) createInitButton( )
+			addChild( _initButton ) ; 
+		}
+		private function onRemoveInitButton( evt : Event = null ) : void
+		{ 
+			if( _initButton )
+			{
+				_initButton.dispose() ; 
+				if( _initButton.parent ) 
+					_initButton.parent.removeChild( _initButton ) ; 
+				_initButton= null; 
+			}
+			
 		}
 	
 		private function onUpdateVideo( evt : StateEvent) : void

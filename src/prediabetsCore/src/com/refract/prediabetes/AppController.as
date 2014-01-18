@@ -10,6 +10,7 @@ package com.refract.prediabetes
 	import com.refract.prediabetes.nav.events.FooterEvent;
 	import com.refract.prediabetes.sections.intro.Intro;
 	import com.refract.prediabetes.stateMachine.SMController;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMView;
 	import com.refract.prediabetes.stateMachine.events.BooleanEvent;
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
@@ -289,7 +290,11 @@ package com.refract.prediabetes
 		{
 			DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);					
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onStateMachineEnd);	
-			_smController.start({module:1,selectedState:null});
+			
+			if( !SMSettings.DEBUG_GET_CLIP_LENGTH)
+				_smController.start();
+			else
+				_smController.startGetClipLength() ; 
 		}
 		
 		

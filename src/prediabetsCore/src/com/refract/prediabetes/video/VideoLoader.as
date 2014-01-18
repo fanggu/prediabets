@@ -3,11 +3,11 @@ package com.refract.prediabetes.video
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
 	import br.com.stimuli.loading.loadingtypes.VideoItem;
-
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.events.BooleanEvent;
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
@@ -15,10 +15,8 @@ package com.refract.prediabetes.video
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.refract.prediabetes.video.events.LSVideoEvent;
 	import com.robot.comm.DispatchManager;
-
 	import org.bytearray.video.SimpleStageVideo;
 	import org.bytearray.video.events.SimpleStageVideoEvent;
-
 	import flash.display.Bitmap;
 	import flash.display.BlendMode;
 	import flash.display.Graphics;
@@ -63,7 +61,8 @@ package com.refract.prediabetes.video
 		protected var _blackOn : Boolean ;
 		
 		public var paused : Boolean  = true;
-		public var videoAddress : String; 
+		public var videoAddress : String;
+		private var _nameVideo : String;
 		 
 		public function VideoLoader(){
 			super();
@@ -168,7 +167,9 @@ package com.refract.prediabetes.video
 			
 			var netClient:Object = new Object();
 			_netStream.client = netClient;
-			netClient.onMetaData = metaHandler ; 
+			if( SMSettings.DEBUG_GET_CLIP_LENGTH)
+				netClient.onMetaData = metaHandler ;
+			 
 			
 			_simpleVid.attachNetStream(_netStream);
 			
@@ -358,11 +359,13 @@ package com.refract.prediabetes.video
 		}
 		protected function createVideo( nameVideo : String) : void
 		{		
+			SMVars.me.nsStreamTimeAbs = 0 ; 
 			showLoader() ; 
 			_metaActive = true ;  
 			_iterMetaFixBug = 0 ; 
 			
 	  		_url = nameVideo;
+			_nameVideo = nameVideo ; 
 			if(_simpleVidAvailable)
 			{
 				_failedToPlay = false;
@@ -398,8 +401,12 @@ package com.refract.prediabetes.video
 				if( videoItem )
 				{
 					 _metaActive = false ; 
+					 /*DEBUG DURATION
 					 var obj : Object = {} ; obj.clip_length = Number( videoItem.metaData['duration'] ) * 1000  ;
 					 DispatchManager.dispatchEvent(new ObjectEvent( Flags.ON_FLV_METADATA , obj  ) ) ; 
+					 trace( '"'+_nameVideo+'"' + ' : ' + obj.clip_length + ' , ')
+					  * 
+					  */
 				}
 				
 				if(videoItem)
@@ -438,6 +445,7 @@ package com.refract.prediabetes.video
 			DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ;
 		}
 		
+		//* DEBUG DURATION
 		private function metaHandler( meta : Object ) : void
 		{ 
 			if( _metaActive )
@@ -447,10 +455,12 @@ package com.refract.prediabetes.video
 				if( _iterMetaFixBug > 1 )
 				{
 					DispatchManager.dispatchEvent(new ObjectEvent( Flags.ON_FLV_METADATA , obj ) ) ;
+					trace( '"'+_nameVideo+'"' + ' : ' + obj.clip_length + ' , ')
 				} 
 			}
 	        
 		}
+		 
 		
 		protected function showLoader():void
 		{

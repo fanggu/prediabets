@@ -4,6 +4,7 @@ package com.refract.prediabetes.stateMachine {
 	 */
 	public class SMSettings 
 	{
+		public static const DEBUG_GET_CLIP_LENGTH 		: Boolean = false ; 
 		public static const STATE_TXT_MAX_W               : int = 800 ; 
 		public static var STATE_TXT_FONT_SIZE           : int = 72 ; 
 		

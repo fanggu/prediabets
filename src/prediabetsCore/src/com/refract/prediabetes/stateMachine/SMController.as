@@ -12,6 +12,7 @@ package com.refract.prediabetes.stateMachine {
 	import com.robot.comm.DispatchManager;
 
 	import flash.display.Shape;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.NetStatusEvent;
 	import flash.events.TimerEvent;
@@ -34,12 +35,14 @@ package com.refract.prediabetes.stateMachine {
 		private var _frozen : Boolean;
 		private var _videoFreeze : Boolean;
 		
-		private var _initObject : Object ;
-		
 		private var _schedulerMaxTime : int;
 		
 		private var _prevTooslowState : String ; 
 		private var _prevState : String ; 
+		
+		private var _totalTooSlowTime : int ; 
+		private var _newSlowTime : Number ; 
+		
 		public function SMController()
 		{
 			_me = this ; 
@@ -58,29 +61,32 @@ package com.refract.prediabetes.stateMachine {
 			createEnterFrameLoop();
 			createModel();	
 			
+			if( SMSettings.DEBUG_GET_CLIP_LENGTH )
+			{
+				
+			}
 		}
 		
-		/*DEBUG
-		public function start(obj:Object) : void
+		//*DEBUG DURATION
+		public function startGetClipLength() : void
 		{
-			_initObject = obj ; 
-			_model.init( _initObject.module ) ;
+			_model.init( ) ;
 			var iter : int = 0 ; 
 			for( var mc in _model.dictState)
 			{
 				iter ++ 
-				//trace('mc :' , mc)
+				
 				var state : Object = _model.dictState[ mc ]  ; 
-				//trace('STATE ' , state)
+				
 				var interactions : Object = state.interactions ; 
 				//_dictStates[address].interactions[iterInteraction] ;
-				//trace('interactions' , interactions)
+				
 				
 				for( var i : int = 0 ; i < interactions.length ; i ++ )
 				{
 					iter ++ ; 
 					var interaction : Object = interactions[ i ] ;
-					//trace('interaction video_name :' , interaction.video_name ) 
+					 
 					
 					var b : Sprite = new Sprite() ; 
 					TweenMax.to( b , iter  , { x : 100 , onComplete : launchVideo , onCompleteParams:[ interaction.video_name ]})
@@ -92,16 +98,16 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function launchVideo( nameVideo : String ) : void
 		{
-			trace(' --- ')
-			trace('name Video ' ,  nameVideo )
+				trace('requesting :' , nameVideo)
 				VideoLoader.i.update(nameVideo) ;
 		}
-		 * 
-		 */
+		 
+		 
+		 
 		 
 		 
 		//***
-		public function start(obj:Object) : void
+		public function start( ) : void
 		{ 	
 			reset() ;
 			createListeners();
@@ -109,37 +115,19 @@ package com.refract.prediabetes.stateMachine {
 			SMVars.reset() ;
 			DispatchManager.dispatchEvent(new Event ( Flags.UN_FREEZE ) );
 		
-			_initObject = obj ; 
-			_prevState = _initObject.selectedState ; 
 			_model.init( ) ; 
 			
 			_model.selectedInteraction= 0 ;
-			if( _initObject.selectedState == null)
-			{
-				_model.selectedState = _model.initState ;  
-			}
-			else
-			{
-				_model.selectedState = _initObject.selectedState ; 
-			}
+			_model.selectedState = _model.initState ;
 			DispatchManager.dispatchEvent( new Event ( Flags.CREATE_INIT_BUTTON ) ) ;
-
 			dispatchStartEvents() ; 
-			if( _initObject.selectedState != null )
-			{
-				_model.selectedState = _initObject.selectedState ;
-				transitionPrevState() ; 
-			}
-			else
-			{
-				stateMachineTransition();
-			}
+			stateMachineTransition();
 			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) ) ; 
 		}
 
 		private function dispatchStartEvents() : void
 		{
-			DispatchManager.dispatchEvent(new ObjectEvent(Flags.STATE_MACHINE_START, _initObject ) ) ;
+			DispatchManager.dispatchEvent(new Event(Flags.STATE_MACHINE_START ) ) ;
 			DispatchManager.dispatchEvent(new Event(Flags.SHOW_FOOTER_PLAY_PAUSE) ) ;
 		}
 
@@ -224,7 +212,7 @@ package com.refract.prediabetes.stateMachine {
 			DispatchManager.addEventListener(Flags.SM_RESET , reset); 	
 			DispatchManager.addEventListener(Flags.UPDATE_PLAY_BUTTON, onUpdatePlayButton) ;
 			DispatchManager.addEventListener(Flags.SM_KILL, onKill) ;
-			DispatchManager.addEventListener(Flags.ON_FLV_METADATA , onActivateTooSlowTimer ) ;
+			//DispatchManager.addEventListener(Flags.ON_FLV_METADATA , onActivateTooSlowTimer ) ;
 			DispatchManager.addEventListener(Flags.ON_BACKWARD , onBackwardState) ;
 		}
 		private function removeListeners() : void
@@ -236,7 +224,7 @@ package com.refract.prediabetes.stateMachine {
 			DispatchManager.removeEventListener(Flags.UPDATE_PLAY_BUTTON, onUpdatePlayButton) ;
 			DispatchManager.removeEventListener(Flags.SM_RESET , reset); 
 			DispatchManager.removeEventListener(Flags.SM_KILL, onKill) ;
-			DispatchManager.removeEventListener(Flags.ON_FLV_METADATA , onActivateTooSlowTimer);
+			//DispatchManager.removeEventListener(Flags.ON_FLV_METADATA , onActivateTooSlowTimer);
 			DispatchManager.removeEventListener(Flags.ON_BACKWARD , onBackwardState) ;
 		}
 		
@@ -316,8 +304,10 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function onInsertCoin( evt : ObjectEvent) : void
 		{	
+			
 			var coinObj : CoinVO = evt.object as CoinVO; 
 			DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS )) ;
+			
 			switch( coinObj.btName)
 			{
 				case Flags.NONE : 					 
@@ -352,6 +342,8 @@ package com.refract.prediabetes.stateMachine {
 				 	
 				break ;
 			}
+			trace('onInsertCoin:'  , coinObj.btName)
+			trace('onInsertCoin:'  , _model.selectedState)
 		}
 
 		
@@ -365,12 +357,15 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function stateMachineTransition() : void
 		{
+			//trace('STATE MACHINE TRANSITION' , _model.selectedState )
 			removeTimers() ; 
 			DispatchManager.dispatchEvent( new Event( Flags.CLEAR_SOUNDS) ) ; 
 			var interaction : Object = _model.interaction;
 			var videoName : String  = interaction.video_name ; 
 			
-			//activateTooSlowTimer() ; 
+			
+			 
+			setClipLength() ; 
 			
 			if( videoName.length > 0)
 			{
@@ -439,6 +434,8 @@ package com.refract.prediabetes.stateMachine {
 		
 		protected function updateState( address : String , cleanUI : Boolean = true) : void
 		{	
+			//trace('UPDATE ADDRESS')
+			_newSlowTime = 0 ; 
 			DispatchManager.removeEventListener( Event.ENTER_FRAME , scheduler) ;			
 			
 			if( address == _model.endState)
@@ -479,7 +476,6 @@ package com.refract.prediabetes.stateMachine {
 			
 			VideoLoader.i.deactivateClickPause() ; 
 			
-			trace('address ' , address )
 			if( address = _model.initState )
 			{
 				//DispatchManager.dispatchEvent( new Event ( Flags.CREATE_INIT_BUTTON ) ) ; 
@@ -495,6 +491,57 @@ package com.refract.prediabetes.stateMachine {
 			if( i != -1 )
 				_prevState = _model.selectedState ; 
 		}
+		
+		
+		//**progress bar click. 
+		public function progressBarClick( time : Number ) : void
+		{
+			/*
+			var futureState : String = _model.selectedState ; 
+			var is_q : Boolean = _model.is_q( futureState ) ; 
+			if( is_q || _model.is_pre_q( futureState ) )
+			{
+				if( is_q ) 
+					futureState = _model.state_no_q( futureState ) ; 
+				updateState( futureState ) ; 
+			}
+			else
+			{
+				VideoLoader.i.seek( time / 1000 ) ; 
+			}
+			 * 
+			 */
+			 _newSlowTime = 0 ; 
+			 if( !_tooslowTimer )
+			 {
+				var valueToSeek : Number = time / 1000 ; 
+				
+				VideoLoader.i.seek( time / 1000 ) ;
+			 }
+			 else
+			 {
+				_newSlowTime = time ; //_totalTooSlowTime - time ;
+				var slowTimeDiff : Number = _totalTooSlowTime - time ;  
+				createTooSlowTimer( slowTimeDiff ) ;  
+				
+				var valueToSeek : Number = time / 1000 ; 
+				
+				VideoLoader.i.seek( time / 1000 ) ;
+			 }
+		}
+		
+		public function getTooSlowTimerTime() : Number
+		{
+			if( _tooslowTimer )
+			{
+				return _tooslowTimer.getTime() + _newSlowTime ;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		
 		//**listener for backward funcionality
 		private function onBackwardState( evt : Event ) : void
 		{
@@ -540,26 +587,23 @@ package com.refract.prediabetes.stateMachine {
 			 */
 		}
 		//**async call when we get metadata duration from FLV
-		private function onActivateTooSlowTimer( evt : ObjectEvent ) : void
+		private function setClipLength( ) : void //evt : ObjectEvent ) : void
 		{
-			var clip_length : Number = Number( evt.object.clip_length ) ;  
+			var clip_length : Number = _model.getVideoLength( _model.interaction.video_name ) ; //Number( evt.object.clip_length ) ;  
+			
 			activateTooSlowTimer( clip_length  ) ; 
 			_model.interaction.clip_length = clip_length ; 
 			DispatchManager.dispatchEvent( new ObjectEvent ( Flags.ACTIVATE_PROGRESS_BAR , _model.interaction ) ) ;
 		}
-		private function activateTooSlowTimer( clip_length : Number ) : void
+		private function activateTooSlowTimer( clip_length : Number ) : void//clip_length : Number ) : void
 		{
 			var interaction : Object = _model.interaction ; 
 			var future_address : String = interaction.final_state ; 
-			var l : int = future_address.length ; 
-			var l2 : String = future_address.substr( l-2 , l ) ; 
-			if( l2 == SMSettings._Q && _model.selectedState != SMSettings.STATE_SLOW ) 
+			if( _model.is_q(future_address ) && _model.selectedState != SMSettings.STATE_SLOW ) 
 			{
 				_prevTooslowState = _model.state.name ;
-				_tooslowTimer = new SMTimer( SMSettings.SLOW_TIMER_X + clip_length , 1 ) ; 
-				_tooslowTimer.start() ;
-				_tooslowTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTooSlowTimerComplete );
-				 
+				createTooSlowTimer( SMSettings.SLOW_TIMER_X + clip_length  ) ; 
+				_totalTooSlowTime = SMSettings.SLOW_TIMER_X + clip_length  ; 
 				_model.interaction.tween = true ;  
 			}
 			else
@@ -567,16 +611,21 @@ package com.refract.prediabetes.stateMachine {
 				_model.interaction.tween = false ; 
 			}
 		}
+		private var _testdelete : Number ; 
+		private function createTooSlowTimer( totalTime : Number ) : void
+		{
+			removeTooSlowTimer() ;
+			_tooslowTimer = new SMTimer( totalTime , 1) ; 
+			_tooslowTimer.start() ;
+			_tooslowTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTooSlowTimerComplete );	
+		}
+		
 		
 		private function controlTooSlowState() : void
 		{
 			if( _model.selectedState == SMSettings.STATE_SLOW)
 			{
-				var i : int = _prevTooslowState.indexOf( SMSettings._Q) ;
-				if( i != -1 )
-				{
-					_prevTooslowState = _prevTooslowState.substr( 0 , _prevTooslowState.length - i + 1 ) ; 
-				}
+				_prevTooslowState = _model.state_no_q( _prevTooslowState ) ; 
 				_model.interaction.final_state = _prevTooslowState ;
 				_model.interaction.trigger = -1 ; 
 				_model.interaction.clip_length = _model.slowStates[ _tooslowIter][ 1 ] ;  ; 
@@ -590,7 +639,7 @@ package com.refract.prediabetes.stateMachine {
 			
 		}
 		private function onTooSlowTimerComplete( evt : TimerEvent ) : void
-		{
+		{			
 			removeTimers() ; 
 			updateState( SMSettings.STATE_SLOW ) ; 
 		}
@@ -624,6 +673,10 @@ package com.refract.prediabetes.stateMachine {
 				_transitionTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, answerDelayedCompleted );
 				_transitionTimer = null ;
 			}
+			removeTooSlowTimer() ; 
+		}
+		private function removeTooSlowTimer() : void
+		{
 			if( _tooslowTimer) 
 			{
 				_tooslowTimer.stop() ; 
@@ -666,6 +719,7 @@ package com.refract.prediabetes.stateMachine {
 					updateState( _model.interaction.final_state ) ; 
 				}
 			}
+
 			
 			//DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_UI_PROGRESS, String(  SMVars.me.nsStreamTime ) ));
 		}

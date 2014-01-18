@@ -12,6 +12,9 @@ package com.refract.prediabetes.stateMachine
 		private var _dictStates : Dictionary ; 
 		private var _dictStatesNumber : Dictionary ; 
 		private var _dictAnswers : Dictionary ; 
+		private var _dictQuestions : Dictionary ;
+		private var _dictPreQuestions : Dictionary ; 
+		private var _dictVideoNames: Dictionary ; 
 		
 		public var selectedState : String ; 
 		public var selectedInteraction : int ;
@@ -39,6 +42,9 @@ package com.refract.prediabetes.stateMachine
 			_dictStates = new Dictionary( true );
 			_dictStatesNumber= new Dictionary( true );
 			_dictAnswers = new Dictionary( true ) ; 
+			_dictPreQuestions = new Dictionary( true ) ; 
+			_dictQuestions = new Dictionary( true ) ; 
+			_dictVideoNames = new Dictionary( true ) ; 
 
 			initState = jsonObject.data.meta.start_state ; 
 			initButtonState = jsonObject.data.meta.init_button_state ;
@@ -48,7 +54,19 @@ package com.refract.prediabetes.stateMachine
 			for( var state :String in jsonObject.data.states)
 			{
 				_dictStates[state] = jsonObject.data.states[state];
-				//trace('state ' , state)
+				if( _is_q( state ) )
+				{
+					_dictQuestions[ state ] = true ; 
+				}
+				if( _is_pre_q( jsonObject.data.states[state] ) )
+				{
+					_dictPreQuestions[ state ] = true ; 
+				}
+				
+			}
+			for( var videoName :String in jsonObject.data.meta.clip_length)
+			{
+				_dictVideoNames[videoName] = jsonObject.data.meta.clip_length[ videoName ] ; 
 			}
 			
 			var stateSlow : Object = {} ; 
@@ -61,7 +79,10 @@ package com.refract.prediabetes.stateMachine
 
 			_dictStates[ SMSettings.STATE_SLOW ] = stateSlow ; 
 		}
-		
+		public function getVideoLength( videoName : String ) : int 
+		{
+			return _dictVideoNames[ videoName ] ; 
+		}
 		public function setAnswer( value : Boolean , address : String ) : void
 		{
 			if( _dictAnswers[address] == null)
@@ -144,6 +165,56 @@ package com.refract.prediabetes.stateMachine
 		}
 		
 		
+		
+		private function _is_pre_q( obj : Object ) : Boolean
+		{
+			var finalState : String = obj.interactions[0].finalState ;
+			if( is_q( finalState ) )
+			{
+				return true ; 
+			}
+			else
+			{
+				return false ;
+			}
+		}
+		private function _is_q( address : String ) : Boolean
+		{
+			if( address.indexOf( SMSettings._Q)  != -1)
+			{
+				return true 
+			}
+			else
+			{
+				return false ; 
+			}
+		}
+		public function is_q( address : String ) : Boolean 
+		{
+			if( _dictQuestions[address ])
+				return true ;
+			else 
+				return false ; 
+		}
+		public function is_pre_q( address : String ) : Boolean 
+		{
+			if( _dictPreQuestions[address ])
+				return true ;
+			else 
+				return false ; 
+		}
+		public function state_no_q( address : String ) : String
+		{
+			var i : int = address.indexOf( SMSettings._Q) ;
+			if( i  != -1) 
+			{
+				return address.substr( 0 , address.length - i + 1 ) ;  
+			}
+			else
+			{
+				return address ; 
+			}
+		}
 		
 	
 	}

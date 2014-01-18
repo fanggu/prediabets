@@ -41,7 +41,6 @@ package com.refract.prediabetes.stateMachine
 		
 		private var _countDownCont : Sprite ; 
 		
-		private var _initObject : Object ;
 		private var _countDownTimerTxt : TextField;
 		private var _bar : Box;
 		
@@ -101,9 +100,8 @@ package com.refract.prediabetes.stateMachine
 			createLockButtonsQ();
 		}
 		
-		private function onStart( event : ObjectEvent ) : void
+		private function onStart( event : Event ) : void
 		{
-			_initObject = event.object ; 
 			createListeners() ; 
 		}
 		

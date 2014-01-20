@@ -3,19 +3,19 @@
 <stringAttribute key="ADL_DESCRIPTOR_FILE" value="bin/prediabectsIOS-app.xml"/>
 <stringAttribute key="ADL_SCREENSIZE" value="768x1004:768x1024"/>
 <intAttribute key="AIR_VIEWER_CONF" value="2"/>
-<stringAttribute key="ARGUMENTS" value="-static-link-runtime-shared-libraries=true&#10;-target-player={playerVersion}&#10;-library-path+=&quot;{flexSDK}/frameworks/locale/en_US&quot;&#10;-default-size=550,400&#10;-default-background-color 0xffffff"/>
+<stringAttribute key="ARGUMENTS" value="-static-link-runtime-shared-libraries=true&#10;-target-player={playerVersion}&#10;-library-path+=&quot;{flexSDK}/frameworks/locale/en_US&quot;&#10;-default-size=550,400&#10;-default-background-color 0x000000"/>
 <stringAttribute key="COMPILER_TECHNOLOGY" value="ASC"/>
 <booleanAttribute key="CUSTOMIZE_ADL_ARGS" value="false"/>
 <stringAttribute key="CUSTOM_ADL_CMD_LINE" value="${nodebug} ${profile} ${screensize} ${anesdir} ${desc} ${rootdir}"/>
 <intAttribute key="DEBUG_VIA" value="0"/>
 <booleanAttribute key="DEINSTALL_TARGET" value="true"/>
 <booleanAttribute key="DISABLE_COMPILE_PROCESS" value="false"/>
-<stringAttribute key="INSTALL_TARGET" value="installFirstDevice"/>
+<stringAttribute key="INSTALL_TARGET" value="6d2a4d41793810a030f454ece68c038cd7c27aaf"/>
 <stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
 <intAttribute key="LAUNCH_METHOD" value="1"/>
 <stringAttribute key="MAIN_CLASS" value="src/MainIOS.as"/>
 <stringAttribute key="MOBILE_PRESET" value="Apple iPad1/2"/>
-<intAttribute key="PACKAGE_METHOD" value="1"/>
+<intAttribute key="PACKAGE_METHOD" value="0"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_EXTERNS" value="false"/>
 <booleanAttribute key="PASS_MAIN_CLASS" value="true"/>

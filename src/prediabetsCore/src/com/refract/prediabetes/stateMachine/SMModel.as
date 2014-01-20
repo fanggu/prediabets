@@ -92,21 +92,33 @@ package com.refract.prediabetes.stateMachine
 		{
 			if( _arrHistory.length > 0  ) 
 				var lastEl : String = _arrHistory[ _arrHistory.length-1 ].state ;
-			if( historyVO.state != lastEl)
+			if( historyVO.state != lastEl && historyVO.state != SMSettings.STATE_SLOW )
 				_arrHistory.push( historyVO ) ;
 			
 			if( _arrHistory.length > 1 )
 				DispatchManager.dispatchEvent( new Event( Flags.ACTIVE_BACK ) ) ; 
 		}
 
-		public function getHistory() : HistoryVO
+		public function getHistory( iter : int ) : HistoryVO
 		{
-			var historyVO : HistoryVO = _arrHistory[ _arrHistory.length - 2 ] ; 
-			_arrHistory.splice( _arrHistory.length -2  , 2 ) ; 
+			var historyVO : HistoryVO = _arrHistory[ _arrHistory.length - iter ] ; 
+			_arrHistory.splice( _arrHistory.length -iter  , iter ) ; 
 			
 			if( _arrHistory.length < 1)
 				DispatchManager.dispatchEvent( new Event( Flags.INACTIVE_BACK ) ) ;
 			return historyVO; 
+		}
+		public function getHistoryPrev() : HistoryVO
+		{
+			var historyVO : HistoryVO ; 
+			
+			if( _arrHistory.length > 2 )
+			{
+				historyVO = _arrHistory[ _arrHistory.length - 2 ] ; 
+				
+			}
+			
+			return historyVO ; 
 		}
 		public function getVideoLength( videoName : String ) : int 
 		{

@@ -4,8 +4,8 @@ package {
 
 	import com.refract.air.shared.data.StoredData;
 	import com.refract.air.shared.prediabetes.stateMachine.MobileSMController;
-	import com.refract.air.shared.prediabetes.stateMachine.SMModelMobile;
 	import com.refract.air.shared.prediabetes.stateMachine.view.MobieStateTextView;
+	import com.refract.air.shared.prediabetes.video.IOSVideoLoader;
 	import com.refract.air.shared.sections.feedback.TabletFeedback;
 	import com.refract.air.shared.sections.legal.TabletLegal;
 	import com.refract.prediabetes.AppSettings;
@@ -13,6 +13,7 @@ package {
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.nav.IOSNav;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
@@ -34,7 +35,7 @@ package {
 
 	 * @author robertocascavilla
 	 */
-	//[SWF( backgroundColor='#FFFFFF', frameRate='25')]
+	//[SWF( backgroundColor='#000000', frameRate='25')]
 	public class MainIOS extends Sprite 
 	{
 		public static var STORAGE_DIR:File;
@@ -42,7 +43,8 @@ package {
 		protected var _bkg:Loader;
 		
 		
-		public function MainIOS(){
+		public function MainIOS()
+		{
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
@@ -70,7 +72,7 @@ package {
 			//set the global stage and global resize
 			AppSettings.stage = stage;
 			AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; 
-			AppSettings.PLATFORM = AppSettings.PLATFORM_IOS;
+			//AppSettings.PLATFORM = AppSettings.PLATFORM_IOS;
 			AppSettings.RESERVED_HEADER_HEIGHT_DEFAULT = 60 ; 
 			//AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ; // "./../../../../website/data/";
 			
@@ -107,12 +109,14 @@ package {
 			 AppSettings.VIDEO_FILE_EXT = ".flv" ;
 			 AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR = "";
 			 
+			 AppSettings.BUFFER_DELAY = 1 ; 
+			 
 			 var ext : String = "flv" ; 
 			 var localPath:String = "video/flv/";
 			 MainIOS.STORAGE_DIR = File.cacheDirectory;
 			 AppSettings.APP_VIDEO_BASE_URL = MainIOS.STORAGE_DIR.nativePath + "/" + localPath ;
 			 var videoFileFormatDescriptor : String = "";
-			 var videoFileExt = "."+ext ;
+			 var videoFileExt : String = "."+ext ;
 			 var storageFolder:File = MainIOS.STORAGE_DIR.resolvePath("video");
 			 storageFolder.preventBackup = true;
 			 var newFile:File = MainIOS.STORAGE_DIR.resolvePath(localPath + AppSettings.INTRO_URL+ videoFileFormatDescriptor + videoFileExt);
@@ -130,7 +134,7 @@ package {
 			ClassFactory.NAV = IOSNav ; 
 			//ClassFactory.MODULE_MODEL = LocalModuleModel;
 			//ClassFactory.MENU_BUTTON = LoadedMenuButton;
-			//ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
+			ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
 			//ClassFactory.SM_MODEL = SMModelMobile ; 
 			ClassFactory.STATE_TXT_VIEW = MobieStateTextView; 
 			ClassFactory.SM_CONTROLLER = MobileSMController ; 
@@ -146,12 +150,11 @@ package {
 		}
 		
 		
-		protected function addBkg():void{
-		//	_bkg = new BKG();
+		protected function addBkg():void
+		{
 			_bkg = new Loader();
 			_bkg.load(new URLRequest("Default@2x.png"));
 			addChild(_bkg);
-		//	_bkg.alpha = 0.3;
 			onResize();
 			stage.addEventListener(Event.RESIZE, onResize);
 		}
@@ -220,7 +223,6 @@ package {
 
 		private function onTouchPress(event : MouseEvent) : void 
 		{
-			trace('ON TOUCH SKIP PRESSED')
 			DispatchManager.dispatchEvent(new Event(Flags.START_MOVIE));
 		}
 		

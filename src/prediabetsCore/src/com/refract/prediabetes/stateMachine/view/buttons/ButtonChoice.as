@@ -89,7 +89,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		{
 			var btObj : CoinVO = new CoinVO() ; 
 			btObj.btName = name ; 
-			btObj.timeChoiceFadeOut = (SMSettings.FADE_OUT_TIME * 1000 )  ; //SMSettings.TIME_CHOICE_FADE_OUT 
+			btObj.timeChoiceFadeOut = (SMSettings.FADE_OUT_TIME * 1000 )  ; 
 			
 			
 			if( _value ) 

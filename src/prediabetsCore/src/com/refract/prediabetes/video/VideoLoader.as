@@ -1,12 +1,13 @@
 package com.refract.prediabetes.video 
 {
+	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
 	import br.com.stimuli.loading.loadingtypes.VideoItem;
 	import com.greensock.TweenMax;
-	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
+	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.events.BooleanEvent;
@@ -18,7 +19,6 @@ package com.refract.prediabetes.video
 	import org.bytearray.video.SimpleStageVideo;
 	import org.bytearray.video.events.SimpleStageVideoEvent;
 	import flash.display.Bitmap;
-	import flash.display.BlendMode;
 	import flash.display.Graphics;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -60,7 +60,7 @@ package com.refract.prediabetes.video
 		
 		public var paused : Boolean  = true;
 		public var videoAddress : String;
-		private var _nameVideo : String;
+		protected var _nameVideo : String;
 		//private var _loaderVisible : Boolean;
 		private var _showBuffer : Boolean;
 		 
@@ -72,6 +72,14 @@ package com.refract.prediabetes.video
 			_showBuffer = true  ; 
 			addEventListener(Event.ADDED_TO_STAGE, preInit );
 			loadingOrder = VideoLoader.defaultLoadingOrder;
+			
+			_bulkLoader.addEventListener(BulkLoader.PROGRESS , onAllProgress) ;
+			//_bulkLoader.get( url).addEventListener(BulkLoader.COMPLETE , onAllLoaded) ;
+		}
+		
+		private function onAllProgress( event : BulkProgressEvent ) : void
+		{
+			//if( _url ) trace('xx :' , event.bytesLoaded  , ' : url ' , event.)
 		}
 		
 		
@@ -136,6 +144,7 @@ package com.refract.prediabetes.video
 			_videoBackground = new Sprite();
 			addChild(_videoBackground);
 			
+			/*
 			_videoBackgroundMask = new Sprite() ; 
 			addChild( _videoBackgroundMask ) ; 
 			
@@ -144,6 +153,8 @@ package com.refract.prediabetes.video
 			_videoBackgroundMask.blendMode = BlendMode.ERASE;
 			
 			drawVideoBackground();
+			 * 
+			 */
 			
 			DispatchManager.addEventListener(Flags.DEACTIVATE_VIDEO_RUN, deActivateVideoRun );
 			DispatchManager.addEventListener(Flags.ACTIVATE_VIDEO_RUN, onActivateVideoRun );
@@ -201,6 +212,7 @@ package com.refract.prediabetes.video
 		}
 		private function drawVideoBackground( ) : void
 		{
+			/*
 			var g:Graphics = _videoBackground.graphics;
 			g.clear();
 			g.beginFill(0xffFFFF,1);
@@ -210,6 +222,8 @@ package com.refract.prediabetes.video
 			gg.clear() ; 
 			gg.beginFill(0xff0099 , 1 ) ; 
 			gg.drawRect(AppSettings.VIDEO_LEFT,AppSettings.VIDEO_TOP,AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT );
+			 * 
+			 */
 		}
 		
 		public function activateClickPause():void
@@ -317,6 +331,13 @@ package com.refract.prediabetes.video
 		{
 			_deActivate = false ; 
 			DispatchManager.addEventListener(Event.ENTER_FRAME , run ) ; 
+			hideBuffer() ; 
+			
+			SMController.me.onSetClipLength() ; 
+		}
+		public function setLoadedTrue() : void
+		{
+			
 		}
 		private function deActivateVideoRun( evt : Event = null) : void
 		{
@@ -337,42 +358,42 @@ package com.refract.prediabetes.video
 			else
 				SMVars.me.nsStreamTime =0 ; 
 				
-			//trace(' ns buffer length' , _netStream.bufferLength )
-			//trace(' ns buffer time' , _netStream.bufferTime)
 			var percent:Number = Math.round( _netStream.bufferLength / _netStream.bufferTime * 100);
-			//trace('percent :' , percent)
 			if( percent > 95 && _showBuffer )
 			{
 				hideBuffer() ; 
-				//trace('here i am guys')
 			}
 			if( percent < 5 && !_showBuffer )
 			{ 
-				//trace('maybe here ?') 
 				showBuffer() ; 
 			}
-			/*
+			
 			if( percent > 95)
 			{
-				trace('----hide?')
+				//trace('----hide?')
 			}
 			if( percent < 5)
 			{ 
-				trace('----show?')
+				//trace('----show?')
 			}
-			 * 
-			 */
+			//trace('--- PERC ' , percent )
+			if( _loader.alpha > 0 )
+			{
+				//trace('ALPHA - 0 ')
+				_showBuffer = true ; 
+			}
+			
 			
 			
 		}
 		
-		private function showBuffer() : void
+		protected function showBuffer() : void
 		{
 			_showBuffer = true ; 
 			TweenMax.killTweensOf( _loader ) ;
-			TweenMax.to( _loader , .5 , { alpha : 1 , delay : .3 } ) ; 
+			TweenMax.to( _loader , .5 , { alpha : 1 , delay : AppSettings.BUFFER_DELAY } ) ; 
 		}
-		private function hideBuffer() : void
+		protected function hideBuffer() : void
 		{
 			_showBuffer = false ; 
 			TweenMax.killTweensOf( _loader ) ;
@@ -414,10 +435,11 @@ package com.refract.prediabetes.video
 			{
 				_failedToPlay = false;
 				var url : String ; 
+				url = getCompleteUrl( _url ) ;
 				if( _url == AppSettings.INTRO_URL && AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
 				{
 					var ext : String = "flv" ;
-					var videoFileFormatDescriptor : String = "_800"+ext;
+					var videoFileFormatDescriptor : String = "";
 					var videoFileExt: String = "."+ext ;
 					url = AppSettings.APP_DATA_PATH + AppSettings.APP_VIDEO_BASE_URL +_url+videoFileFormatDescriptor+videoFileExt;
 				}
@@ -626,6 +648,18 @@ package com.refract.prediabetes.video
 					_bulkLoader.remove( url ) ; 
 				}
 				if( item ) if( !item._isLoaded  ) _bulkLoader.remove( url ) ; 
+			}
+		}
+		public function removeItem( name : String ) : void
+		{
+			if(_bulkLoader)
+			{
+				var url:String =getCompleteUrl( name ) ; 
+				if( name == _url)
+					return ; 
+				
+				var item:LoadingItem = _bulkLoader.get(url);
+				if( item )  _bulkLoader.remove( url ) ; 
 			}
 		}
 		

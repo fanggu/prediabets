@@ -1,27 +1,30 @@
 package com.refract.air.shared.prediabetes.video 
 {
+	import br.com.stimuli.loading.loadingtypes.VideoItem;
+
 	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.stateMachine.SMVars;
+	import com.refract.prediabetes.stateMachine.events.StateEvent;
+	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.refract.prediabetes.video.VideoLoader;
+	import com.robot.comm.DispatchManager;
 
-	import org.bytearray.video.SimpleStageVideo;
-	import org.bytearray.video.events.SimpleStageVideoEvent;
-
-	import flash.events.Event;
 	import flash.events.NetStatusEvent;
-	import flash.net.NetConnection;
-	import flash.net.NetStream;
 
 
 	public class IOSVideoLoader extends VideoLoader {
 		
-		public function IOSVideoLoader() {
+		private var _wasLoaded : Boolean ; 
+		public function IOSVideoLoader() 
+		{
+			_wasLoaded = false ; 
 		//	VIDEO_BASE_URL = "video/flv/";
 		//	VIDEO_FILE_EXT = '.flv' ; 
 			super();
 		}
 		
 	
-		  
+		/*
 		override protected function createVideo( nameVideo : String) : void
 		{	
 	  		_url = nameVideo;
@@ -32,7 +35,6 @@ package com.refract.air.shared.prediabetes.video
 					+ AppSettings.VIDEO_BASE_URL 
 					+ _url+AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR 
 					+ AppSettings.VIDEO_FILE_EXT;
-				trace('url :' , url )
 				if( !_simpleVid )
 				{
 					_simpleVid = new SimpleStageVideo(AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT);
@@ -79,7 +81,6 @@ package com.refract.air.shared.prediabetes.video
 				_netStream.bufferTime = 4;
 				
 				_simpleVid.attachNetStream(_netStream);
-				trace('play url :: ' , url )
 				_netStream.play(url);
 				
 				onResize();
@@ -87,53 +88,106 @@ package com.refract.air.shared.prediabetes.video
 			}
 		}
 		
-		
-		
-		
-		override protected function showLoader():void
-		{
-		//	TweenMax.killTweensOf(_loader);
+		 * 
+		 */
+		 
+		override protected function createVideo( nameVideo : String) : void
+		{		
+			trace('CREATE VIDEO :' , nameVideo)
+			SMVars.me.nsStreamTimeAbs = 0 ; 
+			 
+			//showBuffer() ; 
+			 
 			
-		//	_loader.visible = true ; 
-		//	TweenMax.to( _loader , .5 , { alpha : 1 , delay : .5 } ) ; 
-		//	TweenMax.to(_loader, 1 , {rotation:360, ease:Linear.easeNone,repeat:-1}); 
-		}
-		
-		override protected function hideLoader():void
-		{
-		//	TweenMax.killTweensOf(_loader);
-		//	TweenMax.to(_loader, 0.3, {alpha:0});
-			//_loader.visible = false ; 
-			//TweenMax.to( _loader , .5 , { alpha : 0} )
-		}
-		
-		
-		override public function update( nameVideo : String ) : void
-		{
-			if(_netStream)
+	  		_url = nameVideo;
+			_nameVideo = nameVideo ; 
+			if(_simpleVidAvailable)
 			{
-				_netStream.removeEventListener(NetStatusEvent.NET_STATUS, videoStatus);
-				_netStream.close() ;
-				_netStream.close() ;
-				_netStream = null ; 
-				var urlTemp:String = 
-					AppSettings.DATA_PATH 
-					+ AppSettings.VIDEO_BASE_URL 
-					+ nameVideo 
-					+ AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR 
-					+ AppSettings.VIDEO_FILE_EXT;
-				_bulkLoader.remove( urlTemp ) ; 
+				_failedToPlay = false;
+				var url : String ; 
+				url = getCompleteUrl( _url ) ;
+				if( _url == AppSettings.INTRO_URL && AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
+				{
+					var ext : String = "flv" ;
+					var videoFileFormatDescriptor : String = "";
+					var videoFileExt: String = "."+ext ;
+					url = AppSettings.APP_DATA_PATH + AppSettings.APP_VIDEO_BASE_URL +_url+videoFileFormatDescriptor+videoFileExt;
+				}
+				else
+				{
+					url = getCompleteUrl( _url ) ; 
+				}
 				
-			} 
-			super.update( nameVideo ) ; 
-		}	
-		override public function requestLoad( name : String ) : void
-		{
-			//do nothing
+				var items:Array = _bulkLoader.items;
+				var totalItems:int = items.length;
+				var videoItem:VideoItem;
+				for(var i:int = 0; i < totalItems; ++i)
+				{
+					if(items[i].url.url == url )
+					{
+						videoItem = items[i] as VideoItem;
+					}
+				} 
+				
+				
+				if(videoItem)
+				{
+					videoItem.pausedAtStart = false;
+				}
+				
+				if( videoItem != null )
+				{
+					_netStream = videoItem.stream ;
+				}
+				else
+				{
+					_netStream = _backupNetStream ; 
+				}
+				if(videoItem && !_netStream)
+				{
+    				_bulkLoader.loadNow(url);
+    				_netStream = videoItem.stream;
+				}
+				
+				_netStream.addEventListener(NetStatusEvent.NET_STATUS, videoStatus);
+				_netStream.bufferTime = 4;
+				_simpleVid.attachNetStream(_netStream);
+				
+				/*
+				if( videoItem != null)
+				{
+					_netStream.seek( 0 ) ; 
+					_netStream.resume() ;
+				}
+				else
+					_netStream.play(url);
+					 * 
+					 */
+				
+				if( _wasLoaded )
+				{
+					_wasLoaded = false ;
+					_netStream.resume() ;
+				}
+				 else
+				_netStream.play(url);
+				
+				onResize();
+				paused = false ;
+			}
+			else
+			{
+				_failedToPlay = true;
+				addChild(_simpleVid);
+			}
+			DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ;
 		}
-		override public function cancelLoadRequest( name : String ) : void
+		
+		
+		
+		override public function setLoadedTrue( ) : void
 		{
-			//do nothing
+			_wasLoaded = true ; 
 		}
 	}
 }

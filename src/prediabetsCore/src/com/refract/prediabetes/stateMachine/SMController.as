@@ -78,7 +78,6 @@ package com.refract.prediabetes.stateMachine {
 			DispatchManager.dispatchEvent(new Event ( Flags.UN_FREEZE ) );
 		
 			_model.init( ) ; 
-			
 			_model.selectedInteraction= 0 ;
 			_model.selectedState = _model.initState ;
 			DispatchManager.dispatchEvent( new Event ( Flags.CREATE_INIT_BUTTON ) ) ;
@@ -276,7 +275,6 @@ package com.refract.prediabetes.stateMachine {
 					
 					removeTimers( ) ; 
 					
-					
 					_transitionTimer = new SMTimer( coinObj.timeChoiceFadeOut , 1 ) ; 
 					_transitionTimer.start() ;
 					_transitionTimer.addEventListener(TimerEvent.TIMER_COMPLETE, answerDelayedCompleted );
@@ -316,8 +314,8 @@ package com.refract.prediabetes.stateMachine {
 				var loaded : Boolean = VideoLoader.i.isLoaded( videoName ) ; 
 				if( loaded )
 				{	
+					VideoLoader.i.setLoadedTrue() ;
 					stateMachineTransitionExec(  ) ; 
-					VideoLoader.i.hideLoader() ; 
 				}
 				else
 				{
@@ -347,6 +345,11 @@ package com.refract.prediabetes.stateMachine {
 				_bulkLoader.get( _url).removeEventListener(BulkLoader.COMPLETE , onAllLoaded) ;
 			}
 		}
+		
+		public function onSetClipLength() : void
+		{
+			setClipLength() ; 	
+		}
 		private function stateMachineTransitionExec(  ) : void
 		{
 			clenBulkLoader() ; 
@@ -354,11 +357,12 @@ package com.refract.prediabetes.stateMachine {
 			var videoName : String  = interaction.video_name ; 
 			if( videoName.length > 0)
 			{
-				setClipLength() ; 
+				//setClipLength() ; 
 				DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI));
 				activateTrigger() ; 
 				
 				DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );
+				
 				DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO , interaction.video_name)) ;
 				
 				 
@@ -408,7 +412,6 @@ package com.refract.prediabetes.stateMachine {
 		}
 		private function onAllLoaded(event : Event) : void 
 		{
-			
 			_bulkLoader.removeEventListener(BulkLoader.PROGRESS, onAllProgress);
 			_bulkLoader.removeEventListener(BulkLoader.COMPLETE, onAllLoaded);
 			
@@ -458,6 +461,7 @@ package com.refract.prediabetes.stateMachine {
 		protected function updateState( address : String , cleanUI : Boolean = true) : void
 		{	
 			clenBulkLoader() ; 
+			cleanMemory() ; 
 			
 			_newSlowTime = 0 ; 
 			DispatchManager.removeEventListener( Event.ENTER_FRAME , scheduler) ;			
@@ -563,7 +567,9 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function backExec() : void
 		{
-			var historyVO : HistoryVO = _model.getHistory() ; 
+			var iter : int  = 2 ; 
+			if( _model.selectedState == SMSettings.STATE_SLOW ) iter = 1 ; 
+			var historyVO : HistoryVO = _model.getHistory( iter ) ; 
 			updateState( historyVO.state ) ; 
 			if( historyVO.btName != 'none')
 			{
@@ -694,6 +700,23 @@ package com.refract.prediabetes.stateMachine {
 
 			
 			//DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_UI_PROGRESS, String(  SMVars.me.nsStreamTime ) ));
+		}
+		
+		//**clean memory ( !important especially for ipad2 ) 
+		private function cleanMemory() : void
+		{
+			trace('::clean memory::')
+			var historyVO : HistoryVO = _model.getHistoryPrev() ; 
+			if( historyVO)
+			{
+				var state : Object = _model.getState( historyVO.state ) ; 
+				var interactions : Array = state.interactions ; 
+				for( var i : int = 0 ; i < interactions.length ; i ++ )
+				{
+					var videoName : String = interactions[i].video_name ; 
+					VideoLoader.i.removeItem( videoName ) ; 
+				}
+			}
 		}
 		
 		//**detect end of video

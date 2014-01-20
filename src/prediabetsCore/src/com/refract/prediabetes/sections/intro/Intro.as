@@ -96,6 +96,7 @@ package com.refract.prediabetes.sections.intro {
 
 		protected function onIntroEnded( ) : void 
 		{
+			trace('intro dispacth start movie')
 			DispatchManager.dispatchEvent(new Event(Flags.START_MOVIE));
 		}
 

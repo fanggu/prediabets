@@ -34,6 +34,7 @@ package com.refract.prediabetes {
 		public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
 		//public static var DATA_PATH:String = "data/" ; 
 		public static var APP_DATA_PATH : String = "file://";
+		public static var BUFFER_DELAY 				  : Number = 0.3 ; 	  
 
 		public static const BUTTON_HIT_AREA_ALPHA:Number = 0;
 		public static const BUTTON_HIT_AREA_EDGE:int = 10;

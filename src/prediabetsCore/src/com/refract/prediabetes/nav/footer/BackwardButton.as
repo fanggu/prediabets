@@ -1,7 +1,6 @@
 package com.refract.prediabetes.nav.footer {
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
@@ -9,8 +8,6 @@ package com.refract.prediabetes.nav.footer {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.media.SoundMixer;
-	import flash.media.SoundTransform;
 
 
 	public class BackwardButton extends Sprite 
@@ -31,6 +28,9 @@ package com.refract.prediabetes.nav.footer {
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOverOut);
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOverOut);
 			addEventListener(MouseEvent.CLICK, onClick);
+			
+			DispatchManager.addEventListener( Flags.ACTIVE_BACK , onBackActive);
+			DispatchManager.addEventListener(Flags.INACTIVE_BACK , onBackInactive);
 			
 			mouseChildren = false;
 			mouseEnabled = true;
@@ -66,6 +66,17 @@ package com.refract.prediabetes.nav.footer {
 		private function onClick(evt:Event):void
 		{
 			DispatchManager.dispatchEvent( new Event( Flags.ON_BACKWARD ) ) ; 
+		}
+		
+		private function onBackActive( evt : Event ) : void
+		{
+			alpha = 1 ; 
+			mouseEnabled = true ; 
+		}
+		private function onBackInactive( evt : Event  ) : void
+		{
+			alpha = .4 ; 
+			mouseEnabled = false ; 
 		}
 	}
 }

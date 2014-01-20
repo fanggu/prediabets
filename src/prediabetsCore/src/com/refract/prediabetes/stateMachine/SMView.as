@@ -174,7 +174,6 @@ package com.refract.prediabetes.stateMachine
 
 		private function onFreeze(event : Event) : void 
 		{	
-			//trace('lock button called :' , event.type)
 			_lockButtonsView.addChild( _lockButtonsQ ) ;
 			onResize() ; 
 		}
@@ -322,7 +321,7 @@ package com.refract.prediabetes.stateMachine
 			if( _stateTxtView )
 			{
 				if( _stateTxtView.parent)
-					removeChild( _stateTxtView );
+					_stateTxtView.parent.removeChild( _stateTxtView );
 				 _stateTxtView = null ; 
 			}
 			_stateTxtView  = new StateTxtView( stateObjectText, SMSettings.STATE_TXT_FONT_SIZE  ) ; 
@@ -400,7 +399,7 @@ package com.refract.prediabetes.stateMachine
 		
 		private function fadeOut( obj : * ) : void
 		{
-			TweenMax.to( obj , .3 , {alpha : 0 , delay :SMSettings.BUTTON_FADE_DELAY , onComplete:makeInvisible , onCompleteParams:[obj], canBePaused:true} ) ; 
+			TweenMax.to( obj , SMSettings.FADE_OUT_TIME , {alpha : 0 , delay :SMSettings.BUTTON_FADE_DELAY , onComplete:makeInvisible , onCompleteParams:[obj], canBePaused:true} ) ; 
 		}
 		private function makeInvisible( obj : *) : void
 		{

@@ -20,6 +20,9 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const UNFREEZE_BUTTONS 					: String = 'UNFREEZE_BUTTONS' ;
 		public static const CHOICE_SELECTED 			    	: String = 'choiceSelected' ;
 		
+		public static const ACTIVE_BACK 						: String = 'activeBack' ; 
+		public static const INACTIVE_BACK 						: String = 'inactiveBack' ; 
+		
 		public static const STATE_MACHINE_START 				: String = 'stateMachineStart' ; 
 		public static const STATE_MACHINE_END 					: String = 'stateMachineEnd' ; 
 		

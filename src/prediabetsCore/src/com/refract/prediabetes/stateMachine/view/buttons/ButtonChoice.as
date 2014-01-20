@@ -79,7 +79,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		private function onFadeOut( evt : Event ) : void
 		{
-			TweenMax.to( this , .3 , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY , onComplete : destroy, canBePaused:true } ) ;  	
+			TweenMax.to( this , SMSettings.FADE_OUT_TIME , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY , onComplete : destroy, canBePaused:true } ) ;  	
 			
 			removeEvents() ; 
 			removeEventListener(MouseEvent.CLICK, btPressed); 
@@ -89,7 +89,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		{
 			var btObj : CoinVO = new CoinVO() ; 
 			btObj.btName = name ; 
-			btObj.wrong = _value ; 
+			btObj.timeChoiceFadeOut = (SMSettings.FADE_OUT_TIME * 1000 )  ; //SMSettings.TIME_CHOICE_FADE_OUT 
 			
 			
 			if( _value ) 

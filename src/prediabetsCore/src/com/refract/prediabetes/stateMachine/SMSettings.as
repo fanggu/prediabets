@@ -10,9 +10,11 @@ package com.refract.prediabetes.stateMachine {
 		
 		//public static const COUNTER_START_FLASHING        : String = '00:02' ; 
 
-		public static const RIGHT_ANSWER_TIMER            : int = 1000 ; 
-		public static const BUTTON_FADE_DELAY             : Number = 1 ; 
-		public static const SLOW_TIMER_X			  	  : int = 6000 ;  			  
+		public static const TIME_CHOICE_FADE_OUT          : int = 1000 ; 
+		public static const BUTTON_FADE_DELAY             : Number = 0 ; 
+		public static const FADE_OUT_TIME 				  : Number = 0.5 ; 
+		public static const SLOW_TIMER_X			  	  : int = 6000 ;  	
+		public static const BACK_MAX_TIME 				  : int = 5000 ; 		  
 		
 		public static const SHOW_DELAY                    : Number = .2 ; 
 		public static const MIN_BUTTON_SIZE               : int = 1 ; 
@@ -27,14 +29,7 @@ package com.refract.prediabetes.stateMachine {
 		public static const FONT_BUTTON                   : String = 'buttonFont' ;
 		public static const FONT_COUNTDOWN                : String = 'countDown' ;
 		public static const FONT_STATETXT                 : String = 'stateTxt' ;
-		
-		
-		public static const REAL_STORIES                  : String ='REAL STORIES :';
-		public static const OF                            : String ='OF';
-		public static const WATCHED                       : String ='WATCHED';
-		
-		
-		public static const CHOICE_IMG_DISTANCE           : int = 300 ; 
+				
 		
 		public static const BUTTON_SOUND_GOOD             : String = 'BUTTON_SOUND_GOOD' ; 
 		public static const BUTTON_SOUND_WRONG            : String = 'BUTTON_SOUND_WRONG' ;

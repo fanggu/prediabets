@@ -29,7 +29,10 @@ package com.refract.prediabetes {
 		public static var DARK_GREY:int = 0x4d4d4d;
 		public static var WHITE:int = 0xffffff;
 		
-		public static var DATA_PATH:String = "data/" ; 
+		public static const BULK_LOADER_ID : String  = 'Videos' ; 
+		
+		public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		//public static var DATA_PATH:String = "data/" ; 
 		public static var APP_DATA_PATH : String = "file://";
 
 		public static const BUTTON_HIT_AREA_ALPHA:Number = 0;

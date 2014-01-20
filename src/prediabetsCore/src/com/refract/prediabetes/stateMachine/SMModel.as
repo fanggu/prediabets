@@ -1,7 +1,10 @@
 package com.refract.prediabetes.stateMachine 
 {
 	import com.refract.prediabetes.assets.AssetManager;
-
+	import com.refract.prediabetes.stateMachine.VO.HistoryVO;
+	import com.refract.prediabetes.stateMachine.flags.Flags;
+	import com.robot.comm.DispatchManager;
+	import flash.events.Event;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	/**
@@ -15,7 +18,9 @@ package com.refract.prediabetes.stateMachine
 		private var _dictQuestions : Dictionary ;
 		private var _dictPreQuestions : Dictionary ; 
 		private var _dictVideoNames: Dictionary ; 
+		private var _arrHistory : Array ; 
 		
+		public var arrLoadInitRequest : Array ; 
 		public var selectedState : String ; 
 		public var selectedInteraction : int ;
 		public var initState : String ;
@@ -50,7 +55,8 @@ package com.refract.prediabetes.stateMachine
 			initButtonState = jsonObject.data.meta.init_button_state ;
 			endState = jsonObject.data.meta.end_state ; 
 			
-			slowStates = jsonObject.data.meta.slow_down_states ; 
+			slowStates = jsonObject.data.slow_down_states ; 
+			arrLoadInitRequest = jsonObject.data.meta.load_init_request ; 
 			for( var state :String in jsonObject.data.states)
 			{
 				_dictStates[state] = jsonObject.data.states[state];
@@ -64,9 +70,9 @@ package com.refract.prediabetes.stateMachine
 				}
 				
 			}
-			for( var videoName :String in jsonObject.data.meta.clip_length)
+			for( var videoName :String in jsonObject.data.clip_length)
 			{
-				_dictVideoNames[videoName] = jsonObject.data.meta.clip_length[ videoName ] ; 
+				_dictVideoNames[videoName] = jsonObject.data.clip_length[ videoName ] ; 
 			}
 			
 			var stateSlow : Object = {} ; 
@@ -78,6 +84,29 @@ package com.refract.prediabetes.stateMachine
 			stateSlow.interactions = [interaction] ;
 
 			_dictStates[ SMSettings.STATE_SLOW ] = stateSlow ; 
+			
+			_arrHistory = [] ; 
+			DispatchManager.dispatchEvent( new Event( Flags.INACTIVE_BACK ) ) ; 
+		}
+		public function storeHistory( historyVO : HistoryVO ) : void
+		{
+			if( _arrHistory.length > 0  ) 
+				var lastEl : String = _arrHistory[ _arrHistory.length-1 ].state ;
+			if( historyVO.state != lastEl)
+				_arrHistory.push( historyVO ) ;
+			
+			if( _arrHistory.length > 1 )
+				DispatchManager.dispatchEvent( new Event( Flags.ACTIVE_BACK ) ) ; 
+		}
+
+		public function getHistory() : HistoryVO
+		{
+			var historyVO : HistoryVO = _arrHistory[ _arrHistory.length - 2 ] ; 
+			_arrHistory.splice( _arrHistory.length -2  , 2 ) ; 
+			
+			if( _arrHistory.length < 1)
+				DispatchManager.dispatchEvent( new Event( Flags.INACTIVE_BACK ) ) ;
+			return historyVO; 
 		}
 		public function getVideoLength( videoName : String ) : int 
 		{
@@ -168,8 +197,8 @@ package com.refract.prediabetes.stateMachine
 		
 		private function _is_pre_q( obj : Object ) : Boolean
 		{
-			var finalState : String = obj.interactions[0].finalState ;
-			if( is_q( finalState ) )
+			var finalState : String = obj.interactions[0].final_state ;
+			if( _is_q( finalState ) )
 			{
 				return true ; 
 			}
@@ -182,7 +211,7 @@ package com.refract.prediabetes.stateMachine
 		{
 			if( address.indexOf( SMSettings._Q)  != -1)
 			{
-				return true 
+				return true ;
 			}
 			else
 			{

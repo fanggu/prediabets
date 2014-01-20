@@ -4,8 +4,7 @@ package com.refract.prediabetes.stateMachine.VO {
 	 */
 	public class CoinVO 
 	{
-		
-		public var wrong : Boolean ; 
+		public var timeChoiceFadeOut : Number ; 
 		public var btName : String ; 
 		public function CoinVO()
 		{

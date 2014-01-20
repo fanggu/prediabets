@@ -258,10 +258,10 @@ package com.refract.prediabetes.sections.utils {
 			useHandCursor = false;
 			buttonMode = false;
 			
-			_deActiveShape = new Shape() ; 
-			drawDeactivateShape() ; 
+			//_deActiveShape = new Shape() ; 
+			//drawDeactivateShape() ; 
 			
-			TweenMax.to( _deActiveShape , .1 , { alpha:0 , repeat:3, yoyo:true} );
+			//TweenMax.to( _deActiveShape , .1 , { alpha:0 , repeat:3, yoyo:true} );
 			
 		}
 		

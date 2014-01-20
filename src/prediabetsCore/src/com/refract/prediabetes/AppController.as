@@ -300,7 +300,6 @@ package com.refract.prediabetes
 		
 		private function onStateMachineEnd(evt:ObjectEvent):void
 		{	
-			trace('::onStateMachineEnd::')
 		}
 		
 

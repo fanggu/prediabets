@@ -1,6 +1,5 @@
 package com.refract.prediabetes.nav {
 	import com.greensock.TweenMax;
-	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.nav.events.FooterEvent;
 	import com.refract.prediabetes.nav.footer.BackwardButton;
@@ -13,7 +12,6 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
-	import com.refract.prediabetes.video.VideoLoader;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
 
@@ -24,7 +22,8 @@ package com.refract.prediabetes.nav {
 	import flash.utils.Dictionary;
 
 
-	public class Footer extends Sprite {
+	public class Footer extends Sprite 
+	{
 		
 		//Flags
 		private const PLAY_PAUSE:String = "PLAY_PAUSE";
@@ -337,7 +336,7 @@ package com.refract.prediabetes.nav {
 			if( _tween )
 			{
 				/*
-				trace('in tween')
+				
 				removeEventListener( Event.ENTER_FRAME , onProgressBar) ;
 				_progressBarBox.scaleX = 0 ; 
 				_tweenID = new TweenMax( _progressBarBox , _clip_length / 1000 , { scaleX : 1 , ease : Linear.easeNone } ) ; 

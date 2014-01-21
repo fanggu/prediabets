@@ -10,7 +10,6 @@ package com.refract.prediabetes {
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMModel;
 	import com.refract.prediabetes.stateMachine.SMView;
-	import com.refract.prediabetes.stateMachine.view.StateTxtView;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
 	import com.refract.prediabetes.video.VideoLoader;
 
@@ -34,7 +33,6 @@ package com.refract.prediabetes {
 		public static var INTERACTION_CHOICE : Class = InteractionChoice ; 
 		public static var SM_VIEW : Class = SMView ; 
 		public static var SM_MODEL : Class = SMModel ; 
-		public static var STATE_TXT_VIEW : Class = StateTxtView ;
 		public static var SM_CONTROLLER : Class = SMController ; 
 
 	}

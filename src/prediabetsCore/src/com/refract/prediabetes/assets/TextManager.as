@@ -58,53 +58,8 @@ package com.refract.prediabetes.assets {
 			makeDefaultData();
 		}
 		
-		private function makeDefaultData():void{
-			
-			
-			_data["dummyText"]={
-				id:"dummyText",
-				copy_en:"THIS IS SOME DUMMY TEXT",
-				font: "BEBASNEUE",
-				bold: false,
-				colour:"WHITE"
-			};
-			
-			_data["dummyTextLarge"]={
-				id:"dummyTextLarge",
-				copy_en:"THIS IS SOME DUMMY TEXT",
-				font: "BEBASNEUE",
-				colour:"WHITE"
-			};
-			
-			
-			//****ROB ADDED
-			_data["countDown"]={
-				id:"countDown",
-				copy_en:"",
-				font: "AKZIDENZG_BOLD_CONDENSED",
-				colour:"0xc45252",
-				gradientColor:"NONE"
-			};
-			
-			_data["stateTxt"]={
-				id:"stateTxt",
-				copy_en:"",
-				font: "BEBASNEUE",
-				colour:"WHITE",
-				gradientColor:"NONE"
-			};
-			
-			_data["buttonFont"]={
-				id:"buttonFont",
-				copy_en:"",
-				font: "AKZIDENZG_BOLD_CONDENSED",
-				colour:"WHITE",
-				gradientColor:"NONE"
-			};
-			
-			
-			//** ROB ENDED
-			
+		private function makeDefaultData():void
+		{	
 		}
 		
 		private function parseData(json:String):void{
@@ -149,12 +104,21 @@ package com.refract.prediabetes.assets {
 			{
 				//text format
 				var format:TextFormat = new TextFormat();
-				format.font = FontManager["FONT_"+data.font] ? FontManager["FONT_"+data.font] : FontManager["FONT_BEBASNEUE"];
+				format.font = FontManager["FONT_"+data.font] ? FontManager["FONT_"+data.font] : FontManager["FONT_NEXABOLD"];
 				format.letterSpacing = props.letterSpacing ? props.letterSpacing : DEFAULT_PROPS.letterSpacing;
 				format.leading = props.leading ? props.leading : DEFAULT_PROPS.leading;
 				format.bold = (data.bold == "true" || data.bold == "TRUE" || data.bold == true) ? true : false;
 				format.align = props.align ? props.align : DEFAULT_PROPS.align;
-				format.size = isNaN(Number(props.fontSize)) ? AppSettings.FONT_SIZES[DEFAULT_PROPS.fontSize] :  AppSettings.FONT_SIZES[Number(props.fontSize)];
+				 
+				if(isNaN(Number(props.fontSize)) )
+				{
+					format.size = AppSettings.FONT_SIZES[DEFAULT_PROPS.fontSize]   
+				}
+				else
+				{
+					format.size = AppSettings.FONT_SIZES[Number(props.fontSize)];
+				}
+				
 				/*
 				var size:Number = isNaN(Number(props.fontSize)) ? DEFAULT_PROPS.fontSize :Number(props.fontSize);
 				format.size = isNaN(Number(props.fontScale)) ? (size * AppSettings.FONT_SCALE_FACTOR) : Number(props.fontScale) * size;

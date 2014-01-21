@@ -25,14 +25,15 @@ package com.refract.prediabetes {
 		
 		public static var RED:int = 0xc45252;
 		public static var LIGHT_GREY:int =0xcdcdcd;
-		public static var GREY:int = 0x868989;
+		public static var GREY:int = 0x999999;
 		public static var DARK_GREY:int = 0x4d4d4d;
 		public static var WHITE:int = 0xffffff;
+		public static var BLACK:int = 0x000000;
 		
 		public static const BULK_LOADER_ID : String  = 'Videos' ; 
 		
-		public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
-		//public static var DATA_PATH:String = "data/" ; 
+		//public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		public static var DATA_PATH:String = "data/" ; 
 		public static var APP_DATA_PATH : String = "file://";
 		public static var BUFFER_DELAY 				  : Number = 0.3 ; 	  
 
@@ -59,17 +60,19 @@ package com.refract.prediabetes {
 		//public static var RESERVED_HEADER_HEIGHT_TOP:int = 10;
 		//public static var RESERVED_HEADER_HEIGHT_BOTTOM:int = 80;
 		
-		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 0;
+		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 35;
 		public static var RESERVED_FOOTER_HEIGHT_DEFAULT:int = 70;
 		public static var RESERVED_HEADER_HEIGHT:int = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
 		public static var RESERVED_FOOTER_HEIGHT:int = RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
 		public static var RESERVED_HEIGHT:int = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
-		public static const RESERVED_SIDE_BORDER:int = 100;
+		public static var RESERVED_SIDE_BORDER:int = 0;
 		
 		public static var FONT_SCALE_FACTOR:Number = 1;
 		
-		public static var FOOTER_FONT_SIZE:int = 13;
+		public static var FOOTER_FONT_SIZE:int = 15;
 		public static var FOOTER_FONT_SIZE2:int = 14;
+		public static var HEADER_FONT_SIZE : int = 21 ; 
+		 
 		
 		public static var FONT_SIZES : Dictionary = __MAKE_DICTIONARY();
 		public static function GET_FONT_SCALE(size:int):Number{
@@ -88,8 +91,10 @@ package com.refract.prediabetes {
 			dict[20] = 20;
 			dict[22] = 22;
 			dict[24] = 24;
+			dict[28] = 28;
 			dict[30] = 30;
 			dict[32] = 32;
+			dict[35] = 35;
 			dict[36] = 36;
 			dict[48] = 48;
 			dict[54] = 54;
@@ -126,22 +131,30 @@ package com.refract.prediabetes {
 		
 		private static const SIXTEEN_NINE_RATIO:Number = 16/9;
 		
-		private static function onStageResize(evt:Event = null):void{
-			var stageRatio:Number = _stage.stageWidth/(_stage.stageHeight-RESERVED_HEIGHT);
+		private static function onStageResize(evt:Event = null):void
+		{
+			var stageW : Number = _stage.stageWidth - AppSettings.RESERVED_SIDE_BORDER * 2 ; 
 			
-			if(SIXTEEN_NINE_RATIO > stageRatio){ //stage height greater than width -> fit to width
-				VIDEO_HEIGHT = _stage.stageWidth/SIXTEEN_NINE_RATIO;
-				VIDEO_WIDTH = _stage.stageWidth;
+			var stageRatio:Number = stageW /(_stage.stageHeight-RESERVED_HEIGHT);
+			
+			if(SIXTEEN_NINE_RATIO > stageRatio)
+			{
+				//stage height greater than width -> fit to width
+				VIDEO_HEIGHT = stageW/SIXTEEN_NINE_RATIO;
+				VIDEO_WIDTH = stageW
 				VIDEO_IS_STAGE_WIDTH = true;
 				VIDEO_LEFT = 0;
 				VIDEO_RIGHT = VIDEO_WIDTH;
-				VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2 - RESERVED_HEIGHT/2 ;
+				VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2 //- RESERVED_HEADER_HEIGHT/2 ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
-			}else{ //stage width greater than stage height -> fit to height
-				VIDEO_WIDTH = (_stage.stageHeight - RESERVED_HEIGHT)*SIXTEEN_NINE_RATIO;
+			}
+			else
+			{ 
+				//stage width greater than stage height -> fit to height
+				VIDEO_WIDTH = (_stage.stageHeight - RESERVED_HEIGHT)*SIXTEEN_NINE_RATIO - AppSettings.RESERVED_SIDE_BORDER * 2;
 				VIDEO_HEIGHT = (_stage.stageHeight - RESERVED_HEIGHT);
 				VIDEO_IS_STAGE_WIDTH = false;
-				VIDEO_LEFT = _stage.stageWidth/2 - VIDEO_WIDTH/2 ;
+				VIDEO_LEFT = stageW/2 - VIDEO_WIDTH/2 ;
 				VIDEO_RIGHT = VIDEO_LEFT + VIDEO_WIDTH;
 				VIDEO_TOP = RESERVED_HEADER_HEIGHT ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
@@ -210,8 +223,10 @@ package com.refract.prediabetes {
 				FONT_SIZES[20] = 20*rat300;
 				FONT_SIZES[22] = 22*rat300;
 				FONT_SIZES[24] = 24*rat300;
+				FONT_SIZES[28] = 28*rat300;
 				FONT_SIZES[30] = 30*rat300;
 				FONT_SIZES[32] = 32*rat300;
+				FONT_SIZES[35] = 35*rat300;
 				FONT_SIZES[36] = 36*rat300;
 				FONT_SIZES[48] = 48*rat300*.75;
 				FONT_SIZES[54] = 54*rat300*.75;

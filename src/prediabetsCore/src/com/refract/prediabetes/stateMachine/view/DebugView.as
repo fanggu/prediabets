@@ -57,7 +57,7 @@ package com.refract.prediabetes.stateMachine.view {
 		
 		protected function createText( str : String , size : int = 15) : TextField
 		{
-			var myFormat:TextFormat = new TextFormat("bebas", size);
+			var myFormat:TextFormat = new TextFormat("NEXABOLD", size);
 			var myTextField:TextField = new TextField(); 
 			myTextField.embedFonts = true ; 
 			

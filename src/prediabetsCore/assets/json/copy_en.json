@@ -2,40 +2,54 @@
     "success": "result for api/fsm_descriptor/module/1",
     "data": 
     [{
-        "flash_id": "placeholder_dummy_copysmall",
-        "copy_en": "dummy copy",
-        "font": "BEBASNEUE",
+        "flash_id": "stateTxt",
+        "copy_en": "",
+        "font": "NEXABOLD",
+        "bold": false,
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "buttonFont",
+        "copy_en": "",
+        "font": "NEXALIGHT",
         "bold": false,
         "colour": "WHITE"
     }, 
     {
         "flash_id": "startAgain",
-        "copy_en": "START AGAIN",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "copy_en": "Start again",
+        "font": "NEXABOLD",
+        "bold": false,
+        "colour": "GREY"
+    }, 
+    {
+        "flash_id": "headerRight",
+        "copy_en": "Pre diabetes - What you can do",
+        "font": "NEXABOLD",
         "bold": false,
         "colour": "GREY"
     }, 
     
     {
         "flash_id": "findOutMore",
-        "copy_en": "FIND OUT MORE",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "copy_en": "Find out more",
+        "font": "NEXABOLD",
         "bold": false,
         "colour": "GREY"
     }, 
 
     {
         "flash_id": "share",
-        "copy_en": "SHARE",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "copy_en": "share",
+        "font": "NEXABOLD",
         "bold": false,
         "colour": "GREY"
     }, 
 
     {
         "flash_id": "legal",
-        "copy_en": "LEGAL",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "copy_en": "legal",
+        "font": "NEXABOLD",
         "bold": false,
         "colour": "GREY"
     }, 
@@ -43,14 +57,14 @@
      {
         "flash_id": "findoutmore_title",
         "copy_en": "FIND OUT MORE",
-        "font": "BEBASNEUE",
+        "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
 
     {
         "flash_id": "page_findoutmore_copy",
         "copy_en": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magpteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esspisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.e cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "font": "AKZIDENZG_MEDIUM",
+        "font": "NEXALIGHT",
         "colour": "GREY"
     },
 
@@ -58,84 +72,22 @@
     {
         "flash_id": "footer_00_lslogo",
         "copy_en": "PREDIABETS",
-        "font": "BEBASNEUE",
+        "font": "NEXALIGHT",
         "bold": false,
         "colour": "WHITE"
-    }, {
-        "flash_id": "footer_01_med_questions",
-        "copy_en": "MEDICAL QUESTIONS",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
-        "flash_id": "footer_02_emergency_info",
-        "copy_en": "EMERGENCY INFO",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, 
-    
-    {
-        "flash_id": "footer_04_get_the_app",
-        "copy_en": "GET THE APP",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
-        "flash_id": "footer_05_about",
-        "copy_en": "ABOUT RC(UK)",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
-        "flash_id": "footer_06_credits",
-        "copy_en": "CREDITS",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
-        "flash_id": "footer_07_login",
-        "copy_en": "LOG IN",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
-        "flash_id": "footer_07_logout",
-        "copy_en": "LOG OUT",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, {
-        "flash_id": "footer_08_legal",
-        "copy_en": "LEGAL",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    }, 
-    {
-        "flash_id": "footer_11_profile",
-        "copy_en": "PROFILE",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
-        "bold": false,
-        "colour": "GREY"
-    },  
+    },       
+ 
     {
         "flash_id": "footer_back_to_video",
         "copy_en": "BACK",
-        "font": "AKZIDENZG_BOLD_CONDENSED",
+        "font": "NEXALIGHT",
         "bold": false,
         "colour": "GREY"
     },  
     {
-        "flash_id": "header_timer_sep",
-        "copy_en": ":",
-        "font": "AKZIDENZG_CONDENSED",
-        "colour": "WHITE"
-    }, 
-    {
         "flash_id": "full_screen_blocker",
         "copy_en": "Some parts of this experience require keyboard input. \nPlease click the allow button on screen now, or press Esc to continue.",
-        "font": "AKZIDENZG_MEDIUM_CONDENSED_ALT",
+        "font": "NEXALIGHT",
         "colour": "LIGHT_GREY"
     },
 
@@ -143,17 +95,17 @@
     {
         "flash_id": "signup_facebook",
         "copy_en": "FACEBOOK",
-        "font": "AKZIDENZG_MEDIUM_CONDENSED_ALT",
+        "font": "NEXALIGHT",
         "colour": "WHITE"
     }, {
         "flash_id": "signup_twitter",
         "copy_en": "TWITTER",
-        "font": "AKZIDENZG_MEDIUM_CONDENSED_ALT",
+        "font": "NEXALIGHT",
         "colour": "WHITE"
     }, {
         "flash_id": "signup_google",
         "copy_en": "GOOGLE+",
-        "font": "AKZIDENZG_MEDIUM_CONDENSED_ALT",
+        "font": "NEXALIGHT",
         "colour": "WHITE"
     },
 

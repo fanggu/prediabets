@@ -1,6 +1,8 @@
 package com.refract.prediabetes.stateMachine.view.messageBox {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
+	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.view.StateTxtView;
 	import com.robot.comm.DispatchManager;
@@ -22,10 +24,9 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 			var stateObjectText : Object = new Object() ; 
 			stateObjectText.state_txt = _valueObject.copy ; 
 			stateObjectText.state_txt_x = 50 ;
-			stateObjectText.state_txt_y = 40;
+			stateObjectText.state_txt_y = 50;
 			
-			_stateTxtView  = new StateTxtView( stateObjectText , 30 ) ; 
-			_stateTxtView.updateColor( _valueObject.color ) ; 
+			_stateTxtView  = new StateTxtView( stateObjectText , SMSettings.MESSAGE_BOX_FONT_SIZE , true ) ; 
 			addChild( _stateTxtView ) ; 
 			_stateTxtView.visible = false ; 
 			DispatchManager.addEventListener( Event.ENTER_FRAME, run ) ;

@@ -18,7 +18,8 @@ package com.refract.prediabetes.sections.utils {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
-	public class LSButton extends Sprite {
+	public class LSButton extends Sprite 
+	{
 		protected var _copy:TextField;
 		protected var _copyID:String;
 		protected var _copyProps:Object;
@@ -30,7 +31,7 @@ package com.refract.prediabetes.sections.utils {
 		public function set id(id : String) : void {_id = id;}
 		
 		
-		protected var _overColor : int = AppSettings.WHITE;
+		protected var _overColor : int = AppSettings.BLACK;
 		public function get overColor() : int { return _overColor; }
  		public function set overColor(overColor : int) : void { _overColor = overColor; }
 		
@@ -55,6 +56,7 @@ package com.refract.prediabetes.sections.utils {
 		public function get arrowAsset():String{ return _arrowAsset; }
 		public function set arrowAsset(str:String):void{ _arrowAsset = str;  if(_arrow){ if(_body.contains(_arrow)){ _body.removeChild(_arrow); } _arrow = null; } draw(); }
 		
+	
 		protected var _arrowScale:Number = 0.5;
 		public function get arrowScale() : Number { return _arrowScale; }
 		public function set arrowScale(arrowScale : Number) : void { _arrowScale = arrowScale; draw(); }
@@ -95,12 +97,10 @@ package com.refract.prediabetes.sections.utils {
 			TweenPlugin.activate([TintPlugin]);
 			_copyID = copyID;
 			_copyProps = props;
-			_useArrow = useArrow;
 			_extraBlack = extraBlack;
 			_minW = w;
 			_minH = h;
 			activated = 0 ; 
-		//	init();
 			addEventListener(Event.ADDED_TO_STAGE,init);
 		}
 		
@@ -155,7 +155,10 @@ package com.refract.prediabetes.sections.utils {
 		}
 
 		protected function addCopy() : void {
-			if(!_copy && _copyID)	_copy = TextManager.makeText(_copyID, _body, _copyProps);
+			if(!_copy && _copyID)	
+			{
+				_copy = TextManager.makeText(_copyID, _body, _copyProps);
+			}
 		}
 		
 		protected function addBkg():void{
@@ -229,10 +232,12 @@ package com.refract.prediabetes.sections.utils {
 					playSound("SndGeneralRollover");
 					TweenMax.to(_body,0.4,{tint:overColor});
 					if(_bkgBorder)	TweenMax.to(_bkgBorder,0.4,{alpha:1});
+					if( _bkg ) TweenMax.to( _bkg , 0.4 , {tint : 0xffffff} ) ;
 				break;
 				default:
 					TweenMax.to(_body,0.4,{tint:null});
 					if(_bkgBorder) TweenMax.to(_bkgBorder,0.4,{alpha:0});
+					if( _bkg ) TweenMax.to( _bkg , 0.4 , {tint : null} ) ;
 			}
 		}
 		

@@ -422,7 +422,6 @@ package com.refract.prediabetes.video
 		}
 		protected function createVideo( nameVideo : String) : void
 		{		
-			trace('::createVide : ' , nameVideo )
 			SMVars.me.nsStreamTimeAbs = 0 ; 
 			 
 			showBuffer() ; 
@@ -462,7 +461,6 @@ package com.refract.prediabetes.video
 				
 				if( videoItem )
 				{
-					trace('-3-')
 					 _metaActive = false ; 
 					 /*DEBUG DURATION
 					 var obj : Object = {} ; obj.clip_length = Number( videoItem.metaData['duration'] ) * 1000  ;

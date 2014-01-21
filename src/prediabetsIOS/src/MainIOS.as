@@ -4,7 +4,6 @@ package {
 
 	import com.refract.air.shared.data.StoredData;
 	import com.refract.air.shared.prediabetes.stateMachine.MobileSMController;
-	import com.refract.air.shared.prediabetes.stateMachine.view.MobieStateTextView;
 	import com.refract.air.shared.prediabetes.video.IOSVideoLoader;
 	import com.refract.air.shared.sections.feedback.TabletFeedback;
 	import com.refract.air.shared.sections.legal.TabletLegal;
@@ -110,6 +109,7 @@ package {
 			 AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR = "";
 			 
 			 AppSettings.BUFFER_DELAY = 1 ; 
+			 AppSettings.RESERVED_SIDE_BORDER = 8 ; 
 			 
 			 var ext : String = "flv" ; 
 			 var localPath:String = "video/flv/";
@@ -136,7 +136,6 @@ package {
 			//ClassFactory.MENU_BUTTON = LoadedMenuButton;
 			ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
 			//ClassFactory.SM_MODEL = SMModelMobile ; 
-			ClassFactory.STATE_TXT_VIEW = MobieStateTextView; 
 			ClassFactory.SM_CONTROLLER = MobileSMController ; 
 			
 			//ClassFactory.PROFILE_BUTTON = LoadedProfileButton;

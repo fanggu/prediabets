@@ -8,6 +8,7 @@ package com.refract.prediabetes.assets {
 		
 		//**GENERIC
 		[Embed(source="../../../../../assets/img/politeloader.png")] private var PoliteLoader : Class;
+		[Embed(source="../../../../../assets/img/logo.jpg")] private var Logo : Class;
 		
 		[Embed(source="../../../../../assets/swf/library.swf", symbol="Green_Play")] private var GreenPlay : Class;
 		[Embed(source="../../../../../assets/swf/library.swf", symbol="Red_Pause")] private var RedPause : Class;

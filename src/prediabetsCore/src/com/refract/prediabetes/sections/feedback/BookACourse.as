@@ -28,7 +28,7 @@ package com.refract.prediabetes.sections.feedback {
 			_bodyText.y = _bodyHeader.height+20;
 			
 			var buttonStyle:Object = {fontSize:36};
-			_bookBtn = new LSButton("page_book_a_course_link",buttonStyle,100,50,true,false);
+			_bookBtn = new LSButton("page_book_a_course_link",buttonStyle,100,50,true , false);
 			addChild(_bookBtn);
 			_bookBtn.addEventListener(MouseEvent.CLICK, launchCoursePage);
 			

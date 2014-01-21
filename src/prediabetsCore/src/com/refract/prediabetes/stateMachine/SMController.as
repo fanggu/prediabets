@@ -236,7 +236,6 @@ package com.refract.prediabetes.stateMachine {
 			if( _frozen)
 			{
 				_frozen = false ; 
-				//if( _countDownTimer ) _countDownTimer.resume() ; 
 				if( _transitionTimer ) _transitionTimer.resume() ; 
 				if( _tooslowTimer ) _tooslowTimer.resume() ; 
 				

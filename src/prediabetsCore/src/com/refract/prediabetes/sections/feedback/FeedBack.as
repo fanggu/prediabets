@@ -66,7 +66,7 @@ package com.refract.prediabetes.sections.feedback {
 			
 			loadValidation();
 			
-			_validationReload = new LSButton("page_feedback_reload",{fontSize:13},0,0,true,false);
+			_validationReload = new LSButton("page_feedback_reload",{fontSize:13},0,0,true , false );
 			_validationReload.addEventListener(MouseEvent.CLICK, loadValidation);
 			_validationReload.arrowScale = 0.65;
 			addChild(_validationReload);

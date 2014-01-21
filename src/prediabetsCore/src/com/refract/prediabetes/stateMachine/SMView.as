@@ -66,9 +66,7 @@ package com.refract.prediabetes.stateMachine
 			addChild( _overlayView );
 			addChild( _balloonView );
 		}
-		
-		
-		
+	
 		private function createStuff() : void
 		{
 			_borderView = new BorderView() ; 
@@ -101,11 +99,10 @@ package com.refract.prediabetes.stateMachine
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onEnd);
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_INTERACTIONS, onUpdateInteractions);
 			DispatchManager.addEventListener(Flags.UPDATE_VIEW_VIDEO, onUpdateVideo);
-			DispatchManager.addEventListener(Flags.UPDATE_VIEW_STATE_TEXT , onUpdateStateText);
+			//DispatchManager.addEventListener(Flags.UPDATE_VIEW_STATE_TEXT , onUpdateStateText);
 			DispatchManager.addEventListener(Flags.UPDATE_MESSAGE_BOX, onUpdateMessageBox);
 			DispatchManager.addEventListener(Flags.UPDATE_UI, onUpdateUI);
 			
-
 			//**PAUSE
 			DispatchManager.addEventListener(Flags.FREEZE, onFreeze );
 			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze);
@@ -125,7 +122,7 @@ package com.refract.prediabetes.stateMachine
 			DispatchManager.removeEventListener(Flags.STATE_MACHINE_END , onEnd);
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_INTERACTIONS, onUpdateInteractions);
 			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_VIDEO, onUpdateVideo);
-			DispatchManager.removeEventListener(Flags.UPDATE_VIEW_STATE_TEXT, onUpdateStateText);
+			//DispatchManager.removeEventListener(Flags.UPDATE_VIEW_STATE_TEXT, onUpdateStateText);
 			DispatchManager.removeEventListener(Flags.UPDATE_UI, onUpdateUI);
 			DispatchManager.removeEventListener(Flags.CREATE_INIT_BUTTON, onAddInitButton);
 			DispatchManager.removeEventListener(Flags.REMOVE_INIT_BUTTON, onRemoveInitButton);
@@ -161,16 +158,14 @@ package com.refract.prediabetes.stateMachine
 		}
 		//**/[FREEZE AND UNFREEZE]
 
-		
 		private function createInteraction( interaction : Object) : void
 		{
 			switch( interaction.interaction_type)
 			{
 				case Flags.CHOICE :
-					_uiView.createChoice( interaction );	
+					_uiView.createChoice( interaction , _stateTxtView.height );	
 					SMVars.me.tempTotChoice++;
 				break ; 
-				
 				
 				case Flags.NONE :
 					var btObj : CoinVO = new CoinVO() ; 
@@ -194,9 +189,11 @@ package com.refract.prediabetes.stateMachine
 			var len : int = stateObject.interactions.length ;
 			
 			SMVars.me.maxButtonSize = 0 ; 
-			var nrChoiceImg : int = 0 ; 
-			var i : int ; 
 			SMVars.me.tempTotChoice = 0 ; 
+			
+			createChoiceTitle( stateObject ) ; 
+			
+			var i : int ; 
 			for( i = 0 ; i < len ; i++)
 			{
 				var interaction : Object = stateObject.interactions[i] ;
@@ -204,16 +201,27 @@ package com.refract.prediabetes.stateMachine
 				interaction.stateName = stateObject.name ; 
 				createInteraction( interaction );
 			}
-			if( nrChoiceImg == 2)
-			{
-				if( SMVars.me.maxButtonSize < 290)
-				{
-					SMVars.me.maxButtonSize = 290 ; 
-				}
-			}
+			
 			DispatchManager.dispatchEvent( new Event( Flags.UPDATE_SIZE_BUTTON ) ) ; 
+			
+			_uiView.onResize() ; 
+			onResize() ; 
 		}
-
+		
+		private function createChoiceTitle( stateObject : Object ) : void
+		{		
+			if( _stateTxtView )
+			{
+				if( _stateTxtView.parent)
+					_stateTxtView.parent.removeChild( _stateTxtView );
+				 _stateTxtView = null ; 
+			}
+			_stateTxtView  = new StateTxtView( stateObject, SMSettings.STATE_TXT_FONT_SIZE  ) ; 
+			_uiView.addChild( _stateTxtView ) ; 
+			_uiView.stateTxtHeight = _stateTxtView.height ;
+			
+			_stateTxtView.x = - _stateTxtView.width / 2 ;  
+		}
 		
 
 
@@ -242,7 +250,7 @@ package com.refract.prediabetes.stateMachine
 		
 		private function createInitButton( interaction : Object) : void
 		{
-			_initButton = new ButtonChoice("buttonFont", { fontSize:32  }, SMSettings.MIN_BUTTON_SIZE, 70  , true);
+			_initButton = new ButtonChoice("buttonFont", { fontSize:32  }, SMSettings.MIN_BUTTON_SIZE, 70  , true , true);
 			addChild( _initButton ) ; 
 			_initButton.visible = false ; 
 			_initButton.setButton( interaction ) ; 
@@ -365,7 +373,11 @@ package com.refract.prediabetes.stateMachine
 		
 		//**RESIZE
 		private function onResize( evt : Event = null ) : void
-		{				
+		{			
+			_uiView.x = AppSettings.stage.stageWidth / 2 ; //- _uiView.width / 2 ; 
+			_uiView.y = AppSettings.stage.stageHeight / 2 - _uiView.height / 2; 	
+			
+			
 			resizeSquare( _lockButtonsQ );
 			if(_closeButton )
 			{

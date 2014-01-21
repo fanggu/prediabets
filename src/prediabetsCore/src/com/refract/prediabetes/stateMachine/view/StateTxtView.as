@@ -4,8 +4,6 @@ package com.refract.prediabetes.stateMachine.view {
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.stateMachine.SMSettings;
-	import com.refract.prediabetes.stateMachine.SMVars;
-	import com.refract.prediabetes.stateMachine.flags.Flags;
 
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -23,19 +21,35 @@ package com.refract.prediabetes.stateMachine.view {
 		public var txt : TextField ; 
 		
 		private var _fontSize : int ;
+		private var _stateObjectText : Object ;
+		private var _usePos : Boolean;
 		 
-		public function StateTxtView( stateObjectText : Object , fontSize : int) 
+		public function StateTxtView( stateObjectText : Object , fontSize : int , usePos : Boolean = false ) 
 		{
 			_fontSize = fontSize ; 
-			init( stateObjectText  ) ;
+			_stateObjectText = stateObjectText ; 
+			_usePos = usePos ;
+			
+			addEventListener(Event.ADDED_TO_STAGE , init );
 		}
-		private function init( stateObjectText : Object ) : void
+		private function init( evt : Event ) : void
 		{
-			AppSettings.stage.addEventListener( Event.RESIZE , onResize ) ; 
+			if( _usePos ) 
+			{
+				AppSettings.stage.addEventListener( Event.RESIZE , onResize ) ; 
+			}
+			removeEventListener(Event.ADDED_TO_STAGE , init );
+			if( _stateObjectText.state_txt ) if( _stateObjectText.state_txt.length > 0)
+			{
+				create( ) ;
+			}
+		}
+		private function create( ) : void
+		{
 			var myfontSize : int = _fontSize ; 
 			
 			var w : Number = SMSettings.STATE_TXT_MAX_W*AppSettings.RATIO ; 
-			if( stateObjectText.width ) w = stateObjectText.width ; 
+			if( _stateObjectText.width ) w = _stateObjectText.width ; 
 			var style:Object = 
 			{ 
 				fontSize: myfontSize
@@ -43,24 +57,22 @@ package com.refract.prediabetes.stateMachine.view {
 				, autoSize : TextFieldAutoSize.CENTER 
 				, multiline: true
 				, wordWrap : true
-			//	, width: 500
 				, width : w 
+				, border : false
 			} ; 
 			
 			txt = TextManager.makeText( SMSettings.FONT_STATETXT ,  null , style) ;
-			txt.htmlText = stateObjectText.state_txt  ; 
-			
-			if( stateObjectText.state_txt_grey)
-			{
-				txt.textColor = SMSettings.DEEP_RED ; 
-			}
-			
+			txt.htmlText = _stateObjectText.state_txt  ; 
+
 			addChild( txt ) ; 
 			
-			perc_x = stateObjectText.state_txt_x ; 
-			perc_y = stateObjectText.state_txt_y ; 
+			perc_x = _stateObjectText.state_txt_x ; 
+			perc_y = _stateObjectText.state_txt_y ; 
 			
-			onResize() ; 
+			if( _usePos ) 
+			{
+				onResize() ; 
+			}
 			
 			alpha = 0 ; 
 			TweenMax.to( this , .25 , { alpha : 1 , ease : Linear.easeNone , canBePaused:true} ) ;
@@ -75,21 +87,11 @@ package com.refract.prediabetes.stateMachine.view {
 		protected function onResize(event : Event = null ) : void 
 		{
 			x = ( perc_x * AppSettings.VIDEO_WIDTH) / 100 - width/2 + AppSettings.VIDEO_LEFT;
-			y = ( perc_y * AppSettings.VIDEO_HEIGHT ) / 100  + AppSettings.VIDEO_TOP;
-			
-			
-			
-			//if( AppSettings.RATIO > 1.2){
-//			if( AppSettings.DEVICE == AppSettings.DEVICE_TABLET || AppSettings.DEVICE == AppSettings.DEVICE_MOBILE)
-//			{
-//				if( AppSettings.RATIO > 1.2)
-//				{
-//					y = y - height /2 ; 
-//				}
-//			}
+			y = ( perc_y * AppSettings.VIDEO_HEIGHT ) / 100  + AppSettings.VIDEO_TOP - height / 2;
 		}
 		public function dispose() : void
 		{
+			_stateObjectText = null ; 
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize ) ; 
 		}
 	}

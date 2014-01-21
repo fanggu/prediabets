@@ -25,22 +25,32 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		private var _value : Boolean  ;
 		private var _txtBalloon : Sprite;
 		private var _txtField : TextField;
-		public function ButtonChoice(copyID:String, props:Object = null, w:Number = 0,h:Number = 0, useArrow:Boolean = false) 
+		private var _usePos : Boolean ; 
+		public function ButtonChoice(
+			copyID:String
+			, props:Object = null
+			, w:Number = 0
+			, h:Number = 0
+			, useArrow:Boolean = false
+			, usePos:Boolean = false
+			) 
 		{
+			_usePos = usePos ;
 			super( copyID , props , w , h *AppSettings.RATIO , useArrow);
 		}
 		public function setButton( interaction : Object ) : void
 		{
-			AppSettings.stage.addEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
 			
 			_interaction = interaction ; 
 			
-			text = interaction.copy.main.toUpperCase() ;
-			
+			text = interaction.copy.main ;
 			name = interaction.iter ; 
-			onResize() ; 
-			
+			if( _usePos)
+			{
+				 AppSettings.stage.addEventListener( Event.RESIZE , onResize) ;
+				 onResize() ;  
+			}
 			buttonAlpha = 0.15 ;
 			
 			var values : String = interaction.interaction_meta ;
@@ -98,7 +108,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.INSERT_COIN, btObj));
 		}
 		
-	
 		
 		public function onResize( evt : Event = null ) : void
 		{
@@ -109,15 +118,13 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		override public function destroy() : void
 		{
 			super.destroy() ; 
-			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 		}
 
 		public function dispose() : void
 		{
-			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
-			
+			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ;
 			if( _txtField ) if( _txtField.parent ) _txtField.parent.removeChild( _txtField ) ;
 			if( _txtBalloon ) if( _txtBalloon.parent ) _txtBalloon.parent.removeChild( _txtBalloon ) ;
 			_txtBalloon = null ; 

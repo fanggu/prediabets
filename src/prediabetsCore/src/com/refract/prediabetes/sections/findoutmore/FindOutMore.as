@@ -29,7 +29,7 @@ package com.refract.prediabetes.sections.findoutmore
 			_bodyText.y = _header.height+5;
 			
 			var buttonStyle:Object = {fontSize:36};
-			_bookBtn = new LSButton("page_findoutmore_link",buttonStyle,100,50,true,false);
+			_bookBtn = new LSButton("page_findoutmore_link",buttonStyle,100,50,true , false );
 			addChild(_bookBtn);
 			_bookBtn.addEventListener(MouseEvent.CLICK, launchCoursePage);
 			

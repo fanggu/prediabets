@@ -6,13 +6,21 @@ package com.refract.prediabetes.stateMachine {
 	{
 		public static const DEBUG_GET_CLIP_LENGTH 		: Boolean = false ; 
 		public static const STATE_TXT_MAX_W               : int = 800 ; 
-		public static var STATE_TXT_FONT_SIZE           : int = 72 ; 
+		
 		
 		//public static const COUNTER_START_FLASHING        : String = '00:02' ; 
 		public static const BUTTON_FADE_DELAY             : Number = 0 ; 
 		public static const FADE_OUT_TIME 				  : Number = 0.5 ; 
 		public static const SLOW_TIMER_X			  	  : int = 6000 ;  	
 		public static const BACK_MAX_TIME 				  : int = 5000 ; 	
+		
+		public static var CHOICE_BUTTON_HEIGHT		      : int = 60 ; 
+		
+		public static const STATE_TXT_COLOR 			  : uint = 0xffffff ; 
+		public static var STATE_TXT_FONT_SIZE           : int = 28 ; 
+		public static var CHOICE_FONT_SIZE 				  : int = 24 ; 
+		public static var MESSAGE_BOX_FONT_SIZE			  : int = 35 ;
+		
 		
 		
 		public static const SHOW_DELAY                    : Number = .2 ; 
@@ -27,7 +35,6 @@ package com.refract.prediabetes.stateMachine {
 		public static const GREEN_BUTTON                  : uint = 0x829b64 ;
 		
 		public static const FONT_BUTTON                   : String = 'buttonFont' ;
-		public static const FONT_COUNTDOWN                : String = 'countDown' ;
 		public static const FONT_STATETXT                 : String = 'stateTxt' ;
 				
 		

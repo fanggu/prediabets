@@ -1,6 +1,7 @@
 package com.refract.prediabetes.stateMachine.view.interactions {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
+	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.sections.utils.LSButton;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
@@ -16,15 +17,16 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 	public class InteractionChoice extends Interaction 
 	
 	{
-		protected var _btChoice : ButtonChoice;
+		protected var _btChoice : ButtonChoice;		
+		protected var _nameStyleChoice:Object ; 
 		
-		protected var _nameStyleChoice:Object = { fontSize:32  };
-		protected var _nameStyleChoiceTarget:Object = { fontSize:32  };
-		protected var _nameStyleChoiceImage:Object = { fontSize:24  };
+		public var iter : int ; 
 		
 		public function InteractionChoice( interactionObject : Object) 
 		{
+			_nameStyleChoice = { fontSize:SMSettings.CHOICE_FONT_SIZE  };
 			interaction = interactionObject ; 
+			iter = interaction.iter ; 
 			addEventListener(Event.ADDED_TO_STAGE, create);
 			DispatchManager.addEventListener( Flags.UPDATE_SIZE_BUTTON , onUpdateSizeButton ) ;
 			
@@ -35,8 +37,7 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 		{
 			if( _btChoice )
 			{
-				 _btChoice.minW = SMVars.me.maxButtonSize ; 
-				 _btChoice.onResize() ; 
+				 _btChoice.minW = SMVars.me.maxButtonSize ;  
 			}
 		}
 
@@ -45,7 +46,7 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 			var bt : LSButton ;
 			if( interaction.interaction_type == Flags.CHOICE)
 			{
-				_btChoice = new ButtonChoice("buttonFont", _nameStyleChoice, SMSettings.MIN_BUTTON_SIZE, 70  , true);
+				_btChoice = new ButtonChoice("buttonFont", _nameStyleChoice, SMSettings.MIN_BUTTON_SIZE, 24  , true);
 				addChild( _btChoice ) ; 
 				_btChoice.setButton( interaction ) ; 
 			}

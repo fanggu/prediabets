@@ -23,10 +23,11 @@ package com.refract.prediabetes.stateMachine
 		public var arrLoadInitRequest : Array ; 
 		public var selectedState : String ; 
 		public var selectedInteraction : int ;
-		public var initState : String ;
-		public var initButtonState : String ;
+		public var startState : String ;
+		public var initButtonStateAddress : String ;
 		public var endState : String ;
 		public var slowStates : Array ; 
+		public var initButtonState : Object ; 
 		 
 		public function SMModel()
 		{
@@ -51,8 +52,8 @@ package com.refract.prediabetes.stateMachine
 			_dictQuestions = new Dictionary( true ) ; 
 			_dictVideoNames = new Dictionary( true ) ; 
 
-			initState = jsonObject.data.meta.start_state ; 
-			initButtonState = jsonObject.data.meta.init_button_state ;
+			startState = jsonObject.data.meta.start_state ; 
+			initButtonStateAddress = jsonObject.data.meta.init_button_state_address ;
 			endState = jsonObject.data.meta.end_state ; 
 			
 			slowStates = jsonObject.data.slow_down_states ; 
@@ -75,15 +76,14 @@ package com.refract.prediabetes.stateMachine
 				_dictVideoNames[videoName] = jsonObject.data.clip_length[ videoName ] ; 
 			}
 			
-			var stateSlow : Object = {} ; 
-			var interaction : Object = {} ; 
-			interaction.final_state = '' ; 
-			interaction.interaction_type = 'none' ;
-			interaction.video_name = '' ;
-			interaction.trigger = -1  ;  
-			stateSlow.interactions = [interaction] ;
-
+			var stateSlow : Object = jsonObject.data[ SMSettings.STATE_SLOW ] ; 
 			_dictStates[ SMSettings.STATE_SLOW ] = stateSlow ; 
+			
+			var stateNone : Object = jsonObject.data[ SMSettings.STATE_NONE ] ; 
+			_dictStates[ SMSettings.STATE_NONE ] = stateNone ; 
+			
+			initButtonState = jsonObject.data.init_button_state ; 
+			initButtonState.iter = Flags.INIT_BUTTON ; 
 			
 			_arrHistory = [] ; 
 			DispatchManager.dispatchEvent( new Event( Flags.INACTIVE_BACK ) ) ; 

@@ -1,19 +1,14 @@
 package com.refract.prediabetes.stateMachine.view.buttons 
 {
 	import com.greensock.TweenMax;
-	import com.greensock.easing.Elastic;
-	import com.greensock.easing.Quint;
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.sections.utils.LSButton;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.VO.CoinVO;
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
-	import com.refract.prediabetes.stateMachine.events.OverlayEvent;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
-	import com.robot.geom.Circle;
 
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -103,59 +98,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.INSERT_COIN, btObj));
 		}
 		
-		
-		private function onTextFeedback( evt : StateEvent ) : void
-		{
-			if( evt.stringParam == '-1' && activated == -1 )
-			{
-				createText( evt.stringParam ) ; 
-			}
-			if( evt.stringParam == '+1' && activated == 1 )
-			{
-				createText( evt.stringParam ) ; 
-			}
-			
-		}
-		private function createText( str : String ) : void
-		{
-			var colorCircle : uint ; 
-			
-			if( str == '+1') colorCircle = SMSettings.GREEN_BUTTON ; 
-			else colorCircle = SMSettings.DEEP_RED ; 
-			_txtBalloon  = new Sprite ;
-			var circleSize : Number = 20 *AppSettings.RATIO ; 
-			var circBack : Circle = new Circle( circleSize , colorCircle ) ; 
-			var style:Object = 
-			{ 
-				fontSize:24   
-				, multiline: true
-				, wordWrap : false
-				, width : 300
-			} ; 
-
-			_txtField  = TextManager.makeText( SMSettings.FONT_COUNTDOWN , null , style) ;
-			_txtField.text = str ; 
-			_txtField.textColor = 0xffffff ;
-			
-			_txtBalloon.addChild( circBack ) ;
-			_txtBalloon.addChild( _txtField ) ; 
-			_txtField.x = - _txtField.width/2 ;
-			_txtField.y = - _txtField.height/2 ;
-			circBack.alpha = .7 ;
-			addChild( _txtBalloon ) ;
-			
-			_txtBalloon.scaleX = _txtBalloon.scaleY = 0 ; 
-			_txtBalloon.y = AppSettings.stage.mouseY ;
-			_txtBalloon.x = AppSettings.stage.mouseX ;
-			
-			TweenMax.killTweensOf( _txtBalloon ) ;
-			TweenMax.to( _txtBalloon , 2 , { y : AppSettings.stage.mouseY-100 , ease : Quint.easeOut , onComplete : devastate , onCompleteParams : [_txtField] , canBePaused:false} ) ; 
-			//TweenMax.to( txtBalloon , .1 , { alpha : 0 ,  delay : .8 , yoyo:true , repeat : 4} ) ;
-			TweenMax.to( _txtBalloon , .7 , { scaleX : 1 , scaleY:1  ,delay :0 , ease : Elastic.easeOut , canBePaused:true } ) ;
-			TweenMax.to( _txtBalloon , .2 , { scaleX : 0 , scaleY:0  ,delay :.7 , ease : Quint.easeOut , canBePaused:true } ) ;
-			
-			DispatchManager.dispatchEvent(  new OverlayEvent( OverlayEvent.DRAW_BALLOON , _txtBalloon ) ) ; 
-		} 
+	
 		
 		public function onResize( evt : Event = null ) : void
 		{
@@ -169,12 +112,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 		}
-		
-		private function devastate( obj : TextField ) : void
-		{
-			if( obj.parent ) obj.parent.removeChild( obj ) ; 
-		}
-		
+
 		public function dispose() : void
 		{
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ; 

@@ -367,7 +367,7 @@ package com.refract.prediabetes.video
 			{ 
 				showBuffer() ; 
 			}
-			
+			/*
 			if( percent > 95)
 			{
 				//trace('----hide?')
@@ -382,7 +382,7 @@ package com.refract.prediabetes.video
 				//trace('ALPHA - 0 ')
 				_showBuffer = true ; 
 			}
-			
+			*/
 			
 			
 		}
@@ -422,6 +422,7 @@ package com.refract.prediabetes.video
 		}
 		protected function createVideo( nameVideo : String) : void
 		{		
+			trace('::createVide : ' , nameVideo )
 			SMVars.me.nsStreamTimeAbs = 0 ; 
 			 
 			showBuffer() ; 
@@ -461,6 +462,7 @@ package com.refract.prediabetes.video
 				
 				if( videoItem )
 				{
+					trace('-3-')
 					 _metaActive = false ; 
 					 /*DEBUG DURATION
 					 var obj : Object = {} ; obj.clip_length = Number( videoItem.metaData['duration'] ) * 1000  ;
@@ -495,11 +497,15 @@ package com.refract.prediabetes.video
 				
 				if( videoItem != null)
 				{
-					_netStream.seek( 0 ) ; 
+					//_netStream.seek( 100 ) ; 
 					_netStream.resume() ;
+					
+					//_netStream.play(url);
 				}
 				else
+				{
 					_netStream.play(url);
+				}
 				
 				onResize();
 				paused = false ;
@@ -633,6 +639,7 @@ package com.refract.prediabetes.video
 		
 		public function cancelLoadRequest(name:String):void
 		{
+			
 			if(_bulkLoader)
 			{
 				var url:String =getCompleteUrl( name ) ; 
@@ -647,7 +654,13 @@ package com.refract.prediabetes.video
 					item.destroy();
 					_bulkLoader.remove( url ) ; 
 				}
-				if( item ) if( !item._isLoaded  ) _bulkLoader.remove( url ) ; 
+				if( item ) 
+				{
+					if( !item._isLoaded  ) 
+					{
+						_bulkLoader.remove( url ) ; 
+					}
+				}
 			}
 		}
 		public function removeItem( name : String ) : void

@@ -10,12 +10,12 @@
 <intAttribute key="DEBUG_VIA" value="0"/>
 <booleanAttribute key="DEINSTALL_TARGET" value="true"/>
 <booleanAttribute key="DISABLE_COMPILE_PROCESS" value="false"/>
-<stringAttribute key="INSTALL_TARGET" value="6d2a4d41793810a030f454ece68c038cd7c27aaf"/>
+<stringAttribute key="INSTALL_TARGET" value="installManually"/>
 <stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
 <intAttribute key="LAUNCH_METHOD" value="1"/>
 <stringAttribute key="MAIN_CLASS" value="src/MainIOS.as"/>
 <stringAttribute key="MOBILE_PRESET" value="Apple iPad1/2"/>
-<intAttribute key="PACKAGE_METHOD" value="0"/>
+<intAttribute key="PACKAGE_METHOD" value="1"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_EXTERNS" value="false"/>
 <booleanAttribute key="PASS_MAIN_CLASS" value="true"/>

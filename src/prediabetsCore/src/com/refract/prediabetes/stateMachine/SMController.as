@@ -1,6 +1,6 @@
 package com.refract.prediabetes.stateMachine {
-	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.BulkLoader;
+	import br.com.stimuli.loading.BulkProgressEvent;
 
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
@@ -75,17 +75,19 @@ package com.refract.prediabetes.stateMachine {
 			createListeners();
 			
 			SMVars.reset() ;
-			DispatchManager.dispatchEvent(new Event ( Flags.UN_FREEZE ) );
+			//DispatchManager.dispatchEvent(new Event ( Flags.UN_FREEZE ) );
 		
 			_model.init( ) ; 
 			_model.selectedInteraction= 0 ;
-			_model.selectedState = _model.initState ;
-			DispatchManager.dispatchEvent( new Event ( Flags.CREATE_INIT_BUTTON ) ) ;
+			
+			
+			
+			setNewState( _model.startState ) ; 
 			dispatchStartEvents() ; 
 			stateMachineTransition();
 			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) ) ; 
 			
-			//**manual load of the first videos, set on json
+			//**manual load of the first videos, ( #on json load_init_request: ) 
 			for( var i : int = 0 ; i < _model.arrLoadInitRequest.length ; i ++ )
 			{
 				var videoName : String = _model.arrLoadInitRequest[ i ] ; 
@@ -114,6 +116,8 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function reset( evt : Event = null ) : void
 		{
+			/*
+			trace("::reset::")
 			_tooslowIter = 0 ; 
 			removeTimers() ; 
 			//DispatchManager.dispatchEvent( new Event( Flags.FAST_CLEAR_SOUNDS ) ) ; 
@@ -122,6 +126,8 @@ package com.refract.prediabetes.stateMachine {
 			//removeListeners() ;	
 			DispatchManager.dispatchEvent( new Event( Flags.FAST_CLEAR_SOUNDS ) );
 			DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );
+			 * 
+			 */
 			
 		}
 
@@ -178,14 +184,20 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function onKill( evt : Event ) : void
 		{
+			/*
+			trace('::onKill::')
 			removeTimers() ;
-			if( VideoLoader.i.videoAddress != 'intro' ) VideoLoader.i.cancelLoadRequest(VideoLoader.i.videoAddress) ; 
-			DispatchManager.dispatchEvent( new Event ( Flags.FAST_CLEAR_SOUNDS ) ) ;  
-			DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );
+			clenBulkLoader() ; 
 			
+			if( VideoLoader.i.videoAddress != AppSettings.INTRO_URL ) 
+				VideoLoader.i.cancelLoadRequest(VideoLoader.i.videoAddress) ; 
+				
+			DispatchManager.dispatchEvent( new Event ( Flags.FAST_CLEAR_SOUNDS ) ) ;  
+			DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );	
 			DispatchManager.dispatchEvent( new Event( Flags.UPDATE_UI) ) ; 
 			DispatchManager.removeEventListener( NetStatusEvent.NET_STATUS,onNetStatus);
-			//removeListeners() ; 
+			 * 
+			 */
 		}
 		 
 		 
@@ -262,7 +274,7 @@ package com.refract.prediabetes.stateMachine {
 					stateMachineTransition();
 				break ;
 				case Flags.INIT_BUTTON : 					 
-					updateState(_model.initButtonState ) ; 
+					updateState(_model.initButtonStateAddress ) ; 
 					DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ; 
 				break ;
 
@@ -457,54 +469,74 @@ package com.refract.prediabetes.stateMachine {
 				break;	
 			}	
 		}
-		
+		public function goStartState( ) : void
+		{
+			updateState( _model.startState ) ; 
+		}
+		private function setNewState( address : String ) : void
+		{
+			_model.selectedState = address ; 
+			switch( address )
+			{				
+				case _model.initButtonStateAddress : 
+					DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ;
+				break ;
+				
+				case _model.startState : 
+					DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_INIT_BUTTON , _model.initButtonState) ) ;
+				break ;
+			}
+		}
 		protected function updateState( address : String , cleanUI : Boolean = true) : void
 		{	
 			clenBulkLoader() ; 
 			cleanMemory() ; 
 			
 			_newSlowTime = 0 ; 
+			_activateMessageBox = false ; 
 			DispatchManager.removeEventListener( Event.ENTER_FRAME , scheduler) ;			
+			DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS  )) ;
 			
 			if( address == _model.endState)
 			{
 				end() ; 
 				return ; 
 			}
-			if( address == _model.initButtonState)
-			{
-				DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ; 
-			}
 
-			DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS  )) ;
-			
-			cleanUI = false ; 
-			if( cleanUI ) 
-				DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI));
-
-			_activateMessageBox = false ; 
-			
 			storePrevState() ;  
-
-			_model.selectedState = address ; 
-			
-			var stateObject : Object = _model.state;
-
+			setNewState(address) ; 
     		controlTooSlowState() ; 
-			
 			createInteractions( );
 
 			 DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , SMSettings.QUESTIONS_FADE_IN) );			
 			 DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_DEBUG_PANEL_STATE, _model.selectedState ));
 
 			requestVideos( _model.state ) ; 
-			if( stateObject.state_txt ) if( stateObject.state_txt.length > 0)
+			if( _model.state.state_txt ) if( _model.state.state_txt.length > 0)
 			{
-				DispatchManager.dispatchEvent(new ObjectEvent(Flags.UPDATE_VIEW_STATE_TEXT, stateObject));
+				DispatchManager.dispatchEvent(new ObjectEvent(Flags.UPDATE_VIEW_STATE_TEXT, _model.state) ) ;
 			}
 			
 			VideoLoader.i.deactivateClickPause() ; 
-			
+		}
+		private function addressCheck( address : String ) : Boolean
+		{
+			switch( address )
+			{
+				case _model.endState : 
+					end() ; 
+					return true ; 
+				break ; 
+				
+				case _model.initButtonStateAddress : 
+					DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ;
+				break ;
+				
+				case _model.startState : 
+					DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_INIT_BUTTON , _model.initButtonState) ) ;
+				break ;
+			}
+			return false ; 
 		}
 		
 		//**for backward functionality
@@ -705,7 +737,6 @@ package com.refract.prediabetes.stateMachine {
 		//**clean memory ( !important especially for ipad2 ) 
 		private function cleanMemory() : void
 		{
-			trace('::clean memory::')
 			var historyVO : HistoryVO = _model.getHistoryPrev() ; 
 			if( historyVO)
 			{

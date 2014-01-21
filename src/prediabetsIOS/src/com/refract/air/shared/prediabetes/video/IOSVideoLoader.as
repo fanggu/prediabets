@@ -18,8 +18,7 @@ package com.refract.air.shared.prediabetes.video
 		public function IOSVideoLoader() 
 		{
 			_wasLoaded = false ; 
-		//	VIDEO_BASE_URL = "video/flv/";
-		//	VIDEO_FILE_EXT = '.flv' ; 
+			
 			super();
 		}
 		
@@ -189,5 +188,6 @@ package com.refract.air.shared.prediabetes.video
 		{
 			_wasLoaded = true ; 
 		}
+
 	}
 }

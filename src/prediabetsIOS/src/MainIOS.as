@@ -13,7 +13,6 @@ package {
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.nav.IOSNav;
-	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
@@ -45,6 +44,7 @@ package {
 		
 		public function MainIOS()
 		{
+			trace('::init::')
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		

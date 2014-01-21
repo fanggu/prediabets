@@ -64,7 +64,7 @@ package com.refract.prediabetes {
 		public static var RESERVED_HEADER_HEIGHT:int = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
 		public static var RESERVED_FOOTER_HEIGHT:int = RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
 		public static var RESERVED_HEIGHT:int = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
-		public static const RESERVED_SIDE_BORDER:int = 30;
+		public static const RESERVED_SIDE_BORDER:int = 100;
 		
 		public static var FONT_SCALE_FACTOR:Number = 1;
 		

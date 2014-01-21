@@ -19,6 +19,7 @@ package com.refract.prediabetes.stateMachine {
 		public static const MIN_BUTTON_SIZE               : int = 1 ; 
 		
 		public static const STATE_SLOW           	      : String = 'd_slow' ;
+		public static const STATE_NONE           	      : String = 'd_none' ;
 		public static const _Q           				  : String = '_q' ;
 		
 		//**Colors

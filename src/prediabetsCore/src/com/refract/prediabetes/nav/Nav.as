@@ -5,8 +5,7 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.nav.events.FooterEvent;
-	import com.refract.prediabetes.sections.intro.Intro;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
@@ -240,7 +239,9 @@ package com.refract.prediabetes.nav {
 					break;
 				case(AppSections.START_AGAIN ):
 					onBackToVideo( ) ; 
-					AppController.i.setSWFAddress(AppSections.INTRO);
+					//AppController.i.setSWFAddress(AppSections.INTRO);
+					//DispatchManager.dispatchEvent(new Event(Flags.START_MOVIE));
+					SMController.me.goStartState() ; 
 					break;
 				
 				case('share'):

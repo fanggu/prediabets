@@ -71,20 +71,16 @@ package com.refract.prediabetes.stateMachine {
 		//*START
 		public function start( ) : void
 		{ 	
-			reset() ;
-			createListeners();
-			
+			createListeners();	
 			SMVars.reset() ;
-			//DispatchManager.dispatchEvent(new Event ( Flags.UN_FREEZE ) );
-		
+
 			_model.init( ) ; 
-			_model.selectedInteraction= 0 ;
+			_model.selectedInteraction= 0 ;		
+			_model.selectedState = _model.startState ; 
 			
-			
-			
-			setNewState( _model.startState ) ; 
 			dispatchStartEvents() ; 
 			stateMachineTransition();
+			
 			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) ) ; 
 			
 			//**manual load of the first videos, ( #on json load_init_request: ) 
@@ -108,29 +104,9 @@ package com.refract.prediabetes.stateMachine {
 			
 			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI) ) ;
 			DispatchManager.dispatchEvent(new Event(Flags.HIDE_FOOTER_PLAY_PAUSE) ) ;
-			reset() ; 
-			
 			DispatchManager.dispatchEvent( new ObjectEvent( Flags.STATE_MACHINE_END, endObject ) ) ; 
 		}
 		
-		
-		private function reset( evt : Event = null ) : void
-		{
-			/*
-			trace("::reset::")
-			_tooslowIter = 0 ; 
-			removeTimers() ; 
-			//DispatchManager.dispatchEvent( new Event( Flags.FAST_CLEAR_SOUNDS ) ) ; 
-			initValues() ; 
-			SMVars.reset() ; 
-			//removeListeners() ;	
-			DispatchManager.dispatchEvent( new Event( Flags.FAST_CLEAR_SOUNDS ) );
-			DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );
-			 * 
-			 */
-			
-		}
-
 		private function initValues() : void
 		{
 			_videoFreeze = false ; 
@@ -162,45 +138,9 @@ package com.refract.prediabetes.stateMachine {
 			DispatchManager.addEventListener(Flags.INSERT_COIN , onInsertCoin);
 			DispatchManager.addEventListener(Flags.FREEZE , onFreeze);
 			DispatchManager.addEventListener(Flags.UN_FREEZE , onUnFreeze); 
-			DispatchManager.addEventListener(Flags.SM_RESET , reset); 	
 			DispatchManager.addEventListener(Flags.UPDATE_PLAY_BUTTON, onUpdatePlayButton) ;
-			DispatchManager.addEventListener(Flags.SM_KILL, onKill) ;
-			//DispatchManager.addEventListener(Flags.ON_FLV_METADATA , onActivateTooSlowTimer ) ;
 			DispatchManager.addEventListener(Flags.ON_BACKWARD , onBackwardState) ;
 		}
-		private function removeListeners() : void
-		{	
-			DispatchManager.removeEventListener(Flags.INSERT_COIN , onInsertCoin);			
-			DispatchManager.removeEventListener(Flags.FREEZE , onFreeze);
-			DispatchManager.removeEventListener(Flags.UN_FREEZE , onUnFreeze); 
-			
-			DispatchManager.removeEventListener(Flags.UPDATE_PLAY_BUTTON, onUpdatePlayButton) ;
-			DispatchManager.removeEventListener(Flags.SM_RESET , reset); 
-			DispatchManager.removeEventListener(Flags.SM_KILL, onKill) ;
-			//DispatchManager.removeEventListener(Flags.ON_FLV_METADATA , onActivateTooSlowTimer);
-			DispatchManager.removeEventListener(Flags.ON_BACKWARD , onBackwardState) ;
-		}
-		
-		
-		private function onKill( evt : Event ) : void
-		{
-			/*
-			trace('::onKill::')
-			removeTimers() ;
-			clenBulkLoader() ; 
-			
-			if( VideoLoader.i.videoAddress != AppSettings.INTRO_URL ) 
-				VideoLoader.i.cancelLoadRequest(VideoLoader.i.videoAddress) ; 
-				
-			DispatchManager.dispatchEvent( new Event ( Flags.FAST_CLEAR_SOUNDS ) ) ;  
-			DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );	
-			DispatchManager.dispatchEvent( new Event( Flags.UPDATE_UI) ) ; 
-			DispatchManager.removeEventListener( NetStatusEvent.NET_STATUS,onNetStatus);
-			 * 
-			 */
-		}
-		 
-		 
 
 		private function onUpdatePlayButton( evt : BooleanEvent ) : void
 		{
@@ -213,20 +153,18 @@ package com.refract.prediabetes.stateMachine {
 		{
 			if( !_frozen)
 			{ 
-				if( _transitionTimer ) _transitionTimer.pause() ;
-				if( _tooslowTimer ) _tooslowTimer.pause() ;
-				 
+				if( _transitionTimer ) 
+					_transitionTimer.pause() ;
+				if( _tooslowTimer ) 
+					_tooslowTimer.pause() ; 
 				_enterFrameObject.removeEventListener( Event.ENTER_FRAME , loop ) ;
-				
 				if( !VideoLoader.i.paused ) 
 				{
 					_videoFreeze = true ; 
 					VideoLoader.i.pauseVideo() ; 
 				}
-				
 				SMVars.me.freezeTime() ; 
 				_frozen = true ; 
-				
 				TweenMax.pauseAll( ) ;
 			}
 		}
@@ -236,18 +174,16 @@ package com.refract.prediabetes.stateMachine {
 			if( _frozen)
 			{
 				_frozen = false ; 
-				if( _transitionTimer ) _transitionTimer.resume() ; 
-				if( _tooslowTimer ) _tooslowTimer.resume() ; 
-				
+				if( _transitionTimer ) 
+					_transitionTimer.resume() ; 
+				if( _tooslowTimer ) 
+					_tooslowTimer.resume() ; 
 				_enterFrameObject.addEventListener( Event.ENTER_FRAME , loop ) ;
-				
-				if( _videoFreeze ) VideoLoader.i.resumeVideo() ; 
+				if( _videoFreeze ) 
+					VideoLoader.i.resumeVideo() ; 
 				SMVars.me.unFreezeTime() ; 
-				
 				DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE_SOUNDS )) ; 
-				
 				TweenMax.resumeAll() ; 
-				
 				_videoFreeze = false ; 
 				AppSettings.stage.focus = AppSettings.stage ; 
 			}
@@ -258,8 +194,7 @@ package com.refract.prediabetes.stateMachine {
 			}
 		}
 		
-
-		
+		//**Activate State Machine.
 		private function onInsertCoin( evt : ObjectEvent) : void
 		{	
 			VideoLoader.i.pauseVideo() ; 
@@ -302,11 +237,9 @@ package com.refract.prediabetes.stateMachine {
 				_model.storeHistory( historyVO ) ;
 			 }
 		}
-
 		
 		private function answerDelayedCompleted( evt : TimerEvent = null ) : void
 		{
-			
 			removeTimers() ; 
 			DispatchManager.dispatchEvent(new Event( Flags.DEACTIVATE_VIDEO_RUN)) ; 
 			stateMachineTransition();
@@ -325,8 +258,8 @@ package com.refract.prediabetes.stateMachine {
 				var loaded : Boolean = VideoLoader.i.isLoaded( videoName ) ; 
 				if( loaded )
 				{	
-					VideoLoader.i.setLoadedTrue() ;
-					stateMachineTransitionExec(  ) ; 
+					VideoLoader.i.setLoadedTrue() ; 
+ 					stateMachineTransitionExec(  ) ; 
 				}
 				else
 				{
@@ -357,10 +290,12 @@ package com.refract.prediabetes.stateMachine {
 			}
 		}
 		
-		public function onSetClipLength() : void
+		public function onVideoStart() : void
 		{
-			setClipLength() ; 	
+			checkAddress() ; 
+			setClipLength() ;
 		}
+	
 		private function stateMachineTransitionExec(  ) : void
 		{
 			clenBulkLoader() ; 
@@ -373,10 +308,7 @@ package com.refract.prediabetes.stateMachine {
 				activateTrigger() ; 
 				
 				DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );
-				
-				DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO , interaction.video_name)) ;
-				
-				 
+				DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_VIEW_VIDEO , interaction.video_name)) ;				
 				if( _prevStateAddress && _model.selectedState != SMSettings.STATE_SLOW )
 				{
 					cancelVideos( _prevStateAddress ) ; 
@@ -472,9 +404,9 @@ package com.refract.prediabetes.stateMachine {
 		{
 			updateState( _model.startState ) ; 
 		}
-		private function setNewState( address : String ) : void
+		private function checkAddress(  ) : void
 		{
-			_model.selectedState = address ; 
+			var address : String = _model.selectedState ;
 			switch( address )
 			{				
 				case _model.initButtonStateAddress : 
@@ -482,6 +414,7 @@ package com.refract.prediabetes.stateMachine {
 				break ;
 				
 				case _model.startState : 
+					_model.resetHistory() ; 
 					DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_INIT_BUTTON , _model.initButtonState) ) ;
 				break ;
 			}
@@ -503,12 +436,12 @@ package com.refract.prediabetes.stateMachine {
 			}
 
 			storePrevState() ;  
-			setNewState(address) ; 
+			_model.selectedState = address ;  
     		controlTooSlowState() ; 
 			createInteractions( );
 
 			 DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , SMSettings.QUESTIONS_FADE_IN) );			
-			 DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_DEBUG_PANEL_STATE, _model.selectedState ));
+			 if( AppSettings.DEBUG ) DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_DEBUG_PANEL_STATE, _model.selectedState ));
 
 			requestVideos( _model.state ) ; 
 			if( _model.state.state_txt ) if( _model.state.state_txt.length > 0)
@@ -518,25 +451,7 @@ package com.refract.prediabetes.stateMachine {
 			
 			VideoLoader.i.deactivateClickPause() ; 
 		}
-		private function addressCheck( address : String ) : Boolean
-		{
-			switch( address )
-			{
-				case _model.endState : 
-					end() ; 
-					return true ; 
-				break ; 
-				
-				case _model.initButtonStateAddress : 
-					DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ;
-				break ;
-				
-				case _model.startState : 
-					DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_INIT_BUTTON , _model.initButtonState) ) ;
-				break ;
-			}
-			return false ; 
-		}
+
 		
 		//**for backward functionality
 		private function storePrevState() : void
@@ -782,27 +697,18 @@ package com.refract.prediabetes.stateMachine {
 		{
 			_model.init( ) ;
 			var iter : int = 0 ; 
-			for( var mc in _model.dictState)
+			for( var mc : * in _model.dictState)
 			{
-				iter ++ 
-				
+				iter ++ ;				
 				var state : Object = _model.dictState[ mc ]  ; 
-				
 				var interactions : Object = state.interactions ; 
-				//_dictStates[address].interactions[iterInteraction] ;
-				
-				
 				for( var i : int = 0 ; i < interactions.length ; i ++ )
 				{
 					iter ++ ; 
 					var interaction : Object = interactions[ i ] ;
-					 
-					
 					var b : Sprite = new Sprite() ; 
 					TweenMax.to( b , iter  , { x : 100 , onComplete : launchVideo , onCompleteParams:[ interaction.video_name ]})
 				}
-				
-				
 			}
 		}
 		

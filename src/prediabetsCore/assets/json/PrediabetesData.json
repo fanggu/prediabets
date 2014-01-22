@@ -819,7 +819,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 500
+            "trigger": 1000
           }
         ]
       },

@@ -404,7 +404,7 @@ package com.refract.prediabetes.nav {
 			
 			_progressBarAbsWidth = AppSettings.VIDEO_WIDTH - _progressBarBack.x - 50 ;
 			
-			var g:Graphics = _progressBarBox.graphics;
+			g = _progressBarBox.graphics;
 			g.clear();
 			g.beginFill( 0xfff000 , 1 ) ;
 			g.drawRect

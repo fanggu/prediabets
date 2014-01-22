@@ -42,5 +42,8 @@ package com.refract.prediabetes.stateMachine {
 		public static const BUTTON_SOUND_WRONG            : String = 'BUTTON_SOUND_WRONG' ;
 		public static const QUESTIONS_FADE_IN             : String = 'Questions_Fade_Up' ; 
 		public static const QUESTIONS_ROLLOVER            : String = 'Questions_Rollover' ; 
+		
+		//**fix bug with choice smoker ( as video is too short ) 
+		public static const D_21_M						  : String = 'd21m_choice_smoker' ; 
 	}
 }

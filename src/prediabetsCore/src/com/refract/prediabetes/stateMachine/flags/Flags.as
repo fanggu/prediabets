@@ -71,8 +71,6 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const CLEAR_SOUNDS							: String = 'clearSounds' ; 
 		public static const FAST_CLEAR_SOUNDS						: String = 'fastClearSounds' ; 
 		 
-		public static const SM_RESET 								: String = 'SmReset' ; 
-		
 		public static const SM_ACTIVE								: String = 'SmActive' ;
 		public static const SM_NOT_ACTIVE 							: String = 'SmNotActive';
 		public static const SM_KILL 								: String = 'smKill' ;

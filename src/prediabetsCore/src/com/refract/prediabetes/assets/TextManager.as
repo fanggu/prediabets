@@ -1,7 +1,5 @@
 package com.refract.prediabetes.assets {
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.logger.Logger;
-	import com.refract.prediabetes.stateMachine.SMSettings;
 
 	import flash.display.DisplayObjectContainer;
 	import flash.text.TextField;
@@ -154,7 +152,7 @@ package com.refract.prediabetes.assets {
 				}
 				
 			}else{
-				Logger.log(Logger.TEXT,"Missing Text ID: "+id+" for textfield: "+txt.name)
+				trace("Missing Text ID: "+id+" for textfield: "+txt.name)
 				txt.text = "Missing Text ID: "+id+" for textfield: "+txt.name;
 				out = false;
 			}

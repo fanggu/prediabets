@@ -2,7 +2,8 @@ package com.refract.prediabetes.sections.utils {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.logger.Logger;
+
+	import org.osmf.logging.Logger;
 
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
@@ -151,7 +152,7 @@ package com.refract.prediabetes.sections.utils {
 		private var touchY:Number = 0;
 		
 		private function beginTouchDrag(evt:TouchEvent):void{
-			Logger.log(Logger.OVERLAY,"touch begin");
+			//trace(Logger.OVERLAY,"touch begin");
 			touchY = evt.stageY;
 			stage.addEventListener(TouchEvent.TOUCH_MOVE,onTouchMove);
 			stage.addEventListener(TouchEvent.TOUCH_END,endTouchDrag);
@@ -168,7 +169,7 @@ package com.refract.prediabetes.sections.utils {
 		}
 		
 		private function endTouchDrag(evt:TouchEvent):void{
-			Logger.log(Logger.OVERLAY,"ontouchEnd");
+			//trace(Logger.OVERLAY,"ontouchEnd");
 			stage.removeEventListener(TouchEvent.TOUCH_MOVE,onTouchMove);
 			stage.removeEventListener(TouchEvent.TOUCH_END,endTouchDrag);
 		//	touchY = touchY - evt.stageY;
@@ -184,7 +185,6 @@ package com.refract.prediabetes.sections.utils {
 		}
 		
 		private function onTouchMove(evt:TouchEvent):void{
-		//	Logger.log(Logger.OVERLAY,"touch move",evt.toString());
 		//	evt.
 			touchY = touchY - evt.stageY;
 			movePivotTouch( touchY*0.1);

@@ -8,12 +8,9 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
-
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	import flash.display.StageDisplayState;
 	import flash.events.Event;
-	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
 
 	
@@ -29,9 +26,6 @@ package com.refract.prediabetes.nav {
 		protected var _currentOverlay:Sprite;
 		protected var _prevOverlay : Sprite;
 		private var _blackGraphics : Sprite ; 
-		
-		//protected var _backToVideo:LSButton;
-		
 		protected var _fadeInTime:Number = 0.5;
 		protected var _fadeOutTime:Number = 2;
 		protected var _fadeDelay:Number = 5;
@@ -61,20 +55,20 @@ package com.refract.prediabetes.nav {
 
 			_header = new ClassFactory.HEADER();
 			addChild(_header);
-			//_header.visible = false ; 
-			_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
+			if( AppSettings.RESERVED_HEADER_HEIGHT == 0 ) 
+			{
+				_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
+				_header.visible = false ; 
+			}
+			
 			
 			_footer = new ClassFactory.FOOTER( this );
 			addChild(_footer);
 			DispatchManager.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			
-			
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_START, onSMStart);
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onSMEnd);
-			
 			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze);
-			
-			DispatchManager.addEventListener(AppSettings.REQUEST_FULL_SCREEN_INTERACTIVE, onFSIRequest);
 			
 			stage.addEventListener(Event.RESIZE,onResize);
 			onResize();
@@ -210,16 +204,7 @@ package com.refract.prediabetes.nav {
 		{
 			
 		}
-		
-		protected function onFSIRequest(evt:MouseEvent):void{
-			stage.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED,onFSInteractiveAccepted);
-			stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-		}
-		
-		protected function onFSInteractiveAccepted(evt:FullScreenEvent):void
-		{
-			//AppSettings.FullScreenInteractiveAllowed = true;	
-		}
+
 		
 		protected function onNavClicked(evt : FooterEvent) : void 
 		{

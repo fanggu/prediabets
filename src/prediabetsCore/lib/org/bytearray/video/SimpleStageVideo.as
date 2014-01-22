@@ -2,10 +2,8 @@
 53 49 4D 50 4C 45 53 54 41 47 45 56 49 44 45 4F  
 */
 	
-package org.bytearray.video
-{
+package org.bytearray.video {
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.logger.Logger;
 
 	import org.bytearray.video.events.SimpleStageVideoEvent;
 	import org.bytearray.video.events.SimpleStageVideoToggleEvent;
@@ -115,6 +113,7 @@ package org.bytearray.video
 			
 			if ( !_played ) 
 			{
+				
 				_played = true;
 				dispatchEvent(_initEvent);
 			}
@@ -152,7 +151,6 @@ package org.bytearray.video
 			{
 				if ( _sv == null && stage.stageVideos.length > 0 )
 				{
-					Logger.log(Logger.VIDEO,"he don't exist sir");
 					_sv = stage.stageVideos[0];
 					_sv.addEventListener(StageVideoEvent.RENDER_STATE, onRenderState);
 				}

@@ -2,11 +2,8 @@ package com.refract.prediabetes.sections.feedback {
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.TextManager;
-	import com.refract.prediabetes.logger.Logger;
-	import com.refract.prediabetes.nav.Nav;
 	import com.refract.prediabetes.sections.utils.LSButton;
 	import com.refract.prediabetes.sections.utils.LSInputBox;
-	import com.robot.comm.DispatchManager;
 
 	import flash.display.Bitmap;
 	import flash.display.Loader;
@@ -33,8 +30,8 @@ package com.refract.prediabetes.sections.feedback {
 	//	private var _close:LSButton;
 		private var _submit:LSButton;
 		
-		public function FeedBack() {
-			AppSettings.checkFSStatus();
+		public function FeedBack() 
+		{
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -161,7 +158,7 @@ package com.refract.prediabetes.sections.feedback {
 		}
 		
 		protected function onFeedbackError(evt:Event):void{
-			Logger.log(Logger.OVERLAY,"PROBLEM!");
+			
 		}
 		
 		protected function validateInput():Boolean{

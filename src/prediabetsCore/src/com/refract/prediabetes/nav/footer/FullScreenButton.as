@@ -56,7 +56,8 @@ package com.refract.prediabetes.nav.footer {
 				stage.displayState = StageDisplayState.NORMAL;
 			//	drawState();
 			}else{
-				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+				trace('----set full screen')
+				stage.displayState = StageDisplayState.FULL_SCREEN;
 			//	drawState();
 			}
 		}

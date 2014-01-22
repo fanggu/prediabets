@@ -103,7 +103,7 @@ package com.refract.air.shared.prediabetes.stateMachine.view.interactions {
 		private var _iterFrame : int = 0 ; 
 		private function updateAccelerometer( e :AccelerometerEvent = null ) :void
 		{
-			if( !SMVars.me.PAUSED )
+			if( !SMVars.me.paused )
 			{
 				var ki :Number = 0.1 ; //0.1;
 				_iterFrame ++ ; 

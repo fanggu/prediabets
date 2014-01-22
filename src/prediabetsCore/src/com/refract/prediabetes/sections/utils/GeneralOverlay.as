@@ -74,8 +74,8 @@ package com.refract.prediabetes.sections.utils {
 			}
 		}
 		
-		public function get effectiveHeight():Number{
-		//	Logger.log(Logger.OVERLAY,"EFFECTIVE HEIGHT: this.height:", this.height,"_body.y:",_body.y,"_body.height:", _body.height,"_scrollbox.contentHeight:", _scrollbox.contentHeight,"result:", _scrollbox ? this.height - _body.height + _scrollbox.contentHeight : this.height);			
+		public function get effectiveHeight():Number
+		{			
 			var _bodyY:Number = _body.y;
 			_body.y = 0;
 			var effectiveHeight:Number = _scrollbox ? this.height - _body.height + _scrollbox.contentHeight : this.height;

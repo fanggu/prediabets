@@ -51,7 +51,6 @@ package com.refract.prediabetes.nav
 			
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_START, onSMEvent);
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onSMEvent);
-			DispatchManager.addEventListener(Flags.SM_RESET, onSMEvent);
 			DispatchManager.addEventListener(Flags.SM_ACTIVE, onSMEvent);
 			DispatchManager.addEventListener(Flags.SM_NOT_ACTIVE, onSMEvent);
 			DispatchManager.addEventListener(FooterEvent.HIGHLIGHT_BUTTON, highlightHeaderButton);
@@ -132,7 +131,6 @@ package com.refract.prediabetes.nav
 				case(Flags.STATE_MACHINE_START):
 					
 					break;
-				case(Flags.SM_RESET):
 				case(Flags.STATE_MACHINE_END):
 					TweenMax.to(_middle,0.5,{autoAlpha:0});
 					break;

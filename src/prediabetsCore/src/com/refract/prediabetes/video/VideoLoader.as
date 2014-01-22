@@ -1,9 +1,10 @@
 package com.refract.prediabetes.video 
 {
-	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.BulkLoader;
+	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
 	import br.com.stimuli.loading.loadingtypes.VideoItem;
+
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
@@ -14,10 +15,11 @@ package com.refract.prediabetes.video
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
-	import com.refract.prediabetes.video.events.LSVideoEvent;
 	import com.robot.comm.DispatchManager;
+
 	import org.bytearray.video.SimpleStageVideo;
 	import org.bytearray.video.events.SimpleStageVideoEvent;
+
 	import flash.display.Bitmap;
 	import flash.display.Graphics;
 	import flash.display.Sprite;
@@ -31,15 +33,12 @@ package com.refract.prediabetes.video
 	{	
 		public static const VIDEO_WIDTH:int = 1024;
 		public static const VIDEO_HEIGHT:int = 576;
-		protected static var _defaultLoadingOrder:Array = [ LSVideoEvent.STREAM_VIDEO_ONLY ];
-		
 		private static var _i : VideoLoader;
+		
 		private var _lastPos : Number;
-		private var _videoBackground : Sprite;
-		private var _videoBackgroundMask : Sprite;
 		private var _metaActive : Boolean ; 
 		private var _iterMetaFixBug : int ;
-		protected var _loadingOrder:Array;
+
 		protected var _url:String;
 		protected var _currentStep:int = 0;
 		protected var _loader:Sprite;
@@ -61,54 +60,51 @@ package com.refract.prediabetes.video
 		public var paused : Boolean  = true;
 		public var videoAddress : String;
 		protected var _nameVideo : String;
-		//private var _loaderVisible : Boolean;
 		private var _showBuffer : Boolean;
 		 
-		public function VideoLoader(){
+		public function VideoLoader()
+		{
 			super();
+			
 			_i = this;
-			setBulkLoader();
-			
 			_showBuffer = true  ; 
-			addEventListener(Event.ADDED_TO_STAGE, preInit );
-			loadingOrder = VideoLoader.defaultLoadingOrder;
 			
-			_bulkLoader.addEventListener(BulkLoader.PROGRESS , onAllProgress) ;
+			setBulkLoader();
+			addEventListener(Event.ADDED_TO_STAGE, preInit );
+			//loadingOrder = VideoLoader.defaultLoadingOrder;
+			
+			//_bulkLoader.addEventListener(BulkLoader.PROGRESS , onAllProgress) ;
 			//_bulkLoader.get( url).addEventListener(BulkLoader.COMPLETE , onAllLoaded) ;
 		}
 		
-		private function onAllProgress( event : BulkProgressEvent ) : void
+		
+		
+		
+		public function stopVideo() : void
 		{
-			//if( _url ) trace('xx :' , event.bytesLoaded  , ' : url ' , event.)
-		}
-		
-		
-		
-		public function stopVideo() : void{
-			if(_netStream) _netStream.close();
+			if(_netStream) 
+				_netStream.close();
 		}
 		
 		
 		public function pauseVideo()  : void
 		{
-			if( _netStream) _netStream.pause() ; 
+			if( _netStream) 
+				_netStream.pause() ; 
+				
 			paused = true ; 
 		}
 		public function playVideo()  : void
 		{
 			paused = false ; 
 			if( _netStream) 
-			{
-				
 				_netStream.resume() ; 
-			}
 		}
 		public function resumeVideo()  : void
 		{
 			paused = false ; 
-			if( _netStream){
+			if( _netStream)
 				 _netStream.resume() ; 
-			}
 		}
 		public function rePlayVideo( ) : void
 		{
@@ -140,27 +136,10 @@ package com.refract.prediabetes.video
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, preInit);
 			
-			
-			_videoBackground = new Sprite();
-			addChild(_videoBackground);
-			
-			/*
-			_videoBackgroundMask = new Sprite() ; 
-			addChild( _videoBackgroundMask ) ; 
-			
-			_videoBackground.blendMode = BlendMode.LAYER;
-			this.blendMode = BlendMode.LAYER ; 
-			_videoBackgroundMask.blendMode = BlendMode.ERASE;
-			
-			drawVideoBackground();
-			 * 
-			 */
-			
 			DispatchManager.addEventListener(Flags.DEACTIVATE_VIDEO_RUN, deActivateVideoRun );
 			DispatchManager.addEventListener(Flags.ACTIVATE_VIDEO_RUN, onActivateVideoRun );
 			
 			_simpleVidAvailable = false;
-			
 			_simpleVid = new SimpleStageVideo(AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT);
 			_simpleVid.addEventListener(Event.INIT, onInit);
 			_simpleVid.addEventListener(SimpleStageVideoEvent.STATUS, onSimpleStageVideoStatus);
@@ -180,14 +159,12 @@ package com.refract.prediabetes.video
 			 
 			
 			_simpleVid.attachNetStream(_netStream);
-			
 			addChild(_simpleVid);
 			
 			_loader = new Sprite();
 			addChild(_loader);
 			var bmp:Bitmap = AssetManager.getEmbeddedAsset("PoliteLoader") as Bitmap;
 			_loader.addChild(bmp);
-			//_loader.visible = false;
 			bmp.blendMode = "screen";
 			bmp.smoothing = true;
 			bmp.scaleX = bmp.scaleY = 0.77;
@@ -198,11 +175,6 @@ package com.refract.prediabetes.video
 			addChild(_videoClickListener);
 			drawVideoClickListener();
 		}
-		
-		public function setBlackOn() : void
-		{
-			
-		}
 
 		protected function drawVideoClickListener():void{
 			var g:Graphics = _videoClickListener.graphics;
@@ -210,22 +182,7 @@ package com.refract.prediabetes.video
 			g.beginFill(0xff0000,0);
 			g.drawRect(AppSettings.VIDEO_LEFT,AppSettings.VIDEO_TOP,AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT);
 		}
-		private function drawVideoBackground( ) : void
-		{
-			/*
-			var g:Graphics = _videoBackground.graphics;
-			g.clear();
-			g.beginFill(0xffFFFF,1);
-			g.drawRect( 0 , 0 , stage.stageWidth , stage.stageHeight );
-			
-			var gg : Graphics = _videoBackgroundMask.graphics; 
-			gg.clear() ; 
-			gg.beginFill(0xff0099 , 1 ) ; 
-			gg.drawRect(AppSettings.VIDEO_LEFT,AppSettings.VIDEO_TOP,AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT );
-			 * 
-			 */
-		}
-		
+
 		public function activateClickPause():void
 		{
 			AppSettings.stage.focus = AppSettings.stage ; 
@@ -246,19 +203,13 @@ package com.refract.prediabetes.video
 		public function onSpaceBarClicked(  ) : void
 		{
 			if( _videoClickListener.buttonMode )
-			{
 				_videoClickListener.dispatchEvent( new MouseEvent( MouseEvent.CLICK ) ) ;
-			} 
 			else
 			{
 				if(paused)
-				{
 					 DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) ) ;
-				}
 				else
-				{
 					 DispatchManager.dispatchEvent( new Event( Flags.FREEZE ) ) ;
-				}
 			}	
 		}
 		private function onVideoClick(evt:Event):void
@@ -276,11 +227,9 @@ package com.refract.prediabetes.video
 						DispatchManager.dispatchEvent( new BooleanEvent( Flags.DRAW_VIDEO_STATUS ,false ) ) ;
 						DispatchManager.dispatchEvent( new BooleanEvent( Flags.UPDATE_PLAY_BUTTON , false)) ;
 						pauseVideo();
-						
 					}
 				break;
 			}
-			
 		}
 
 		protected function onInit(evt:Event):void
@@ -300,10 +249,6 @@ package com.refract.prediabetes.video
 			if(_videoClickListener)
 			{
 				drawVideoClickListener();
-			}
-			if( _videoBackground )
-			{
-				drawVideoBackground( ) ; 
 			}
 			if(_loader)
 			{
@@ -333,12 +278,9 @@ package com.refract.prediabetes.video
 			DispatchManager.addEventListener(Event.ENTER_FRAME , run ) ; 
 			hideBuffer() ; 
 			
-			SMController.me.onSetClipLength() ; 
+			SMController.me.onVideoStart() ; 
 		}
-		public function setLoadedTrue() : void
-		{
-			
-		}
+	
 		private function deActivateVideoRun( evt : Event = null) : void
 		{
 			_deActivate = true ; 
@@ -366,25 +308,7 @@ package com.refract.prediabetes.video
 			if( percent < 5 && !_showBuffer )
 			{ 
 				showBuffer() ; 
-			}
-			/*
-			if( percent > 95)
-			{
-				//trace('----hide?')
-			}
-			if( percent < 5)
-			{ 
-				//trace('----show?')
-			}
-			//trace('--- PERC ' , percent )
-			if( _loader.alpha > 0 )
-			{
-				//trace('ALPHA - 0 ')
-				_showBuffer = true ; 
-			}
-			*/
-			
-			
+			}			
 		}
 		
 		protected function showBuffer() : void
@@ -418,12 +342,12 @@ package com.refract.prediabetes.video
 		
 		public function resetVideo() : void
 		{
-			if( _simpleVid ) _simpleVid.attachNetStream( null ) ; 
+			if( _simpleVid ) 
+				_simpleVid.attachNetStream( null ) ; 
 		}
 		protected function createVideo( nameVideo : String) : void
 		{		
 			SMVars.me.nsStreamTimeAbs = 0 ; 
-			 
 			showBuffer() ; 
 			
 			_metaActive = true ;  
@@ -495,10 +419,22 @@ package com.refract.prediabetes.video
 				
 				if( videoItem != null)
 				{
-					//_netStream.seek( 100 ) ; 
-					_netStream.resume() ;
-					
-					//_netStream.play(url);
+					if( nameVideo == SMSettings.D_21_M )
+					{
+						_netStream.play( url ) ; 
+					}
+					else
+					{
+						if( _netStream.time > 0.1)
+						{
+							_netStream.seek( 0 ) ;
+							_netStream.play(url);
+						}
+						else
+						{
+							_netStream.resume() ;
+						}
+					}
 				}
 				else
 				{
@@ -510,11 +446,10 @@ package com.refract.prediabetes.video
 			}
 			else
 			{
-				trace('failed to play')
 				_failedToPlay = true;
 				addChild(_simpleVid);
 			}
-			DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ;
+			if( AppSettings.DEBUG ) DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ;
 		}
 		
 		//* DEBUG DURATION
@@ -541,12 +476,6 @@ package com.refract.prediabetes.video
 		
 		public function hideLoader():void
 		{
-			/*
-			TweenMax.killTweensOf(_loader);
-			TweenMax.to(_loader, 0, {alpha:0});
-			 * 
-			 */
-			 
 			 hideBuffer() ; 
 		}
 		
@@ -577,13 +506,7 @@ package com.refract.prediabetes.video
 					//hideLoader();
 		            break; 
 		        case "NetStream.Buffer.Empty": 
-				
-					//if(!_deActivate)
-					//{
-				//		trace('-----2')
-				//		showLoader();
-					//}
-		            
+
 		            break; 
 				case "NetStream.Play.StreamNotFound":
 					
@@ -684,9 +607,17 @@ package com.refract.prediabetes.video
 		public static function get i():VideoLoader{ return _i; }
 		public static function set i(vl:VideoLoader):void{ _i = vl;} 
 		public function get url():String {return _url;}
-		public static function set defaultLoadingOrder(newOrder:Array):void{ _defaultLoadingOrder = newOrder; }
-		public static function get defaultLoadingOrder():Array{ return _defaultLoadingOrder; }
-		public function set loadingOrder(newOrder:Array):void{ _loadingOrder = newOrder; }
-		public function get loadingOrder():Array{ return _loadingOrder; }
+		//public static function set defaultLoadingOrder(newOrder:Array):void{ _defaultLoadingOrder = newOrder; }
+		//public static function get defaultLoadingOrder():Array{ return _defaultLoadingOrder; }
+		//public function set loadingOrder(newOrder:Array):void{ _loadingOrder = newOrder; }
+		//public function get loadingOrder():Array{ return _loadingOrder; }
+		private function onAllProgress( event : BulkProgressEvent ) : void
+		{
+			//if( _url ) trace('xx :' , event.bytesLoaded  , ' : url ' , event.)
+		}
+		
+		//**to be extended in iOS
+		public function setLoadedTrue() : void{}
+		
 	}
 }

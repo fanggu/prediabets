@@ -33,7 +33,6 @@ package com.refract.prediabetes.stateMachine
 		private var _uiView : UIView;
 		private var _debugView : DebugView;
 		private var _overlayView : Sprite;
-		private var _balloonView : Sprite ;
 		private var _lockButtonsView : Sprite;
 		private var _lockButtonsQ : Sprite;
 		
@@ -61,10 +60,9 @@ package com.refract.prediabetes.stateMachine
 			addChild( _uiView );
 			addChild( _messageBoxContView );
 			
-			addChild( _debugView );
+			if( AppSettings.DEBUG ) addChild( _debugView );
 			addChild( _lockButtonsView );
 			addChild( _overlayView );
-			addChild( _balloonView );
 		}
 	
 		private function createStuff() : void
@@ -74,10 +72,9 @@ package com.refract.prediabetes.stateMachine
 			_videoOverlayView = new Sprite();
 			_uiView = new UIView() ;
 			_messageBoxContView = new Sprite() ; 
-			_debugView = new DebugView() ; 
+			if( AppSettings.DEBUG ) _debugView = new DebugView() ; 
 			_lockButtonsView = new Sprite() ;
 			_overlayView = new Sprite() ; 
-			_balloonView = new Sprite ; 
 			 
 			createLockButtonsQ();
 		}
@@ -113,8 +110,8 @@ package com.refract.prediabetes.stateMachine
 			DispatchManager.addEventListener(Flags.SPEED_FADEOUT, onSpeedFadeOut );	
 		
 			//**DEBUG PANEL UPDATE
-			DispatchManager.addEventListener(Flags.UPDATE_DEBUG_PANEL_STATE, onUpdateDebugPanelState);
-			DispatchManager.addEventListener(Flags.UPDATE_DEBUG_PANEL_VIDEO, onUpdateDebugPanelVideo);
+			if( AppSettings.DEBUG ) DispatchManager.addEventListener(Flags.UPDATE_DEBUG_PANEL_STATE, onUpdateDebugPanelState);
+			if( AppSettings.DEBUG ) DispatchManager.addEventListener(Flags.UPDATE_DEBUG_PANEL_VIDEO, onUpdateDebugPanelVideo);
 		}
 		
 		private function removeListeners() : void

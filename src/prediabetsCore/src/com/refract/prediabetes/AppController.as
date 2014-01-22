@@ -4,7 +4,6 @@ package com.refract.prediabetes
 	import com.asual.swfaddress.SWFAddressEvent;
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.nav.Header;
 	import com.refract.prediabetes.nav.Nav;
 	import com.refract.prediabetes.nav.events.FooterEvent;
@@ -79,25 +78,16 @@ package com.refract.prediabetes
 			_ui = new Sprite();
 			_main.addChild(_ui);
 			
-			AppSettings._stageCoverCopy = TextManager.makeText("full_screen_blocker",null,{fontSize:24,align:"center"});
 			_main.stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
 		}
 		
 		//**FS management
 		private function onFSChange(evt:FullScreenEvent):void
 		{
-			//if(evt.fullScreen && _interactiveSections.indexOf("SECTION:"+currentPath[0]) != -1){
 			if(evt.fullScreen )
 			{
-				DispatchManager.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, fsAcceptedOrNot);
-				
-				AppSettings.checkFSStatus();
+				trace('FS CHange :' , evt.fullScreen)
 			}
-		}
-		
-		private function fsAcceptedOrNot(evt:Event):void{
-			DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, fsAcceptedOrNot);
-			
 		}
 		
 		//**Create Nav
@@ -150,7 +140,6 @@ package com.refract.prediabetes
 						
 						if(lastMajor != path[0]){
 							AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ; 
-							DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ;
 							lastMajor = path[0];
 							beginModule();
 							AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
@@ -169,12 +158,8 @@ package com.refract.prediabetes
 					default://intro is default state so no break
 						lastMajor = path[0];
 						removeCurrentSection();	
-						DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ;
 						createIntro();
 						AppSettings.stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
-						
-						//DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
-						
 				}
 				currentPath = path.concat();
 				previousPath = currentPath;
@@ -219,9 +204,6 @@ package com.refract.prediabetes
 		{
 			if(!_intro)
 			{
-				//_nextStory = -1;
-				DispatchManager.dispatchEvent(new Event(Flags.SM_RESET)) ; 
-				DispatchManager.dispatchEvent( new Event( Flags.SM_KILL ) ) ; 
 				VideoLoader.i.stopVideo();
 				_intro  = new ClassFactory.INTRO();
 				_status = AppSections.INTRO;
@@ -282,13 +264,11 @@ package com.refract.prediabetes
 			_status = paths[0];
 			_nav.removeCurrentOverlay();
 			destroyIntro();
-			DispatchManager.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);
-			AppSettings.checkFSStatus();
+			goModule() ; 
 		}
 		
-		private function goModule(evt:Event):void
-		{
-			DispatchManager.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED, goModule);					
+		private function goModule( ):void
+		{				
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onStateMachineEnd);	
 			
 			if( !SMSettings.DEBUG_GET_CLIP_LENGTH)

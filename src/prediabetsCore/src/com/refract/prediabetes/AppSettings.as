@@ -1,23 +1,17 @@
 package com.refract.prediabetes {
-	import com.refract.prediabetes.logger.Logger;
-	import com.robot.comm.DispatchManager;
-
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	import flash.display.Sprite;
 	import flash.display.Stage;
-	import flash.display.StageDisplayState;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	import flash.system.Capabilities;
-	import flash.text.TextField;
 	import flash.utils.Dictionary;
 
 	public class AppSettings 
 	{
-		public static const DEBUG : Boolean = false;
+		public static const DEBUG : Boolean = true;
 		public static const INTRO_URL : String = 'd01_intro_part_1' ; 
 		
 		public static var APP_VIDEO_BASE_URL : String ; 
@@ -32,8 +26,8 @@ package com.refract.prediabetes {
 		
 		public static const BULK_LOADER_ID : String  = 'Videos' ; 
 		
-		//public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
-		public static var DATA_PATH:String = "data/" ; 
+		public static var DATA_PATH:String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		//public static var DATA_PATH:String = "data/" ; 
 		public static var APP_DATA_PATH : String = "file://";
 		public static var BUFFER_DELAY 				  : Number = 0.3 ; 	  
 
@@ -60,7 +54,7 @@ package com.refract.prediabetes {
 		//public static var RESERVED_HEADER_HEIGHT_TOP:int = 10;
 		//public static var RESERVED_HEADER_HEIGHT_BOTTOM:int = 80;
 		
-		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 35;
+		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 0 ; //35;
 		public static var RESERVED_FOOTER_HEIGHT_DEFAULT:int = 70;
 		public static var RESERVED_HEADER_HEIGHT:int = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
 		public static var RESERVED_FOOTER_HEIGHT:int = RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
@@ -117,17 +111,13 @@ package com.refract.prediabetes {
 			
 			if(_stage){
 				_stage.removeEventListener(Event.RESIZE, onStageResize);
-				_stage.removeEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED,onFSInteractiveAccepted);
 				_stage.removeEventListener(FullScreenEvent.FULL_SCREEN,onFullScreenChange);
 			}
 			_stage = st;
 			_stage.addEventListener(Event.RESIZE, onStageResize);
 			_stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFullScreenChange);
-			_stage.addEventListener(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED,onFSInteractiveAccepted);
 			onStageResize();
 		}
-		
-		public static var _stageCoverCopy:TextField;
 		
 		private static const SIXTEEN_NINE_RATIO:Number = 16/9;
 		
@@ -141,11 +131,11 @@ package com.refract.prediabetes {
 			{
 				//stage height greater than width -> fit to width
 				VIDEO_HEIGHT = stageW/SIXTEEN_NINE_RATIO;
-				VIDEO_WIDTH = stageW
+				VIDEO_WIDTH = stageW ; 
 				VIDEO_IS_STAGE_WIDTH = true;
 				VIDEO_LEFT = 0;
 				VIDEO_RIGHT = VIDEO_WIDTH;
-				VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2 //- RESERVED_HEADER_HEIGHT/2 ;
+				VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2 ; //- RESERVED_HEADER_HEIGHT/2 ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 			}
 			else
@@ -158,18 +148,6 @@ package com.refract.prediabetes {
 				VIDEO_RIGHT = VIDEO_LEFT + VIDEO_WIDTH;
 				VIDEO_TOP = RESERVED_HEADER_HEIGHT ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
-			}
-			
-			
-			if(_stageCover && _stage.contains(_stageCover)){
-				_stageCover.graphics.clear();
-				_stageCover.graphics.beginFill(0x000000,0.85);
-				_stageCover.graphics.drawRect(0,0,stage.stageWidth,stage.stageHeight);
-				
-				if(_stageCoverCopy){
-					_stageCoverCopy.x = stage.stageWidth/2 - _stageCoverCopy.width/2;
-					_stageCoverCopy.y = AppSettings.VIDEO_TOP + 100;
-				}
 			}
 		}
 		
@@ -202,7 +180,7 @@ package com.refract.prediabetes {
 			RATIO = ( dpi / 72) ; 
 			if( RATIO > 1.2) RATIO = RATIO / 2 ;
 			
-			Logger.general("Device looks like: ", DEVICE, "size is", inches, "with dpi",dpi, "and reported dpi",reportedDpi, "and scale factor",FONT_SCALE_FACTOR);
+			//trace("Device looks like: ", DEVICE, "size is", inches, "with dpi",dpi, "and reported dpi",reportedDpi, "and scale factor",FONT_SCALE_FACTOR);
 			if(DEVICE == DEVICE_TABLET){
 				RESERVED_FOOTER_HEIGHT = RESERVED_FOOTER_HEIGHT*FONT_SCALE_FACTOR;
 				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT*FONT_SCALE_FACTOR;	
@@ -259,29 +237,11 @@ package com.refract.prediabetes {
 			}
 		}
 		
-		private static var _stageCover:Sprite;
-		
-		
-		private static function onFullScreenChange(evt:FullScreenEvent):void{
-			if(evt.fullScreen == false){
-				FullScreenInteractiveAllowed = false;
-			}
+		private static function onFullScreenChange(evt:FullScreenEvent):void
+		{
 		}
 		
-		public static function checkFSStatus():void{
-			if(_stage.displayState != StageDisplayState.NORMAL && !FullScreenInteractiveAllowed && DEVICE == DEVICE_PC){
-				
-				if(!_stageCover){
-					_stageCover = new Sprite();
-				}
-				_stage.addChild(_stageCover);
-				_stageCover.addChild(_stageCoverCopy);
-				onStageResize();
-				_stage.addEventListener(FullScreenEvent.FULL_SCREEN, onFullScreenChangeForOverlay);
-			}else{
-				removeStageCover();
-			}
-		}
+
 		
 		public static function isDisplayObjectVisible(t:DisplayObject):Boolean{
 			if(t.stage == null || t.visible == false){
@@ -297,30 +257,8 @@ package com.refract.prediabetes {
 		    return true;
 		}
 		
-		private static function onFSInteractiveAccepted(evt:FullScreenEvent):void{
-			FullScreenInteractiveAllowed = true;
-			removeStageCover();
-		}
-		
-		
-		private static function onFullScreenChangeForOverlay(evt:FullScreenEvent):void{
-			if(evt.fullScreen == false && _stageCover && _stage.contains(_stageCover)){
-				removeStageCover();
-			}
-		}
-		
-		private static function removeStageCover():void{
-			
-			if(_stageCover){
-				_stageCover.graphics.clear();
-				_stage.removeChild(_stageCover);
-				_stageCover.removeChild(_stageCoverCopy);
-				_stageCover = null;
-				
-			}
-			_stage.removeEventListener(FullScreenEvent.FULL_SCREEN, onFullScreenChangeForOverlay);
-			DispatchManager.dispatchEvent(new Event(FullScreenEvent.FULL_SCREEN_INTERACTIVE_ACCEPTED));
-		}
+
+
 		
 	}
 }

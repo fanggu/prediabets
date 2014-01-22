@@ -24,7 +24,7 @@ com.powerflasher.fdt.core.mobile.iOS.ACTIVE=true
 com.powerflasher.fdt.core.mobile.iOS.AVAILABLE.EXTENSIONS=pl.mateuszmackowiak.nativeANE.NativeAlert
 com.powerflasher.fdt.core.mobile.iOS.CUSTOM.ADT.CMD.LINE=${package} ${target} ${connection} ${special} ${market} ${signing} ${provision} ${output} ${content} ${icons} ${platformsdk}
 com.powerflasher.fdt.core.mobile.iOS.CUSTOMIZE.ADT.ARGS=false
-com.powerflasher.fdt.core.mobile.iOS.DEPLOY.LOCATION=
+com.powerflasher.fdt.core.mobile.iOS.DEPLOY.LOCATION=bin/distr/prediabetesIOS.ipa
 com.powerflasher.fdt.core.mobile.iOS.DEPLOY.PACKAGE.TYPE=0
 com.powerflasher.fdt.core.mobile.iOS.DEPLOY.PRE.PACKAGE.LAUNCHER=prediabectsIOS-MainIOS
 com.powerflasher.fdt.core.mobile.iOS.DEPLOY.SDK.LOCATION=
@@ -42,13 +42,13 @@ com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.72x72=
 com.powerflasher.fdt.core.mobile.iOS.MOBILE.DESCRIPTOR=bin/prediabectsIOS-app.xml
 com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/prediabectsIOS-app.xml > prediabectsIOS-app.xml;bin/prediabectsIOS.swf > prediabectsIOS.swf;assets/Default@2x.png > Default@2x.png;assets/video;
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=../../cert/Certificates_dev.p12
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=../../cert/prediabets_ipad.mobileprovision
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE.RELEASE=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=../../cert/Certificates_distr.p12
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=../../cert/prediabetes_ipad_dev.mobileprovision
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE.RELEASE=../../cert/prediabetes_ipad_distr.mobileprovision
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD=sIeHvkKXVzuHij6UAo7ejw\=\=
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD.RELEASE=HZsdm2UDN/4\=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD.RELEASE=sIeHvkKXVzuHij6UAo7ejw\=\=
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.REMEMBER.PWD=true
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.REMEMBER.PWD.RELEASE=false
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.USE.DIFEERENT.PROFILES=false
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.REMEMBER.PWD.RELEASE=true
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.USE.DIFEERENT.PROFILES=true
 com.powerflasher.fdt.core.mobile.iOS.SWFPATH=
 eclipse.preferences.version=1

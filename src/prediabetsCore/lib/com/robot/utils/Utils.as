@@ -16,6 +16,17 @@ package com.robot.utils {
 			w_mc['transform'].colorTransform = newColorTransform;
 		}
 
+		public static function cleanContainer( w : Sprite ) : void
+		{
+			var i : int = 0 ; 
+			var l : int = w.numChildren ; 
+			for(i= 0 ; i < l ; i ++ )
+			{
+				var child : * = w.getChildAt( 0 ) ; 
+				child.parent.removeChild( child ) ; 
+			}
+			if( w.parent ) w.parent.removeChild( w ) ; 
+		}
 	}
 	
 }

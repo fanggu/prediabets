@@ -1,7 +1,7 @@
 package com.refract.prediabetes.sections.social {
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.TextManager;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -12,12 +12,12 @@ package com.refract.prediabetes.sections.social {
 	public class ShareBar extends Sprite {
 		
 		
-		private var _facebook:LSButton;
-		public function get facebook() : LSButton {return _facebook;}
-		private var _twitter:LSButton;
-		public function get twitter() : LSButton {return _twitter;}
-		private var _google:LSButton;
-		public function get google() : LSButton {return _google;}
+		private var _facebook:PrediabetesButton;
+		public function get facebook() : PrediabetesButton {return _facebook;}
+		private var _twitter:PrediabetesButton;
+		public function get twitter() : PrediabetesButton {return _twitter;}
+		private var _google:PrediabetesButton;
+		public function get google() : PrediabetesButton {return _google;}
 		
 		private var _titleID:String;
 		private var _subTitleID:String;
@@ -42,9 +42,9 @@ package com.refract.prediabetes.sections.social {
 			tf.y = getChildAt(0).y + getChildAt(0).height + 12;
 			
 			var buttonStyle:Object = {fontSize:20};
-			_facebook = new LSButton("signup_facebook",buttonStyle,140,54,true,false);
-			_twitter = new LSButton("signup_twitter",buttonStyle,140,54,true,false);
-			_google = new LSButton("signup_google",buttonStyle,140,54,true,false);
+			_facebook = new PrediabetesButton("signup_facebook",buttonStyle,140,54,true,false);
+			_twitter = new PrediabetesButton("signup_twitter",buttonStyle,140,54,true,false);
+			_google = new PrediabetesButton("signup_google",buttonStyle,140,54,true,false);
 			
 			_facebook.arrowAsset = "Facebook";
 			_twitter.arrowAsset = "Twitter";

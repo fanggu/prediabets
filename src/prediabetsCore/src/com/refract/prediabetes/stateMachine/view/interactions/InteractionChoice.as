@@ -2,7 +2,7 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
@@ -43,7 +43,7 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 
 		protected function create(event : Event) : void 
 		{
-			var bt : LSButton ;
+			var bt : PrediabetesButton ;
 			if( interaction.interaction_type == Flags.CHOICE)
 			{
 				_btChoice = new ButtonChoice("buttonFont", _nameStyleChoice, SMSettings.MIN_BUTTON_SIZE, 24  , true);

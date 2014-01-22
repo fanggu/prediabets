@@ -8,9 +8,11 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
+
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
 
 	
@@ -55,12 +57,11 @@ package com.refract.prediabetes.nav {
 
 			_header = new ClassFactory.HEADER();
 			addChild(_header);
-			if( AppSettings.RESERVED_HEADER_HEIGHT == 0 ) 
+			if( !AppSettings.SHOW_HEADER )
 			{
 				_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 				_header.visible = false ; 
 			}
-			
 			
 			_footer = new ClassFactory.FOOTER( this );
 			addChild(_footer);
@@ -71,7 +72,32 @@ package com.refract.prediabetes.nav {
 			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze);
 			
 			stage.addEventListener(Event.RESIZE,onResize);
+			stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
 			onResize();
+		}
+		
+		private function onFSChange( evt : FullScreenEvent ) : void
+		{
+			if( evt.fullScreen )
+			{
+				onFS() ; 
+			}
+			else
+			{
+				onNoFS() ; 
+			}
+		}
+		private function onFS() : void
+		{
+			AppSettings.SHOW_HEADER = true ; 
+			_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
+			_header.visible = true ; 
+		}
+		private function onNoFS() : void
+		{
+			AppSettings.SHOW_HEADER = false ; 
+			_header.removeEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
+			_header.visible = false ; 
 		}
 
 		private function onUnFreeze(event : Event) : void 
@@ -209,12 +235,8 @@ package com.refract.prediabetes.nav {
 		protected function onNavClicked(evt : FooterEvent) : void 
 		{
 			var obj:Object = evt.info;
-			switch(obj.value){
-				case(Header.LS_LOGO):
-					AppController.i.setSWFAddress(AppSections.INTRO);
-					removeCurrentOverlay();
-					break;
-		
+			switch(obj.value)
+			{
 				case('legal'):
 					AppController.i.setSWFAddress(AppSections.LEGAL);
 					break;

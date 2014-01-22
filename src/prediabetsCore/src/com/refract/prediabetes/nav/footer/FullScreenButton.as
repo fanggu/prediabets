@@ -1,10 +1,12 @@
 package com.refract.prediabetes.nav.footer {
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
 	import flash.events.Event;
@@ -15,13 +17,18 @@ package com.refract.prediabetes.nav.footer {
 		
 		private var colour:uint = AppSettings.GREY;
 		
-		public var id:String;
+		public var id : String;
+		private var _mc : MovieClip ;
 		
-		public function FullScreenButton() {
+		public function FullScreenButton() 
+		{
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		private function init(evt:Event):void{
+		private function init(evt:Event):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOverOut);
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOverOut);
 			addEventListener(MouseEvent.CLICK, onClick);
@@ -29,13 +36,17 @@ package com.refract.prediabetes.nav.footer {
 			mouseEnabled = true;
 			useHandCursor = true;
 			buttonMode = true;
+			
+			_mc  = AssetManager.getEmbeddedAsset('FullScreen') ;
+			addChild( _mc ) ; 
 			drawState();
 			stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
 			
 			this.scaleX = this.scaleY = AppSettings.FONT_SCALE_FACTOR;
 		}
 
-		private function onFSChange(event : FullScreenEvent) : void {
+		private function onFSChange(event : FullScreenEvent) : void 
+		{
 			drawState();
 		}
 
@@ -52,11 +63,12 @@ package com.refract.prediabetes.nav.footer {
 		
 		private function onClick(evt:Event):void{
 			DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralClick") );	
-			if(stage.displayState != StageDisplayState.NORMAL){
+			if(stage.displayState != StageDisplayState.NORMAL)
+			{
 				stage.displayState = StageDisplayState.NORMAL;
-			//	drawState();
-			}else{
-				trace('----set full screen')
+			}
+			else
+			{
 				stage.displayState = StageDisplayState.FULL_SCREEN;
 			//	drawState();
 			}
@@ -71,25 +83,15 @@ package com.refract.prediabetes.nav.footer {
 			
 		}
 		
-		public function drawState():void{
-			this.scaleX = this.scaleY = 1;
-			graphics.clear();
-			drawOuter();
+		public function drawState():void
+		{
 			var isFullScreen:Boolean = !(stage.displayState == StageDisplayState.NORMAL);
-			if(isFullScreen){
-				graphics.lineStyle(2,colour);
-				graphics.moveTo(5,3);
-				graphics.lineTo(9,7);
-				graphics.moveTo(5,7);
-				graphics.lineTo(9,3);
-			}else{
-				graphics.beginFill(colour,1);
-				graphics.moveTo(12,8);
-				graphics.lineTo(12,5);
-				graphics.lineTo(9,8);
-				graphics.lineTo(12,8);
-				graphics.endFill();
-				
+			if(isFullScreen)
+			{
+				_mc.gotoAndStop( 2 ) ; 	
+			}else
+			{
+				_mc.gotoAndStop( 1 ) ; 	
 			}
 			this.graphics.lineStyle(0,0,0);
 			this.graphics.beginFill(0xff0000,AppSettings.BUTTON_HIT_AREA_ALPHA);

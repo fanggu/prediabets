@@ -5,9 +5,10 @@ package com.refract.prediabetes.nav
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.nav.events.FooterEvent;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
+	import com.robot.geom.Box;
 
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -20,7 +21,6 @@ package com.refract.prediabetes.nav
 
 	public class Header extends Sprite 
 	{
-		public static const LS_LOGO:String = "LS_LOGO";
 		public static const PROGRESS:String = "PROGRESS";
 		
 		protected const _buttonSpace:int = 12;
@@ -42,8 +42,13 @@ package com.refract.prediabetes.nav
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
 			_headerButtons = [];
-			
 			_textStyle.fontSize = AppSettings.FOOTER_FONT_SIZE;
+			
+			if( AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
+			{
+				var box : Box = new Box( AppSettings.stage.stageWidth , AppSettings.TOP_HEIGHT_BAR , 0x000000 ); 
+				addChild( box ) ; 
+			}
 			
 			addLeftSide();
 			addMiddle();
@@ -57,6 +62,8 @@ package com.refract.prediabetes.nav
 			
 			stage.addEventListener(Event.RESIZE,onResize);
 			onResize();
+			
+			
 		}
 		
 		
@@ -73,23 +80,26 @@ package com.refract.prediabetes.nav
 		
 
 		
-		public function hideAllBtns(_headerFadeOutTime:Number = 2):void{
-		//	this.addEventListener(MouseEvent.MOUSE_OVER,onMouseOverForAutoHide);
-		//	TweenMax.killTweensOf(_headerButtons[LS_LOGO]);
-		//	TweenMax.to(_headerButtons[LS_LOGO],_headerFadeOutTime,{tint:AppSettings.GREY});
+		public function hideAllBtns(_headerFadeOutTime:Number = 2):void
+		{
 		}
 		
-		public function showAllBtns(_headerFadeInTime:Number = 0.5):void{
-		//	TweenMax.killTweensOf(_headerButtons[LS_LOGO]);
-		//	TweenMax.to(_headerButtons[LS_LOGO],_headerFadeInTime,{tint:null});
+		public function showAllBtns(_headerFadeInTime:Number = 0.5):void
+		{
 		}
 		
 		private function addLeftSide():void{
 			_leftSide = new Sprite();
 			addChild(_leftSide);
 			
-			 var logo : Bitmap = AssetManager.getEmbeddedAsset("Logo");
-			 _leftSide.addChild( logo ) ; 
+			var logoAddress : String = 'Logo' ; 
+			if( AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
+			{
+				if( AppSettings.RETINA )
+					logoAddress = 'LogoRetina' ; 
+			}
+			 var logo : Bitmap = AssetManager.getEmbeddedAsset( logoAddress );
+			 _leftSide.addChild( logo ) ;
 		}
 		
 		private function addMiddle():void{
@@ -109,19 +119,20 @@ package com.refract.prediabetes.nav
 			{ 
 				fontSize: AppSettings.HEADER_FONT_SIZE
 				, align:TextFormatAlign.CENTER 
-				, autoSize : TextFieldAutoSize.CENTER 
-				, multiline: true
-				, wordWrap : true
-				, width : 200 
+				, autoSize : TextFieldAutoSize.LEFT 
+				, multiline: false
+				, wordWrap : false
+				, width : 400 
 				, border : false
 			} ; 
 			
 			var headerCopy : TextField = TextManager.makeText('headerRight', this , style);
 			_rightSide.addChild( headerCopy ) ; 
+			
 		}
 		
 		protected function headerButtonClick(evt:MouseEvent):void{
-			var thisGuy:String = (evt.currentTarget as LSButton).id;
+			var thisGuy:String = (evt.currentTarget as PrediabetesButton).id;
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED,{value:thisGuy}));
 		}
 
@@ -143,20 +154,14 @@ package com.refract.prediabetes.nav
 			}
 		}
 		
-
-		private function onResize(evt:Event = null) : void {
-			graphics.clear();
-			graphics.beginFill(0x808000,1);
-			graphics.drawRect(0,0,stage.stageWidth,AppSettings.RESERVED_HEADER_HEIGHT);
-			if(AppSettings.VIDEO_IS_STAGE_WIDTH){
-				this.y = AppSettings.VIDEO_TOP - AppSettings.RESERVED_FOOTER_HEIGHT ;//stage.stageHeight/2 + AppSettings.VIDEO_HEIGHT/2;
-				_rightSide.x = stage.stageWidth - _rightSide.width ; //- 30;
-			}else{
-				this.y = AppSettings.VIDEO_TOP - AppSettings.RESERVED_FOOTER_HEIGHT ;//stage.stageHeight - AppSettings.RESERVED_FOOTER_HEIGHT;
-				_rightSide.x = AppSettings.VIDEO_RIGHT - _rightSide.width ; //- 30;
-			}
-			_leftSide.x = AppSettings.VIDEO_LEFT + 20;
+		private function onResize(evt:Event = null) : void 
+		{
+			_rightSide.x = AppSettings.VIDEO_RIGHT- _rightSide.width - 5;
+			_leftSide.x = AppSettings.VIDEO_LEFT ;
 			_middle.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 - _middle.width/2;
+			
+			_leftSide.y = AppSettings.VIDEO_TOP - _leftSide.height; 
+			_rightSide.y = AppSettings.VIDEO_TOP - _rightSide.height - AppSettings.HEADER_FIX_COPY_TABLET_POSITION;
 		}
 	}
 }

@@ -3,7 +3,7 @@ package com.refract.prediabetes.sections.findoutmore
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.sections.utils.GeneralOverlay;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 
 	import flash.display.StageDisplayState;
 	import flash.events.MouseEvent;
@@ -13,7 +13,7 @@ package com.refract.prediabetes.sections.findoutmore
 		private var _bodyText:TextField;
 		private var _bodyHeader:TextField;
 		
-		private var _bookBtn:LSButton;
+		private var _bookBtn:PrediabetesButton;
 		
 		public function FindOutMore() {
 			super();
@@ -29,7 +29,7 @@ package com.refract.prediabetes.sections.findoutmore
 			_bodyText.y = _header.height+5;
 			
 			var buttonStyle:Object = {fontSize:36};
-			_bookBtn = new LSButton("page_findoutmore_link",buttonStyle,100,50,true , false );
+			_bookBtn = new PrediabetesButton("page_findoutmore_link",buttonStyle,100,50,true , false );
 			addChild(_bookBtn);
 			_bookBtn.addEventListener(MouseEvent.CLICK, launchCoursePage);
 			

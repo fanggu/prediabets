@@ -43,7 +43,6 @@ package {
 		
 		public function MainIOS()
 		{
-			trace('::init::')
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
@@ -59,7 +58,8 @@ package {
 			showTerms();
 		}
 
-		protected function setScreenRatio():void{
+		protected function setScreenRatio():void
+		{
 			AppSettings.setScreenRatio(true);
 		}
 		
@@ -71,45 +71,23 @@ package {
 			//set the global stage and global resize
 			AppSettings.stage = stage;
 			AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; 
-			//AppSettings.PLATFORM = AppSettings.PLATFORM_IOS;
 			AppSettings.RESERVED_HEADER_HEIGHT_DEFAULT = 60 ; 
-			//AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ; // "./../../../../website/data/";
-			
+			AppSettings.FOOTER_VIDEONAV_FIXED = true ; 
+			//**this is the retina value. the app will detect if no retina, and divide / 2
+			AppSettings.FOOTER_FONT_SIZE = 19 ;
+			AppSettings.HEADER_FONT_SIZE = 19 ;  
+			AppSettings.FOOTER_FIX_TABLET_POSITION = 10 ; 
+			AppSettings.HEADER_FIX_COPY_TABLET_POSITION = 40 ; 
 			setScreenRatio();
-			/*
-			var ext:String = "mp4";
-			// If we're not mobile show the top bar in ios and use flv
-			if(AppSettings.DEVICE != AppSettings.DEVICE_MOBILE){
-				stage.displayState = StageDisplayState.NORMAL;
-				ext = "flv";
-			}
 
-			var localPath:String = "video/"+ext+"/";
-			MainIOS.STORAGE_DIR = File.cacheDirectory;
-			VideoLoader.VIDEO_BASE_URL = MainIOS.STORAGE_DIR.nativePath + "/" + localPath ;
-			VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR = "_800"+ext;
-			VideoLoader.VIDEO_FILE_EXT = "."+ext ; 
-			
-			var storageFolder:File = MainIOS.STORAGE_DIR.resolvePath("video");
-			storageFolder.preventBackup = true;
-			
-			var newFile:File = MainIOS.STORAGE_DIR.resolvePath(localPath + AppSettings.INTRO_URL+ VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR + VideoLoader.VIDEO_FILE_EXT);
-			newFile.preventBackup = true;
-			Logger.log(Logger.FILE_LOADING,"NEW INTRO FILE:" + newFile.nativePath);
-			if(!newFile.exists){
-				var file:File = File.applicationDirectory.resolvePath(localPath + AppSettings.INTRO_URL+VideoLoader.VIDEO_FILE_FORMAT_DESCRIPTOR+VideoLoader.VIDEO_FILE_EXT);
-				Logger.log(Logger.FILE_LOADING,"INTRO FILE: " + file.nativePath);
-				file.copyTo(newFile,true);
-			}
-			 * 
-			 */
-			 
 			 AppSettings.VIDEO_BASE_URL = "video/flv/1024/" ; 
 			 AppSettings.VIDEO_FILE_EXT = ".flv" ;
 			 AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR = "";
 			 
 			 AppSettings.BUFFER_DELAY = 1 ; 
-			 AppSettings.RESERVED_SIDE_BORDER = 8 ; 
+			 //AppSettings.RESERVED_SIDE_BORDER = 7 ; 
+			
+			 
 			 
 			 var ext : String = "flv" ; 
 			 var localPath:String = "video/flv/";
@@ -128,24 +106,12 @@ package {
 			 
 		}
 		
-		protected function setAppClasses():void{
-			//ClassFactory.APP_CONTROLLER = MobileAppController;
-			
+		protected function setAppClasses():void
+		{
 			ClassFactory.NAV = IOSNav ; 
-			//ClassFactory.MODULE_MODEL = LocalModuleModel;
-			//ClassFactory.MENU_BUTTON = LoadedMenuButton;
 			ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
-			//ClassFactory.SM_MODEL = SMModelMobile ; 
 			ClassFactory.SM_CONTROLLER = MobileSMController ; 
-			
-			//ClassFactory.PROFILE_BUTTON = LoadedProfileButton;
-			
-			ClassFactory.FEEDBACK = TabletFeedback;
 			ClassFactory.LEGAL = TabletLegal;
-			//ClassFactory.MEDICAL_QUESTIONS = TabletMedicalQuestions;
-			//ClassFactory.EMERGENCY_INFO_CHOKING = TabletEmergencyInfoChoking;
-			//ClassFactory.EMERGENCY_INFO_COLLAPSED = TabletEmergencyInfoCollapsed;
-			
 		}
 		
 		
@@ -212,19 +178,6 @@ package {
 			
 			var mainCore : PrediabetesCore = new PrediabetesCore() ; 
 			addChild ( mainCore ) ;
-			
-			var skipButton : Box = new Box( 120 , 40 , 0xfff000 ) ; 
-			addChild( skipButton ) ; 
-			skipButton.x = 40 ; 
-			skipButton.y = 40 ; 
-			skipButton.addEventListener( MouseEvent.CLICK, onTouchPress ) ; 
 		}
-
-		private function onTouchPress(event : MouseEvent) : void 
-		{
-			DispatchManager.dispatchEvent(new Event(Flags.START_MOVIE));
-		}
-		
-		
 	}
 }

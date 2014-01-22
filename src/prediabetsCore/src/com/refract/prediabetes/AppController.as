@@ -101,7 +101,6 @@ package com.refract.prediabetes
 		//**on App Active and Deactive
 		private function onAppActivated(evt:Event = null):void{
 			TweenMax.resumeAll();
-			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED,{value:Header.LS_LOGO}));
 			
 			if(VideoLoader.i){
 				VideoLoader.i.reattachStageVideo();

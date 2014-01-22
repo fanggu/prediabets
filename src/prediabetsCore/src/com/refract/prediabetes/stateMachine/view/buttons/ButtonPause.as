@@ -1,6 +1,6 @@
 package com.refract.prediabetes.stateMachine.view.buttons {
 	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
@@ -11,7 +11,7 @@ package com.refract.prediabetes.stateMachine.view.buttons {
 	/**
 	 * @author robertocascavilla
 	 */
-	public class ButtonPause extends LSButton 
+	public class ButtonPause extends PrediabetesButton 
 	{
 		public var active : Bitmap ;
 		public var notActive : Bitmap ;

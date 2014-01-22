@@ -1,4 +1,6 @@
 package com.refract.prediabetes.nav {
+	import com.refract.prediabetes.assets.TextManager;
+	import flash.text.TextField;
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.nav.events.FooterEvent;
@@ -6,7 +8,7 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.nav.footer.FullScreenButton;
 	import com.refract.prediabetes.nav.footer.PlayPauseButton;
 	import com.refract.prediabetes.nav.footer.SoundButton;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
@@ -14,10 +16,12 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
+	import com.robot.utils.Utils;
 
 	import flash.display.Graphics;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 
@@ -37,11 +41,9 @@ package com.refract.prediabetes.nav {
 		
 		private var _footerButtons : Dictionary ; 
 		//special buttons
-		private var _backToVideo:LSButton; 
+		private var _backToVideo:PrediabetesButton; 
 		private var _playPauseButton : PlayPauseButton ;
 		private var _backwardButton : BackwardButton ;  
-		
-		private var _buttonSpace:int = 12;
 		
 		private var _progressBar : Sprite;
 		private var _footerBackCont : Sprite ;
@@ -49,23 +51,19 @@ package com.refract.prediabetes.nav {
 		private var _footerBackTop : Box;
 		private var _footerBackMiddle : Box ; 
 		
-		
 		private var _footerBottom : Sprite;
+		private var _footerBottomRight : Sprite ; 
+		
 		protected var _footerTopCenter:Sprite;
 		private var _footerTopRight : Sprite;
-		private var _footerBottomRight : Sprite ; 
+		private var _footerTopLeft : Sprite;
 		
 		private var _nav : Nav ;
 		private var _clip_length : Number;
-		
-		
 		private var _tween : Boolean ;
-		private var _footerTopLeft : Sprite;
-		private var _tweenID : TweenMax;
-		
+		private var _tweenID : TweenMax;	
 		private var _progressBarBack : Sprite;
 		private var _progressBarBox : Sprite;
-		
 		private var _progressBarAbsWidth : Number ; 
 
 		public function Footer( nav : Nav ) 
@@ -79,12 +77,13 @@ package com.refract.prediabetes.nav {
 			createFooterButtonsArray() ; 
 			createFooterBackgrounds() ; 
 			createFooterContainers() ; 
-			createBottomFooter() ;
-			createBottomRightFooter() ; 
+			createBottomFooter() ; 
 			createTopRightFooter() ; 
 			createTopLeftFooter() ; 
 			createTopCenterFooter() ; 
 			createProgressBar() ; 
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				createBottomRightFooter() ;
 			
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
@@ -99,6 +98,9 @@ package com.refract.prediabetes.nav {
 			
 			DispatchManager.addEventListener(Flags.FREEZE , onFreeze);
 			DispatchManager.addEventListener(Flags.UN_FREEZE , onUnFreeze); 
+			
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
 			
 			onResize();
 		}
@@ -124,13 +126,57 @@ package com.refract.prediabetes.nav {
 			}
 		}
 		
+		private function onFSChange( evt : FullScreenEvent ) : void
+		{
+			createFooterBackgrounds() ; 
+			if( evt.fullScreen )
+			{
+				onFS() ; 
+			}
+			else
+			{
+				onNoFS() ; 
+			}
+		}
+		private function onFS() : void
+		{
+			for(var s:String in _footerButtons)
+			{
+				var button : PrediabetesButton  = _footerButtons[s] ; 
+				var copy : TextField = button.textfield ; 
+				
+				var style:Object = {};
+				style.fontSize = AppSettings.FOOTER_FONT_SIZE_FS ;
+				style.align = "left";
+				TextManager.styleText( button.id, copy , style) ; 
+				//TweenMax.to(_footerButtons[s],0.5,{tint:null});
+				
+				positionButtons() ; 
+			}
+		}
+		private function onNoFS() : void
+		{
+			for(var s:String in _footerButtons)
+			{
+				var button : PrediabetesButton  = _footerButtons[s] ; 
+				var copy : TextField = button.textfield ; 
+				
+				var style:Object = {};
+				style.fontSize = AppSettings.FOOTER_FONT_SIZE  ;
+				style.align = "left";
+				TextManager.styleText( button.id, copy , style) ; 
+				//TweenMax.to(_footerButtons[s],0.5,{tint:null});
+				
+				positionButtons(); 
+			}
+		}
 		private function createButton( valueName : String ) : void
 		{
 			var style:Object = {};
 			style.fontSize = AppSettings.FOOTER_FONT_SIZE;
 			style.align = "left";
 			
-			var button : LSButton = new LSButton( valueName , style );
+			var button : PrediabetesButton = new PrediabetesButton( valueName , style );
 			button.x = 0 ; 
 			button.y = 0 ; 
 			button.id = valueName ; 
@@ -144,16 +190,29 @@ package com.refract.prediabetes.nav {
 		}
 		private function createFooterBackgrounds() : void
 		{
-			_footerBackBottom = new Box( stage.stageWidth , AppSettings.RESERVED_FOOTER_HEIGHT / 2 - 2 , 0xff0099) ;
+			if(_footerBackCont && _footerBackCont.parent )
+			{
+				Utils.cleanContainer( _footerBackCont ) ; 
+			}
+			var posContainerAdder : int = 0 ; 
+			var footerHeight : Number = AppSettings.RESERVED_FOOTER_HEIGHT ; 
+			if( AppSettings.FOOTER_VIDEONAV_FIXED )
+			{
+				footerHeight = footerHeight / 2;
+				posContainerAdder = footerHeight ;
+			}
+			_footerBackBottom = new Box( stage.stageWidth , footerHeight - 2 , 0x808000) ;
 			_footerBackMiddle = new Box( stage.stageWidth , 2 , 0x000000 ) ;
-			_footerBackTop = new Box( stage.stageWidth , AppSettings.RESERVED_FOOTER_HEIGHT / 2 - 2 , 0xff9966) ;
-			_footerBackTop.y = AppSettings.RESERVED_FOOTER_HEIGHT / 2  ;
-			_footerBackMiddle.y = AppSettings.RESERVED_FOOTER_HEIGHT / 2 - 2 ; 
+			_footerBackTop = new Box( stage.stageWidth , footerHeight - 2 , 0xff9966) ;
+			_footerBackTop.alpha = .4 ; 
+			_footerBackBottom.y = 0 + posContainerAdder  ;
+			_footerBackTop.y = -footerHeight + posContainerAdder ;
+			_footerBackMiddle.y =  footerHeight-2; 
 			_footerBackCont = new Sprite() ; 
 			_footerBackCont.addChild( _footerBackBottom ) ; 
 			_footerBackCont.addChild( _footerBackMiddle ) ; 
 			_footerBackCont.addChild( _footerBackTop ) ; 
-			addChild( _footerBackCont ) ; 
+			addChildAt( _footerBackCont , 0 ) ; 
 		}
 		
 		private function createFooterContainers() : void
@@ -177,27 +236,44 @@ package com.refract.prediabetes.nav {
 			style.fontSize = AppSettings.FOOTER_FONT_SIZE;
 			style.align = "left";
 			
-			var lastButton : LSButton ;
-			var button: LSButton ;  
+			var lastButton : PrediabetesButton ;
+			var button: PrediabetesButton ;  
 
 			lastButton = _footerButtons[START_AGAIN ] ; 
 			_footerBottom.addChild( lastButton ) ; 
 			 	
 			button = _footerButtons[FIND_OUT_MORE ] ;
-			button.x = lastButton.x + lastButton.width + _buttonSpace;
+			//button.x = lastButton.x + lastButton.width + _buttonSpace;
 			_footerBottom.addChild(button );
 			lastButton = button;
 			
 			button = _footerButtons[ SHARE ] ;
-			button.x = lastButton.x + lastButton.width + _buttonSpace;
+			//button.x = lastButton.x + lastButton.width + _buttonSpace;
 			_footerBottom.addChild(button );
 			lastButton = button;
 			
 			button = _footerButtons[ LEGAL ] ;
-			button.x = lastButton.x + lastButton.width + _buttonSpace;
+			//button.x = lastButton.x + lastButton.width + _buttonSpace;
 			_footerBottom.addChild(button );
 			lastButton = button;
 			
+			positionButtons() ; 
+		}
+		private function positionButtons() : void
+		{
+			var i : int = 0 ; 
+			var l : int = _footerBottom.numChildren ; 
+			var prevButton : PrediabetesButton ; 
+			for( i = 0 ; i < l ; i ++ )
+			{
+				if( i > 0 )
+				{
+					 prevButton = _footerBottom.getChildAt( i - 1 ) as PrediabetesButton ;
+					var button : PrediabetesButton = _footerBottom.getChildAt( i ) as PrediabetesButton ; 
+					button.x = prevButton.x  + prevButton.width + AppSettings.FOOTER_BUTTON_SPACE ;
+					//button.y = ( (-i) * _buttonSpace )  //+ prevButton.width ; 
+				}
+			}
 		}
 		
 		private function createBottomRightFooter() : void
@@ -259,7 +335,7 @@ package com.refract.prediabetes.nav {
 			style.fontSize = 13;
 			style.align = "left";
 			 
-			_backToVideo = new LSButton("footer_back_to_video",style);
+			_backToVideo = new PrediabetesButton("footer_back_to_video",style);
 			_footerTopCenter.addChild(_backToVideo);
 			_backToVideo.graphics.beginFill(0x000000,1);
 			_backToVideo.graphics.drawRect(0,0,_backToVideo.width,_backToVideo.height);
@@ -378,7 +454,7 @@ package com.refract.prediabetes.nav {
 		}
 		
 		protected function footerButtonClick(evt:MouseEvent):void{
-			var thisGuy:String = (evt.currentTarget as LSButton).id;
+			var thisGuy:String = (evt.currentTarget as PrediabetesButton).id;
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED ,{value:thisGuy}));
 		}
 
@@ -419,6 +495,8 @@ package com.refract.prediabetes.nav {
 		
 		protected function onResize(evt:Event = null) : void 
 		{
+			
+			
 			var center_x : Number = stage.stageWidth / 2 ; 
 			var sw : Number = stage.stageWidth ; 
 			_footerBackBottom.width = sw ; 
@@ -427,16 +505,19 @@ package com.refract.prediabetes.nav {
 			_footerBackCont.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 - center_x ;
 			
 			_footerBottom.x = center_x - _footerBottom.width / 2; 
-			_footerBottom.y = _footerBackBottom.height/2 + _footerBackBottom.height - _footerBottom.height / 2 ; //( _footer_bottom_back.height * 3 ) / 3 ;  
+			_footerBottom.y = _footerBackBottom.y + _footerBackBottom.height / 2 - _footerBottom.height / 2 + AppSettings.FOOTER_FIX_TABLET_POSITION;  
+			//_footerBackBottom.height/2 + _footerBackBottom.height - _footerBottom.height / 2 ; //( _footer_bottom_back.height * 3 ) / 3 ;  
 			
 			_footerTopRight.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH - _footerTopRight.width - 15 ;
 			_footerTopRight.y = -_footerTopRight.height / 2 ;  
 			
-			_footerBottomRight.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH - _footerTopRight.width - 15 ;
-			_footerBottomRight.y = _footerBackBottom.height/2 + _footerBackBottom.height ; //- _footerBottomRight.height / 2 ;  
+			_footerBottomRight.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH - _footerTopRight.width - 30 ; //20 ;
+			_footerBottomRight.y = _footerBackBottom.y + _footerBackBottom.height / 2 - 7.5 ; //- _footerBottomRight.height / 2 + 8; 
+			//_footerBackBottom.height/2 + _footerBackBottom.height ; //- _footerBottomRight.height / 2 ;  
 			
 			_footerTopLeft.x = AppSettings.VIDEO_LEFT + 20  ; //+ AppSettings.VIDEO_WIDTH - _footerTopRight.width - 15 ;
-			//_footerTopLeft.y = -_footerTopLeft.height / 2 ;  
+			_footerTopLeft.y = _footerBackTop.y  ;//-_footerTopLeft.height / 2 ;  
+			
 			
 			_footerTopCenter.x = center_x ; 
 			_footerTopCenter.y = _footerBackTop.height/2 ;  

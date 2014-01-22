@@ -43,6 +43,8 @@ package com.refract.prediabetes {
 		public static const DEVICE_TABLET:String = "DEVICE_TABLET";
 		public static var DEVICE : String = "DEVICE_PC";
 		
+		public static var RETINA : Boolean = false ;
+		
 		public static var VIDEO_WIDTH:Number = 0;
 		public static var VIDEO_HEIGHT:Number = 0;
 		public static var VIDEO_IS_STAGE_WIDTH:Boolean = false;
@@ -54,18 +56,34 @@ package com.refract.prediabetes {
 		//public static var RESERVED_HEADER_HEIGHT_TOP:int = 10;
 		//public static var RESERVED_HEADER_HEIGHT_BOTTOM:int = 80;
 		
-		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 0 ; //35;
-		public static var RESERVED_FOOTER_HEIGHT_DEFAULT:int = 70;
+		public static var SHOW_HEADER : Boolean = false ; 
+		public static var FOOTER_VIDEONAV_FIXED : Boolean = false ; 
+		public static var RESERVED_HEADER_HEIGHT_DEFAULT:int = 34 ; //35;
+		public static var RESERVED_FOOTER_HEIGHT_DEFAULT:int = 34 ; //34;
 		public static var RESERVED_HEADER_HEIGHT:int = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
 		public static var RESERVED_FOOTER_HEIGHT:int = RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
 		public static var RESERVED_HEIGHT:int = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
 		public static var RESERVED_SIDE_BORDER:int = 0;
 		
+		public static var RESERVED_FOOTER_HEIGH_RETINA : int = 210 ; 
+		public static var RESERVED_HEADER_HEIGH_RETINA : int = 202 ; 
+		
+		public static var RESERVED_FOOTER_HEIGH_NO_RETINA : int = 105 ; 
+		public static var RESERVED_HEADER_HEIGH_NO_RETINA : int = 101 ; 
+		
+		public static var TOP_HEIGHT_BAR				  : int = 38 ; 
+		
 		public static var FONT_SCALE_FACTOR:Number = 1;
 		
-		public static var FOOTER_FONT_SIZE:int = 15;
+		public static var FOOTER_FONT_SIZE:int = 15 ;
+		public static var FOOTER_FONT_SIZE_FS:int = 18;
+		
+		public static var FOOTER_FIX_TABLET_POSITION : int = 0 ;
+		public static var HEADER_FIX_COPY_TABLET_POSITION : int = 0 ; 
 		public static var FOOTER_FONT_SIZE2:int = 14;
 		public static var HEADER_FONT_SIZE : int = 21 ; 
+		
+		public static var FOOTER_BUTTON_SPACE : int = 22; 
 		 
 		
 		public static var FONT_SIZES : Dictionary = __MAKE_DICTIONARY();
@@ -82,7 +100,9 @@ package com.refract.prediabetes {
 			dict[15] = 15;
 			dict[16] = 16;
 			dict[18] = 18;
+			dict[19] = 19;
 			dict[20] = 20;
+			dict[21] = 21;
 			dict[22] = 22;
 			dict[24] = 24;
 			dict[28] = 28;
@@ -124,29 +144,34 @@ package com.refract.prediabetes {
 		private static function onStageResize(evt:Event = null):void
 		{
 			var stageW : Number = _stage.stageWidth - AppSettings.RESERVED_SIDE_BORDER * 2 ; 
-			
 			var stageRatio:Number = stageW /(_stage.stageHeight-RESERVED_HEIGHT);
-			
+			var totHBusy : int ; 
+			var diffFree : int ; 
 			if(SIXTEEN_NINE_RATIO > stageRatio)
 			{
-				//stage height greater than width -> fit to width
+				//**stage height greater than width -> fit to width
 				VIDEO_HEIGHT = stageW/SIXTEEN_NINE_RATIO;
 				VIDEO_WIDTH = stageW ; 
 				VIDEO_IS_STAGE_WIDTH = true;
 				VIDEO_LEFT = 0;
 				VIDEO_RIGHT = VIDEO_WIDTH;
-				VIDEO_TOP = _stage.stageHeight/2 - VIDEO_HEIGHT/2 ; //- RESERVED_HEADER_HEIGHT/2 ;
+				totHBusy = VIDEO_HEIGHT + RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT ;
+				diffFree = _stage.stageHeight - totHBusy ; 
+				VIDEO_TOP = RESERVED_HEADER_HEIGHT + ( diffFree / 2 ) ;
+				//_stage.stageHeight/2 - VIDEO_HEIGHT/2 ; //- RESERVED_HEADER_HEIGHT/2 ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 			}
 			else
 			{ 
-				//stage width greater than stage height -> fit to height
+				//**stage width greater than stage height -> fit to height
 				VIDEO_WIDTH = (_stage.stageHeight - RESERVED_HEIGHT)*SIXTEEN_NINE_RATIO - AppSettings.RESERVED_SIDE_BORDER * 2;
 				VIDEO_HEIGHT = (_stage.stageHeight - RESERVED_HEIGHT);
 				VIDEO_IS_STAGE_WIDTH = false;
 				VIDEO_LEFT = stageW/2 - VIDEO_WIDTH/2 ;
 				VIDEO_RIGHT = VIDEO_LEFT + VIDEO_WIDTH;
-				VIDEO_TOP = RESERVED_HEADER_HEIGHT ;
+				totHBusy = VIDEO_HEIGHT + RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT ;
+				diffFree = _stage.stageHeight - totHBusy ; 
+				VIDEO_TOP = RESERVED_HEADER_HEIGHT - diffFree / 2;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 			}
 		}
@@ -179,7 +204,24 @@ package com.refract.prediabetes {
 			
 			RATIO = ( dpi / 72) ; 
 			if( RATIO > 1.2) RATIO = RATIO / 2 ;
-			
+			if( dpi > 200  && dpi < 300)
+			{
+				RETINA = true ; 
+				RESERVED_FOOTER_HEIGHT = RESERVED_FOOTER_HEIGH_RETINA ; 
+				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGH_RETINA ; 
+				FOOTER_FIX_TABLET_POSITION = FOOTER_FIX_TABLET_POSITION * 1.7 ; 				
+			}
+			else
+			{
+				RETINA = false ; 
+				RESERVED_FOOTER_HEIGHT = RESERVED_FOOTER_HEIGH_NO_RETINA ; 
+				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGH_NO_RETINA ; 
+				
+				TOP_HEIGHT_BAR = TOP_HEIGHT_BAR / 2; 
+				HEADER_FIX_COPY_TABLET_POSITION = HEADER_FIX_COPY_TABLET_POSITION / 2; 
+			}
+			RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
+			/*
 			//trace("Device looks like: ", DEVICE, "size is", inches, "with dpi",dpi, "and reported dpi",reportedDpi, "and scale factor",FONT_SCALE_FACTOR);
 			if(DEVICE == DEVICE_TABLET){
 				RESERVED_FOOTER_HEIGHT = RESERVED_FOOTER_HEIGHT*FONT_SCALE_FACTOR;
@@ -189,28 +231,12 @@ package com.refract.prediabetes {
 				RESERVED_HEADER_HEIGHT = 0;
 			}
 			RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
+			 * 
+			 */
 
-			if(dpi >= 300){
-				var rat300:Number = DEVICE == DEVICE_TABLET ? 2.672972973 : 1.75;
-				FONT_SIZES[12] = 12*rat300;
-				FONT_SIZES[13] = 13*rat300;
-				FONT_SIZES[14] = 14*rat300;
-				FONT_SIZES[15] = 15*rat300;
-				FONT_SIZES[16] = 16*rat300;
-				FONT_SIZES[18] = 18*rat300;
-				FONT_SIZES[20] = 20*rat300;
-				FONT_SIZES[22] = 22*rat300;
-				FONT_SIZES[24] = 24*rat300;
-				FONT_SIZES[28] = 28*rat300;
-				FONT_SIZES[30] = 30*rat300;
-				FONT_SIZES[32] = 32*rat300;
-				FONT_SIZES[35] = 35*rat300;
-				FONT_SIZES[36] = 36*rat300;
-				FONT_SIZES[48] = 48*rat300*.75;
-				FONT_SIZES[54] = 54*rat300*.75;
-				FONT_SIZES[72] = 72*rat300*.75;
-				FONT_SIZES[100] = 100*rat300*.75;
-			}else if (dpi >= 200){
+		    if (dpi >= 200)
+			{
+				trace('>>200')
 				var rat200:Number = DEVICE == DEVICE_TABLET ? 2.277777778 : 1.3;
 				FONT_SIZES[12] = 12*rat200;
 				FONT_SIZES[13] = 13*rat200;
@@ -218,27 +244,46 @@ package com.refract.prediabetes {
 				FONT_SIZES[15] = 15*rat200;
 				FONT_SIZES[16] = 16*rat200;
 				FONT_SIZES[18] = 18*rat200;
+				FONT_SIZES[19] = 38;
 				FONT_SIZES[20] = 20*rat200;
 				FONT_SIZES[22] = 22*rat200;
 				FONT_SIZES[24] = 24*rat200;
 				FONT_SIZES[30] = 30*rat200;
 				FONT_SIZES[32] = 32*rat200;
+				FONT_SIZES[35] = 61 ; 
 				FONT_SIZES[36] = 36*rat200;
 				FONT_SIZES[48] = 48*rat200*.75;
 				FONT_SIZES[54] = 54*rat200*.75;
 				FONT_SIZES[72] = 72*rat200*.75;
 				FONT_SIZES[100] = 100*rat200*.75;
-				
-			}else if (dpi >= 100){
-				
-				FONT_SIZES[12] = 14;
-				FONT_SIZES[13] = 14;
-				
 			}
 		}
 		
 		private static function onFullScreenChange(evt:FullScreenEvent):void
 		{
+			if( evt.fullScreen )
+			{
+				RESERVED_HEADER_HEIGHT_DEFAULT = 60 ; //35;
+				RESERVED_FOOTER_HEIGHT_DEFAULT = 60 ; //34;
+
+				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
+				RESERVED_FOOTER_HEIGHT= RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
+				RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
+				
+				FOOTER_BUTTON_SPACE = 22 ; 
+		
+			}
+			else
+			{
+				RESERVED_HEADER_HEIGHT_DEFAULT = 34 ; //35;
+				RESERVED_FOOTER_HEIGHT_DEFAULT = 34 ; //34;
+				
+				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
+				RESERVED_FOOTER_HEIGHT= RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
+				RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
+				
+				FOOTER_BUTTON_SPACE = 30 ; 
+			}
 		}
 		
 

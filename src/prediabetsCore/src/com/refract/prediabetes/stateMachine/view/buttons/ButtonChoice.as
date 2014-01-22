@@ -2,7 +2,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 {
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.sections.utils.LSButton;
+	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.VO.CoinVO;
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
@@ -19,7 +19,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 	/**
 	 * @author robertocascavilla
 	 */
-	public class ButtonChoice extends LSButton 
+	public class ButtonChoice extends PrediabetesButton 
 	{
 		private var _interaction : Object;
 		private var _value : Boolean  ;

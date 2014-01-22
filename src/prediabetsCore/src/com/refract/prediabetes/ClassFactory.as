@@ -2,7 +2,6 @@ package com.refract.prediabetes {
 	import com.refract.prediabetes.nav.Footer;
 	import com.refract.prediabetes.nav.Header;
 	import com.refract.prediabetes.nav.Nav;
-	import com.refract.prediabetes.sections.feedback.FeedBack;
 	import com.refract.prediabetes.sections.findoutmore.FindOutMore;
 	import com.refract.prediabetes.sections.intro.Intro;
 	import com.refract.prediabetes.sections.legal.Legal;
@@ -21,7 +20,6 @@ package com.refract.prediabetes {
 		public static var INTRO:Class = Intro;
 		public static var VIDEO_LOADER:Class = VideoLoader;
 		public static var LEGAL : Class = Legal;
-		public static var FEEDBACK: Class = FeedBack;
 		public static var SHARE : Class = Share;		
 		public static var FIND_OUT_MORE : Class = FindOutMore;
 		

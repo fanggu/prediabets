@@ -21,6 +21,7 @@ package com.refract.prediabetes.stateMachine.view {
 		
 		private function init( evt : Event ) : void
 		{
+			
 			removeEventListener(Event.ADDED_TO_STAGE , init );
 			
 			AppSettings.stage.addEventListener(Event.RESIZE, onResize );

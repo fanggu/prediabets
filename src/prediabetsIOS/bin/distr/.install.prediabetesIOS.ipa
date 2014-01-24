@@ -1,8 +1,0 @@
-/Users/otlabs/io/work/SDKs/flex_sdk_4.6.nov/bin/adt
--installApp
--platform
-ios
--device
-39
--package
-/Users/otlabs/io/work/projects/2014/01_prediabets/code/src/prediabetsIOS/bin/distr/prediabetesIOS.ipa

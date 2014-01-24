@@ -232,7 +232,7 @@ package com.refract.prediabetes.sections.utils {
 					break;
 				case(MouseEvent.MOUSE_OVER):
 					playSound("SndGeneralRollover");
-					TweenMax.to(_body,0.4,{tint:SMSettings.CHOICE_BACK_COLOR});
+					TweenMax.to(_body,0.4,{tint:SMSettings.CHOICE_BACK_COLOR });
 					//if(_bkgBorder)	TweenMax.to(_bkgBorder,0.5,{tint : SMSettings.CHOICE_BACK_COLOR });
 					//if( _bkg ) TweenMax.to( _bkg , 0.5 , {tint : SMSettings.CHOICE_BORDER_COLOR } ) ;
 				break;

@@ -7,7 +7,6 @@ package com.refract.prediabetes.nav.footer {
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
-	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -18,19 +17,25 @@ package com.refract.prediabetes.nav.footer {
 		protected var playBtn:*;
 		
 		public var id : String;
-		private var _fixHitArea_w : int;
-		private var _fixHitArea_h : int;
+		protected var _fixHitArea_w : int;
+		protected var _fixHitArea_h : int;
+		protected var _fixHitArea_x : int ; 
+		
+		protected var w : int ; 
+		protected var h : int ; 
 		
 		
 		public function PlayPauseButton() 
 		{
+			_fixHitArea_w = 10 ; 
+			_fixHitArea_h = 10 ; 
+			_fixHitArea_x = 0 ; 
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		protected function init( evt : Event = null ) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			_fixHitArea_w = 10 ; 
-			_fixHitArea_h = 10 ; 
+			
 			
 			createState() ; 
 			pauseBtn.y = playBtn.height/2 - pauseBtn.height/2;
@@ -40,15 +45,8 @@ package com.refract.prediabetes.nav.footer {
 			mouseChildren = false;
 			useHandCursor = true;
 			buttonMode = true;
-			graphics.beginFill(0x00ff99 , 1 ) ;
-			if(AppSettings.DEVICE == AppSettings.DEVICE_PC)
-			{
-				graphics.drawRect( -_fixHitArea_w / 2 , _fixHitArea_h / 2 , width + _fixHitArea_w , height + _fixHitArea_h );
-			}
-			else
-			{
-				graphics.drawRect( 0 , 0  , width  , height ) ;	
-			}
+			graphics.beginFill(0x00ff99 , 0 ) ;
+			graphics.drawRect( -_fixHitArea_w / 2 - _fixHitArea_x , -_fixHitArea_h / 2 , w + _fixHitArea_w , h + _fixHitArea_h );
 			
 			DispatchManager.addEventListener(Flags.FREEZE,onFreezeUnFreeze);
 			DispatchManager.addEventListener(Flags.UN_FREEZE,onFreezeUnFreeze);
@@ -71,18 +69,23 @@ package com.refract.prediabetes.nav.footer {
 			addChild(playBtn);
 			playBtn.visible = false;
 			
+			w = playBtn.width ;
+			h = playBtn.height ;
+			
 		}
 		
-		private function onOverOut(evt:MouseEvent):void{
+		protected function onOverOut(evt:MouseEvent):void{
 			if(evt.type == MouseEvent.MOUSE_OVER){
 				DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralRollover") );
-				TweenMax.to(this,0.5,{tint:AppSettings.WHITE});	
+				TweenMax.to(this,0.5,{tint:AppSettings.WHITE });	
+				
 			}else{
 				TweenMax.to(this,0.5,{tint:null});
 			}
 		}
 		
-		private function onClick(evt:MouseEvent):void{
+		private function onClick(evt:MouseEvent):void
+		{
 			DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralClick") );	
 			if(pauseBtn.visible)
 			{

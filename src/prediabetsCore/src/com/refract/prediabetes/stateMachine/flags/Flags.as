@@ -5,6 +5,7 @@ package com.refract.prediabetes.stateMachine.flags {
 	public class Flags 
 	{
 		public static const START_MOVIE							: String = 'startMovie' ; 
+		public static const OVERWEIGHT							: String = 'overweight' ; 
 		//**comm with External UI
 		//public static const UPDATE_UI_PROGRESS 					: String = 'updateProgress' ; 
 		public static const ACTIVATE_PROGRESS_BAR 				: String = 'activateProgressBar' ; 

@@ -6,6 +6,7 @@ package com.refract.prediabetes.stateMachine.VO {
 	{
 		public var timeChoiceFadeOut : Number ; 
 		public var btName : String ; 
+		public var interaction_internal : Boolean = false ; 
 		public function CoinVO()
 		{
 			

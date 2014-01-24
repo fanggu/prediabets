@@ -59,7 +59,8 @@ package {
 			
 			addBkg();
 			
-			showTerms();
+			//showTerms();
+			getBackendData();
 		}
 
 		
@@ -80,6 +81,9 @@ package {
 			AppSettings.HEADER_FONT_SIZE = 19 ;  
 			AppSettings.FOOTER_FIX_MENU_TABLET_POSITION = 15 ; 
 			AppSettings.HEADER_FIX_COPY_TABLET_POSITION = 40 ; 
+			
+			
+			
 			setScreenRatio();
 
 			 AppSettings.VIDEO_BASE_URL = "video/flv/1024/" ; 
@@ -124,6 +128,9 @@ package {
 			{
 				AppSettings.RETINA = true ; 
 				AppSettings.FONT_SCALE_FACTOR = 1 ;
+				//**fix positions in the footer - buttons
+				AppSettings.PP_FIXER_Y = 3 ;
+				AppSettings.SND_FIXER_X = -12 ; 
 				
 				AppSettings.RESERVED_FOOTER_HEIGHT = AppSettingsIOS.RESERVED_FOOTER_HEIGH_RETINA ; 
 				AppSettings.RESERVED_HEADER_HEIGHT = AppSettingsIOS.RESERVED_HEADER_HEIGH_RETINA ; 		
@@ -135,6 +142,7 @@ package {
 				
 				AppSettings.VIDEO_NAV_SIDE = AppSettingsIOS.VIDEO_NAV_SIDE_RETINA ; 
 				AppSettings.VIDEO_NAV_HEIGHT = AppSettingsIOS.VIDEO_NAV_HEIGHT_RETINA ; 
+				AppSettings.VIDEO_NAV_PROGRESS_BAR_HIT_AREA_HEIGHT = AppSettings.VIDEO_NAV_PROGRESS_BAR_HIT_AREA_HEIGHT * 2 ; 
 		//		AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT = AppSettingsIOS.VIDEO_NAV_HEIGHT_RETINA ;
 		//		public static var VIDEO_NAV_SIDE_RETINA 						: int = AppSettings.VIDEO_NAV_SIDE * 2; 
 		//public static var VIDEO_NAV_HEIGHT_RETINA 						: int = AppSettings.VIDEO_NAV_HEIGHT * 2 ;
@@ -144,6 +152,11 @@ package {
 			{
 				AppSettings.RETINA = false ; 
 				AppSettings.FONT_SCALE_FACTOR = 0.5 ;
+				
+				AppSettings.PP_FIXER_Y = AppSettingsIOS.VIDEO_NAV_FIX_PAUSE_POS_Y  ; 
+				AppSettings.SND_FIXER_X = -7 ; 
+				AppSettings.SND_FIXER_Y = -2 ;
+				
 				AppSettings.RESERVED_FOOTER_HEIGHT = AppSettingsIOS.RESERVED_FOOTER_HEIGH_NO_RETINA ; 
 				AppSettings.RESERVED_HEADER_HEIGHT = AppSettingsIOS.RESERVED_HEADER_HEIGH_NO_RETINA ; 
 				
@@ -266,7 +279,7 @@ package {
 			var mainCore : PrediabetesCore = new PrediabetesCore() ; 
 			addChild ( mainCore ) ;
 			
-			var box : Box = new Box( AppSettings.stage.stageWidth , AppSettingsIOS.TOP_HEIGHT_BAR , 0x000000 ); 
+			var box : Box = new Box( AppSettings.stage.stageWidth * 2 , AppSettingsIOS.TOP_HEIGHT_BAR , 0x000000 ); 
 			addChild( box ) ; 
 		}
 	}

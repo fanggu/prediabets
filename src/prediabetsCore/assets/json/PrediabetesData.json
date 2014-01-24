@@ -452,6 +452,7 @@
           , 
           {
             "final_state": "d27s",
+            "interaction_internal" : "true" ,
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
@@ -1043,6 +1044,7 @@
           {
             "final_state": "d27m",
             "interaction_type": "choice",
+            "interaction_internal" : "true" , 
             "interaction_meta": "wrong=true",
             "copy": {
               "main": "Not Sure what overweight means ?"

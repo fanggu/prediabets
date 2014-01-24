@@ -15,6 +15,8 @@ package com.refract.air.shared {
 		public static var VIDEO_NAV_HEIGHT_RETINA 					: int = AppSettings.VIDEO_NAV_HEIGHT * 2 ;
 		public static var VIDEO_NAV_PROGRESS_BAR_HEIGHT_NO_RETINA 	: int = AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT / 2; 
 		
+		public static var VIDEO_NAV_FIX_PAUSE_POS_Y 				: int = 1 ;
+		
 		public static function checkWifiAvailable():Boolean
 		{
 			

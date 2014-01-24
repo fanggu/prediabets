@@ -5,6 +5,7 @@ package com.refract.prediabetes.stateMachine {
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
+	import com.refract.prediabetes.nav.events.FooterEvent;
 	import com.refract.prediabetes.stateMachine.VO.CoinVO;
 	import com.refract.prediabetes.stateMachine.VO.HistoryVO;
 	import com.refract.prediabetes.stateMachine.events.BooleanEvent;
@@ -72,6 +73,7 @@ package com.refract.prediabetes.stateMachine {
 		//*START
 		public function start( ) : void
 		{ 	
+			trace('::start::')
 			createListeners();	
 			SMVars.reset() ;
 
@@ -213,6 +215,11 @@ package com.refract.prediabetes.stateMachine {
 					DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ; 
 				break ;
 
+				case Flags.OVERWEIGHT : 					 
+					DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED ,{value:'share'}));
+				break ;
+				
+				
 				default:
 					_model.selectedInteraction = int(coinObj.btName);
 					var interaction : Object = _model.interaction ; 

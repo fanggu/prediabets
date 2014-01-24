@@ -1,5 +1,6 @@
 package com.refract.prediabetes.nav {
 	import com.greensock.TweenMax;
+	import com.greensock.easing.Quint;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.assets.TextManager;
@@ -23,6 +24,7 @@ package com.refract.prediabetes.nav {
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 
@@ -64,9 +66,12 @@ package com.refract.prediabetes.nav {
 		private var _clip_length : Number;
 		private var _tween : Boolean ;
 		private var _tweenID : TweenMax;	
-		private var _progressBarBack : Sprite;
 		private var _progressBarBox : Sprite;
+		private var _progressBarBoxHitArea : Sprite;
 		private var _progressBarAbsWidth : Number ; 
+		private var _iterShowNav : int ; 
+		private var _barHidden : Boolean ;
+		private var _endFooterTopLeft_y : int;
 
 		public function Footer( nav : Nav ) 
 		{
@@ -76,6 +81,10 @@ package com.refract.prediabetes.nav {
 		
 		protected function init(evt:Event):void
 		{
+			_iterShowNav = 0 ; 
+			_barHidden = false ; 
+			
+			removeEventListener(Event.ADDED_TO_STAGE, init);
 			createFooterButtonsArray() ; 
 			createFooterBackgrounds() ; 
 			createFooterContainers() ; 
@@ -98,14 +107,56 @@ package com.refract.prediabetes.nav {
 			DispatchManager.addEventListener(Flags.ACTIVATE_PROGRESS_BAR , activateProgressBar);
 			DispatchManager.addEventListener(Flags.DE_ACTIVATE_PROGRESS_BAR , deActivateProgressBar);
 			
+			
 			DispatchManager.addEventListener(Flags.FREEZE , onFreeze);
 			DispatchManager.addEventListener(Flags.UN_FREEZE , onUnFreeze); 
 			
 			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+			{
+				DispatchManager.addEventListener(Event.ENTER_FRAME , onRun);
+				AppSettings.stage.addEventListener(MouseEvent.MOUSE_MOVE ,  onMouseMove ) ; 
 				stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
+			}
 			
 			onResize();
 		}
+		private function onRun( evt : Event ) : void
+		{
+			_iterShowNav ++ ; 
+			if( _iterShowNav > 240 && !_barHidden )
+			{ 
+				var arrObjs : Array = AppSettings.stage.getObjectsUnderPoint( new Point( AppSettings.stage.mouseX , AppSettings.stage.mouseY ) ) ; 
+				for( var i : int = 0 ; i < arrObjs.length ; i ++ )
+				{
+					if( arrObjs[ i ].name == 'topBack')
+					{
+						_iterShowNav = 0 ; 
+						return ; 
+					}
+				}
+				hideNavBar()  ; 
+			}
+		}
+		private function onMouseMove( evt : MouseEvent ) : void
+		{
+			_iterShowNav = 0 ;
+			if( _barHidden )
+				showNavBar() ; 
+		}
+		
+		private function showNavBar() : void
+		{
+			_barHidden = false ; 
+			TweenMax.killTweensOf( _footerTopLeft ) ; 
+			TweenMax.to( _footerTopLeft , .5 , { y : _endFooterTopLeft_y , alpha : 1 , scaleY : 1 , ease : Quint.easeOut } ) ;
+		}
+		private function hideNavBar() : void
+		{
+			_barHidden = true ;
+			TweenMax.killTweensOf( _footerTopLeft ) ; 
+			TweenMax.to( _footerTopLeft , .5 , { y : 5 , scaleY : 0 , alpha : 0 , ease : Quint.easeOut } ) ;
+		}
+		
 		
 		private function onFreeze( evt : Event ) : void
 		{
@@ -194,14 +245,17 @@ package com.refract.prediabetes.nav {
 			}
 			var posContainerAdder : int = 0 ; 
 			var footerHeight : Number = AppSettings.RESERVED_FOOTER_HEIGHT ; 
+			_footerBackTop = new Box( stage.stageWidth , footerHeight  , 0xffffff) ;
+			_footerBackTop.alpha = 0 ; 
 			if( AppSettings.FOOTER_VIDEONAV_FIXED )
 			{
 				footerHeight = footerHeight / 2;
 				posContainerAdder = footerHeight ;
+				_footerBackTop.height = footerHeight ; 
+				_footerBackTop.alpha = 1 ; 
 			}
-			_footerBackBottom = new Box( stage.stageWidth , footerHeight  , 0x808000) ;
-			_footerBackTop = new Box( stage.stageWidth , footerHeight  , 0xff9966) ;
-			_footerBackTop.alpha = .4 ; 
+			_footerBackBottom = new Box( stage.stageWidth , footerHeight  , 0xffffff) ;
+			
 			_footerBackBottom.y = 0 + posContainerAdder  ;
 			_footerBackTop.y = -footerHeight + posContainerAdder ;
 			_footerBackCont = new Sprite() ; 
@@ -215,7 +269,7 @@ package com.refract.prediabetes.nav {
 			_footerBottom = new Sprite() ; 
 			_footerBottomRight = new Sprite() ; 
 			_footerTopRight = new Sprite() ;
-			_footerTopLeft = new Sprite() ; 
+			_footerTopLeft = new Sprite() ;  
 			_footerTopCenter= new Sprite() ; 
 			
 			addChild( _footerBottom ) ; 
@@ -282,19 +336,18 @@ package com.refract.prediabetes.nav {
 		private function createTopLeftFooter() : void
 		{
 			_footerTopBackground = new Sprite() ; 
+			_footerTopBackground.name= 'topBack' ; 
 			_footerTopLeft.addChild( _footerTopBackground );
 			
 			if( AppSettings.FOOTER_VIDEONAV_FIXED )
 			{
 				_footerTopBackground.visible = true ; 
-				_footerTopBackground.alpha = .6 ; 
+				_footerTopBackground.alpha = 0 ; 
 				_footerTopBackground.y = _footerBackTop.height/2 - AppSettings.VIDEO_NAV_HEIGHT / 2 ; 
 			}
 			else
 			{
 				_footerTopBackground.y = -AppSettings.VIDEO_NAV_SIDE - AppSettings.VIDEO_NAV_HEIGHT ;
-				
-				
 			}
 			
 			
@@ -310,33 +363,38 @@ package com.refract.prediabetes.nav {
 			_footerTopLeft.addChild( _playPauseButton );
 			_playPauseButton.id = PLAY_PAUSE;
 			_playPauseButton.visible = true;
-			_playPauseButton.x = _backwardButton.x + _backwardButton.width + 15  ; 
-			_playPauseButton.y =  _footerTopBackground.y + AppSettings.VIDEO_NAV_PROGRESS_BAR_Y_POS - 2 ; 
+			_playPauseButton.x = _backwardButton.x + _backwardButton.width + AppSettings.VIDEO_NAV_BUTTON_SPACE  ; 
+			_playPauseButton.y =  _footerTopBackground.y + AppSettings.VIDEO_NAV_PROGRESS_BAR_Y_POS - 2 + AppSettings.PP_FIXER_Y; 
 			
 			
 			var snd:SoundButton = new ClassFactory.SOUND_BUTTON();
 			_footerTopLeft.addChild(snd);
-			snd.x = _playPauseButton.x + _playPauseButton.width + 20  ; 
-			snd.y =  _footerTopBackground.y + AppSettings.VIDEO_NAV_PROGRESS_BAR_Y_POS  ; 
+			snd.x = _playPauseButton.x + _playPauseButton.width + AppSettings.VIDEO_NAV_BUTTON_SPACE + AppSettings.SND_FIXER_X ; 
+			snd.y =  _footerTopBackground.y + AppSettings.VIDEO_NAV_PROGRESS_BAR_Y_POS + AppSettings.SND_FIXER_Y ; 
 			snd.id = SOUND;
 			
 			
 			_progressBar = new Sprite();
 			_footerTopLeft.addChild(_progressBar);
-			_progressBar.y = _footerTopBackground.y + AppSettings.VIDEO_NAV_HEIGHT / 2 - AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT / 2; //+ AppSettings.VIDEO_NAV_PROGRESS_BAR_Y_POS ;  
+			_progressBar.y = _footerTopBackground.y + AppSettings.VIDEO_NAV_HEIGHT / 2 - AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT / 2;   
 
-			var fix_x : int = snd.x + snd.width + 20 ;
-			_progressBarBack    = new Sprite() ;  
+			var fix_x : int = snd.x + snd.width + AppSettings.VIDEO_NAV_BUTTON_SPACE  ;
 			_progressBarBox = new Sprite() ;  
+			_progressBarBoxHitArea = new Sprite();
+			_progressBarBoxHitArea.alpha = 0 ; 
 			
-			_progressBarBox.addEventListener( MouseEvent.MOUSE_DOWN , onProgressBarClick ) ; 
-			_progressBarBox.buttonMode = true ; 
-			_progressBarBox.mouseEnabled = true ; 
-			_progressBar.addChild( _progressBarBack ) ; 
+			_progressBarBoxHitArea.addEventListener( MouseEvent.MOUSE_DOWN , onProgressBarClick ) ;
+			_progressBarBoxHitArea.buttonMode = true ; 
+			_progressBarBoxHitArea.mouseEnabled = true ; 
+			
 			_progressBar.addChild( _progressBarBox ) ;  
+			_progressBar.addChild( _progressBarBoxHitArea ) ;
+			
 			_progressBarBox.x = fix_x ;
-			_progressBarBack.x = fix_x - 4 ;
 			_progressBarBox.y = 0 ;
+			
+			_progressBarBoxHitArea.x = fix_x ;
+			_progressBarBoxHitArea.y = 0 ;
 		}
 		private function createTopRightFooter() : void
 		{
@@ -436,6 +494,7 @@ package com.refract.prediabetes.nav {
 					perc = 1 ; 
 				}
 				_progressBarBox.scaleX = perc  ;  
+				_progressBarBoxHitArea.scaleX = perc ; 
 			}
 			else
 			{
@@ -446,6 +505,7 @@ package com.refract.prediabetes.nav {
 					perc = 1 ; 
 				}
 				_progressBarBox.scaleX = perc  ; 
+				_progressBarBoxHitArea.scaleX = perc ; 
 			}
 		}
 		
@@ -478,22 +538,8 @@ package com.refract.prediabetes.nav {
 		
 		private function onDrawProgressBar() : void
 		{
-			var g:Graphics = _progressBarBack.graphics;
-			/*
-			
-			g.clear();
-			g.beginFill( 0xff0000 , 1 ) ;
-			g.drawRect
-			(
-				0
-				, 0
-				, AppSettings.VIDEO_WIDTH - _progressBarBack.x + 8 - 50
-				, 10
-			);
-			 * 
-			 */
-			
-			_progressBarAbsWidth = AppSettings.VIDEO_WIDTH - _progressBarBack.x - 50 ;
+			var g:Graphics ;			
+			_progressBarAbsWidth = _footerTopBackground.width - _progressBarBox.x - AppSettings.VIDEO_NAV_SIDE / 2 ;//- 50 ;
 			
 			g = _progressBarBox.graphics;
 			g.clear();
@@ -504,6 +550,18 @@ package com.refract.prediabetes.nav {
 				, 0
 				, _progressBarAbsWidth
 				, AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT
+			);
+			
+			g = _progressBarBoxHitArea.graphics;
+			g.clear();
+			g.beginFill( 0xff0099 , 1 ) ;
+			var h : int = AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT + AppSettings.VIDEO_NAV_PROGRESS_BAR_HIT_AREA_HEIGHT ; 
+			g.drawRect
+			(
+				0
+				, AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT/2- h/2
+				, _progressBarAbsWidth
+				, h
 			);
 			
 		}
@@ -543,13 +601,15 @@ package com.refract.prediabetes.nav {
 			_footerTopLeft.x = AppSettings.VIDEO_LEFT ; 
 			if( !AppSettings.FOOTER_VIDEONAV_FIXED )
 			{
-				_footerTopLeft.y = 0 ;   
+				_endFooterTopLeft_y = 0 ; 
+				_footerTopLeft.y = _endFooterTopLeft_y ; 
 				onDrawFooterTopBackground() ; 
 				 
 			}
 			else
 			{
-				_footerTopLeft.y = -_footerBackTop.y ; 
+				_endFooterTopLeft_y = -_footerBackTop.y ; ; 
+				_footerTopLeft.y = _endFooterTopLeft_y ; 
 				onDrawFooterTopBackground() ; 
 			}
 				

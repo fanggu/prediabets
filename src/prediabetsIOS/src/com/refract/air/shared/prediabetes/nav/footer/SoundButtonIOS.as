@@ -1,9 +1,11 @@
 package com.refract.air.shared.prediabetes.nav.footer {
-	import com.refract.prediabetes.assets.AssetManager;
+	import com.greensock.TweenMax;
 	import com.refract.prediabetes.nav.footer.SoundButton;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 
 	import flash.display.Loader;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 
 	/**
@@ -22,10 +24,24 @@ package com.refract.air.shared.prediabetes.nav.footer {
 			addChild( audioOn ) ; 
 			
 			audioOff = new Sprite( ) ; 
-			var l2 = new Loader();
+			var l2 : Loader= new Loader();
 			l2.load(new URLRequest("img/audio/audio_off_retina.png"));
 			audioOff.addChild(l2);
 			addChild( audioOff ) ; 
+			
+			w = 44 ; 
+			h = 40 ; 
+		}
+		override protected function onMouseOverOut(evt : MouseEvent) : void 
+		{
+			switch(evt.type){
+				case(MouseEvent.MOUSE_OVER):
+					//DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralRollover") );
+					TweenMax.to(this,0.5,{tint: SMSettings.CHOICE_BACK_COLOR  } ) ;
+				break;
+				default:
+					TweenMax.to(this,0.5,{tint:null});
+			}	
 		}
 	}
 }

@@ -61,6 +61,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			var arr : Array = values.match( regExp );	
 			var tempValue : String = arr[1] ; 
 			
+			
 			if( tempValue == 'true') _value = true ; 
 			else _value = false ; 
 			
@@ -132,6 +133,11 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			btObj.btName = name ; 
 			btObj.timeChoiceFadeOut = (SMSettings.FADE_OUT_TIME * 1000 )  ; 
 			
+			if( _interaction.interaction_internal)
+			{
+				btObj.interaction_internal  = true ; 
+				btObj.btName = Flags.OVERWEIGHT ; 
+			}
 			
 			if( _value ) 
 			{ 

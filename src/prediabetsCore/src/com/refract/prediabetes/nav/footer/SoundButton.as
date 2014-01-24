@@ -6,7 +6,6 @@ package com.refract.prediabetes.nav.footer {
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
-	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -14,21 +13,28 @@ package com.refract.prediabetes.nav.footer {
 	import flash.media.SoundTransform;
 
 
-	public class SoundButton extends Sprite {
-		
-		private var colour:uint = AppSettings.GREY;
-		
+	public class SoundButton extends Sprite 
+	{
 		public var id : String;
 		protected var audioOn : *;
 		protected var audioOff : *;
+		protected var _fixHitArea_w : int;
+		protected var _fixHitArea_h : int;
 		
-		public function SoundButton() {
+		protected var w : int ; 
+		protected var h : int ; 
+		
+		public function SoundButton() 
+		{
+			_fixHitArea_w = 10 ; 
+			_fixHitArea_h = 10 ; 
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		private function init(evt:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
 			
 			createStates() ;
 			drawStates();
@@ -46,8 +52,8 @@ package com.refract.prediabetes.nav.footer {
 		}
 		private function drawBack() : void
 		{
-			graphics.beginFill(0xff0000,1);
-			graphics.drawRect(0,0, audioOn.width , audioOn.height);
+			graphics.beginFill(0xff0000 , 0 ) ;
+			graphics.drawRect( -_fixHitArea_w / 2 , -_fixHitArea_h / 2 , w + _fixHitArea_w , h + _fixHitArea_h );
 			graphics.endFill();
 		}
 		protected function createStates() : void
@@ -56,6 +62,8 @@ package com.refract.prediabetes.nav.footer {
 			audioOff = AssetManager.getEmbeddedAsset("AudioOff");
 			addChild( audioOn ) ; 
 			addChild( audioOff ) ; 
+			w = audioOn.width ; 
+			h = audioOn.height ; 
 		}
 		private function drawStates() : void
 		{
@@ -71,7 +79,7 @@ package com.refract.prediabetes.nav.footer {
 			}
 		}
 
-		private function onMouseOverOut(evt : MouseEvent) : void 
+		protected function onMouseOverOut(evt : MouseEvent) : void 
 		{
 			switch(evt.type){
 				case(MouseEvent.MOUSE_OVER):

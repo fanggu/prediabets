@@ -71,6 +71,12 @@ package com.refract.prediabetes {
 		public static var VIDEO_NAV_PROGRESS_BAR_COLOR 					: uint = 0x999999 ;
 		public static var VIDEO_NAV_PROGRESS_BAR_HEIGHT 				: int = 12 ; 
 		public static var VIDEO_NAV_PROGRESS_BAR_Y_POS					: int = 5 ; 
+		public static var VIDEO_NAV_BUTTON_SPACE 						: int = 10 ; 
+		public static var VIDEO_NAV_PROGRESS_BAR_HIT_AREA_HEIGHT 		: int = 20 ; 
+		public static var PP_FIXER_Y 									: int = 0 ; 
+		public static var SND_FIXER_X									: int = 0 ; 
+		public static var SND_FIXER_Y									: int = 0 ; 
+		
 		 
 		//**Colors
 		public static var RED:int = 0xc45252;

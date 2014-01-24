@@ -1,7 +1,11 @@
 package com.refract.prediabetes {
+	import com.refract.prediabetes.assets.AssetManagerEmbeds;
 	import com.refract.prediabetes.nav.Footer;
 	import com.refract.prediabetes.nav.Header;
 	import com.refract.prediabetes.nav.Nav;
+	import com.refract.prediabetes.nav.footer.BackwardButton;
+	import com.refract.prediabetes.nav.footer.PlayPauseButton;
+	import com.refract.prediabetes.nav.footer.SoundButton;
 	import com.refract.prediabetes.sections.findoutmore.FindOutMore;
 	import com.refract.prediabetes.sections.intro.Intro;
 	import com.refract.prediabetes.sections.legal.Legal;
@@ -32,6 +36,11 @@ package com.refract.prediabetes {
 		public static var SM_VIEW : Class = SMView ; 
 		public static var SM_MODEL : Class = SMModel ; 
 		public static var SM_CONTROLLER : Class = SMController ; 
+		
+		public static var ASSETS_MANAGER_EMBEDS : Class = AssetManagerEmbeds ; 
+		public static var BACKWARD_BUTTON : Class = BackwardButton ; 
+		public static var SOUND_BUTTON : Class = SoundButton ; 
+		public static var PLAY_PAUSE_BUTTON : Class = PlayPauseButton ; 
 
 	}
 }

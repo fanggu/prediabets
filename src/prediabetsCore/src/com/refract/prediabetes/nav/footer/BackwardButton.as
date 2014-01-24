@@ -1,26 +1,29 @@
 package com.refract.prediabetes.nav.footer {
+	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
 	import flash.display.Bitmap;
+	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
 
 
 	public class BackwardButton extends Sprite 
 	{		
 		public var id : String;
-		private var backwardButton : Bitmap;
+		protected var backwardButton : *;
 		
 		public function BackwardButton() 
 		{
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		private function init(evt:Event):void
+		protected function init(evt:Event):void
 		{
 			drawBack() ; 
 			createStates() ;
@@ -38,6 +41,7 @@ package com.refract.prediabetes.nav.footer {
 			buttonMode = true;
 			
 			this.scaleX = this.scaleY = AppSettings.FONT_SCALE_FACTOR;
+			
 		}
 		private function drawBack() : void
 		{
@@ -45,9 +49,9 @@ package com.refract.prediabetes.nav.footer {
 			graphics.drawRect(0,0,25,25);
 			graphics.endFill();
 		}
-		private function createStates() : void
+		protected function createStates() : void
 		{
-			backwardButton = AssetManager.getEmbeddedAsset("BackwardButton");
+			backwardButton = AssetManager.getEmbeddedAsset("BackwardButton"); 
 			addChild( backwardButton ) ; 
 		}
 
@@ -56,10 +60,10 @@ package com.refract.prediabetes.nav.footer {
 			switch(evt.type){
 				case(MouseEvent.MOUSE_OVER):
 					//DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralRollover") );
-					//TweenMax.to(this,0.5,{tint:0xffffff});
+					TweenMax.to(this,0.5,{tint:0xffffff});
 				break;
 				default:
-					//TweenMax.to(this,0.5,{tint:null});
+					TweenMax.to(this,0.5,{tint:null});
 			}	
 		}
 		

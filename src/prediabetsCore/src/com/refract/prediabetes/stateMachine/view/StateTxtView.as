@@ -7,6 +7,7 @@ package com.refract.prediabetes.stateMachine.view {
 
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FullScreenEvent;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormatAlign;
@@ -23,10 +24,11 @@ package com.refract.prediabetes.stateMachine.view {
 		private var _fontSize : int ;
 		private var _stateObjectText : Object ;
 		private var _usePos : Boolean;
+		private var _style : Object;
 		 
-		public function StateTxtView( stateObjectText : Object , fontSize : int , usePos : Boolean = false ) 
+		public function StateTxtView( stateObjectText : Object , usePos : Boolean = false ) 
 		{
-			_fontSize = fontSize ; 
+			_fontSize = SMSettings.STATE_TXT_FONT_SIZE ; 
 			_stateObjectText = stateObjectText ; 
 			_usePos = usePos ;
 			
@@ -50,7 +52,7 @@ package com.refract.prediabetes.stateMachine.view {
 			
 			var w : Number = SMSettings.STATE_TXT_MAX_W*AppSettings.RATIO ; 
 			if( _stateObjectText.width ) w = _stateObjectText.width ; 
-			var style:Object = 
+			_style = 
 			{ 
 				fontSize: myfontSize
 				, align:TextFormatAlign.CENTER 
@@ -61,7 +63,7 @@ package com.refract.prediabetes.stateMachine.view {
 				, border : false
 			} ; 
 			
-			txt = TextManager.makeText( SMSettings.FONT_STATETXT ,  null , style) ;
+			txt = TextManager.makeText( SMSettings.FONT_STATETXT ,  null , _style) ;
 			txt.htmlText = _stateObjectText.state_txt  ; 
 
 			addChild( txt ) ; 
@@ -78,6 +80,16 @@ package com.refract.prediabetes.stateMachine.view {
 			TweenMax.to( this , .25 , { alpha : 1 , ease : Linear.easeNone , canBePaused:true} ) ;
 			
 			mouseEnabled = false ; 
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
+		}
+		
+		private function onFullScreenChange ( evt : FullScreenEvent ) : void
+		{
+			var temp : String = txt.text ; 
+			_style.fontSize = SMSettings.STATE_TXT_FONT_SIZE ; 
+			TextManager.styleText( SMSettings.FONT_STATETXT , txt , _style) ; 
+			txt.text  = temp ; 
 		}
 		
 		public function updateColor( color : uint ) : void

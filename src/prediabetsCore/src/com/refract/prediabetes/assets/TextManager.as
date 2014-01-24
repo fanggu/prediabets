@@ -95,7 +95,8 @@ package com.refract.prediabetes.assets {
 			return txt;	
 		}
 		
-		private function styleText(id:String,txt:TextField, props:Object = null ):Boolean{
+		private function styleText(id:String,txt:TextField, props:Object = null ):Boolean
+		{
 			var data:Object = _data[id],out:Boolean = true;
 			props = props != null ? props : DEFAULT_PROPS;
 			if(data)
@@ -116,7 +117,6 @@ package com.refract.prediabetes.assets {
 				{
 					format.size = AppSettings.FONT_SIZES[Number(props.fontSize)];
 				}
-				
 				/*
 				var size:Number = isNaN(Number(props.fontSize)) ? DEFAULT_PROPS.fontSize :Number(props.fontSize);
 				format.size = isNaN(Number(props.fontScale)) ? (size * AppSettings.FONT_SCALE_FACTOR) : Number(props.fontScale) * size;

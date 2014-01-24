@@ -24,13 +24,18 @@ package com.refract.prediabetes.assets {
 		[Embed(source='../../../../../assets/sound/BUTTON_SOUND_WRONG.mp3')] private var BUTTON_SOUND_WRONG :Class ;
 		[Embed(source='../../../../../assets/sound/Questions_Fade-Up.mp3')] private var Questions_Fade_Up :Class ;
 		[Embed(source='../../../../../assets/sound/Questions_Rollover.mp3')] private var Questions_Rollover :Class ;
-
-		[Embed(source="../../../../../assets/img/preloader_redArrow.png")] private var RedArrow : Class;
+/*
+		[Embed(source="../../../../../assets/img/pause_retina.png")] private var Pause : Class;
+		[Embed(source="../../../../../assets/img/play_retina.png")] private var Play : Class;
+		[Embed(source="../../../../../assets/img/audio/audio_on_retina.png")] private var AudioOn : Class;
+		[Embed(source="../../../../../assets/img/audio/audio_off_retina.png")] private var AudioOff : Class;
+		[Embed(source="../../../../../assets/img/backward_retina.png")] private var BackwardButton : Class;
+*/
 		[Embed(source="../../../../../assets/img/pause.png")] private var Pause : Class;
+		[Embed(source="../../../../../assets/img/play.png")] private var Play : Class;
 		[Embed(source="../../../../../assets/img/audio/audio_on.png")] private var AudioOn : Class;
 		[Embed(source="../../../../../assets/img/audio/audio_off.png")] private var AudioOff : Class;
-		[Embed(source="../../../../../assets/img/backward_button.png")] private var BackwardButton : Class;
-
+		[Embed(source="../../../../../assets/img/backward.png")] private var BackwardButton : Class;
 		
 		[Embed(source="../../../../../assets/img/social/facebook.png")] public var Facebook : Class;
 		[Embed(source="../../../../../assets/img/social/twitter.png")] public var Twitter : Class;

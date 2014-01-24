@@ -185,7 +185,6 @@ package com.refract.prediabetes.stateMachine
 			var stateObject :Object = evt.object ; 
 			var len : int = stateObject.interactions.length ;
 			
-			SMVars.me.maxButtonSize = 0 ; 
 			SMVars.me.tempTotChoice = 0 ; 
 			
 			createChoiceTitle( stateObject ) ; 
@@ -199,10 +198,9 @@ package com.refract.prediabetes.stateMachine
 				createInteraction( interaction );
 			}
 			
-			DispatchManager.dispatchEvent( new Event( Flags.UPDATE_SIZE_BUTTON ) ) ; 
-			
-			_uiView.onResize() ; 
+			_uiView.posButton() ; 
 			onResize() ; 
+			_uiView.animateIn() ; 
 		}
 		
 		private function createChoiceTitle( stateObject : Object ) : void
@@ -213,7 +211,7 @@ package com.refract.prediabetes.stateMachine
 					_stateTxtView.parent.removeChild( _stateTxtView );
 				 _stateTxtView = null ; 
 			}
-			_stateTxtView  = new StateTxtView( stateObject, SMSettings.STATE_TXT_FONT_SIZE  ) ; 
+			_stateTxtView  = new StateTxtView( stateObject ) ; 
 			_uiView.addChild( _stateTxtView ) ; 
 			_uiView.stateTxtHeight = _stateTxtView.height ;
 			
@@ -247,8 +245,9 @@ package com.refract.prediabetes.stateMachine
 		
 		private function createInitButton( interaction : Object) : void
 		{
-			_initButton = new ButtonChoice("buttonFont", { fontSize:32  }, SMSettings.MIN_BUTTON_SIZE, 70  , true , true);
+			_initButton = new ButtonChoice("buttonFont", { fontSize:26  }, SMSettings.MIN_BUTTON_SIZE, 70  , true , true);
 			addChild( _initButton ) ; 
+			_initButton.id = Flags.INIT_BUTTON ; 
 			_initButton.visible = false ; 
 			_initButton.setButton( interaction ) ; 
 		}

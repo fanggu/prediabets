@@ -1,4 +1,5 @@
 package com.refract.prediabetes.assets {
+	import com.refract.prediabetes.ClassFactory;
 	import br.com.stimuli.loading.BulkLoader;
 
 	import flash.display.MovieClip;
@@ -50,10 +51,10 @@ package com.refract.prediabetes.assets {
 		
 		
 		private var _bulk:BulkLoader;
-		private var _assets:AssetManagerEmbeds;
+		private var _assets: AssetManagerEmbeds ;
 		
 		public function AssetManager(){
-			_assets = new AssetManagerEmbeds();
+			_assets = new ClassFactory.ASSETS_MANAGER_EMBEDS();
 			_bulk = new BulkLoader(DefaultLoader);
 		}
 		

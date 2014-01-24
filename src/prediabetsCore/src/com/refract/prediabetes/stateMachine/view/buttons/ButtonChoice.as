@@ -2,6 +2,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 {
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.VO.CoinVO;
@@ -9,9 +10,8 @@ package com.refract.prediabetes.stateMachine.view.buttons
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
-
-	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
  com.refract.prediabetes.AppSettings;
@@ -23,7 +23,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 	{
 		private var _interaction : Object;
 		private var _value : Boolean  ;
-		private var _txtBalloon : Sprite;
 		private var _txtField : TextField;
 		private var _usePos : Boolean ; 
 		public function ButtonChoice(
@@ -36,22 +35,26 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			) 
 		{
 			_usePos = usePos ;
-			super( copyID , props , w , h *AppSettings.RATIO , useArrow);
+			super( copyID , props , w , h , useArrow);
 		}
 		public function setButton( interaction : Object ) : void
 		{
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
 			DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
 			
 			_interaction = interaction ; 
-			
 			text = interaction.copy.main ;
 			name = interaction.iter ; 
+			
+			onFullScreenChange() ;  
+			
 			if( _usePos)
 			{
 				 AppSettings.stage.addEventListener( Event.RESIZE , onResize) ;
 				 onResize() ;  
 			}
-			buttonAlpha = 0.15 ;
+			buttonAlpha = 1 ; //0.15 ;
 			
 			var values : String = interaction.interaction_meta ;
 			var regExp : RegExp =  /-?[a-z]+/g;
@@ -70,8 +73,41 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			{
 				deActivate() ; 
 			}
+			
 		}
-
+		
+		private function onFullScreenChange ( evt : FullScreenEvent = null ) : void
+		{
+			var style:Object = {};
+			style.fontSize = SMSettings.CHOICE_FONT_SIZE  ;
+			style.align = "left";
+			var temp : String = textfield.text ; 
+			TextManager.styleText( 'buttonFont' , textfield , style) ; 
+			
+			minW = SMSettings.CHOICE_BUTTON_WIDTH  ; 
+			minH = SMSettings.CHOICE_BUTTON_HEIGHT ; 
+			text = temp ; 
+		}
+		
+		override protected function onMouseEvent(ev:MouseEvent):void{
+			switch(ev.type){
+				case(MouseEvent.CLICK):
+					playSound("SndGeneralClick");
+					break;
+				case(MouseEvent.MOUSE_OVER):
+					playSound("SndGeneralRollover");
+					//TweenMax.to(_body,0.4,{tint:overColor});
+					if(_bkgBorder)	TweenMax.to(_bkgBorder,0.5,{tint : SMSettings.CHOICE_BACK_COLOR });
+					if( _bkg ) TweenMax.to( _bkg , 0.5 , {tint : SMSettings.CHOICE_BORDER_COLOR } ) ;
+				break;
+				default:
+					//TweenMax.to(_body,0.2,{tint:null});
+					//if(_bkgBorder) TweenMax.to(_bkgBorder,0.4,{alpha:0});
+					if( _bkg ) TweenMax.to( _bkg , 0.2 , {tint : null} ) ;
+					if( _bkgBorder ) TweenMax.to( _bkgBorder , 0.2 , {tint : null} ) ;
+			}
+		}
+		
 		override public function deActivate() : void
 		{
 			super.deActivate();	
@@ -123,11 +159,10 @@ package com.refract.prediabetes.stateMachine.view.buttons
 
 		public function dispose() : void
 		{
+			AppSettings.stage.removeEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ;
 			if( _txtField ) if( _txtField.parent ) _txtField.parent.removeChild( _txtField ) ;
-			if( _txtBalloon ) if( _txtBalloon.parent ) _txtBalloon.parent.removeChild( _txtBalloon ) ;
-			_txtBalloon = null ; 
 			super.destroy() ; 
 		}
 	}

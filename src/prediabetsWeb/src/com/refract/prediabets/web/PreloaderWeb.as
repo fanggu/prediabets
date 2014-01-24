@@ -3,9 +3,10 @@ package com.refract.prediabets.web {
 	import br.com.stimuli.loading.BulkProgressEvent;
 
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.logger.Logger;
 	import com.refract.prediabets.web.preloader.PreloaderAssets;
 	import com.refract.prediabets.web.preloader.PreloaderSplash;
+
+	import org.osmf.logging.Logger;
 
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;

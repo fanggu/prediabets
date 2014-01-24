@@ -65,7 +65,8 @@ package com.refract.prediabetes.stateMachine {
 			initValues() ;
 
 			createEnterFrameLoop();
-			createModel();	
+			createModel();
+			SMSettings.init() ; 	
 		}
 
 		//*START

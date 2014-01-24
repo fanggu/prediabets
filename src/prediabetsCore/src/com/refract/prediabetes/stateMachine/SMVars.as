@@ -10,7 +10,7 @@ package com.refract.prediabetes.stateMachine {
 		public var nsStreamTime : Number ; 
 		public var nsStreamTimeAbs : Number ;
 		public var tempTotChoice : int ; 
-		public var maxButtonSize : Number ; 
+		//public var maxButtonSize : Number ; 
 		
 		private var paused : Boolean ; 
 		private var _totPauseTime : Number = 0 ; 
@@ -28,9 +28,8 @@ package com.refract.prediabetes.stateMachine {
 		}
 		public function initValues() : void
 		{
-			_me.nsStreamTime = 0 ; 
+			_me.nsStreamTime  = 0 ; 
 			_me.tempTotChoice = 0 ; 
-			_me.maxButtonSize = 0 ; 
 		}
 		public function freezeTime() : void
 		{
@@ -50,10 +49,7 @@ package com.refract.prediabetes.stateMachine {
 		
 		public function updateMaxButtonSize( value : Number ) : void
 		{
-			if( value > maxButtonSize )
-			{
-				maxButtonSize = value ; 
-			}
+			
 		}
 
 		public static function reset() : void

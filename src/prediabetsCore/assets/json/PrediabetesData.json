@@ -300,7 +300,7 @@
 
 
       "d24s_q": {
-        "state_txt": "Did any members of their family have heart disease under the age of 55?",
+        "state_txt": "Did any members of their family <br></br>have heart disease under the age of 55?",
         "state_txt_x": 50,
         "state_txt_y": 10,
         "interactions": [

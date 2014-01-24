@@ -14,25 +14,18 @@ package com.refract.prediabetes.nav.footer {
 
 	public class PlayPauseButton extends Sprite {
 		
-		private var pauseBtn:Bitmap;
-		private var playBtn:Bitmap;
+		protected var pauseBtn:*;
+		protected var playBtn:*;
 		
 		public var id:String;
 		
 		
 		public function PlayPauseButton() {
-			pauseBtn = AssetManager.getEmbeddedAsset("Pause");
-			pauseBtn.smoothing = true;
-			TweenMax.to(pauseBtn,0,{tint:AppSettings.GREY});
-			addChild(pauseBtn);
+			createState() ; 
 			
 			
-			playBtn = AssetManager.getEmbeddedAsset("RedArrow");
-			playBtn.smoothing = true;
-			TweenMax.to(playBtn,0,{tint:AppSettings.GREY});
-			playBtn.scaleX = playBtn.scaleY = pauseBtn.width/playBtn.width;
-			addChild(playBtn);
-			playBtn.visible = false;
+			
+			
 
 			pauseBtn.y = playBtn.height/2 - pauseBtn.height/2;
 			
@@ -43,7 +36,7 @@ package com.refract.prediabetes.nav.footer {
 			useHandCursor = true;
 			buttonMode = true;
 			
-			this.graphics.beginFill(0xff0000,AppSettings.BUTTON_HIT_AREA_ALPHA);
+			this.graphics.beginFill(0xff0000,1 ) //AppSettings.BUTTON_HIT_AREA_ALPHA);
 			if(AppSettings.DEVICE == AppSettings.DEVICE_PC){
 				graphics.drawRect(0,0,width,height);
 			}else{
@@ -55,6 +48,22 @@ package com.refract.prediabetes.nav.footer {
 			DispatchManager.addEventListener(Flags.UPDATE_PLAY_BUTTON, onUpdatePlayButton) ;
 			
 			this.scaleX = this.scaleY = AppSettings.FONT_SCALE_FACTOR;
+			
+		}
+		protected function createState() : void
+		{
+			pauseBtn = AssetManager.getEmbeddedAsset("Pause");
+			playBtn = AssetManager.getEmbeddedAsset("Play");
+			pauseBtn.smoothing = true;
+			playBtn.smoothing = true;
+			
+			TweenMax.to(pauseBtn,0,{tint:AppSettings.GREY});
+			addChild(pauseBtn);
+			
+			TweenMax.to(playBtn,0,{tint:AppSettings.GREY});
+			playBtn.scaleX = playBtn.scaleY = pauseBtn.width/playBtn.width;
+			addChild(playBtn);
+			playBtn.visible = false;
 			
 		}
 		
@@ -81,30 +90,42 @@ package com.refract.prediabetes.nav.footer {
 		
 		private function onFreezeUnFreeze(evt:Event):void
 		{
-			if(evt.type == Flags.FREEZE){
-				//TweenMax.to(pauseBtn,0.5,{autoAlpha:0});
-				TweenMax.to(pauseBtn,0,{autoAlpha:0});
-				//TweenMax.to(playBtn,0.5,{autoAlpha:1});
-				TweenMax.to(playBtn,0,{autoAlpha:1});
-			}else{
-				//TweenMax.to(pauseBtn,0.5,{autoAlpha:1});
-				TweenMax.to(pauseBtn,0,{autoAlpha:1});
-				//TweenMax.to(playBtn,0.5,{autoAlpha:0});
-				TweenMax.to(playBtn,0,{autoAlpha:0});
-			}
-		}
-		private function onUpdatePlayButton( evt : BooleanEvent ) : void
-		{
-			if( !evt.value )
+			pauseBtn.visible = false ; 
+			playBtn.visible = false ; 
+			if(evt.type == Flags.FREEZE)
 			{
-				TweenMax.to(pauseBtn,0,{autoAlpha:0});
-				TweenMax.to(playBtn,0,{autoAlpha:1});
+				playBtn.visible = true ; 
 			}
 			else
 			{
+				pauseBtn.visible = true ;
+			}
+			/*
+			if(evt.type == Flags.FREEZE)
+			{
+				
+				TweenMax.to(pauseBtn,0,{autoAlpha:0});
+				TweenMax.to(playBtn,0,{autoAlpha:1});
+			}else{
 				TweenMax.to(pauseBtn,0,{autoAlpha:1});
 				TweenMax.to(playBtn,0,{autoAlpha:0});
 			}
+			 * 
+			 */
+		}
+		private function onUpdatePlayButton( evt : BooleanEvent ) : void
+		{
+			pauseBtn.visible = false ; 
+			playBtn.visible = false ; 
+			if( !evt.value )
+			{
+				playBtn.visible = true ; 
+			}
+			else
+			{
+				pauseBtn.visible = true ; 
+			}
+			
 		}
 		
 	}

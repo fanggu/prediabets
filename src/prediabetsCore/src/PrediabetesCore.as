@@ -34,7 +34,8 @@ package {
 	
 			var bytes : ByteArray = AssetManager.getEmbeddedAsset("CopyJSON") as ByteArray;
 			TextManager.parseData(bytes.readUTFBytes(bytes.length));
-			 
+			
+			//AppSettings.RETINA = false ; 
 			startApp() ; 
 		}
 

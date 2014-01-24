@@ -44,11 +44,7 @@ package com.refract.prediabetes.nav
 			_headerButtons = [];
 			_textStyle.fontSize = AppSettings.FOOTER_FONT_SIZE;
 			
-			if( AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
-			{
-				var box : Box = new Box( AppSettings.stage.stageWidth , AppSettings.TOP_HEIGHT_BAR , 0x000000 ); 
-				addChild( box ) ; 
-			}
+			
 			
 			addLeftSide();
 			addMiddle();
@@ -92,12 +88,15 @@ package com.refract.prediabetes.nav
 			_leftSide = new Sprite();
 			addChild(_leftSide);
 			
-			var logoAddress : String = 'Logo' ; 
+			var logoAddress : String = AppSettings.LOGO_ADDRESS ; 
+			/*
 			if( AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
 			{
-				if( AppSettings.RETINA )
-					logoAddress = 'LogoRetina' ; 
+				//if( AppSettings.RETINA )
+				//	logoAddress = 'LogoRetina' ; 
 			}
+			 * 
+			 */
 			 var logo : Bitmap = AssetManager.getEmbeddedAsset( logoAddress );
 			 _leftSide.addChild( logo ) ;
 		}

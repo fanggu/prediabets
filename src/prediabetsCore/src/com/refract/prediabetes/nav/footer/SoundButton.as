@@ -1,4 +1,5 @@
 package com.refract.prediabetes.nav.footer {
+	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
@@ -18,8 +19,8 @@ package com.refract.prediabetes.nav.footer {
 		private var colour:uint = AppSettings.GREY;
 		
 		public var id : String;
-		private var audioOn : Bitmap;
-		private var audioOff : Bitmap;
+		protected var audioOn : *;
+		protected var audioOff : *;
 		
 		public function SoundButton() {
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -27,6 +28,7 @@ package com.refract.prediabetes.nav.footer {
 		
 		private function init(evt:Event):void
 		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
 			drawBack() ; 
 			createStates() ;
 			drawStates();
@@ -48,7 +50,7 @@ package com.refract.prediabetes.nav.footer {
 			graphics.drawRect(0,0,25,25);
 			graphics.endFill();
 		}
-		private function createStates() : void
+		protected function createStates() : void
 		{
 			audioOn = AssetManager.getEmbeddedAsset("AudioOn");
 			audioOff = AssetManager.getEmbeddedAsset("AudioOff");
@@ -60,9 +62,13 @@ package com.refract.prediabetes.nav.footer {
 			audioOn.visible = false ; 
 			audioOff.visible = false ; 
 			if(SoundMixer.soundTransform.volume != 0)
+			{
 				audioOn.visible = true ; 
+			}
 			else
+			{
 				audioOff.visible = true ; 
+			}
 		}
 
 		private function onMouseOverOut(evt : MouseEvent) : void 
@@ -70,10 +76,10 @@ package com.refract.prediabetes.nav.footer {
 			switch(evt.type){
 				case(MouseEvent.MOUSE_OVER):
 					//DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralRollover") );
-					//TweenMax.to(this,0.5,{tint:0xffffff});
+					TweenMax.to(this,0.5,{tint:0xffffff});
 				break;
 				default:
-					//TweenMax.to(this,0.5,{tint:null});
+					TweenMax.to(this,0.5,{tint:null});
 			}	
 		}
 		

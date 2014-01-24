@@ -1,8 +1,11 @@
 package com.refract.prediabetes.stateMachine.view {
-	import com.refract.prediabetes.AppSettings;
+	import com.greensock.TweenMax;
+	import com.greensock.easing.Linear;
+	import com.greensock.easing.Quint;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
+
 	import flash.display.Sprite;
 	import flash.events.Event;
 
@@ -60,12 +63,12 @@ package com.refract.prediabetes.stateMachine.view {
 			if( !_liveInteractions ) _liveInteractions = new Array() ; 
 			var interactionChoice : InteractionChoice = new ClassFactory.INTERACTION_CHOICE( interaction ) ; 
 			addChild( interactionChoice ) ; 
-			
+			interactionChoice.alpha = 0 ; 
 			_liveInteractions.push( interactionChoice ) ; 
 		}
 		
 		
-		public function onResize(evt : Event = null ) : void
+		public function posButton(evt : Event = null ) : void
 		{ 
 			if( _liveInteractions )
 			{
@@ -75,26 +78,34 @@ package com.refract.prediabetes.stateMachine.view {
 				{
 					var interactionChoice : InteractionChoice = _liveInteractions[ i ] ; 
 					interactionChoice.x = -interactionChoice.width / 2 ; 
-					interactionChoice.y = stateTxtHeight + interactionChoice.iter* SMSettings.CHOICE_BUTTON_HEIGHT ;
+					interactionChoice.myY = SMSettings.CHOICE_BUTTON_SPACE * 2 + stateTxtHeight + interactionChoice.iter* (SMSettings.CHOICE_BUTTON_HEIGHT  + SMSettings.CHOICE_BUTTON_SPACE ) ;
+					TweenMax.killTweensOf( interactionChoice ) ; 
+					interactionChoice.y = interactionChoice.myY ;
+					interactionChoice.alpha = 1 ; 
 				}
 			}
-			
-			//**Example how to change buttons space
-			/*
-			var w : Number = AppSettings.stage.stageWidth ; 
-			if( w < 800 ) w = 800 ; 
-			if( w > 1440 ) w = 1440 ; 
-			var w_clean  : Number = w - 800 ; 
-			
-			var w_clean_max  : Number = 1440 - 800 ; 
-			var test : Number = ( w_clean * 10 ) / w_clean_max ; 
-			trace('test ' , test)
-			var final_test : Number = 30 + test ; 
-			trace('final_test :' , final_test )
-			SMSettings.CHOICE_BUTTON_HEIGHT = final_test ; 
-			 * 
-			 */
-			
+		}
+		public function animateIn( ) : void
+		{ 
+			if( _liveInteractions )
+			{
+				var i : int = 0 ; 
+				var l : int = _liveInteractions.length ; 
+				for( i = 0 ; i < l ; i ++ )
+				{
+					var interactionChoice : InteractionChoice = _liveInteractions[ i ] ; 
+					interactionChoice.y = interactionChoice.myY + 40  ; 
+					interactionChoice.alpha = 0  ; 
+					var dd: Number = SMSettings.SHOW_DELAY + i* SMSettings.SHOW_DELAY ; 
+					TweenMax.to( interactionChoice , .5 , {alpha : 1 ,  ease : Quint.easeOut, delay : dd, canBePaused:true } ) ;
+					TweenMax.to( interactionChoice , .6 , {y : interactionChoice.myY  ,  ease : Quint.easeOut , delay : dd, canBePaused:true } ) ;
+				}
+			}
+		}
+		
+		private function onResize( evt : Event = null ) : void
+		{
+			posButton() ; 
 		}
 	}
 }

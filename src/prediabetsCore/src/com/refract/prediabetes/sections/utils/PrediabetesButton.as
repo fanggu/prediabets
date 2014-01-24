@@ -82,7 +82,7 @@ package com.refract.prediabetes.sections.utils {
 		public function get minBkgWidthGap():Number { return _minBkgWidthGap; }
 		public function set minBkgWidthGap(num:Number):void { _minBkgWidthGap = num; draw(); }
 		
-		protected var _buttonAlpha:Number = 0.1;
+		protected var _buttonAlpha:Number = 1 ; //0.1;
 		public function get buttonAlpha():Number{return _buttonAlpha;}
 		public function set buttonAlpha(alpha:Number):void{ _buttonAlpha = alpha; addBkg();}
 		
@@ -161,12 +161,14 @@ package com.refract.prediabetes.sections.utils {
 			}
 		}
 		
-		protected function addBkg():void{
-			if(_minW > 0 && _minH > 0 && _initComplete && _body){
+		protected function addBkg():void
+		{
+			if(_minW > 0 && _minH > 0 && _initComplete && _body)
+			{
 				
 				var ww:Number = _minW > _body.width + _minBkgWidthGap  ? _minW : _body.width + _minBkgWidthGap ;
-				var hh:Number = _minH > _body.height + _minBkgHeightGap ? _minH : _body.height + _minBkgHeightGap ;
-				
+				var hh:Number = _minH ; //> _body.height + _minBkgHeightGap ? _minH : _body.height + _minBkgHeightGap ;
+				 
 				if(!_bkgBorder){
 					_bkgBorder = new Shape();
 					addChildAt(_bkgBorder,0);
@@ -181,13 +183,13 @@ package com.refract.prediabetes.sections.utils {
 					_bkg.graphics.beginFill(0x00,0.3);
 					_bkg.graphics.drawRect(0, 0, ww, hh);
 				}
-				_bkg.graphics.beginFill(0xffffff,_buttonAlpha);
+				_bkg.graphics.beginFill(SMSettings.CHOICE_BACK_COLOR ,_buttonAlpha);
 				_bkg.graphics.drawRect(0, 0, ww, hh);
 				
 				_bkgBorder.graphics.clear();
-				_bkgBorder.graphics.lineStyle(1,0xffffff,1);
+				_bkgBorder.graphics.lineStyle(2,SMSettings.CHOICE_BORDER_COLOR,1);
 				_bkgBorder.graphics.drawRect(0, 0, ww, hh);
-				_bkgBorder.alpha = 0;
+				_bkgBorder.alpha = 1;
 				
 				_body.x = int(_bkg.width/2 - _body.width/2);
 				_body.y = int(_bkg.height/2 - _body.height/2);
@@ -230,14 +232,15 @@ package com.refract.prediabetes.sections.utils {
 					break;
 				case(MouseEvent.MOUSE_OVER):
 					playSound("SndGeneralRollover");
-					TweenMax.to(_body,0.4,{tint:overColor});
-					if(_bkgBorder)	TweenMax.to(_bkgBorder,0.4,{alpha:1});
-					if( _bkg ) TweenMax.to( _bkg , 0.4 , {tint : 0xffffff} ) ;
+					TweenMax.to(_body,0.4,{tint:SMSettings.CHOICE_BACK_COLOR});
+					//if(_bkgBorder)	TweenMax.to(_bkgBorder,0.5,{tint : SMSettings.CHOICE_BACK_COLOR });
+					//if( _bkg ) TweenMax.to( _bkg , 0.5 , {tint : SMSettings.CHOICE_BORDER_COLOR } ) ;
 				break;
 				default:
-					TweenMax.to(_body,0.4,{tint:null});
-					if(_bkgBorder) TweenMax.to(_bkgBorder,0.4,{alpha:0});
-					if( _bkg ) TweenMax.to( _bkg , 0.4 , {tint : null} ) ;
+					TweenMax.to(_body,0.2,{tint:null});
+					//if(_bkgBorder) TweenMax.to(_bkgBorder,0.4,{alpha:0});
+					//if( _bkg ) TweenMax.to( _bkg , 0.2 , {tint : null} ) ;
+					//if( _bkgBorder ) TweenMax.to( _bkgBorder , 0.2 , {tint : null} ) ;
 			}
 		}
 		

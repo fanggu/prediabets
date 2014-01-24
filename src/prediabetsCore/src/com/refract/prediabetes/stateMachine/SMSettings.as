@@ -1,4 +1,7 @@
 package com.refract.prediabetes.stateMachine {
+	import com.refract.prediabetes.AppSettings;
+
+	import flash.events.FullScreenEvent;
 	/**
 	 * @author robertocascavilla
 	 */
@@ -7,19 +10,38 @@ package com.refract.prediabetes.stateMachine {
 		public static const DEBUG_GET_CLIP_LENGTH 		: Boolean = false ; 
 		public static const STATE_TXT_MAX_W               : int = 800 ; 
 		
-		
-		//public static const COUNTER_START_FLASHING        : String = '00:02' ; 
 		public static const BUTTON_FADE_DELAY             : Number = 0 ; 
 		public static const FADE_OUT_TIME 				  : Number = 0.5 ; 
 		public static const SLOW_TIMER_X			  	  : int = 6000 ;  	
 		public static const BACK_MAX_TIME 				  : int = 5000 ; 	
 		
-		public static var CHOICE_BUTTON_HEIGHT		      : int = 60 ; 
+		
 		
 		public static const STATE_TXT_COLOR 			  : uint = 0xffffff ; 
-		public static var STATE_TXT_FONT_SIZE           : int = 28 ; 
-		public static var CHOICE_FONT_SIZE 				  : int = 24 ; 
-		public static var MESSAGE_BOX_FONT_SIZE			  : int = 35 ;
+		 
+		
+		public static var STATE_TXT_FONT_SIZE_NO_FS       : int = 28 ;
+		public static var STATE_TXT_FONT_SIZE_FS          : int = 35 ;
+		
+		public static var STATE_TXT_FONT_SIZE 			  : int = STATE_TXT_FONT_SIZE_NO_FS ; 
+		//**Choice Skin
+		 
+		public static var CHOICE_BORDER_COLOR 			  : uint = 0x676767 ; 
+		public static var CHOICE_BACK_COLOR 			  : uint = 0x363636 ; 
+		
+		public static var CHOICE_FONT_SIZE_NO_FS		  : int = 24 ; 
+		public static var CHOICE_FONT_SIZE_FS		      : int = 30 ; //24 ; 
+		public static var CHOICE_BUTTON_HEIGHT_NO_FS 	  : int = 38 ; 
+		public static var CHOICE_BUTTON_HEIGHT_FS 	  	  : int = 50 ; 
+		public static var CHOICE_BUTTON_WIDTH_NO_FS 	  : int = 704 ; 
+		public static var CHOICE_BUTTON_WIDTH_FS 	  	  : int = 806 ; 
+		public static var CHOICE_BUTTON_SPACE_NO_FS 	  : int = 13 ; 
+		public static var CHOICE_BUTTON_SPACE_FS 	  	  : int = 16 ; 
+		
+		public static var CHOICE_BUTTON_HEIGHT			  : int = CHOICE_BUTTON_HEIGHT_NO_FS ;
+		public static var CHOICE_FONT_SIZE       		  : int = CHOICE_FONT_SIZE_NO_FS ; 
+		public static var CHOICE_BUTTON_WIDTH			  : int = CHOICE_BUTTON_WIDTH_NO_FS ; 
+		public static var CHOICE_BUTTON_SPACE			  : int = CHOICE_BUTTON_SPACE_NO_FS ;
 		
 		
 		
@@ -45,5 +67,32 @@ package com.refract.prediabetes.stateMachine {
 		
 		//**fix bug with choice smoker ( as video is too short ) 
 		public static const D_21_M						  : String = 'd21m_choice_smoker' ; 
+		
+		public static function init() : void
+		{
+			AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
+		}
+		private static function onFullScreenChange ( evt : FullScreenEvent ) : void
+		{
+			if( evt.fullScreen )
+			{
+				CHOICE_FONT_SIZE = CHOICE_FONT_SIZE_FS ; 
+				CHOICE_BUTTON_HEIGHT = CHOICE_BUTTON_HEIGHT_FS ; 
+				CHOICE_BUTTON_WIDTH = CHOICE_BUTTON_WIDTH_FS ; 
+				CHOICE_BUTTON_SPACE = CHOICE_BUTTON_SPACE_FS ; 
+				
+				STATE_TXT_FONT_SIZE = STATE_TXT_FONT_SIZE_FS ; 
+				trace('converted')
+			}
+			else
+			{
+				CHOICE_FONT_SIZE = CHOICE_FONT_SIZE_NO_FS ; 
+				CHOICE_BUTTON_HEIGHT = CHOICE_BUTTON_HEIGHT_NO_FS ; 
+				CHOICE_BUTTON_WIDTH = CHOICE_BUTTON_WIDTH_NO_FS ;
+				CHOICE_BUTTON_SPACE = CHOICE_BUTTON_SPACE_NO_FS ;
+				
+				STATE_TXT_FONT_SIZE = STATE_TXT_FONT_SIZE_NO_FS ; 
+			}
+		}
 	}
 }

@@ -74,14 +74,6 @@ package com.refract.prediabetes.nav.footer {
 			}
 		}
 		
-		private function drawOuter():void{
-			graphics.beginFill(0xff0000,0);
-			graphics.drawRect(0,0,14,10);
-			graphics.endFill();
-			graphics.lineStyle(1,colour);
-			graphics.drawRoundRect(0, 0, 14, 10, 2);
-			
-		}
 		
 		public function drawState():void
 		{

@@ -1,6 +1,6 @@
 AnePlatforms//Id.lib/NativeAlert.ane=pl.mateuszmackowiak.nativeANE.NativeAlert
 AnePlatforms//Platforms.lib/NativeAlert.ane=iPhone-ARM,iPhone-x86,Windows-x86,Android-ARM,default
-AnesChanged=61
+AnesChanged=65
 com.powerflasher.fdt.core.CompatiblePlayers=AIR_Debug_Launcher
 com.powerflasher.fdt.core.CompilerArguments=-static-link-runtime-shared-libraries\=true\n-target-player\={playerVersion}\n-library-path+\="{flexSDK}/frameworks/locale/en_US"\n-default-size\=550,400
 com.powerflasher.fdt.core.DefaultOutputFolder=bin
@@ -40,7 +40,7 @@ com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.57x57=
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.58x58=
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.72x72=
 com.powerflasher.fdt.core.mobile.iOS.MOBILE.DESCRIPTOR=bin/prediabectsIOS-app.xml
-com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/prediabectsIOS-app.xml > prediabectsIOS-app.xml;bin/prediabectsIOS.swf > prediabectsIOS.swf;assets/Default@2x.png > Default@2x.png;assets/video;
+com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/prediabectsIOS-app.xml > prediabectsIOS-app.xml;bin/prediabectsIOS.swf > prediabectsIOS.swf;assets/Default@2x.png > Default@2x.png;assets/video;assets/img;
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=../../cert/Certificates_dev.p12
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=../../cert/Certificates_distr.p12
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=../../cert/prediabetes_ipad_dev.mobileprovision

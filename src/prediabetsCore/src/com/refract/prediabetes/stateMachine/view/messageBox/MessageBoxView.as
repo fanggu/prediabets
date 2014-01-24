@@ -26,7 +26,7 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 			stateObjectText.state_txt_x = 50 ;
 			stateObjectText.state_txt_y = 50;
 			
-			_stateTxtView  = new StateTxtView( stateObjectText , SMSettings.MESSAGE_BOX_FONT_SIZE , true ) ; 
+			_stateTxtView  = new StateTxtView( stateObjectText ,  true ) ; 
 			addChild( _stateTxtView ) ; 
 			_stateTxtView.visible = false ; 
 			DispatchManager.addEventListener( Event.ENTER_FRAME, run ) ;

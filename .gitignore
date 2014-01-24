@@ -1,3 +1,14 @@
 deploy/
+bin
+bin/
 bin/**
 distr/
+distr
+distr/**
+src/prediabetsIOS/bin
+src/prediabetsIOS/bin/
+src/prediabetsIOS/bin/**
+src/prediabetsIOS/bin/distr
+src/prediabetsIOS/bin/distr/
+
+

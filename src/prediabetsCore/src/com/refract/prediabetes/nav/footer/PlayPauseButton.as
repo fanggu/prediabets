@@ -40,7 +40,7 @@ package com.refract.prediabetes.nav.footer {
 			mouseChildren = false;
 			useHandCursor = true;
 			buttonMode = true;
-			graphics.beginFill(0xffff00 , 1 ) ;
+			graphics.beginFill(0x00ff99 , 1 ) ;
 			if(AppSettings.DEVICE == AppSettings.DEVICE_PC)
 			{
 				graphics.drawRect( -_fixHitArea_w / 2 , _fixHitArea_h / 2 , width + _fixHitArea_w , height + _fixHitArea_h );

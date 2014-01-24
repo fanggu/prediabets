@@ -29,10 +29,10 @@ package com.refract.prediabetes.nav.footer {
 		private function init(evt:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			drawBack() ; 
+			
 			createStates() ;
 			drawStates();
-			
+			drawBack() ; 
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOverOut);
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOverOut);
 			addEventListener(MouseEvent.CLICK, onClick);

@@ -1,3 +1,2 @@
 deploy/
-src/prediabetsIOS/bin/**
-src/prediabetsIOS/bin/distr/**
+bin/

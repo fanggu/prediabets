@@ -17,42 +17,44 @@ package com.refract.prediabetes.nav.footer {
 		protected var pauseBtn:*;
 		protected var playBtn:*;
 		
-		public var id:String;
+		public var id : String;
+		private var _fixHitArea_w : int;
+		private var _fixHitArea_h : int;
 		
 		
-		public function PlayPauseButton() {
+		public function PlayPauseButton() 
+		{
+			addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		protected function init( evt : Event = null ) : void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			_fixHitArea_w = 10 ; 
+			_fixHitArea_h = 10 ; 
+			
 			createState() ; 
-			
-			
-			
-			
-
 			pauseBtn.y = playBtn.height/2 - pauseBtn.height/2;
-			
-			this.addEventListener(MouseEvent.MOUSE_OUT, onOverOut);
-			this.addEventListener(MouseEvent.MOUSE_OVER, onOverOut);
-			this.addEventListener(MouseEvent.CLICK, onClick);
+			addEventListener(MouseEvent.MOUSE_OUT, onOverOut);
+			addEventListener(MouseEvent.MOUSE_OVER, onOverOut);
+			addEventListener(MouseEvent.CLICK, onClick);
 			mouseChildren = false;
 			useHandCursor = true;
 			buttonMode = true;
-			
-			this.graphics.beginFill(0xff0000,1 ) //AppSettings.BUTTON_HIT_AREA_ALPHA);
-			if(AppSettings.DEVICE == AppSettings.DEVICE_PC){
-				graphics.drawRect(0,0,width,height);
+			graphics.beginFill(0xff0000,1 ) ;
+			if(AppSettings.DEVICE == AppSettings.DEVICE_PC)
+			{
+				graphics.drawRect( -_fixHitArea_w / 2 , _fixHitArea_h / 2 , width + _fixHitArea_w , height + _fixHitArea_h );
 			}
 			else
 			{
-				//this.graphics.drawRect(-AppSettings.BUTTON_HIT_AREA_EDGE,-AppSettings.BUTTON_HIT_AREA_EDGE,width+AppSettings.BUTTON_HIT_AREA_WIDTH,height+AppSettings.BUTTON_HIT_AREA_WIDTH);
-				this.graphics.drawRect( 0 , 0  , width  , height ) ;
-				
+				graphics.drawRect( 0 , 0  , width  , height ) ;	
 			}
 			
 			DispatchManager.addEventListener(Flags.FREEZE,onFreezeUnFreeze);
 			DispatchManager.addEventListener(Flags.UN_FREEZE,onFreezeUnFreeze);
 			DispatchManager.addEventListener(Flags.UPDATE_PLAY_BUTTON, onUpdatePlayButton) ;
 			
-			this.scaleX = this.scaleY = AppSettings.FONT_SCALE_FACTOR;
-			
+			scaleX = scaleY = AppSettings.FONT_SCALE_FACTOR;
 		}
 		protected function createState() : void
 		{

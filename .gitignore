@@ -1,2 +1,2 @@
-deploy
-**/src/prediabetsIOS/bin
+deploy/
+src/prediabetsIOS/bin/

@@ -46,8 +46,8 @@ package com.refract.prediabetes.nav.footer {
 		}
 		private function drawBack() : void
 		{
-			graphics.beginFill(0xff0000,0);
-			graphics.drawRect(0,0,25,25);
+			graphics.beginFill(0xff0000,1);
+			graphics.drawRect(0,0, audioOn.width , audioOn.height);
 			graphics.endFill();
 		}
 		protected function createStates() : void

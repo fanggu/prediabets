@@ -45,7 +45,7 @@ package com.refract.prediabetes.nav.footer {
 		}
 		private function drawBack() : void
 		{
-			graphics.beginFill(0xff0000,0);
+			graphics.beginFill(0xff0000,1);
 			graphics.drawRect(0,0,25,25);
 			graphics.endFill();
 		}

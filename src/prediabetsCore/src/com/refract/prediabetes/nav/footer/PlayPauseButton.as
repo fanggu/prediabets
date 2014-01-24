@@ -39,8 +39,12 @@ package com.refract.prediabetes.nav.footer {
 			this.graphics.beginFill(0xff0000,1 ) //AppSettings.BUTTON_HIT_AREA_ALPHA);
 			if(AppSettings.DEVICE == AppSettings.DEVICE_PC){
 				graphics.drawRect(0,0,width,height);
-			}else{
-				this.graphics.drawRect(-AppSettings.BUTTON_HIT_AREA_EDGE,-AppSettings.BUTTON_HIT_AREA_EDGE,width+AppSettings.BUTTON_HIT_AREA_WIDTH,height+AppSettings.BUTTON_HIT_AREA_WIDTH);
+			}
+			else
+			{
+				//this.graphics.drawRect(-AppSettings.BUTTON_HIT_AREA_EDGE,-AppSettings.BUTTON_HIT_AREA_EDGE,width+AppSettings.BUTTON_HIT_AREA_WIDTH,height+AppSettings.BUTTON_HIT_AREA_WIDTH);
+				this.graphics.drawRect( 0 , 0  , width  , height ) ;
+				
 			}
 			
 			DispatchManager.addEventListener(Flags.FREEZE,onFreezeUnFreeze);

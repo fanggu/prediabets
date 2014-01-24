@@ -98,7 +98,7 @@ package {
 			ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
 			ClassFactory.SM_CONTROLLER = MobileSMController ; 
 			ClassFactory.LEGAL = TabletLegal;
-			//ClassFactory.ASSETS_MANAGER_EMBEDS = AssetsManagerEmbedsIOS ; 
+			ClassFactory.ASSETS_MANAGER_EMBEDS = AssetsManagerEmbedsIOS ; 
 			ClassFactory.BACKWARD_BUTTON = BackwardButtonIOS ; 
 			ClassFactory.PLAY_PAUSE_BUTTON = PlayPauseButtonIOS; 
 			ClassFactory.SOUND_BUTTON = SoundButtonIOS ; 

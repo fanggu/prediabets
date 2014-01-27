@@ -96,15 +96,6 @@ package com.refract.prediabetes.stateMachine
 			
 			if( _arrHistory.length > 1 )
 				DispatchManager.dispatchEvent( new Event( Flags.ACTIVE_BACK ) ) ; 
-			/*	
-			trace('*** STORE HISTORY ***')
-			for( var i : int = 0 ; i < _arrHistory.length ; i ++ )
-			{
-				trace(' history ' , i , ' : ' , _arrHistory[i].state)
-			}
-			trace('+++ END STORE HISTORY +++')
-			 * 
-			 */
 		}
 
 		public function getHistory( iter : int ) : HistoryVO
@@ -114,15 +105,6 @@ package com.refract.prediabetes.stateMachine
 			
 			if( _arrHistory.length < 1)
 				DispatchManager.dispatchEvent( new Event( Flags.INACTIVE_BACK ) ) ;
-			/*	
-			trace('*** GET HISTORY ***')
-			for( var i : int = 0 ; i < _arrHistory.length ; i ++ )
-			{
-				trace(' history ' , i , ' : ' , _arrHistory[i].state)
-			}
-			trace('+++ END GET HISTORY +++')
-			 * 
-			 */
 			
 			return historyVO; 
 		}

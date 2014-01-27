@@ -8,7 +8,6 @@ package com.refract.prediabetes.nav
 	import com.refract.prediabetes.sections.utils.PrediabetesButton;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
-	import com.robot.geom.Box;
 
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -161,6 +160,16 @@ package com.refract.prediabetes.nav
 			
 			_leftSide.y = AppSettings.VIDEO_TOP - _leftSide.height; 
 			_rightSide.y = AppSettings.VIDEO_TOP - _rightSide.height - AppSettings.HEADER_FIX_COPY_TABLET_POSITION;
+			
+			/* ******* WORKING PREV FOR IOS
+			_rightSide.x = AppSettings.VIDEO_RIGHT- _rightSide.width - 5;
+			_leftSide.x = AppSettings.VIDEO_LEFT ;
+			_middle.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 - _middle.width/2;
+			
+			_leftSide.y = AppSettings.VIDEO_TOP - _leftSide.height; 
+			_rightSide.y = AppSettings.VIDEO_TOP - _rightSide.height - AppSettings.HEADER_FIX_COPY_TABLET_POSITION;
+			 * 
+			 */
 		}
 	}
 }

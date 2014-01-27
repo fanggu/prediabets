@@ -5,7 +5,7 @@
       "module": "1",
       "device": "desktop",
       "start_state": "d01",
-      "init_button_state_address": "d03",
+      "init_button_state_address": "d02",
       "end_state": "d_end" ,
       "load_init_request" :
       [

@@ -2,6 +2,7 @@ package com.refract.prediabetes.nav.footer {
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
@@ -54,7 +55,7 @@ package com.refract.prediabetes.nav.footer {
 			switch(evt.type){
 				case(MouseEvent.MOUSE_OVER):
 					DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , "SndGeneralRollover") );	
-					TweenMax.to(this,0.5,{tint:0xffffff});
+					TweenMax.to(this,0.5,{tint:SMSettings.CHOICE_BACK_COLOR});
 				break;
 				default:
 					TweenMax.to(this,0.5,{tint:null});

@@ -42,7 +42,11 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 //				 _btChoice.minH = SMSettings.CHOICE_BUTTON_HEIGHT ;   
 //			}
 //		}
-
+		
+		public function onFullScreen( ) : void
+		{
+			_btChoice.onFullScreen() ; 
+		}
 		protected function create(event : Event) : void 
 		{
 			var bt : PrediabetesButton ;

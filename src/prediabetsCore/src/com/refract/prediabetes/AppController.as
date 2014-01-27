@@ -77,7 +77,7 @@ package com.refract.prediabetes
 		{
 			_ui = new Sprite();
 			_main.addChild(_ui);
-			
+			SMSettings.init() ; 	
 			_main.stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
 		}
 		
@@ -86,7 +86,7 @@ package com.refract.prediabetes
 		{
 			if(evt.fullScreen )
 			{
-				trace('FS CHange :' , evt.fullScreen)
+				//trace('FS CHange :' , evt.fullScreen)
 			}
 		}
 		
@@ -229,27 +229,32 @@ package com.refract.prediabetes
 				_intro = null;
 			}
 		}
-		
+		private function removeMe( mc : * ) : void
+		{
+			if( mc.parent )
+				mc.parent.removeChild( mc ) ; 
+		}
 		private function onDrawVideoStatus( evt : BooleanEvent) : void
 		{
 			var value :Boolean = evt.value ;
-			var statusMC : MovieClip ;
+			var statusMC : * ;
 			if( value )
 			{
 				statusMC = AssetManager.getEmbeddedAsset('GreenPlay') ;
 				if( _smView )_smView.addChild( statusMC ) ;
-				statusMC.gotoAndStop(1) ;
-				TweenMax.to( statusMC , 1.2 , {frame:36} ) ;
+				TweenMax.to( statusMC , .5 , { delay : 1 , alpha : 0 , onComplete : removeMe , onCompleteParams :[statusMC]} )
+				//statusMC.gotoAndStop(1) ;
+				//TweenMax.to( statusMC , 1.2 , {frame:36} ) ;
 			}
 			else
 			{
 				statusMC = AssetManager.getEmbeddedAsset('RedPause') ;
 				if( _smView )_smView.addChild( statusMC ) ;
-				
-				TweenMax.to( statusMC , 1.2 , {frame:36} ) ;
+				TweenMax.to( statusMC , .5 , { delay : 1 , alpha : 0 , onComplete : removeMe , onCompleteParams :[statusMC]} )
+				//TweenMax.to( statusMC , 1.2 , {frame:36} ) ;
 			}
-			statusMC.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 + statusMC.width/2 ;
-			statusMC.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2 + statusMC.height/2 + 100;
+			statusMC.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 ; //+ statusMC.width/2 ;
+			statusMC.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2 ; // + statusMC.height/2 + 100;
 			
 			statusMC.mouseChildren = false ;
 			statusMC.mouseEnabled = false ; 

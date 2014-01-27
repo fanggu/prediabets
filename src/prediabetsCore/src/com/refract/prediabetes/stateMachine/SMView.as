@@ -198,7 +198,7 @@ package com.refract.prediabetes.stateMachine
 				createInteraction( interaction );
 			}
 			
-			_uiView.posButton() ; 
+			_uiView.posButtons() ; 
 			onResize() ; 
 			_uiView.animateIn() ; 
 		}

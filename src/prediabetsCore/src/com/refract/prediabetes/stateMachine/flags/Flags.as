@@ -11,7 +11,8 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const ACTIVATE_PROGRESS_BAR 				: String = 'activateProgressBar' ; 
 		public static const DE_ACTIVATE_PROGRESS_BAR 				: String = 'deActivateProgressBar' ; 		
 		public static const ON_FLV_METADATA 					: String = 'onFLVMetaData' ; 
-		public static const ON_BACKWARD 						: String = 'onBackward' ; 
+		public static const ON_BACKWARD 						: String = 'onBackward' ;
+		public static const ON_REQUEST_RESIZE 					: String = 'onReuqestResize' ;  
 		
 		public static const FREEZE 								: String = 'freeze' ; 
 		public static const UN_FREEZE 							: String = 'unfreeze' ; 

@@ -39,8 +39,8 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		}
 		public function setButton( interaction : Object ) : void
 		{
-			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
-				AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
+			//if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				//AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange , false , 5 ) ;
 			DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
 			
 			_interaction = interaction ; 
@@ -76,7 +76,10 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			}
 			
 		}
-		
+		public function onFullScreen() : void
+		{
+			onFullScreenChange() ; 
+		}
 		private function onFullScreenChange ( evt : FullScreenEvent = null ) : void
 		{
 			var style:Object = {};

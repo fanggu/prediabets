@@ -1,7 +1,10 @@
 package com.refract.prediabetes {
+	import com.refract.prediabetes.stateMachine.SMSettings;
+
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
+	import flash.display.StageDisplayState;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
 	import flash.net.URLRequest;
@@ -10,7 +13,7 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = true;
+		public static const DEBUG 										: Boolean = false;
 		public static const INTRO_URL									: String = 'd01_intro_part_1' ; 
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
@@ -18,8 +21,8 @@ package com.refract.prediabetes {
 		
 		public static const BULK_LOADER_ID 								: String  = 'Videos' ; 
 		
-		//public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
-		public static var DATA_PATH										: String = "data/" ; 
+		public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		//public static var DATA_PATH										: String = "data/" ; 
 		public static var APP_DATA_PATH 								: String = "file://";
 		public static var BUFFER_DELAY 				  					: Number = 0.3 ; 	  
 
@@ -59,7 +62,7 @@ package com.refract.prediabetes {
 		public static var FOOTER_FONT_SIZE_FS							: int = 18;
 		
 		public static var FOOTER_FIX_MENU_TABLET_POSITION 				: int = 0 ;
-		public static var HEADER_FIX_COPY_TABLET_POSITION 				: int = 0 ; 
+		public static var HEADER_FIX_COPY_TABLET_POSITION 				: int = 15 ; 
 		public static var FOOTER_FONT_SIZE2								: int = 14;
 		public static var HEADER_FONT_SIZE 								: int = 21 ; 
 		
@@ -136,8 +139,9 @@ package com.refract.prediabetes {
 				_stage.removeEventListener(FullScreenEvent.FULL_SCREEN,onFullScreenChange);
 			}
 			_stage = st;
-			_stage.addEventListener(Event.RESIZE, onStageResize);
-			_stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFullScreenChange);
+			
+			_stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFullScreenChange );
+			_stage.addEventListener(Event.RESIZE, onStageResize );
 			onStageResize();
 		}
 		
@@ -145,6 +149,10 @@ package com.refract.prediabetes {
 		
 		private static function onStageResize(evt:Event = null):void
 		{
+			SMSettings.onFullScreenChange() ; 
+			onFullScreenChange() ; 
+			
+			
 			var stageW : Number = _stage.stageWidth - AppSettings.RESERVED_SIDE_BORDER * 2 ; 
 			var stageRatio:Number = stageW /(_stage.stageHeight-RESERVED_HEIGHT);
 			var totHBusy : int ; 
@@ -176,6 +184,8 @@ package com.refract.prediabetes {
 				VIDEO_TOP = RESERVED_HEADER_HEIGHT - diffFree / 2;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 			}
+			
+			 
 		}
 		
 		public static function goToLink(link:String):void{
@@ -191,11 +201,11 @@ package com.refract.prediabetes {
 
 		
 		
-		private static function onFullScreenChange(evt:FullScreenEvent):void
+		private static function onFullScreenChange(evt:FullScreenEvent = null ):void
 		{
-			if( evt.fullScreen )
+			if( stage.displayState != StageDisplayState.NORMAL)
 			{
-				RESERVED_HEADER_HEIGHT_DEFAULT = 60 ; //35;
+				RESERVED_HEADER_HEIGHT_DEFAULT = 80 ; //35;
 				RESERVED_FOOTER_HEIGHT_DEFAULT = 60 ; //34;
 
 				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;

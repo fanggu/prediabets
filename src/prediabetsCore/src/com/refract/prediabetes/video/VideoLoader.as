@@ -6,6 +6,7 @@ package com.refract.prediabetes.video
 	import br.com.stimuli.loading.loadingtypes.VideoItem;
 
 	import com.greensock.TweenMax;
+	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.stateMachine.SMController;
@@ -163,6 +164,7 @@ package com.refract.prediabetes.video
 			
 			_loader = new Sprite();
 			addChild(_loader);
+			
 			var bmp:Bitmap = AssetManager.getEmbeddedAsset("PoliteLoader") as Bitmap;
 			_loader.addChild(bmp);
 			bmp.blendMode = "screen";
@@ -174,6 +176,8 @@ package com.refract.prediabetes.video
 			_videoClickListener = new Sprite();
 			addChild(_videoClickListener);
 			drawVideoClickListener();
+			
+			
 		}
 
 		protected function drawVideoClickListener():void{
@@ -241,6 +245,7 @@ package com.refract.prediabetes.video
 			{
 				createVideo(_url);
 			}
+			
 		}
 		
 		protected function onResize(evt:Event = null):void
@@ -308,9 +313,9 @@ package com.refract.prediabetes.video
 			if( percent < 5 && !_showBuffer )
 			{ 
 				showBuffer() ; 
-			}			
+			}
+				
 		}
-		
 		protected function showBuffer() : void
 		{
 			_showBuffer = true ; 
@@ -347,6 +352,7 @@ package com.refract.prediabetes.video
 		}
 		protected function createVideo( nameVideo : String) : void
 		{		
+			
 			SMVars.me.nsStreamTimeAbs = 0 ; 
 			showBuffer() ; 
 			
@@ -449,6 +455,7 @@ package com.refract.prediabetes.video
 				_failedToPlay = true;
 				addChild(_simpleVid);
 			}
+			
 			if( AppSettings.DEBUG ) DispatchManager.dispatchEvent( new StateEvent( Flags.UPDATE_DEBUG_PANEL_VIDEO , nameVideo)) ;
 		}
 		
@@ -566,7 +573,7 @@ package com.refract.prediabetes.video
 				var url:String =getCompleteUrl( name ) ; 
 				if( name == _url)
 				{
-					return ; //trace('AAAARGH')
+					return ; 
 				}
 				var item:LoadingItem = _bulkLoader.get(url);
 				if(item != null && item._isLoading && !item._isLoaded)
@@ -613,7 +620,7 @@ package com.refract.prediabetes.video
 		//public function get loadingOrder():Array{ return _loadingOrder; }
 		private function onAllProgress( event : BulkProgressEvent ) : void
 		{
-			//if( _url ) trace('xx :' , event.bytesLoaded  , ' : url ' , event.)
+			
 		}
 		
 		//**to be extended in iOS

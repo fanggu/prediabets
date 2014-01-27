@@ -1,13 +1,14 @@
 package com.refract.prediabetes.stateMachine.view {
 	import com.greensock.TweenMax;
-	import com.greensock.easing.Linear;
 	import com.greensock.easing.Quint;
+	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
 
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FullScreenEvent;
 
 	/**
 	 * @author robertocascavilla
@@ -28,7 +29,22 @@ package com.refract.prediabetes.stateMachine.view {
 		private function onAddedToStage(event : Event) : void 
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
-			stage.addEventListener(Event.RESIZE,onResize);
+			//stage.addEventListener(Event.RESIZE,onResize);
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , callFullScreen	 , false , 0 ) ;
+		}
+		private function callFullScreen( evt : Event ) : void
+		{
+			if( _liveInteractions ) var len : int = _liveInteractions.length; 
+			var i : int ; 
+			
+			for( i = 0 ; i < len ; i++)
+			{
+				var interaction : InteractionChoice = _liveInteractions[i] ; 
+				interaction.onFullScreen() ; 
+			}
+			posButtons() ; 
+			
 		}
 
 		
@@ -68,7 +84,7 @@ package com.refract.prediabetes.stateMachine.view {
 		}
 		
 		
-		public function posButton(evt : Event = null ) : void
+		public function posButtons(evt : Event = null ) : void
 		{ 
 			if( _liveInteractions )
 			{
@@ -101,11 +117,6 @@ package com.refract.prediabetes.stateMachine.view {
 					TweenMax.to( interactionChoice , .6 , {y : interactionChoice.myY  ,  ease : Quint.easeOut , delay : dd, canBePaused:true } ) ;
 				}
 			}
-		}
-		
-		private function onResize( evt : Event = null ) : void
-		{
-			posButton() ; 
 		}
 	}
 }

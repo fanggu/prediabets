@@ -67,13 +67,12 @@ package com.refract.prediabetes.stateMachine {
 
 			createEnterFrameLoop();
 			createModel();
-			SMSettings.init() ; 	
+			
 		}
 
 		//*START
 		public function start( ) : void
 		{ 	
-			trace('::start::')
 			createListeners();	
 			SMVars.reset() ;
 
@@ -268,6 +267,7 @@ package com.refract.prediabetes.stateMachine {
 				{	
 					VideoLoader.i.setLoadedTrue() ; 
  					stateMachineTransitionExec(  ) ; 
+					VideoLoader.i.deactivateClickPause() ; 
 				}
 				else
 				{
@@ -722,7 +722,6 @@ package com.refract.prediabetes.stateMachine {
 		
 		private function launchVideo( nameVideo : String ) : void
 		{
-				trace('requesting :' , nameVideo)
 				VideoLoader.i.update(nameVideo) ;
 		}
 		 

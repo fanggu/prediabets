@@ -100,12 +100,13 @@ package com.refract.prediabetes.nav {
 			
 			_buttonSpace : 0;
 
-			stage.addEventListener(Event.RESIZE,onResize);
+			stage.addEventListener(Event.RESIZE,onResize  );
 			DispatchManager.addEventListener(FooterEvent.HIGHLIGHT_BUTTON, highlightFooterButton);
 			DispatchManager.addEventListener(Flags.SHOW_FOOTER_PLAY_PAUSE, togglePauseShown);
 			DispatchManager.addEventListener(Flags.HIDE_FOOTER_PLAY_PAUSE, togglePauseShown);
 			DispatchManager.addEventListener(Flags.ACTIVATE_PROGRESS_BAR , activateProgressBar);
 			DispatchManager.addEventListener(Flags.DE_ACTIVATE_PROGRESS_BAR , deActivateProgressBar);
+			DispatchManager.addEventListener(Flags.ON_REQUEST_RESIZE , onRequestResize);
 			
 			
 			DispatchManager.addEventListener(Flags.FREEZE , onFreeze);
@@ -204,6 +205,7 @@ package com.refract.prediabetes.nav {
 				TextManager.styleText( button.id, copy , style) ; 
 			}
 			positionButtons() ; 
+			
 		}
 		private function onNoFS() : void
 		{
@@ -323,6 +325,8 @@ package com.refract.prediabetes.nav {
 					//button.y = ( (-i) * _buttonSpace )  //+ prevButton.width ; 
 				}
 			}
+			
+			DispatchManager.dispatchEvent( new Event( Flags.ON_REQUEST_RESIZE )) ;
 		}
 		
 		private function createBottomRightFooter() : void
@@ -578,10 +582,12 @@ package com.refract.prediabetes.nav {
 			);
 			_footerTopBackground.x = AppSettings.VIDEO_NAV_SIDE ; 
 		}
+		private function onRequestResize( evt : Event ) : void
+		{
+			onResize()
+		}
 		protected function onResize(evt:Event = null) : void 
 		{
-			
-			
 			var center_x : Number = stage.stageWidth / 2 ; 
 			var sw : Number = stage.stageWidth ; 
 			_footerBackBottom.width = sw ; 

@@ -1,15 +1,15 @@
 package {
-	import com.refract.air.shared.prediabetes.nav.footer.SoundButtonIOS;
-	import com.refract.air.shared.prediabetes.nav.footer.PlayPauseButtonIOS;
-	import com.refract.air.shared.prediabetes.nav.footer.BackwardButtonIOS;
-	import com.refract.air.shared.prediabetes.assets.AssetsManagerEmbedsIOS;
-	import com.refract.air.shared.prediabetes.stateMachine.SMSettingsIOS;
 	import pl.mateuszmackowiak.nativeANE.NativeDialogEvent;
 	import pl.mateuszmackowiak.nativeANE.alert.NativeAlert;
 
 	import com.refract.air.shared.AppSettingsIOS;
 	import com.refract.air.shared.data.StoredData;
+	import com.refract.air.shared.prediabetes.assets.AssetsManagerEmbedsIOS;
+	import com.refract.air.shared.prediabetes.nav.footer.BackwardButtonIOS;
+	import com.refract.air.shared.prediabetes.nav.footer.PlayPauseButtonIOS;
+	import com.refract.air.shared.prediabetes.nav.footer.SoundButtonIOS;
 	import com.refract.air.shared.prediabetes.stateMachine.MobileSMController;
+	import com.refract.air.shared.prediabetes.stateMachine.SMSettingsIOS;
 	import com.refract.air.shared.prediabetes.video.IOSVideoLoader;
 	import com.refract.air.shared.sections.legal.TabletLegal;
 	import com.refract.prediabetes.AppSettings;
@@ -25,8 +25,11 @@ package {
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.GeolocationEvent;
+	import flash.events.StatusEvent;
 	import flash.filesystem.File;
 	import flash.net.URLRequest;
+	import flash.sensors.Geolocation;
 	import flash.system.Capabilities;
 	import flash.text.TextField;
 	import flash.ui.Multitouch;
@@ -42,7 +45,8 @@ package {
 	{
 		public static var STORAGE_DIR:File;
 		
-		protected var _bkg:Loader;
+		protected var _bkg : Loader;
+		private var _geo : Geolocation;
 		
 		
 		public function MainIOS()
@@ -50,17 +54,38 @@ package {
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
-		protected function onAddedToStage(evt:Event):void{
-			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			
+		protected function onAddedToStage(evt:Event):void
+		{
+			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);	
 			
 			setAppSettings();
 			setAppClasses();
-			
 			addBkg();
-			
 			//showTerms();
 			getBackendData();
+			trace('geolocation:request')
+			if (Geolocation.isSupported)
+			{
+				trace('geolocation supported!')	
+				_geo = new Geolocation(); 
+                if (!_geo.muted) 
+                { 
+                    _geo.addEventListener(GeolocationEvent.UPDATE, geoUpdateHandler); 
+                } 
+                _geo.addEventListener(StatusEvent.STATUS, geoStatusHandler);
+			}
+		}
+
+		private function geoStatusHandler(event : StatusEvent) : void 
+		{
+			trace(" geoStatusHandler :" , event.code)
+		}
+
+		private function geoUpdateHandler(event : GeolocationEvent) : void 
+		{
+			trace(" geoUpdateHandler altitude:" , event.altitude)
+			trace(" geoUpdateHandler latitude:" , event.latitude)
+			trace(" geoUpdateHandler longitude:" , event.longitude)
 		}
 
 		

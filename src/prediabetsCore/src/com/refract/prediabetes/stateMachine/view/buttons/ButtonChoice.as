@@ -10,6 +10,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
+
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
@@ -41,7 +42,8 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		{
 			//if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
 				//AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange , false , 5 ) ;
-			DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
+			if( id != Flags.BACK_TO_VIDEO_BUTTON)
+				DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
 			
 			_interaction = interaction ; 
 			text = interaction.copy.main ;
@@ -72,7 +74,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			
 			if(  _interaction.deactivate)
 			{
-				deActivate() ; 
+				//deActivate() ; 
 			}
 			
 		}
@@ -82,14 +84,21 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		}
 		private function onFullScreenChange ( evt : FullScreenEvent = null ) : void
 		{
+			trace(' MY ID :' , id)
 			var style:Object = {};
 			style.fontSize = SMSettings.CHOICE_FONT_SIZE  ;
 			style.align = "left";
 			var temp : String = textfield.text ; 
-			TextManager.styleText( 'buttonFont' , textfield , style) ; 
+			TextManager.styleText( SMSettings.FONT_BUTTON , textfield , style) ; 
 			
-			minW = SMSettings.CHOICE_BUTTON_WIDTH  ; 
+			var subtract : int = 0 ; 
+			if( id == Flags.BACK_TO_VIDEO_BUTTON )
+			{
+				subtract = AppSettings.BACK_TO_VIDEO_GAP ; 
+			}
+			minW = SMSettings.CHOICE_BUTTON_WIDTH //- subtract  ; 
 			minH = SMSettings.CHOICE_BUTTON_HEIGHT ; 
+			
 			text = temp ; 
 		}
 		
@@ -124,6 +133,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		private function onFadeOut( evt : Event ) : void
 		{
+			trace('ID :' , id)
 			TweenMax.to( this , SMSettings.FADE_OUT_TIME , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY , onComplete : destroy, canBePaused:true } ) ;  	
 			
 			removeEvents() ; 
@@ -140,8 +150,10 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			{
 				btObj.interaction_internal  = true ; 
 				btObj.btName = Flags.OVERWEIGHT ; 
+				deActivate() ;
 			}
 			
+			/*
 			if( _value ) 
 			{ 
 				deActivate() ;
@@ -149,7 +161,9 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			else
 			{
 				activate() ; 
-			}			
+			}	
+			 * 
+			 */		
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.INSERT_COIN, btObj));
 		}
 		
@@ -162,12 +176,14 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		override public function destroy() : void
 		{
+			trace('DESTROY :' , id)
 			super.destroy() ; 
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 		}
 
 		public function dispose() : void
 		{
+			trace('DISPOSE :' , id)
 			AppSettings.stage.removeEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ;

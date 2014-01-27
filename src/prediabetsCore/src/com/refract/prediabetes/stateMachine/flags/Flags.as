@@ -100,7 +100,8 @@ package com.refract.prediabetes.stateMachine.flags {
 		//INTERACTION LIST
 		public static const CHOICE 									: String = 'choice' ;
 		public static const NONE 									: String = 'none' ;
-		public static const INIT_BUTTON 							: String = 'initButton' ; 
+		public static const INIT_BUTTON 							: String = 'initButton' ;
+		public static const BACK_TO_VIDEO_BUTTON 					: String = 'backToVideoButton' ;  
 		
 		//DEBUG
 		public static const UPDATE_DEBUG_PANEL_VIDEO 				: String = 'updateDebugPanelVideo' ;

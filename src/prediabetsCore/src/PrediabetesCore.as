@@ -103,10 +103,7 @@ package {
 		{
 			//trace('e ', e.responseHeaders ) 
 		    trace("httpStatusHandler:" + e.status);
-			for( var mc in e )
-			{
-				trace('mc ' , mc)
-			}
+		
 		}
 		
 		private function securityErrorHandler(e:SecurityErrorEvent):void

@@ -55,7 +55,7 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 				
 				_btChoice = new ButtonChoice
 				(
-					"buttonFont"
+					SMSettings.FONT_BUTTON 
 					, _nameStyleChoice
 					, SMSettings.CHOICE_BUTTON_WIDTH
 					, SMSettings.CHOICE_BUTTON_HEIGHT

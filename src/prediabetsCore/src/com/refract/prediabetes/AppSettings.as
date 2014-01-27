@@ -13,7 +13,7 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = false;
+		public static const DEBUG 										: Boolean = true;
 		public static const INTRO_URL									: String = 'd01_intro_part_1' ; 
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
@@ -48,6 +48,8 @@ package com.refract.prediabetes {
 		public static var VIDEO_TOP										: Number = 0;
 		public static var VIDEO_BOTTOM									: Number = 0;
 		
+		public static var OVERLAY_GAP 									: int = 26 ; 
+		public static var BACK_TO_VIDEO_GAP 							: int = 10 ;  
 		public static var SHOW_HEADER 									: Boolean = false ; 
 		public static var FOOTER_VIDEONAV_FIXED 						: Boolean = false ; 
 		public static var RESERVED_HEADER_HEIGHT_DEFAULT				: int = 34 ; 
@@ -213,7 +215,7 @@ package com.refract.prediabetes {
 				RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
 				
 				FOOTER_BUTTON_SPACE = 22 ; 
-		
+				OVERLAY_GAP = 100 ; 
 			}
 			else
 			{
@@ -225,6 +227,7 @@ package com.refract.prediabetes {
 				RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
 				
 				FOOTER_BUTTON_SPACE = 30 ; 
+				OVERLAY_GAP = 50 ; 
 			}
 		}
 		

@@ -24,6 +24,16 @@
         {
             "main": "Click here to talk about stopping diabetes now!"
         }
+    } ,
+    "close_button_state" : 
+    {
+        "choice_x" : 0 ,
+        "choice_y" : 0 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "Close and go back to video"
+        }
     } , 
     "states": 
     {

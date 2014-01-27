@@ -6,6 +6,7 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.nav.events.FooterEvent;
 	import com.refract.prediabetes.stateMachine.SMController;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 
@@ -31,7 +32,8 @@ package com.refract.prediabetes.nav {
 		protected var _fadeInTime:Number = 0.5;
 		protected var _fadeOutTime:Number = 2;
 		protected var _fadeDelay:Number = 5;
-		protected var fadeTime:Number = 0.5;
+		protected var fadeTime : Number = 0.5;
+		private var _overlayBackground : Sprite;
 		
 		
 		public function Nav() 
@@ -42,11 +44,15 @@ package com.refract.prediabetes.nav {
 		
 		protected function init(evt:Event):void
 		{
+			trace("::nav init::")
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
 			_blackGraphics = new Sprite() ; 
 			addChild( _blackGraphics ) ; 
-			_blackGraphics.alpha = .5 ; 
+			_blackGraphics.alpha = 0 ; 
+			
+			_overlayBackground = new Sprite() ; 
+			addChild( _overlayBackground ) ; 
 			
 			_overlayLayer = new Sprite();
 			addChild(_overlayLayer);
@@ -163,6 +169,9 @@ package com.refract.prediabetes.nav {
 				case(AppSections.FIND_OUT_MORE):
 					addOverlay(ClassFactory.FIND_OUT_MORE);
 					break;
+				case(AppSections.OVERWEIGHT):
+					addOverlay(ClassFactory.OVERWEIGHT);
+					break;
 			}
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.HIGHLIGHT_BUTTON,{buttonID:"SECTION:"+name}));
 		}
@@ -179,45 +188,32 @@ package com.refract.prediabetes.nav {
 				_prevOverlay = _currentOverlay ; 
 				removeCurrentOverlay(null,true);
 			}
-			
-			//DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_PAUSE));
-			
-			//_backToVideo.visible = false ; 
-			
+			_footer.addOverlay() ; 
 			_overlayShown = true;
 			_currentOverlay = new overlay();
-			
 			_overlayLayer.addChild(_currentOverlay);
 			_currentOverlay.alpha = 0;
-
 			_footer.showBackToVideo() ; 
 			TweenMax.to(_currentOverlay,fadeTime,{autoAlpha:1});
-
-			//DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.ADD_FOOTER_ITEM,{position:FooterEvent.BOTTOM_MIDDLE,button:_backToVideo}));
 			onResize();
 		}
 
 		public function removeCurrentOverlay(evt:Event = null,hasNextOverlay:Boolean = false):void{
 			if(_currentOverlay)
 			{
+				_footer.removeOverlay() ; 
 				_blackGraphics.graphics.clear();
-				
+				_overlayBackground.graphics.clear();
 				TweenMax.to(_currentOverlay,fadeTime,{autoAlpha:0,onComplete:overlayRemoved,onCompleteParams:[_currentOverlay]});
-				
-				_footer.hideBackToVideo() ; 
-				//DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.REMOVE_FOOTER_ITEM,{position:FooterEvent.BOTTOM_MIDDLE,button:_backToVideo}));
-				
+				_footer.hideBackToVideo() ; 	
 				if(!hasNextOverlay){
 					_currentOverlay = null;
 					_overlayShown = false;
-					
-					DispatchManager.dispatchEvent(new Event(Flags.UN_FREEZE));
-	//				DispatchManager.dispatchEvent(new Event(Intro.INTRO_VIDEO_UNPAUSE));
+					DispatchManager.dispatchEvent(new Event(Flags.UN_FREEZE)) ;
 					DispatchManager.dispatchEvent(new Event(NO_MORE_OVERLAYS));
 					DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.HIGHLIGHT_BUTTON,{buttonID:null}));
 				}
 			}
-			
 		}
 		
 		protected function overlayRemoved(overlay:DisplayObject):void
@@ -250,9 +246,11 @@ package com.refract.prediabetes.nav {
 					//DispatchManager.dispatchEvent(new Event(Flags.START_MOVIE));
 					SMController.me.goStartState() ; 
 					break;
-				
 				case('share'):
 					AppController.i.setSWFAddress(AppSections.SHARE);
+					break;
+				case('overweight'):
+					AppController.i.setSWFAddress(AppSections.OVERWEIGHT);
 					break;
 				
 				default:
@@ -268,8 +266,22 @@ package com.refract.prediabetes.nav {
 			if(_overlayShown)
 			{
 				_blackGraphics.graphics.clear();
-				_blackGraphics.graphics.beginFill(0x0,1);
+				_blackGraphics.graphics.beginFill(0xff0099,1);
 				_blackGraphics.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
+				
+				_overlayBackground.graphics.clear();
+				_overlayBackground.graphics.lineStyle(2 , SMSettings.CHOICE_BORDER_COLOR ) ;
+				_overlayBackground.graphics.beginFill( SMSettings.CHOICE_BACK_COLOR , .95 );
+				_overlayBackground.graphics.drawRect
+					(
+						0
+						, 0
+						, AppSettings.VIDEO_WIDTH - AppSettings.OVERLAY_GAP 
+						, AppSettings.VIDEO_HEIGHT - AppSettings.OVERLAY_GAP  
+					);
+				
+				_overlayBackground.x = AppSettings.VIDEO_LEFT + AppSettings.OVERLAY_GAP / 2 ; 
+				_overlayBackground.y = AppSettings.VIDEO_TOP + AppSettings.OVERLAY_GAP / 2; 
 			}
 		}
 		public function onBackToVideo( ):void

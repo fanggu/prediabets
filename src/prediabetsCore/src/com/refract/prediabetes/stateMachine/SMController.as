@@ -62,6 +62,7 @@ package com.refract.prediabetes.stateMachine {
 		}
 		private function init() : void
 		{
+			trace('::smcontroller init::')
 			setBulkLoader() ; 
 			initValues() ;
 
@@ -76,9 +77,7 @@ package com.refract.prediabetes.stateMachine {
 			createListeners();	
 			SMVars.reset() ;
 
-			_model.init( ) ; 
-			_model.selectedInteraction= 0 ;		
-			_model.selectedState = _model.startState ; 
+			
 			
 			dispatchStartEvents() ; 
 			stateMachineTransition();
@@ -133,6 +132,9 @@ package com.refract.prediabetes.stateMachine {
 		private function createModel() : void
 		{
 			_model = new ClassFactory.SM_MODEL() ; 
+			_model.init( ) ; 
+			_model.selectedInteraction= 0 ;		
+			_model.selectedState = _model.startState ; 
 		}
 		
 		private function createListeners() : void
@@ -212,6 +214,9 @@ package com.refract.prediabetes.stateMachine {
 				case Flags.INIT_BUTTON : 					 
 					updateState(_model.initButtonStateAddress ) ; 
 					DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ; 
+				break ;
+				case Flags.BACK_TO_VIDEO_BUTTON : 					 
+					//**do nothing
 				break ;
 
 				case Flags.OVERWEIGHT : 					 

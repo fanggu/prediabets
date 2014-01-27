@@ -15,6 +15,7 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
+	import com.refract.prediabetes.stateMachine.view.buttons.ButtonChoice;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
 	import com.robot.utils.Utils;
@@ -44,7 +45,7 @@ package com.refract.prediabetes.nav {
 		
 		private var _footerButtons : Dictionary ; 
 		//special buttons
-		private var _backToVideo:PrediabetesButton; 
+		private var _backToVideo:ButtonChoice; 
 		private var _playPauseButton : PlayPauseButton ;
 		private var _backwardButton : BackwardButton ;  
 		
@@ -72,6 +73,7 @@ package com.refract.prediabetes.nav {
 		private var _iterShowNav : int ; 
 		private var _barHidden : Boolean ;
 		private var _endFooterTopLeft_y : int;
+		private var _overlay : Boolean;
 
 		public function Footer( nav : Nav ) 
 		{
@@ -138,20 +140,31 @@ package com.refract.prediabetes.nav {
 				hideNavBar()  ; 
 			}
 		}
+		
 		private function onMouseMove( evt : MouseEvent ) : void
 		{
 			_iterShowNav = 0 ;
-			if( _barHidden )
+			if( _barHidden && !_overlay )
 				showNavBar() ; 
 		}
 		
+		public function addOverlay() : void
+		{
+			_overlay = true ; 
+			hideNavBar() ; 
+		}
+		public function removeOverlay() : void
+		{
+			_overlay = false ; 
+			showNavBar() ; 
+		}
 		private function showNavBar() : void
 		{
 			_barHidden = false ; 
 			TweenMax.killTweensOf( _footerTopLeft ) ; 
 			TweenMax.to( _footerTopLeft , .5 , { y : _endFooterTopLeft_y , alpha : 1 , scaleY : 1 , ease : Quint.easeOut } ) ;
 		}
-		private function hideNavBar() : void
+		private function hideNavBar( ) : void
 		{
 			_barHidden = true ;
 			TweenMax.killTweensOf( _footerTopLeft ) ; 
@@ -410,6 +423,7 @@ package com.refract.prediabetes.nav {
 			style.fontSize = 13;
 			style.align = "left";
 			 
+			 /*
 			_backToVideo = new PrediabetesButton("footer_back_to_video",style);
 			_footerTopCenter.addChild(_backToVideo);
 			_backToVideo.graphics.beginFill(0x000000,1);
@@ -417,14 +431,31 @@ package com.refract.prediabetes.nav {
 			_backToVideo.addEventListener(MouseEvent.CLICK, onBackToVideo);
 			_backToVideo.visible = false ; 
 			_backToVideo.y = -40 ; 
+			 * 
+			 */
+			
+			_backToVideo = new ButtonChoice( SMSettings.FONT_BUTTON, { fontSize:26  }, SMSettings.MIN_BUTTON_SIZE, 70  , false , false);
+			parent.addChild( _backToVideo ) ; 
+			var interaction : Object = SMController.me.model.closeButtonState ; 
+			interaction.iter = Flags.BACK_TO_VIDEO_BUTTON ; 
+			_backToVideo.id = Flags.BACK_TO_VIDEO_BUTTON ;
+			_backToVideo.visible = false ; 
+			//trace(' _backToVideo :' , _backToVideo)
+			//trace(' SMController.me.model.closeButtonState :' , SMController.me.model.closeButtonState)
+			_backToVideo.setButton( interaction ) ; 
+			 
+			_backToVideo.addEventListener(MouseEvent.CLICK, onBackToVideo);
+			onBackToVideoResize() ; 
 		}
 
 		public function showBackToVideo() : void
 		{
+			trace('::Show _backToVideo::' , _backToVideo)
 			_backToVideo.visible = true ; 
 		}
 		public function hideBackToVideo() : void
 		{
+			trace('::hide _backToVideo::' , _backToVideo)
 			_backToVideo.visible = false ; 
 		}
 		
@@ -584,10 +615,26 @@ package com.refract.prediabetes.nav {
 		}
 		private function onRequestResize( evt : Event ) : void
 		{
-			onResize()
+			onResize() ; 
+		}
+		
+		private function onBackToVideoResize() : void
+		{
+			_backToVideo.y = 
+				AppSettings.VIDEO_TOP 
+				+ AppSettings.VIDEO_HEIGHT 
+				- AppSettings.OVERLAY_GAP / 2 
+				- SMSettings.CHOICE_BUTTON_HEIGHT 
+				- AppSettings.BACK_TO_VIDEO_GAP ;
+			
+			_backToVideo.x = 
+				AppSettings.VIDEO_LEFT 
+				+ AppSettings.VIDEO_WIDTH / 2  
+				- SMSettings.CHOICE_BUTTON_WIDTH / 2 ;
 		}
 		protected function onResize(evt:Event = null) : void 
 		{
+			_backToVideo.onFullScreen() ; 
 			var center_x : Number = stage.stageWidth / 2 ; 
 			var sw : Number = stage.stageWidth ; 
 			_footerBackBottom.width = sw ; 
@@ -634,6 +681,7 @@ package com.refract.prediabetes.nav {
 			{
 				this.y = stage.stageHeight - AppSettings.RESERVED_FOOTER_HEIGHT;
 			}
+			onBackToVideoResize() ; 
 		}
 
 	}

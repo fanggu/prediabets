@@ -51,9 +51,9 @@ package com.refract.prediabetes
 		public function init() : void
 		{
 			createSoundMachine() ; 
+			createStateMachine();	
 			createUI();
 			createNav();
-			createStateMachine();		
 			DispatchManager.addEventListener( Flags.DRAW_VIDEO_STATUS ,onDrawVideoStatus  ) ;
 			DispatchManager.addEventListener(Flags.START_MOVIE , onStartMovie  );
 			DispatchManager.addEventListener(Flags.APP_ACTIVATE, onAppActivated);
@@ -64,11 +64,12 @@ package com.refract.prediabetes
 		//**Create Interactive Movie Manager ( StateMachine ) 
 		private function createStateMachine() : void
 		{
+			//*state machine engine			
+			_smController = new ClassFactory.SM_CONTROLLER();
 			//*state machine main view
 			_smView = new ClassFactory.SM_VIEW();
 			_main.addChildAt( _smView, 0 );
-			//*state machine engine			
-			_smController = new ClassFactory.SM_CONTROLLER();
+			
 			
 		}
 		

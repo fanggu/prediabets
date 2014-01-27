@@ -265,12 +265,6 @@ package com.refract.prediabetes.sections.utils {
 			mouseEnabled = false;
 			useHandCursor = false;
 			buttonMode = false;
-			
-			//_deActiveShape = new Shape() ; 
-			//drawDeactivateShape() ; 
-			
-			//TweenMax.to( _deActiveShape , .1 , { alpha:0 , repeat:3, yoyo:true} );
-			
 		}
 		
 		protected function drawDeactivateShape( ) : void
@@ -282,7 +276,6 @@ package com.refract.prediabetes.sections.utils {
 				_deActiveShape.graphics.beginFill( SMSettings.DEEP_RED, .5);
 				_deActiveShape.graphics.drawRect(0, 0, _bkg.width +1, _bkg.height + 1);
 				_deActiveShape.graphics.endFill() ; 
-				//tempShape.x = 1 ; tempShape.y = 1 ; 
 				addChild(_deActiveShape) ; 
 			}
 			

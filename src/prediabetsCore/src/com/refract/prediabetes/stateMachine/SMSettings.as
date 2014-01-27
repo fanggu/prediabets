@@ -39,6 +39,8 @@ package com.refract.prediabetes.stateMachine {
 		public static var CHOICE_BUTTON_SPACE_NO_FS 	  : int = 13 ; 
 		public static var CHOICE_BUTTON_SPACE_FS 	  	  : int = 16 ; 
 		
+		
+		
 		public static var CHOICE_BUTTON_HEIGHT			  : int = CHOICE_BUTTON_HEIGHT_NO_FS ;
 		public static var CHOICE_FONT_SIZE       		  : int = CHOICE_FONT_SIZE_NO_FS ; 
 		public static var CHOICE_BUTTON_WIDTH			  : int = CHOICE_BUTTON_WIDTH_NO_FS ; 

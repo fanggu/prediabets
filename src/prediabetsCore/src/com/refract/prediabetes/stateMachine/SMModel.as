@@ -28,6 +28,7 @@ package com.refract.prediabetes.stateMachine
 		public var endState : String ;
 		public var slowStates : Array ; 
 		public var initButtonState : Object ; 
+		public var closeButtonState : Object ; 
 		 
 		public function SMModel()
 		{
@@ -43,6 +44,7 @@ package com.refract.prediabetes.stateMachine
 		}
 		public function init( ) : void
 		{
+			trace('MODEL INIT')
 			var jsonObject : Object = getJsonObject( ) ; 
 			
 			_dictStates = new Dictionary( true );
@@ -84,6 +86,10 @@ package com.refract.prediabetes.stateMachine
 			
 			initButtonState = jsonObject.data.init_button_state ; 
 			initButtonState.iter = Flags.INIT_BUTTON ; 
+			
+			closeButtonState = jsonObject.data.close_button_state ; 
+			closeButtonState.iter = Flags.BACK_TO_VIDEO_BUTTON ; 
+			
 			
 			resetHistory() ; 
 		}

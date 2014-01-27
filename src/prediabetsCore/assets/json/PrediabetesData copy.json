@@ -1,4 +1,4 @@
-﻿{
+{
   "success": "result for api/fsm_descriptor/module/1",
   "data": {
     "meta": {
@@ -436,7 +436,7 @@
                 {
                     "enter" : 34700 , 
                     "exit" : 41700 , 
-                    "copy": "Mãori, Everyone’s risk of diabetes <br></br>increases as they get older",
+                    "copy": "Māori, Everyone’s risk of diabetes <br></br>increases as they get older",
                     "color": "0xFFFFFF"
                 }
 
@@ -466,7 +466,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Not sure what overweight means?"
+              "main": "Not Sure what overweight means ?"
             },
             "video_name": "dx_dont_want_to_say",
             "message_box": null,
@@ -901,7 +901,7 @@
 
 
       "d24m_q": {
-        "state_txt": "Did anyone in your family have heart disease under the age of 55?",
+        "state_txt": "Did any members of your family have heart disease under the age of 55?",
         "state_txt_x": 50,
         "state_txt_y": 10,
         "interactions": [
@@ -1057,7 +1057,7 @@
             "interaction_internal" : "true" , 
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Not sure what overweight means?"
+              "main": "Not Sure what overweight means ?"
             },
             "video_name": "dx_dont_want_to_say",
             "message_box": null,
@@ -1186,13 +1186,13 @@
                       "enter" : 29633 , 
                       "exit" : 36066 , 
                       "color" : "0xFFFFFF" ,
-                      "copy" : "Change what you eat and drink." 
+                      "copy" : "Change what they eat and drink." 
                   } ,
                   {
                       "enter" : 36566 , 
                       "exit" : 41233 , 
                       "color" : "0xFFFFFF" ,
-                      "copy" : "Change what you do." 
+                      "copy" : "Change what they do." 
                   } 
 
             ],
@@ -1303,7 +1303,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Mr. T"
+              "main": "mr T"
             },
             "video_name": "d43_a1_wrong_mr_t",
             "message_box": null,
@@ -1316,7 +1316,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=false",
             "copy": {
-              "main": "Insulin"
+              "main": "Insuline"
             },
             "video_name": "d43_a2_right_insulin_part_1",
 
@@ -1400,7 +1400,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=false",
             "copy": {
-              "main": "Pre diabetes"
+              "main": "Prediabetes"
             },
             "video_name": "d45_a3_right_pre_diabetes",
 
@@ -1442,7 +1442,7 @@
       },
 
       "d46_q": {
-        "state_txt": "How many Kiwis have got pre diabetes?",
+        "state_txt": "How many Kiwis have got “Pre diabetes” ?",
         "state_txt_x": 50,
         "state_txt_y": 10,
         "interactions": [

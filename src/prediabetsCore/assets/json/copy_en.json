@@ -40,7 +40,7 @@
 
     {
         "flash_id": "share",
-        "copy_en": "share",
+        "copy_en": "Share",
         "font": "NEXABOLD",
         "bold": false,
         "colour": "GREY"
@@ -129,20 +129,137 @@
 
      {
         "flash_id": "page_legal_title",
-        "copy_en": "<h1>Terms of Use and Disclaimer</h1>",
-        "font": "BEBASNEUE",
+        "copy_en": "<h1>Pre diabetes interactive video terms and conditions of use</h1>",
+        "font": "NEXABOLD",
         "colour": "WHITE"
-    }, {
-        "flash_id": "page_legal_heading",
-        "copy_en": "<p>By accessing this application you agree to be bound by these terms of use.</p>",
-        "font": "AKZIDENZG_CONDENSED",
-        "colour": "RED"
-    }, {
-        "flash_id": "page_legal_content",
-        "copy_en": "<p>1. Lifesaver is a web and mobile-based interactive application for training purposes only and completion of the modules does not constitute a certificate of competence as further training is recommended.</p>\n<p>2. The use of Lifesaver as an interactive application is provided by The Resuscitation Council (UK), a registered charity (number 286360), (\"RCUK\"), on an \"As is\" basis.  Use of the Lifesaver application is at your own risk.  </p>\n<p>2.1 To the maximum extent permitted by law: - </p>\n<p>2.1.1 RCUK disclaims all liability whatsoever, whether arising in contract, tort (including negligence) or othewise in relation to the use of Lifesaver; and\n2.1.2 All implied warranties, terms and conditions relating to the Lifesaver application (whether implied by statute, common law or otherwise), including (without limitation) any warranty, term or condition as to accuracy, completeness, satisfactory quality performance, fitness or purpose or any special purpose, availability, non-infrignment, information accuracy, inter-operability, quiet enjoyment and title are as between RCUK and you hereby excluded.  Without prejudice to the aforegoing, RCUK does not accept any responsibility for any technical failure of the internet and/or Lifesaver or any damage or injury to users or their equipment as a result of or relating to their use of Lifesaver.  Your statutory rights remain uneffected.  </p>\n<p>2.2 RCUK will also not be liable, in contract, tort (including without limitation, negligence) under statute or otherwise, as a result of or in connection with the use of Lifesaver, for any:-</p>\n<p>2.2.1 economic loss (including without limitation, loss of revenues, profits, contracts, business or anticipated savings; or\n2.2.2 loss of goodwill or reputation; or\n2.2.3 special or indirect or consequential loss,</p>\n<p>2.3 Nothing in these Terms shall be construed as excluding or limiting the liability of RCUK for death or personal injury caused by its negligence or for any other liability which cannot be excluded by the law of England and Wales.  </p>\n<p>2.4 RCUK does not warrant or make any representations as to the security of this site.  Nor does not it warrant that the site or the servers which make this site available or electronic communications are free from viruses or any other harmful element.</p>\n<p>3. This site has a Secure Socket Layer (SSL) certificate (a means of keeping information secure).  When you enter the site you will provide some personal information that is stored on a server.  This information is in the nature of your name and email address and allows the site to be audited and provide statistical information.</p>\n<p>4. Your personal details are strictly confidential and will not be shared with any other organisation save for in accordance with the provisions contained in paragraph 13 below.  Your personal details may be transmitted outside of the European Economic Area by our third party website hosting services providers.  </p>\n<p>5. Appropriate technical and organisational measures will be taken against the unauthorised or unlawful processing of personal data and against the accidental loss or destruction of, or damage to, personal data.</p>\n<p>6. The site is operated by The Resuscitation Council (UK) at Tavistock House North, Tavistock Square, London WC1H 9HR, registered charity number 286360. You can contact the Resuscitation Council (UK) via <a href=\"mailto:enquiries@resus.org.uk\">enquiries@resus.org.uk</a></p>\n<p>7. For the purposes of the Data Protection Act 1998, the data controller is Resuscitation Council (UK) at 5th Floor Tavistock House North, Tavistock Square, London WC1 9HR.</p>\n<p>8. This site requires users to have cookies enabled.  Cookies are small computer files which our site will store in your internet browser, which enable information to be transmitted to and from your internet browser and our site.  These are temporary cookies rather than permanent ones, which means that these cookies are deleted or made inactive when you close your internet browser.  No critical or sensitive information is stored by cookies and our cookies cannot be used to identify you as an individual.  We use temporary cookies to improve the site’s accessibility.   Temporary cookies enable users who logged in to restart their session from where they left. By using the site, you agree to our use of cookies as described above</p>\n<p>9. This site gives access to external websites, Facebook and Twitter. The RCUK makes no warranties representations or undertakings nor accepts any liability or responsibility in connection with the content or use made of any website linked to this website.  You must comply with any of the terms and conditions of Facebook and Twitter and keep any account passwords confidential.  You will be responsible for anything which happens on any of your accounts. </p>\n<p>10. By using this site you agree to indemnify the RCUK and to keep the RCUK indemnified from and against any costs, claims, demands, expenses and liabilities suffered or incurred by the RCUK arising from or which is directly or indirectly related to your access to and/or use of the site.</p>\n<p>11. All design, text and graphics displayed are copyrighted.  None of the contents  may be copied or incorporated into any other website or other work of any kind, in any form whatsoever.</p>\n<p>12. You agree not to hack or reverse engineer, or acquire unauthorised access to, any part of the site, or attempt to do any of the foregoing.</p>\n<p>13. By providing us with your personal information, you consent to RCUK sharing and/or processing any information you give us with the following third parties:- </p>\n<p>13.1 Any appropriate regulatory body, the Police or other law enforcement agency where we are required to do so by law; or </p>\n<p>13.2 Agents: RCUK may use third parties to perform certain functions on our behalf including sending emails, organising promotions, surveys or polls, removing repetitive information from customer lists, comment hosting, website analysis, data analysis. Our agents will have access to your personal information if necessary to perform their function but they cannot use it or disclose it for any other purpose, unless you have specifically given them authority to do so; or</p>\n<p>13.3 Products or services: Certain products or services may also be made available or offered to you in conjunction with the Lifesaver application by RCUK in partnership with a third party who may require you to disclose personal information to them in order for you to receive these products or services. If you request a product or service offered in partnership with a third party in this way, the identity of the third party will be disclosed to you and your personal information will be transferred to that third party. The use of your personal information by that third party is also subject to its privacy policy and practices for which we are not responsible for; or</p>\n<p>13.4 Maintenance and storage of information: Your information is collected and stored on servers which are owned and maintained by or on behalf of RCUK. We may keep your information for a reasonable period for the purposes set out in these Terms of Use; or</p>\n<p>13.5 Links to other websites: The Lifesaver application contains links to other websites and we may display advertisements from third parties.  RCUK are not responsible for the content or privacy policies of these websites or for third party advertisers, even if they use the logo of Lifesaver as part of a co-branding agreement, nor for the way in which information about their users is handled. Before submitting any personal information to such websites, RCUK recommend that you check the applicable privacy policy attached to such websites.</p>\n<p>14. If you have any general questions about the Lifesaver application or the information RCUK have collected about you and how we use it, you can contact us at The Resuscitation Council (UK) at Tavistock House North, Tavistock Square, London WC1H 9HR. You can also contact the Resuscitation Council (UK) via <a href=\"mailto:enquiries@resus.org.uk\">enquiries@resus.org.uk</a>.\nAlternatively if you have any questions or concerns about your information including what we hold and how we use it, you can contact us at <a href=\"mailto:enquiries@resus.org.uk\">enquiries@resus.org.uk</a>.  You are entitled to request a copy of the information we hold about you (for which we may charge a small fee) and to have any inaccuracies in your information corrected.</p>\n<p>15. These Terms of Use are governed by the law of England and Wales.  The Courts of England and Wales shall have exclusive jurisdiction in respect of any dispute or interpretation arising in respect of these Terms of Use.</p>",
-        "font": "AKZIDENZG_MEDIUM",
-        "colour": "GREY"
     }, 
+    {
+        "flash_id": "page_legal_heading_1",
+        "copy_en": "<p><b>Updated 1 January 2014</b></p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_content_1",
+        "copy_en": "<p>The following terms and conditions govern your use of this website service. By using this website you agree to be bound by these terms and conditions. These terms and conditions may change without further notice to you and we recommend you check the terms and conditions when you use the site.</p>\n \n<p>Use of the service is governed by the terms and conditions of this agreement. Please read this agreement carefully before accessing or using the service.</p>\n \n<p>THIS INTERACTIVE APPLICATION DOES NOT PROVIDE MEDICAL ADVICE.  It is intended for information only. It is not a substitute for professional medical advice, diagnosis or treatment. If you think you may have a medical emergency call Emergency 111 immediately. For personal advice please talk with your healthcare professional.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_heading_2",
+        "copy_en": "<p>General terms and conditions</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_content_2",
+        "copy_en": "<p>By accessing this web and mobile-based application you agree to be bound by these terms of use. Your access and use of this site and its services bind you to this agreement. If you do not agree to the Terms and Conditions of use for this site, you may not use the site or its services.</p>\n \n<p>We may modify this agreement at any time. Any modifications made to this agreement will be effective immediately upon posting on the site. By accessing or using the service, you agree to be bound by all of the terms and conditions of the agreement as posted on the service at the time of your access or use. You agree to review the Agreement posted on the service each time you use the service so that you are aware of any modifications made to this agreement.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_heading_3",
+        "copy_en": "<p>Reliance</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_content_3",
+        "copy_en": "<p>All information included on this website is intended for information purposes only and does not represent clinical advice. It is intended to supplement application of both local and national diabetes clinical guidelines. We make no recommendations on its applicability to any particular clinical situation.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_heading_4",
+        "copy_en": "<p>Service delivery</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_content_4",
+        "copy_en": "<p>We cannot guarantee that the delivery of this website service will be fault free. If a fault occurs in the service we will attempt to correct the fault as soon as we reasonably can. Your access to the website may be occasionally restricted to allow for repairs or maintenance.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_heading_5",
+        "copy_en": "<p>Password and security</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_5",
+        "copy_en": "<p>These services are for designated users. You will be asked to create a password. You must keep this password confidential and must not disclose it or share it with anyone. Please note that you will be responsible for activities that occur under your password. If you know or suspect that someone else knows your password you should notify us immediately and change your password. You may change your password at any time.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+    {
+        "flash_id": "page_legal_heading_6",
+        "copy_en": "<p>Third party sites</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_6",
+        "copy_en": "<p>The website contains links to third party resources on the Web. We do not endorse, approve or sanction (unless otherwise stated) nor are we responsible for any third party's products, services, acts or omissions. There is no association or connection between us and the third party, (unless otherwise stated) save for the provision of the link. We do not act in partnership with nor as agent for or on behalf of the third party to whom we provide links.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+    {
+        "flash_id": "page_legal_heading_7",
+        "copy_en": "<p>Copyright</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_7",
+        "copy_en": "<p>The materials on the site are copyrighted by us and/or other applicable rights holders. All design, text and graphics displayed are copyrighted. None of the contents may be copied or incorporated into any other website or other work of any kind, in any form whatsoever.</p>\n \n<p>The service is for your own personal, non-commercial use only. You may not otherwise reproduce, copy, distribute or use any material on this website. Permanent copying and/or storage of material or reproduction or incorporation of any part of it in any other work, in whatever media, is expressly prohibited. Any other use of the materials is strictly prohibited without our prior written permission and the permission of the applicable rights holder(s).</p>\n \n<p>You agree not to hack or reverse engineer, or acquire unauthorised access to, any part of the site, or attempt to do any of the foregoing.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+     {
+        "flash_id": "page_legal_heading_8",
+        "copy_en": "<p>External websites</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_8",
+        "copy_en": "<p>Where materials are available publicly copyright conditions are provided on those websites.</p>\n\n <p>It is the responsibility of the user to make their own decisions about the accuracy, currency, reliability and correctness of information contained in any linked external web sites. You will be responsible for your use of any external website.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+     {
+        "flash_id": "page_legal_heading_9",
+        "copy_en": "<p>Our liability</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_9",
+        "copy_en": "<p>Whilst we endeavour to ensure that information on this website is correct, we cannot guarantee and assume no legal liability or responsibility for the accuracy, currency or completeness of the information available through this website. The information on this website is for personal use only and is provided in good faith. Users who link to another site from this site are subject to the liability policy of the new site.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+    {
+        "flash_id": "page_legal_heading_10",
+        "copy_en": "<p>Law</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_10",
+        "copy_en": "<p>These terms and conditions and any disputes arising from or in connection with them shall be governed by the laws of New Zealand and the parties submit to the exclusive jurisdiction of the New Zealand.</p>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+
 
 
     {

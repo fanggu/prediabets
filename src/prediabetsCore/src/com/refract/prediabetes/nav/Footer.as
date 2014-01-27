@@ -450,12 +450,10 @@ package com.refract.prediabetes.nav {
 
 		public function showBackToVideo() : void
 		{
-			trace('::Show _backToVideo::' , _backToVideo)
 			_backToVideo.visible = true ; 
 		}
 		public function hideBackToVideo() : void
 		{
-			trace('::hide _backToVideo::' , _backToVideo)
 			_backToVideo.visible = false ; 
 		}
 		

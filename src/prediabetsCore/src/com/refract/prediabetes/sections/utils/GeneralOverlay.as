@@ -8,15 +8,16 @@ package com.refract.prediabetes.sections.utils {
 	import flash.text.TextField;
 
 
-	public class GeneralOverlay extends Sprite {
+	public class GeneralOverlay extends Sprite 
+	{
 		
-		public static var BODY_WIDTH:int = 890;
-		public static var BODY_HEIGHT:int = 400;
+		public static var BODY_WIDTH:int = 500 ; //890;
+		public static var BODY_HEIGHT:int = 200;
 		
-		protected var _headerStyle:Object = {fontSize:72,fontScale:1};
-		protected var _bodyTitleStyle:Object = {fontSize:24, autoSize:"left", selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-40};
+		protected var _headerStyle:Object = {fontSize:24};
+		protected var _bodyTitleStyle:Object = {fontSize:15, autoSize:"left", selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-40};
 		protected var _bodySubtitleStyle:Object = {fontSize:24, autoSize:"left",mouseEnabled:true, selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-40};
-		protected var _bodyStyle:Object = {fontSize:12, autoSize:"left",mouseEnabled:true, selectable:true, align:"left",leading:4, wordWrap: true, multiline:true, width:BODY_WIDTH-40};//385
+		protected var _bodyStyle:Object = {fontSize:15, autoSize:"left",mouseEnabled:true, selectable:true, align:"left",leading:4, wordWrap: true, multiline:true, width:BODY_WIDTH-40};//385
 		
 		protected var _header:TextField;
 		
@@ -34,8 +35,7 @@ package com.refract.prediabetes.sections.utils {
 		public var useClose:Boolean = true;
 		
 		public function GeneralOverlay() {
-			_scrollerWidth = BODY_WIDTH;
-			_scrollerHeight = BODY_HEIGHT;
+			
 			addEventListener(Event.ADDED_TO_STAGE,init);
 		}
 		
@@ -52,15 +52,24 @@ package com.refract.prediabetes.sections.utils {
 			
 			_bodyTitleStyle.width = _bodySubtitleStyle.width = _bodyStyle.width = BODY_WIDTH-5;
 			
+			_scrollerWidth = BODY_WIDTH;
+			_scrollerHeight = BODY_HEIGHT;
+			
+			trace('BODY_HEIGHT :' , BODY_HEIGHT)
 			createContent();
 			
 			
 			stage.addEventListener(Event.RESIZE,onResize);
             SWFAddress.addEventListener(SWFAddressEvent.CHANGE, handleSWFAddress);
+			
+			
 			onResize();
 		}
+
 		
-		protected function createContent():void{
+		protected function createContent():void
+		{
+			
 			_scrollbox = new ScrollBox(_scrollerWidth, _scrollerHeight, _body,_overscroll);
 			addChild(_scrollbox);
 			
@@ -72,6 +81,45 @@ package com.refract.prediabetes.sections.utils {
 			if(_header){
 				_header.x = _scrollbox.x;
 			}
+		}
+		private function clean() : void
+		{
+			if(_scrollbox){
+				//_scrollbox.destroy();
+			}
+			_body.removeChildren();
+			removeChildren();
+					trace('CLEA :' , BODY_WIDTH)
+			_bodyTitleStyle = 
+			{
+				fontSize:15
+				, autoSize:"left"
+				, selectable:true
+				, wordWrap: true, multiline:true
+				, width:BODY_WIDTH-40};
+		   _bodySubtitleStyle = 
+		   {
+				fontSize:24
+				, autoSize:"left"
+				,mouseEnabled:true
+				, selectable:true
+				, wordWrap: true
+				, multiline:true
+				, width:BODY_WIDTH-40
+			};
+			_bodyStyle = 
+			{
+				fontSize:15
+				, autoSize:"left"
+				,mouseEnabled:true
+				, selectable:true
+				, align:"left"
+				,leading:4
+				, wordWrap: true
+				, multiline:true
+				, width:BODY_WIDTH-40
+			};//385
+		
 		}
 		
 		public function get effectiveHeight():Number
@@ -85,12 +133,15 @@ package com.refract.prediabetes.sections.utils {
 		
 		protected function onResize(evt:Event = null,b:Boolean = true):void{
 			
-			if(_scrollbox){
+			
+			if(_scrollbox)
+			{
 				_scrollbox.x = int(-_scrollbox.contentWidth/2);
 				_scrollbox.y = _header ? int(_header.y + _header.height + 10) : 0;
 			}
 			this.x = int(AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2);
-			this.y = int(AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2 - this.effectiveHeight/2);
+			//this.y = int(AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2 - this.effectiveHeight/2);
+			this.y = int(AppSettings.VIDEO_TOP + AppSettings.OVERLAY_GAP / 2 + 20 );
 			
 		//	_scrollbox.updateSize(_scrollbox.width,AppSettings.VIDEO_BOTTOM - 10 - this.y - _scrollbox.y);
 		}

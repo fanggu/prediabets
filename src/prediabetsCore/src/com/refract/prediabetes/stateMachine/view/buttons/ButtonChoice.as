@@ -44,6 +44,8 @@ package com.refract.prediabetes.stateMachine.view.buttons
 				//AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange , false , 5 ) ;
 			if( id != Flags.BACK_TO_VIDEO_BUTTON)
 				DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
+				
+			//DispatchManager.addEventListener( Flags.APP_FULLSCREEN, onAppFullScreen ) ; 
 			
 			_interaction = interaction ; 
 			text = interaction.copy.main ;
@@ -80,25 +82,33 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		}
 		public function onFullScreen() : void
 		{
+			//trace('on full screen ::')
+			onFullScreenChange() ; 
+		}
+		private function onAppFullScreen( evt : Event ) : void
+		{
+			trace('::onApp fullscreen')
 			onFullScreenChange() ; 
 		}
 		private function onFullScreenChange ( evt : FullScreenEvent = null ) : void
 		{
-			trace(' MY ID :' , id)
 			var style:Object = {};
 			style.fontSize = SMSettings.CHOICE_FONT_SIZE  ;
 			style.align = "left";
 			var temp : String = textfield.text ; 
 			TextManager.styleText( SMSettings.FONT_BUTTON , textfield , style) ; 
-			
+			/*
 			var subtract : int = 0 ; 
 			if( id == Flags.BACK_TO_VIDEO_BUTTON )
 			{
 				subtract = AppSettings.BACK_TO_VIDEO_GAP ; 
 			}
-			minW = SMSettings.CHOICE_BUTTON_WIDTH //- subtract  ; 
+			 * 
+			 */
+			minW = SMSettings.CHOICE_BUTTON_WIDTH ; //- subtract  ; 
 			minH = SMSettings.CHOICE_BUTTON_HEIGHT ; 
 			
+			//trace('minW ' , minW, ' id :' , id)
 			text = temp ; 
 		}
 		
@@ -133,7 +143,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		private function onFadeOut( evt : Event ) : void
 		{
-			trace('ID :' , id)
 			TweenMax.to( this , SMSettings.FADE_OUT_TIME , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY , onComplete : destroy, canBePaused:true } ) ;  	
 			
 			removeEvents() ; 
@@ -176,14 +185,14 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		
 		override public function destroy() : void
 		{
-			trace('DESTROY :' , id)
 			super.destroy() ; 
-			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
+			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut ); 
+			DispatchManager.removeEventListener( Flags.APP_FULLSCREEN, onAppFullScreen ) ;  
 		}
 
 		public function dispose() : void
 		{
-			trace('DISPOSE :' , id)
+			DispatchManager.removeEventListener( Flags.APP_FULLSCREEN, onAppFullScreen ) ; 
 			AppSettings.stage.removeEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
 			DispatchManager.removeEventListener(Flags.FADEOUT, onFadeOut );  
 			AppSettings.stage.removeEventListener( Event.RESIZE , onResize) ;

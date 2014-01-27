@@ -4,11 +4,12 @@ package com.refract.prediabetes.stateMachine.view {
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.stateMachine.SMSettings;
+	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.refract.prediabetes.stateMachine.view.interactions.InteractionChoice;
+	import com.robot.comm.DispatchManager;
 
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.FullScreenEvent;
 
 	/**
 	 * @author robertocascavilla
@@ -30,8 +31,10 @@ package com.refract.prediabetes.stateMachine.view {
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
 			//stage.addEventListener(Event.RESIZE,onResize);
+			//if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				//AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , callFullScreen , false , 0 ) ;
 			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
-				AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , callFullScreen	 , false , 0 ) ;
+				DispatchManager.addEventListener( Flags.APP_FULLSCREEN, callFullScreen ) ;
 		}
 		private function callFullScreen( evt : Event ) : void
 		{
@@ -44,7 +47,6 @@ package com.refract.prediabetes.stateMachine.view {
 				interaction.onFullScreen() ; 
 			}
 			posButtons() ; 
-			
 		}
 
 		

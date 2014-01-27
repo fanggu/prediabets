@@ -5,6 +5,7 @@ package com.refract.prediabetes.nav {
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.nav.events.FooterEvent;
+	import com.refract.prediabetes.sections.utils.GeneralOverlay;
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
@@ -12,8 +13,8 @@ package com.refract.prediabetes.nav {
 
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	import flash.display.StageDisplayState;
 	import flash.events.Event;
-	import flash.events.FullScreenEvent;
 	import flash.events.MouseEvent;
 
 	
@@ -44,9 +45,11 @@ package com.refract.prediabetes.nav {
 		
 		protected function init(evt:Event):void
 		{
-			trace("::nav init::")
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			//if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				//DispatchManager.addEventListener( Flags.APP_FULLSCREEN, callFullScreen ) ;
 			
+			setOverlayBoyVars() ; 
 			_blackGraphics = new Sprite() ; 
 			addChild( _blackGraphics ) ; 
 			_blackGraphics.alpha = 0 ; 
@@ -78,13 +81,21 @@ package com.refract.prediabetes.nav {
 			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze);
 			
 			stage.addEventListener(Event.RESIZE,onResize);
-			stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
+			//stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				DispatchManager.addEventListener( Flags.APP_FULLSCREEN, onFSChange)
 			onResize();
 		}
+
 		
-		private function onFSChange( evt : FullScreenEvent ) : void
+		private function setOverlayBoyVars() : void
 		{
-			if( evt.fullScreen )
+			GeneralOverlay.BODY_WIDTH = AppSettings.VIDEO_WIDTH - AppSettings.OVERLAY_GAP - AppSettings.OVERLAY_BODY_DIFF_W;
+			GeneralOverlay.BODY_HEIGHT = AppSettings.VIDEO_HEIGHT - AppSettings.OVERLAY_GAP - AppSettings.OVERLAY_BODY_DIFF_H ; //- 320; 
+		}
+		private function onFSChange( evt : Event ) : void
+		{
+			if( AppSettings.stage.displayState != StageDisplayState.NORMAL )
 			{
 				onFS() ; 
 			}
@@ -98,12 +109,30 @@ package com.refract.prediabetes.nav {
 			AppSettings.SHOW_HEADER = true ; 
 			_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			_header.visible = true ; 
+			setOverlayBoyVars() ; 
+			if( _currentOverlay )
+			{
+					
+				var tempName : String = _currentOverlay.name ; 
+				removeCurrentOverlay() ;  
+				addSection( tempName ) ;
+			}
+			
+			 
 		}
 		private function onNoFS() : void
 		{
 			AppSettings.SHOW_HEADER = false ; 
 			_header.removeEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			_header.visible = false ; 
+			setOverlayBoyVars() ; 
+			if( _currentOverlay )
+			{
+				
+				var tempName : String = _currentOverlay.name ; 
+				removeCurrentOverlay() ; 
+				addSection( tempName ) ;
+			}
 		}
 
 		private function onUnFreeze(event : Event) : void 

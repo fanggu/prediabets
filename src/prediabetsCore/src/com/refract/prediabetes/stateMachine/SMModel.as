@@ -44,7 +44,6 @@ package com.refract.prediabetes.stateMachine
 		}
 		public function init( ) : void
 		{
-			trace('MODEL INIT')
 			var jsonObject : Object = getJsonObject( ) ; 
 			
 			_dictStates = new Dictionary( true );

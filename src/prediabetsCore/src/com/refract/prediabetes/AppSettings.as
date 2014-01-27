@@ -1,5 +1,8 @@
 package com.refract.prediabetes {
+	import com.refract.prediabetes.sections.utils.GeneralOverlay;
 	import com.refract.prediabetes.stateMachine.SMSettings;
+	import com.refract.prediabetes.stateMachine.flags.Flags;
+	import com.robot.comm.DispatchManager;
 
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -49,6 +52,14 @@ package com.refract.prediabetes {
 		public static var VIDEO_BOTTOM									: Number = 0;
 		
 		public static var OVERLAY_GAP 									: int = 26 ; 
+		
+		public static var OVERLAY_BODY_DIFF_W_NO_FS						: int = 50 ;
+		public static var OVERLAY_BODY_DIFF_W_FS						: int = 70 ;
+		public static var OVERLAY_BODY_DIFF_H_NO_FS						: int = 120 ;
+		public static var OVERLAY_BODY_DIFF_H_FS						: int = 130 ;
+		public static var OVERLAY_BODY_DIFF_W							: int = OVERLAY_BODY_DIFF_W_NO_FS ; 
+		public static var OVERLAY_BODY_DIFF_H							: int = OVERLAY_BODY_DIFF_H_NO_FS ; 
+		
 		public static var BACK_TO_VIDEO_GAP 							: int = 10 ;  
 		public static var SHOW_HEADER 									: Boolean = false ; 
 		public static var FOOTER_VIDEONAV_FIXED 						: Boolean = false ; 
@@ -110,6 +121,7 @@ package com.refract.prediabetes {
 			dict[21] = 21;
 			dict[22] = 22;
 			dict[24] = 24;
+			dict[25] = 25;
 			dict[28] = 28;
 			dict[30] = 30;
 			dict[32] = 32;
@@ -172,6 +184,7 @@ package com.refract.prediabetes {
 				VIDEO_TOP = RESERVED_HEADER_HEIGHT + ( diffFree / 2 ) ;
 				//_stage.stageHeight/2 - VIDEO_HEIGHT/2 ; //- RESERVED_HEADER_HEIGHT/2 ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
+				
 			}
 			else
 			{ 
@@ -185,9 +198,9 @@ package com.refract.prediabetes {
 				diffFree = _stage.stageHeight - totHBusy ; 
 				VIDEO_TOP = RESERVED_HEADER_HEIGHT - diffFree / 2;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
+				
 			}
-			
-			 
+		    DispatchManager.dispatchEvent( new Event( Flags.APP_FULLSCREEN )) ;
 		}
 		
 		public static function goToLink(link:String):void{
@@ -216,6 +229,8 @@ package com.refract.prediabetes {
 				
 				FOOTER_BUTTON_SPACE = 22 ; 
 				OVERLAY_GAP = 100 ; 
+				OVERLAY_BODY_DIFF_W = OVERLAY_BODY_DIFF_W_FS ; 
+				OVERLAY_BODY_DIFF_H = OVERLAY_BODY_DIFF_H_FS ; 
 			}
 			else
 			{
@@ -228,6 +243,8 @@ package com.refract.prediabetes {
 				
 				FOOTER_BUTTON_SPACE = 30 ; 
 				OVERLAY_GAP = 50 ; 
+				OVERLAY_BODY_DIFF_W = OVERLAY_BODY_DIFF_W_NO_FS ; 
+				OVERLAY_BODY_DIFF_H = OVERLAY_BODY_DIFF_H_NO_FS ; 
 			}
 		}
 		

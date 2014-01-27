@@ -1,7 +1,10 @@
 package com.refract.prediabetes.stateMachine {
 	import com.refract.prediabetes.AppSettings;
+	import com.refract.prediabetes.stateMachine.flags.Flags;
+	import com.robot.comm.DispatchManager;
 
 	import flash.display.StageDisplayState;
+	import flash.events.Event;
 	import flash.events.FullScreenEvent;
 	/**
 	 * @author robertocascavilla
@@ -73,10 +76,11 @@ package com.refract.prediabetes.stateMachine {
 		
 		public static function init() : void
 		{
-			AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
+			//AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
 		}
 		public static function onFullScreenChange ( evt : FullScreenEvent = null ) : void
 		{
+			
 			if( AppSettings.stage.displayState != StageDisplayState.NORMAL)
 			{
 				CHOICE_FONT_SIZE = CHOICE_FONT_SIZE_FS ; 
@@ -96,6 +100,8 @@ package com.refract.prediabetes.stateMachine {
 				
 				STATE_TXT_FONT_SIZE = STATE_TXT_FONT_SIZE_NO_FS ; 
 			}
+			
+			//DispatchManager.dispatchEvent( new Event( Flags.APP_FULLSCREEN )) ; 
 		}
 	}
 }

@@ -62,7 +62,6 @@ package com.refract.prediabetes.stateMachine {
 		}
 		private function init() : void
 		{
-			trace('::smcontroller init::')
 			setBulkLoader() ; 
 			initValues() ;
 

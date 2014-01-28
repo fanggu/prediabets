@@ -1,5 +1,4 @@
 package com.refract.prediabetes {
-	import com.refract.prediabetes.sections.utils.GeneralOverlay;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
@@ -16,7 +15,7 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = true;
+		public static const DEBUG 										: Boolean = false;
 		public static const INTRO_URL									: String = 'd01_intro_part_1' ; 
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
@@ -24,8 +23,8 @@ package com.refract.prediabetes {
 		
 		public static const BULK_LOADER_ID 								: String  = 'Videos' ; 
 		
-		public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
-		//public static var DATA_PATH										: String = "data/" ; 
+		//public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		public static var DATA_PATH										: String = "data/" ; 
 		public static var APP_DATA_PATH 								: String = "file://";
 		public static var BUFFER_DELAY 				  					: Number = 0.3 ; 	  
 

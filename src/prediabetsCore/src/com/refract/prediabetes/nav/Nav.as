@@ -187,6 +187,7 @@ package com.refract.prediabetes.nav {
 		
 		public function addSection( name:String ):void
 		{
+			trace('add section :' , name)
 			switch("SECTION:"+name)
 			{	
 				case(AppSections.LEGAL):

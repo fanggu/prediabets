@@ -5,7 +5,7 @@
       "module": "1",
       "device": "desktop",
       "start_state": "d01",
-      "init_button_state_address": "d27m",
+      "init_button_state_address": "d02",
       "end_state": "d_end" ,
       "load_init_request" :
       [
@@ -99,7 +99,7 @@
             "final_state": "d03_q",
             "interaction_type": "none",
             "video_name": "d03_choice_worry_about",
-            "trigger": 1000
+            "trigger": 99
           }
         ],
         "prev_state": "d02"
@@ -157,7 +157,7 @@
             "final_state": "d11s_q",
             "interaction_type": "none",
             "video_name": "d11s_choice_anyone_diabetes_already",
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -228,7 +228,7 @@
             "video_name": "d21s_choice_smoker",
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -303,7 +303,7 @@
             "video_name": "d24s_choice_heart_disease",
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -381,7 +381,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -490,7 +490,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -554,7 +554,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -627,7 +627,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -753,7 +753,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -830,7 +830,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -894,7 +894,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -973,7 +973,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1079,7 +1079,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1142,7 +1142,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1222,7 +1222,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1287,7 +1287,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1372,7 +1372,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1436,7 +1436,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1509,7 +1509,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1558,7 +1558,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1621,7 +1621,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1685,7 +1685,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1744,7 +1744,7 @@
             "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
-            "trigger": 1000
+            "trigger": 99
           }
         ]
       },
@@ -1762,6 +1762,21 @@
               "main": "True! No Pain, No Gain!"
             },
             "video_name": "d59_a1_wrong_pain_gain",
+            "message_box": null,
+            "choice_x": 50,
+            "choice_y": 40,
+            "trigger": -1
+          },
+          {
+            "final_state": "d60",
+            "interaction_type": "choice",
+            "interaction_meta": "wrong=false",
+            "copy": {
+              "main": "False! You don’t have to!"
+            },
+            "video_name": "d59_a2_right_dont_have_to",
+
+            
             "message_box": 
             [
                 {
@@ -1787,20 +1802,6 @@
 
                   }
             ],
-            "choice_x": 50,
-            "choice_y": 40,
-            "trigger": -1
-          },
-          {
-            "final_state": "d60",
-            "interaction_type": "choice",
-            "interaction_meta": "wrong=false",
-            "copy": {
-              "main": "False! You don’t have to!"
-            },
-            "video_name": "d59_a2_right_dont_have_to",
-
-            "message_box": null,
             "choice_x": 50,
             "choice_y": 55,
             "trigger": -1

@@ -13,9 +13,10 @@ package com.refract.prediabetes.sections.findoutmore
 		private var _bodyText:TextField;
 		private var _bodyHeader:TextField;
 		
-		private var _bookBtn:PrediabetesButton;
 		
-		public function FindOutMore() {
+		public function FindOutMore() 
+		{
+			name = 'FIND_OUT_MORE' ; 
 			super();
 		}
 	
@@ -28,33 +29,12 @@ package com.refract.prediabetes.sections.findoutmore
 			_bodyText = TextManager.makeText("page_findoutmore_copy", _body,_bodyStyle); 
 			_bodyText.y = _header.height+5;
 			
-			var buttonStyle:Object = {fontSize:36};
-			_bookBtn = new PrediabetesButton("page_findoutmore_link",buttonStyle,100,50,true , false );
-			addChild(_bookBtn);
-			_bookBtn.addEventListener(MouseEvent.CLICK, launchCoursePage);
-			
 			super.createContent();
-			_bookBtn.x = _scrollbox.x;
-			_bookBtn.y = _scrollbox.y + _scrollbox.height + 20;
-		}
-	
-		
-		private function launchCoursePage(event : MouseEvent) : void {
-			
-			
-			//AppSettings.goToLink(AppSettings.COURSE_URL);
-			if(stage.displayState != StageDisplayState.NORMAL && AppSettings.DEVICE == AppSettings.DEVICE_PC){
-				stage.displayState = StageDisplayState.NORMAL;
-			}
 		}
 		
 		
-		override public function destroy():void{
-			_bookBtn.removeEventListener(MouseEvent.CLICK, launchCoursePage);
-			_bookBtn.destroy();
-			_bookBtn = null;
-			_bodyText = null;
-			_bodyHeader = null;
+		override public function destroy():void
+		{
 			super.destroy();
 		}
 

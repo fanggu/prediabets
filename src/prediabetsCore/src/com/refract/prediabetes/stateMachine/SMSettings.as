@@ -1,10 +1,7 @@
 package com.refract.prediabetes.stateMachine {
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.stateMachine.flags.Flags;
-	import com.robot.comm.DispatchManager;
 
 	import flash.display.StageDisplayState;
-	import flash.events.Event;
 	import flash.events.FullScreenEvent;
 	/**
 	 * @author robertocascavilla
@@ -12,7 +9,7 @@ package com.refract.prediabetes.stateMachine {
 	public class SMSettings 
 	{
 		public static const DEBUG_GET_CLIP_LENGTH 		: Boolean = false ; 
-		public static const STATE_TXT_MAX_W               : int = 800 ; 
+		public static const STATE_TXT_MAX_W               : int = 700 ; 
 		
 		public static const BUTTON_FADE_DELAY             : Number = 0 ; 
 		public static const FADE_OUT_TIME 				  : Number = 0.5 ; 

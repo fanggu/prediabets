@@ -11,7 +11,9 @@ package com.refract.prediabetes.sections.social {
 	{	
 		private var _shareBar:ShareBar;
 		
-		public function Share() {
+		public function Share() 
+		{
+			name = 'SHARE' ; 
 			super();
 			
 			addEventListener(Event.ADDED_TO_STAGE,init);

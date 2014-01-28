@@ -151,6 +151,7 @@ package com.refract.prediabetes
 					case(AppSections.LEGAL):
 					case(AppSections.SHARE):
 					case(AppSections.FIND_OUT_MORE):
+					case(AppSections.OVERWEIGHT):
 						addOverlay(path[0]);
 						AppSettings.stage.removeEventListener( KeyboardEvent.KEY_DOWN, onKeyDown ) ;
 						break;
@@ -180,6 +181,7 @@ package com.refract.prediabetes
 				case(AppSections.LEGAL):
 				case(AppSections.SHARE):
 				case(AppSections.FIND_OUT_MORE):
+				case(AppSections.OVERWEIGHT):
 					
 					
 					break;

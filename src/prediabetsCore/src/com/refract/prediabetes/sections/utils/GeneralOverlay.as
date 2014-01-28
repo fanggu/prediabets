@@ -54,15 +54,9 @@ package com.refract.prediabetes.sections.utils {
 			
 			_scrollerWidth = BODY_WIDTH;
 			_scrollerHeight = BODY_HEIGHT;
-			
-			trace('BODY_HEIGHT :' , BODY_HEIGHT)
 			createContent();
-			
-			
 			stage.addEventListener(Event.RESIZE,onResize);
             SWFAddress.addEventListener(SWFAddressEvent.CHANGE, handleSWFAddress);
-			
-			
 			onResize();
 		}
 

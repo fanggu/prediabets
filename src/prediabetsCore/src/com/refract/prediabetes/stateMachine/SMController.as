@@ -219,7 +219,7 @@ package com.refract.prediabetes.stateMachine {
 				break ;
 
 				case Flags.OVERWEIGHT : 					 
-					DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED ,{value:'share'}));
+					DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.FOOTER_CLICKED ,{value:'overweight'}));
 				break ;
 				
 				

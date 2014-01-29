@@ -50,6 +50,8 @@ package com.refract.prediabetes.stateMachine {
 		
 		private var _bulkLoader : BulkLoader ;
 		private var _url : String;
+		private var _choiceTimerActive : Boolean ;
+		private var _storeChoiceObject : Object;
 		
 		public function SMController()
 		{
@@ -111,6 +113,7 @@ package com.refract.prediabetes.stateMachine {
 		{
 			_videoFreeze = false ; 
 			_activateMessageBox = false ; 
+			_choiceTimerActive = false ; 
 		}
 		private function createEnterFrameLoop() : void
 		{
@@ -304,7 +307,12 @@ package com.refract.prediabetes.stateMachine {
 		
 		public function onVideoStart() : void
 		{
-			checkAddress() ; 
+			if( SMVars.me.nsStreamTimeAbs == 0)
+			{
+				checkAddress() ; 
+			}
+			//checkAddress() ;
+			
 			setClipLength() ;
 		}
 	
@@ -414,6 +422,7 @@ package com.refract.prediabetes.stateMachine {
 		}
 		public function goStartState( ) : void
 		{
+			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE) ) ; 
 			updateState( _model.startState ) ; 
 		}
 		private function checkAddress(  ) : void
@@ -433,6 +442,7 @@ package com.refract.prediabetes.stateMachine {
 		}
 		protected function updateState( address : String , cleanUI : Boolean = true) : void
 		{	
+			_choiceTimerActive = false ; 
 			clenBulkLoader() ; 
 			cleanMemory() ; 
 			
@@ -461,7 +471,7 @@ package com.refract.prediabetes.stateMachine {
 				DispatchManager.dispatchEvent(new ObjectEvent(Flags.UPDATE_VIEW_STATE_TEXT, _model.state) ) ;
 			}
 			
-			VideoLoader.i.deactivateClickPause() ; 
+			//VideoLoader.i.deactivateClickPause() ; 
 		}
 
 		
@@ -541,25 +551,46 @@ package com.refract.prediabetes.stateMachine {
 		private function setClipLength( ) : void //evt : ObjectEvent ) : void
 		{
 			var clip_length : Number = _model.getVideoLength( _model.interaction.video_name ) ; //Number( evt.object.clip_length ) ;  
+			var sendChoiceObject : Object = {} ; 
 			
-			activateTooSlowTimer( clip_length  ) ; 
-			_model.interaction.clip_length = clip_length ; 
-			DispatchManager.dispatchEvent( new ObjectEvent ( Flags.ACTIVATE_PROGRESS_BAR , _model.interaction ) ) ;
+			if( !_tooslowTimer )
+			{
+				activateTooSlowTimer( clip_length  ) ; 
+				_model.interaction.clip_length = clip_length ; 
+				_model.interaction.tween = _choiceTimerActive ; 
+				sendChoiceObject = _model.interaction ; 
+				_storeChoiceObject = sendChoiceObject ; 
+			}
+			else
+			{
+				sendChoiceObject = _storeChoiceObject ;
+			}
+			DispatchManager.dispatchEvent( new ObjectEvent ( Flags.ACTIVATE_PROGRESS_BAR , sendChoiceObject ) ) ;
 		}
 		private function activateTooSlowTimer( clip_length : Number ) : void//clip_length : Number ) : void
 		{
+			trace()
 			var interaction : Object = _model.interaction ; 
 			var future_address : String = interaction.final_state ; 
+			
 			if( _model.is_q(future_address ) && _model.selectedState != SMSettings.STATE_SLOW ) 
 			{
 				_prevTooslowState = _model.state.name ;
 				createTooSlowTimer( SMSettings.SLOW_TIMER_X + clip_length  ) ; 
 				_totalTooSlowTime = SMSettings.SLOW_TIMER_X + clip_length  ; 
-				_model.interaction.tween = true ;  
+				_choiceTimerActive = true ;
 			}
 			else
 			{
-				_model.interaction.tween = false ; 
+				if( _tooslowTimer )
+				{
+					
+					_choiceTimerActive = true ;
+				}
+				else
+				{
+					_choiceTimerActive = false ; 
+				}
 			}
 		}
 		

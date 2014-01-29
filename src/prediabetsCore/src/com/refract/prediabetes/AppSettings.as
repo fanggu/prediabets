@@ -15,12 +15,11 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = false ;
+		public static const DEBUG 										: Boolean = true ;
 		public static const INTRO_URL									: String = 'd01_intro_part_1' ; 
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
 		public static var LOGO_ADDRESS 									: String = 'Logo' ; 
-		public static var LOGO_DNZ_ADDRESS 									: String = 'LogoDNZ' ; 
 		
 		public static const BULK_LOADER_ID 								: String  = 'Videos' ; 
 		
@@ -104,6 +103,8 @@ package com.refract.prediabetes {
 		public static var PP_FIXER_Y 									: int = 0 ; 
 		public static var SND_FIXER_X									: int = 0 ; 
 		public static var SND_FIXER_Y									: int = 0 ; 
+		
+		public static var MOUSE_MOVE_H									: int = -60 ; 
 		
 		 
 		//**Colors
@@ -252,6 +253,8 @@ package com.refract.prediabetes {
 				
 				SCROLLBAR_BACK_W = SCROLLBAR_BACK_W_FS ;
 				SCROLLBAR_TRIGGER_W = SCROLLBAR_TRIGGER_W_FS ;  
+				
+				MOUSE_MOVE_H = -120 ; 
 			}
 			else
 			{
@@ -268,6 +271,8 @@ package com.refract.prediabetes {
 				
 				SCROLLBAR_BACK_W = SCROLLBAR_BACK_W_NO_FS ;
 				SCROLLBAR_TRIGGER_W = SCROLLBAR_TRIGGER_W_NO_FS ;  
+				
+				MOUSE_MOVE_H = -90 ; 
 			}
 		}
 		

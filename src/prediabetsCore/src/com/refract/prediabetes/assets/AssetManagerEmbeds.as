@@ -10,8 +10,6 @@ package com.refract.prediabetes.assets {
 		[Embed(source="../../../../../assets/img/politeloader.png")] private var PoliteLoader : Class;
 		[Embed(source="../../../../../assets/img/logo.jpg")] private var Logo : Class;
 		[Embed(source="../../../../../assets/img/logo_retina.jpg")] private var LogoRetina : Class;
-		[Embed(source="../../../../../assets/img/logo_dnz.png")] private var LogoDNZ : Class;
-		[Embed(source="../../../../../assets/img/logo_dnz_retina.png")] private var LogoDNZRetina : Class;
 		
 		[Embed(source="../../../../../assets/swf/library.swf", symbol="Green_Play")] private var GreenPlay : Class;
 		[Embed(source="../../../../../assets/swf/library.swf", symbol="Red_Pause")] private var RedPause : Class;

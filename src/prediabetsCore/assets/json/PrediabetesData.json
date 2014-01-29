@@ -5,7 +5,7 @@
       "module": "1",
       "device": "desktop",
       "start_state": "d01",
-      "init_button_state_address": "d02",
+      "init_button_state_address": "d27s",
       "end_state": "d_end" ,
       "load_init_request" :
       [
@@ -1908,6 +1908,26 @@
         }
     } , 
 
+    "findoutmore_button_1" : 
+    {
+        "choice_x" : 0 ,
+        "choice_y" : 0 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "www.HealthMentorOnline.com"
+        }
+    } , 
+    "findoutmore_button_2" : 
+    {
+        "choice_x" : 0 ,
+        "choice_y" : 0 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "www.diabetes.org.nz"
+        }
+    } , 
 
 
     "clip_length" :

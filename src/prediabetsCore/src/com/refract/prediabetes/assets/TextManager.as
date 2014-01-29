@@ -143,7 +143,7 @@ package com.refract.prediabetes.assets {
 				txt.selectable = props.selectable ? props.selectable : DEFAULT_PROPS.selectable;
 				txt.textColor = AppSettings[data.colour] ? AppSettings[data.colour] : 0xff0000;
 				txt.mouseEnabled = props.mouseEnabled ? props.mouseEnabled : DEFAULT_PROPS.mouseEnabled ;
-				txt.borderColor = props.borderColor ? props.borderColor: 0xff00ff;
+				txt.borderColor = 0xff00ff ; //props.borderColor ? props.borderColor: 0xff00ff;
 				txt.border = props.border ? props.border : false;
 				
 				/*

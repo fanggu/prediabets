@@ -16,7 +16,7 @@ package com.refract.prediabetes.sections
 		{	
 			_header = TextManager.makeText("page_overweight_title",this,_headerStyle);
 			 var i : int = 0 ; 
-			 var l : int = 3 ; 
+			 var l : int = 2 ; 
 			 var bodyTextMemory : TextField ; 
 			 for( i = 1 ; i <= l ; i++ )
 			 {

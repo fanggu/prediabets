@@ -1,5 +1,6 @@
 package com.refract.prediabetes.video 
 {
+	import com.refract.prediabetes.stateMachine.view.interactions.Interaction;
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
@@ -312,11 +313,18 @@ package com.refract.prediabetes.video
 			}
 			if( percent < 5 && !_showBuffer )
 			{ 
-				showBuffer() ; 
+				var clip_length : Number = SMController.me.model.getVideoLength( _nameVideo ) - 200 ; 
+				//trace('SMVars.me.nsStreamTime ' , SMVars.me.nsStreamTime)
+				//trace('clip_length' , clip_length)
+				if( SMVars.me.nsStreamTime <= ( clip_length ) ) 
+				{
+					showBuffer() ;	
+				}
+				 
 			}
 				
 		}
-		protected function showBuffer() : void
+		private function showBuffer() : void
 		{
 			_showBuffer = true ; 
 			TweenMax.killTweensOf( _loader ) ;

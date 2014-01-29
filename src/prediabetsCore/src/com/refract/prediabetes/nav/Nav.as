@@ -206,11 +206,7 @@ package com.refract.prediabetes.nav {
 			}
 			DispatchManager.dispatchEvent(new FooterEvent(FooterEvent.HIGHLIGHT_BUTTON,{buttonID:"SECTION:"+name}));
 		}
-		
-		
-		
-		
-		
+
 		public function addOverlay(overlay:Class ):void
 		{
 			DispatchManager.dispatchEvent(new Event(Flags.FREEZE));
@@ -273,12 +269,11 @@ package com.refract.prediabetes.nav {
 					break;
 				case(AppSections.START_AGAIN ):
 					onBackToVideo( ) ; 
-					//AppController.i.setSWFAddress(AppSections.INTRO);
-					//DispatchManager.dispatchEvent(new Event(Flags.START_MOVIE));
 					SMController.me.goStartState() ; 
 					break;
 				case('share'):
 					AppController.i.setSWFAddress(AppSections.SHARE);
+					//AppController.i.setSWFAddress(AppSections.OVERWEIGHT);
 					break;
 				case('overweight'):
 					AppController.i.setSWFAddress(AppSections.OVERWEIGHT);

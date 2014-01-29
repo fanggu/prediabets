@@ -109,8 +109,8 @@ package com.refract.prediabetes.sections.utils {
 				addChild(_pivotLine);
 				addChild(_pivotTrigger);
 				_pivotTrigger.buttonMode = true;
-				_pivotLine.x = _w - 10 ;
-				_pivotTrigger.x = _w - 10 + _pivotLine.width / 2 - _pivotTrigger.width / 2   ;//- 7;//+ 30;
+				_pivotLine.x = _w + 13 ;
+				_pivotTrigger.x = _w + 13 + _pivotLine.width / 2 - _pivotTrigger.width / 2   ;//- 7;//+ 30;
 				_content.mask = _mask;
 				_pivotRect = new Rectangle( _pivotTrigger.x ,0,0,_h-pivotHeight);
 				_pivotTrigger.y = (_content.y/(-_content.height+_h))*_pivotRect.height;

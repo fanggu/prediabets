@@ -80,7 +80,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		}
 		public function onFullScreen() : void
 		{
-			//trace('on full screen ::')
 			onFullScreenChange() ; 
 		}
 		private function onAppFullScreen( evt : Event ) : void
@@ -108,14 +107,14 @@ package com.refract.prediabetes.stateMachine.view.buttons
 					playSound("SndGeneralRollover");
 					//TweenMax.to(_body,0.4,{tint:overColor});
 					
-					if(_bkgBorder)	TweenMax.to(_bkgBorder,0.5,{tint : SMSettings.CHOICE_BACK_COLOR });
-					if( _bkg ) TweenMax.to( _bkg , 0.5 , {tint : SMSettings.CHOICE_BORDER_COLOR } ) ;
+					if(_bkgBorder)	TweenMax.to(_bkgBorder,0.1,{tint : SMSettings.CHOICE_BACK_COLOR });
+					if( _bkg ) TweenMax.to( _bkg , 0.1 , {tint : SMSettings.CHOICE_BORDER_COLOR } ) ;
 				break;
 				default:
 					//TweenMax.to(_body,0.2,{tint:null});
 					//if(_bkgBorder) TweenMax.to(_bkgBorder,0.4,{alpha:0});
-					if( _bkg ) TweenMax.to( _bkg , 0.2 , {tint : null} ) ;
-					if( _bkgBorder ) TweenMax.to( _bkgBorder , 0.2 , {tint : null} ) ;
+					if( _bkg ) TweenMax.to( _bkg , 0.3 , {tint : null} ) ;
+					if( _bkgBorder ) TweenMax.to( _bkgBorder , 0.3 , {tint : null} ) ;
 			}
 		}
 		
@@ -146,7 +145,9 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			{
 				btObj.interaction_internal  = true ; 
 				btObj.btName = Flags.OVERWEIGHT ; 
-				deActivate() ;
+				
+				//deActivate() ;
+				
 			}
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.INSERT_COIN, btObj));
 		}

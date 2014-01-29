@@ -1,4 +1,5 @@
 package com.refract.prediabetes.sections.utils {
+	import flash.display.StageDisplayState;
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Cubic;
 	import com.greensock.plugins.TintPlugin;
@@ -169,6 +170,10 @@ package com.refract.prediabetes.sections.utils {
 				var ww:Number = _minW > _body.width + _minBkgWidthGap  ? _minW : _body.width + _minBkgWidthGap ;
 				var hh:Number = _minH ; //> _body.height + _minBkgHeightGap ? _minH : _body.height + _minBkgHeightGap ;
 				 
+				if( _copyProps.findoutmore && AppSettings.stage.displayState == StageDisplayState.NORMAL)
+				{
+					ww = ww - 120 ; 
+				}
 				if(!_bkgBorder){
 					_bkgBorder = new Shape();
 					addChildAt(_bkgBorder,0);
@@ -181,7 +186,7 @@ package com.refract.prediabetes.sections.utils {
 				_bkg.graphics.clear();
 				if(_extraBlack){
 					_bkg.graphics.beginFill(0x00,0.3);
-					_bkg.graphics.drawRect(0, 0, ww, hh);
+					_bkg.graphics.drawRect( 0, 0, ww , hh);
 				}
 				
 				var color_back : uint = SMSettings.CHOICE_BACK_COLOR ;

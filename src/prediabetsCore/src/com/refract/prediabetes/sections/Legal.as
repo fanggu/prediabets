@@ -4,16 +4,13 @@ package com.refract.prediabetes.sections {
 
 	import flash.text.TextField;
 
-
 	public class Legal extends GeneralOverlay 
 	{
-		
 		public function Legal() 
 		{
 			name = 'LEGAL' ; 
 			super();
 		}
-		
 		
 		protected override function createContent():void
 		{	
@@ -24,9 +21,6 @@ package com.refract.prediabetes.sections {
 			 for( i = 1 ; i <= l ; i++ )
 			 {
 				var bodyTitle : TextField = TextManager.makeText("page_legal_heading_" + i,_body,_bodyTitleStyle);
-				
-				
-				//_bodyStyle.width = 200 ; 
 				var bodyText : TextField = TextManager.makeText("page_legal_content_" + i,_body,_bodyStyle) ;
 				if( bodyTextMemory )
 				{

@@ -125,7 +125,7 @@ package com.refract.prediabetes.nav {
 		private function onRun( evt : Event ) : void
 		{
 			_iterShowNav ++ ; 
-			if( _iterShowNav > 240 && !_barHidden )
+			if( _iterShowNav > 180 && !_barHidden )
 			{ 
 				var arrObjs : Array = AppSettings.stage.getObjectsUnderPoint( new Point( AppSettings.stage.mouseX , AppSettings.stage.mouseY ) ) ; 
 				for( var i : int = 0 ; i < arrObjs.length ; i ++ )
@@ -142,9 +142,13 @@ package com.refract.prediabetes.nav {
 		
 		private function onMouseMove( evt : MouseEvent ) : void
 		{
-			_iterShowNav = 0 ;
-			if( _barHidden && !_overlay )
-				showNavBar() ; 
+			if( mouseY  > AppSettings.MOUSE_MOVE_H )
+			{
+				_iterShowNav = 0 ;
+				if( _barHidden && !_overlay )
+					showNavBar() ; 
+			}
+			
 		}
 		
 		public function addOverlay() : void
@@ -167,7 +171,7 @@ package com.refract.prediabetes.nav {
 		{
 			_barHidden = true ;
 			TweenMax.killTweensOf( _footerTopLeft ) ; 
-			TweenMax.to( _footerTopLeft , .5 , { y : 5 , scaleY : 0 , alpha : 0 , ease : Quint.easeOut } ) ;
+			TweenMax.to( _footerTopLeft , 1 , { y : 5 , scaleY : 0 , alpha : 0 , ease : Quint.easeOut } ) ;
 		}
 		
 		
@@ -494,6 +498,7 @@ package com.refract.prediabetes.nav {
 		//CLICKS 
 		private function activateProgressBar( evt : ObjectEvent ) : void
 		{		
+			
 			_tween = evt.object.tween ; 
 			_clip_length = evt.object.clip_length ; 
 			 if( _tween )
@@ -508,6 +513,7 @@ package com.refract.prediabetes.nav {
 		}
 		private function onProgressBar( evt : Event ) : void
 		{
+			//trace('***')
 			var perc : Number ; 
 			if( _tween )
 			{
@@ -518,6 +524,8 @@ package com.refract.prediabetes.nav {
 				_tweenID = new TweenMax( _progressBarBox , _clip_length / 1000 , { scaleX : 1 , ease : Linear.easeNone } ) ; 
 				 * 
 				 */
+				 
+				 //trace('_clip_length :' , _clip_length)
 				 perc = ( SMController.me.getTooSlowTimerTime()   ) / _clip_length ; 
 				 if( perc > 1 )
 				{

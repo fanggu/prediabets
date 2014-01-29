@@ -42,7 +42,6 @@ package com.refract.prediabetes.sections.utils {
 		protected function init(evt:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,init);
-			trace('AppSettings RETINA : ' , AppSettings.RETINA)
 			var copy_scrollbar_space : int = 30 ; 
 			if( AppSettings.RETINA )
 			{

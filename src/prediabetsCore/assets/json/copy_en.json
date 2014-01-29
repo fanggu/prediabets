@@ -55,27 +55,28 @@
     }, 
 
      {
-        "flash_id": "findoutmore_title",
+        "flash_id": "page_findoutmore_title",
         "copy_en": "Find out more",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
-
-    {
-        "flash_id": "page_findoutmore_copy_1",
-        "copy_en": "Want to find out more about pre diabetes and diabetes? Here are two great sites:",
-        "font": "NEXALIGHT",
+      {
+        "flash_id": "page_findoutmore_heading_1",
+        "copy_en": "Want to find out more about pre diabetes and diabetes? \nHere are two great sites.",
+        "font": "NEXABOLD",
         "colour": "WHITE"
-    },
+    }, 
+
+   
     {
         "flash_id": "page_findoutmore_copy_2",
-        "copy_en": "For more about health and wellness - and what you can do about pre diabetes and managing your condition if you have diabetes, please visit:\n<u><a href='http://www.healthmentoronline.com' >www.healthmentoronline.com</a></u>",
+        "copy_en": "For more about health and wellness - \n as well as what you can do about pre diabetes ( or managing your condition if you have diabetes ), please visit:",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     },
     {
         "flash_id": "page_findoutmore_copy_3",
-        "copy_en": "And for even more information on diabetes and to find out how Diabetes New Zealand can help you, please visit: \n<u><a href='http://www.diabetes.org.nz' >www.diabetes.org.nz</a></u>",
+        "copy_en": "For even more information on diabetes \nand to find out how Diabetes New Zealand can help you, please visit:",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     },
@@ -312,50 +313,37 @@
     }, 
 
 
-     {
+    {
         "flash_id": "page_overweight_title",
-        "copy_en": "<h1>Are you overweight ?</h1>",
+        "copy_en": "Are you overweight? Here's a rough guide.",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
+
     {
         "flash_id": "page_overweight_heading_1",
-        "copy_en": "<p><b>You fat?</b></p>",
+        "copy_en": "",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_overweight_content_1",
-        "copy_en": "<p>Are you overweight? The following terms and conditions govern your use of this website service. By using this website you agree to be bound by these terms and conditions. These terms and conditions may change without further notice to you and we recommend you check the terms and conditions when you use the site.</p>\n \n<p>Use of the service is governed by the terms and conditions of this agreement. Please read this agreement carefully before accessing or using the service.</p>\n \n<p>THIS INTERACTIVE APPLICATION DOES NOT PROVIDE MEDICAL ADVICE.  It is intended for information only. It is not a substitute for professional medical advice, diagnosis or treatment. If you think you may have a medical emergency call Emergency 111 immediately. For personal advice please talk with your healthcare professional.</p>",
+        "copy_en": "Let’s say you're 1.5m tall (4ft 11in) tall.\n If you weigh 56kg (8 stone 11lb) or more, then you’re seen as 'overweight'.\n \nIf you're taller than that, the weight at which you start to be seen as “overweight” is as follows... \n \n1.6m (5ft 3in)       - 64kg (10 stone 1lbs)\n1.7m (5ft 7in)       - 72kg (11 stone 5lbs)\n1.8m (5ft 10in)      - 81kg (12 stone 10lbs)\n1.9m (6ft 3in)       - 90kg (14 stone 2lbs)\n \nDon’t know your height or weight? Another way to look at it is like this:",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_overweight_heading_2",
-        "copy_en": "<p>Again, are you overweight?</p>",
+        "copy_en": "How big is your waist size?",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_overweight_content_2",
-        "copy_en": "<p>By accessing this web and mobile-based application you agree to be bound by these terms of use. Your access and use of this site and its services bind you to this agreement. If you do not agree to the Terms and Conditions of use for this site, you may not use the site or its services.</p>\n \n<p>We may modify this agreement at any time. Any modifications made to this agreement will be effective immediately upon posting on the site. By accessing or using the service, you agree to be bound by all of the terms and conditions of the agreement as posted on the service at the time of your access or use. You agree to review the Agreement posted on the service each time you use the service so that you are aware of any modifications made to this agreement.</p>",
-        "font": "NEXALIGHT",
-        "colour": "WHITE"
-    }, 
-    {
-        "flash_id": "page_overweight_heading_3",
-        "copy_en": "<p>Again, again, are you overweight?</p>",
-        "font": "NEXABOLD",
-        "colour": "WHITE"
-    }, 
-    {
-        "flash_id": "page_overweight_content_3",
-        "copy_en": "<p>All information included on this website is intended for information purposes only and does not represent clinical advice. It is intended to supplement application of both local and national diabetes clinical guidelines. We make no recommendations on its applicability to any particular clinical situation.</p>",
+        "copy_en": "For most people, you’re probably overweight:\n If you’re a man with a waist size over 102cm (40 inches)\n If you’re a woman with a waist size over 88cm (34.5 inches)\n \nFor people of Asian descent, you’re probably overweight: \nIf you’re a man with a waist size over 90cm (35.5 inches)\n If you’re a woman with a waist size over 80cm (31.5 inches) ",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }
-    
-
 
 
    ]

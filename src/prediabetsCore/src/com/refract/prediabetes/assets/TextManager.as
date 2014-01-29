@@ -2,6 +2,8 @@ package com.refract.prediabetes.assets {
 	import com.refract.prediabetes.AppSettings;
 
 	import flash.display.DisplayObjectContainer;
+	import flash.text.AntiAliasType;
+	import flash.text.StyleSheet;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 
@@ -143,7 +145,30 @@ package com.refract.prediabetes.assets {
 				txt.mouseEnabled = props.mouseEnabled ? props.mouseEnabled : DEFAULT_PROPS.mouseEnabled ;
 				txt.borderColor = props.borderColor ? props.borderColor: 0xff00ff;
 				txt.border = props.border ? props.border : false;
+				
+				/*
+				var asCSS:StyleSheet = new StyleSheet();
+                asCSS.setStyle("a:hover", {textDecoration:'underline'});
+				asCSS.setStyle("body", {fontSize:'15',fontFamily:'NexaBold' , color:'#000066', textAlign : 'left'});
+				txt.styleSheet = asCSS;
+				*/
+				
 				txt.setTextFormat(format);
+				
+				if( props.antialias )
+				{
+					txt.antiAliasType = AntiAliasType.ADVANCED;
+	        		txt.sharpness = 200;
+	        		txt.thickness = 200;
+				}
+				else
+				{
+					txt.antiAliasType = AntiAliasType.ADVANCED;
+	        		txt.sharpness = 60;
+	        		txt.thickness = 60;
+				}
+				
+		
 				txt.defaultTextFormat = format;
 				if(format.leading > 0){
 					var h:Number = txt.height;

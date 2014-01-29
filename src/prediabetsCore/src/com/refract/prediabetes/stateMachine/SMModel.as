@@ -29,6 +29,9 @@ package com.refract.prediabetes.stateMachine
 		public var slowStates : Array ; 
 		public var initButtonState : Object ; 
 		public var closeButtonState : Object ; 
+		public var shareButtonFacebookState : Object ; 
+		public var shareButtonTwitterState : Object ; 
+		public var shareButtonGoogleState : Object ; 
 		 
 		public function SMModel()
 		{
@@ -88,6 +91,11 @@ package com.refract.prediabetes.stateMachine
 			
 			closeButtonState = jsonObject.data.close_button_state ; 
 			closeButtonState.iter = Flags.BACK_TO_VIDEO_BUTTON ; 
+			
+			shareButtonFacebookState = jsonObject.data.share_button_facebook;
+			shareButtonTwitterState = jsonObject.data.share_button_twitter;
+			shareButtonGoogleState = jsonObject.data.share_button_google;  
+			///closeButtonState.iter = Flags.BACK_TO_VIDEO_BUTTON ; 
 			
 			
 			resetHistory() ; 

@@ -52,7 +52,7 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 			var bt : PrediabetesButton ;
 			if( interaction.interaction_type == Flags.CHOICE)
 			{
-				
+				_nameStyleChoice.interaction = true ; 
 				_btChoice = new ButtonChoice
 				(
 					SMSettings.FONT_BUTTON 

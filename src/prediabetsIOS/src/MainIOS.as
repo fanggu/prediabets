@@ -61,8 +61,8 @@ package {
 			setAppSettings();
 			setAppClasses();
 			addBkg();
-			//showTerms();
-			getBackendData();
+			start() ; 
+			/*
 			trace('geolocation:request')
 			if (Geolocation.isSupported)
 			{
@@ -74,7 +74,10 @@ package {
                 } 
                 _geo.addEventListener(StatusEvent.STATUS, geoStatusHandler);
 			}
+			 * 
+			 */
 		}
+
 
 		private function geoStatusHandler(event : StatusEvent) : void 
 		{
@@ -126,7 +129,7 @@ package {
 			ClassFactory.NAV = IOSNav ; 
 			ClassFactory.VIDEO_LOADER   = IOSVideoLoader;
 			ClassFactory.SM_CONTROLLER = MobileSMController ; 
-			ClassFactory.LEGAL = TabletLegal;
+			//ClassFactory.LEGAL = TabletLegal;
 			ClassFactory.ASSETS_MANAGER_EMBEDS = AssetsManagerEmbedsIOS ; 
 			ClassFactory.BACKWARD_BUTTON = BackwardButtonIOS ; 
 			ClassFactory.PLAY_PAUSE_BUTTON = PlayPauseButtonIOS; 
@@ -164,14 +167,18 @@ package {
 				SMSettings.CHOICE_BUTTON_WIDTH = SMSettingsIOS.CHOICE_BUTTON_WIDTH_RETINA ; 
 				SMSettings.CHOICE_BUTTON_SPACE = SMSettingsIOS.CHOICE_BUTTON_SPACE_RETINA ; 
 				AppSettings.LOGO_ADDRESS = AppSettingsIOS.LOGO_RETINA_ADDRESS ;	
+				AppSettings.LOGO_DNZ_ADDRESS = AppSettingsIOS.LOGO_DNZ_RETINA_ADDRESS ;	
 				
 				AppSettings.VIDEO_NAV_SIDE = AppSettingsIOS.VIDEO_NAV_SIDE_RETINA ; 
 				AppSettings.VIDEO_NAV_HEIGHT = AppSettingsIOS.VIDEO_NAV_HEIGHT_RETINA ; 
 				AppSettings.VIDEO_NAV_PROGRESS_BAR_HIT_AREA_HEIGHT = AppSettings.VIDEO_NAV_PROGRESS_BAR_HIT_AREA_HEIGHT * 2 ; 
-		//		AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT = AppSettingsIOS.VIDEO_NAV_HEIGHT_RETINA ;
-		//		public static var VIDEO_NAV_SIDE_RETINA 						: int = AppSettings.VIDEO_NAV_SIDE * 2; 
-		//public static var VIDEO_NAV_HEIGHT_RETINA 						: int = AppSettings.VIDEO_NAV_HEIGHT * 2 ;
-		//public static var VIDEO_NAV_PROGRESS_BAR_HEIGHT_RETINA 			: int = AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT ; 
+				AppSettings.OVERLAY_GAP = AppSettings.OVERLAY_GAP * 2 ; 
+				AppSettings.OVERLAY_BODY_DIFF_W = AppSettings.OVERLAY_BODY_DIFF_W * 2 ; 
+				AppSettings.OVERLAY_BODY_DIFF_H = AppSettings.OVERLAY_BODY_DIFF_H * 2 ; 
+				
+				AppSettings.SCROLLBAR_BACK_W = AppSettings.SCROLLBAR_BACK_W_RETINA ; 
+				AppSettings.SCROLLBAR_TRIGGER_W = AppSettings.SCROLLBAR_TRIGGER_W_RETINA ; 
+				AppSettings.SCROLLBAR_GAP_H = AppSettings.SCROLLBAR_GAP_H * 2 ; 
 			}
 			else
 			{
@@ -196,6 +203,9 @@ package {
 				//AppSettings.VIDEO_NAV_SIDE = AppSettingsIOS.VIDEO_NAV_SIDE_RETINA ; 
 				//AppSettings.VIDEO_NAV_HEIGHT = AppSettingsIOS.VIDEO_NAV_HEIGHT_RETINA ; 
 			    AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT = AppSettingsIOS.VIDEO_NAV_PROGRESS_BAR_HEIGHT_NO_RETINA ;
+				
+				AppSettings.SCROLLBAR_BACK_W = AppSettings.SCROLLBAR_BACK_W_NO_RETINA ; 
+				AppSettings.SCROLLBAR_TRIGGER_W = AppSettings.SCROLLBAR_TRIGGER_W_NO_RETINA ; 
 			}
 			AppSettings.RESERVED_HEIGHT = AppSettings.RESERVED_FOOTER_HEIGHT + AppSettings.RESERVED_HEADER_HEIGHT;
 
@@ -249,54 +259,17 @@ package {
 				file.copyTo(newFile,true);
 			}
 		}
-		protected function onResize(evt:Event = null):void{
+		protected function onResize(evt:Event = null):void
+		{
 			_bkg.x = AppSettings.VIDEO_LEFT;
 			_bkg.y = AppSettings.VIDEO_TOP;
 			_bkg.width = AppSettings.VIDEO_WIDTH;
 			_bkg.height = AppSettings.VIDEO_HEIGHT;
 		}
-		
-		protected function showTerms():void{
-			onResize();
-			
-			var terms:Object = StoredData.getData("has_accepted_terms");
-			if(terms){
-				//skip terms popup
-				getBackendData();
-			}else{
-				var bytes : ByteArray = AssetManager.getEmbeddedAsset("CopyJSON") as ByteArray;
-				TextManager.parseData(bytes.readUTFBytes(bytes.length));
-				/*
-				 * use textfield to strip html characters from copy
-				 */
-				var tf:TextField = TextManager.makeText("page_legal_title");
-				var title:String = tf.text;
-				tf = TextManager.makeText("page_legal_heading");
-				var body:String = tf.text;
-				tf = TextManager.makeText("page_legal_content");
-				var body2:String = tf.text;
-				if(NativeAlert.isSupported){
-					NativeAlert.show(body + "\n\n" + body2, title,"ACCEPT","",onTermsClose);	
-				}else{
-					onTermsClose(new NativeDialogEvent(NativeDialogEvent.CLOSED, "0"));
-				}
-			}
-		}
-		
-		protected function onTermsClose(evt:NativeDialogEvent):void{
-			if(int(evt.index) == 0){
-				StoredData.setData("has_accepted_terms", true);
-				getBackendData();
-			}else{
-				NativeApplication.nativeApplication.exit();
-			}
-		}
-		
-		protected function getBackendData():void{
-			run();
-		}
 
-		protected function run() : void {
+
+
+		protected function start() : void {
 			stage.removeEventListener(Event.RESIZE, onResize);	
 			removeChild(_bkg);
 			_bkg = null;

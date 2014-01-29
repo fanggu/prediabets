@@ -80,6 +80,7 @@ package com.refract.prediabetes.stateMachine {
 			
 			if( AppSettings.stage.displayState != StageDisplayState.NORMAL)
 			{
+				
 				CHOICE_FONT_SIZE = CHOICE_FONT_SIZE_FS ; 
 				CHOICE_BUTTON_HEIGHT = CHOICE_BUTTON_HEIGHT_FS ; 
 				CHOICE_BUTTON_WIDTH = CHOICE_BUTTON_WIDTH_FS ; 
@@ -90,6 +91,7 @@ package com.refract.prediabetes.stateMachine {
 			}
 			else
 			{
+				
 				CHOICE_FONT_SIZE = CHOICE_FONT_SIZE_NO_FS ; 
 				CHOICE_BUTTON_HEIGHT = CHOICE_BUTTON_HEIGHT_NO_FS ; 
 				CHOICE_BUTTON_WIDTH = CHOICE_BUTTON_WIDTH_NO_FS ;

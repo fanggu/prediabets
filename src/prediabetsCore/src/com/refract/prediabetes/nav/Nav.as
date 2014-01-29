@@ -49,7 +49,7 @@ package com.refract.prediabetes.nav {
 			//if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
 				//DispatchManager.addEventListener( Flags.APP_FULLSCREEN, callFullScreen ) ;
 			
-			setOverlayBoyVars() ; 
+			setOverlaySize() ; 
 			_blackGraphics = new Sprite() ; 
 			addChild( _blackGraphics ) ; 
 			_blackGraphics.alpha = 0 ; 
@@ -75,23 +75,25 @@ package com.refract.prediabetes.nav {
 			_footer = new ClassFactory.FOOTER( this );
 			addChild(_footer);
 			DispatchManager.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
-			
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_START, onSMStart);
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_END, onSMEnd);
-			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze);
+			DispatchManager.addEventListener(Flags.UN_FREEZE, onUnFreeze); 
 			
 			stage.addEventListener(Event.RESIZE,onResize);
-			//stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
+			
 			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
-				DispatchManager.addEventListener( Flags.APP_FULLSCREEN, onFSChange)
+				DispatchManager.addEventListener( Flags.APP_FULLSCREEN, onFSChange) ; 
+			else
+				DispatchManager.addEventListener(Flags.SET_OVERLAY_SIZE , setOverlaySize);
+				
 			onResize();
 		}
 
 		
-		private function setOverlayBoyVars() : void
+		private function setOverlaySize( evt : Event = null ) : void
 		{
-			GeneralOverlay.BODY_WIDTH = AppSettings.VIDEO_WIDTH - AppSettings.OVERLAY_GAP - AppSettings.OVERLAY_BODY_DIFF_W;
-			GeneralOverlay.BODY_HEIGHT = AppSettings.VIDEO_HEIGHT - AppSettings.OVERLAY_GAP - AppSettings.OVERLAY_BODY_DIFF_H ; //- 320; 
+			GeneralOverlay.BODY_WIDTH = AppSettings.VIDEO_WIDTH - AppSettings.OVERLAY_GAP - AppSettings.OVERLAY_BODY_DIFF_W ;
+			GeneralOverlay.BODY_HEIGHT = AppSettings.VIDEO_HEIGHT - AppSettings.OVERLAY_GAP - AppSettings.OVERLAY_BODY_DIFF_H ;
 		}
 		private function onFSChange( evt : Event ) : void
 		{
@@ -109,7 +111,7 @@ package com.refract.prediabetes.nav {
 			AppSettings.SHOW_HEADER = true ; 
 			_header.addEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			_header.visible = true ; 
-			setOverlayBoyVars() ; 
+			setOverlaySize() ; 
 			if( _currentOverlay )
 			{
 					
@@ -125,7 +127,7 @@ package com.refract.prediabetes.nav {
 			AppSettings.SHOW_HEADER = false ; 
 			_header.removeEventListener(FooterEvent.FOOTER_CLICKED, onNavClicked);
 			_header.visible = false ; 
-			setOverlayBoyVars() ; 
+			setOverlaySize() ; 
 			if( _currentOverlay )
 			{
 				
@@ -187,7 +189,6 @@ package com.refract.prediabetes.nav {
 		
 		public function addSection( name:String ):void
 		{
-			trace('add section :' , name)
 			switch("SECTION:"+name)
 			{	
 				case(AppSections.LEGAL):
@@ -234,7 +235,7 @@ package com.refract.prediabetes.nav {
 				_footer.removeOverlay() ; 
 				_blackGraphics.graphics.clear();
 				_overlayBackground.graphics.clear();
-				TweenMax.to(_currentOverlay,fadeTime,{autoAlpha:0,onComplete:overlayRemoved,onCompleteParams:[_currentOverlay]});
+				TweenMax.to(_currentOverlay,fadeTime/2,{autoAlpha:0,onComplete:overlayRemoved,onCompleteParams:[_currentOverlay]});
 				_footer.hideBackToVideo() ; 	
 				if(!hasNextOverlay){
 					_currentOverlay = null;

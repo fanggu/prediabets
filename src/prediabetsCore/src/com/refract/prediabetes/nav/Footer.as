@@ -32,7 +32,6 @@ package com.refract.prediabetes.nav {
 
 	public class Footer extends Sprite 
 	{
-		
 		//Flags
 		private const PLAY_PAUSE:String = "PLAY_PAUSE";
 		private const BACKWARD_BUTTON:String = "BACKWARD_BUTTON";
@@ -260,6 +259,7 @@ package com.refract.prediabetes.nav {
 			}
 			var posContainerAdder : int = 0 ; 
 			var footerHeight : Number = AppSettings.RESERVED_FOOTER_HEIGHT ; 
+			
 			_footerBackTop = new Box( stage.stageWidth , footerHeight  , 0xffffff) ;
 			_footerBackTop.alpha = 0 ; 
 			if( AppSettings.FOOTER_VIDEONAV_FIXED )
@@ -269,7 +269,7 @@ package com.refract.prediabetes.nav {
 				_footerBackTop.height = footerHeight ; 
 				_footerBackTop.alpha = 1 ; 
 			}
-			_footerBackBottom = new Box( stage.stageWidth , footerHeight  , 0xffffff) ;
+			_footerBackBottom = new Box( stage.stageWidth , footerHeight  , 0xffffff ) ;
 			
 			_footerBackBottom.y = 0 + posContainerAdder  ;
 			_footerBackTop.y = -footerHeight + posContainerAdder ;
@@ -440,8 +440,6 @@ package com.refract.prediabetes.nav {
 			interaction.iter = Flags.BACK_TO_VIDEO_BUTTON ; 
 			_backToVideo.id = Flags.BACK_TO_VIDEO_BUTTON ;
 			_backToVideo.visible = false ; 
-			//trace(' _backToVideo :' , _backToVideo)
-			//trace(' SMController.me.model.closeButtonState :' , SMController.me.model.closeButtonState)
 			_backToVideo.setButton( interaction ) ; 
 			 
 			_backToVideo.addEventListener(MouseEvent.CLICK, onBackToVideo);

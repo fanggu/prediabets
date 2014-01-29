@@ -111,6 +111,8 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const APP_ACTIVATE 							: String = 'APP_ACTIVATE';
 		public static const APP_DEACTIVATE 							: String = 'APP_DEACTIVATE';
 		
+		public static const SET_OVERLAY_SIZE						: String = 'setOverlaySize' ; 
+		
 		
 	}
 }

@@ -10,6 +10,7 @@ package com.refract.air.shared {
 		public static var TOP_HEIGHT_BAR_RETINA				  		: int = 17 ; 
 		public static var TOP_HEIGHT_BAR_NO_RETINA				  	: int = 238 ; 
 		public static const LOGO_RETINA_ADDRESS 					: String = 'LogoRetina' ; 
+		public static const LOGO_DNZ_RETINA_ADDRESS					: String = 'LogoDNZRetina'
 		
 		public static var VIDEO_NAV_SIDE_RETINA 					: int = AppSettings.VIDEO_NAV_SIDE * 2; 
 		public static var VIDEO_NAV_HEIGHT_RETINA 					: int = AppSettings.VIDEO_NAV_HEIGHT * 2 ;

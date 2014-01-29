@@ -14,7 +14,6 @@ package {
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
@@ -52,33 +51,37 @@ package {
 			 */
 			//Security.allowDomain("*") ;
 			var loader:URLLoader = new URLLoader();
+			/*
 			loader.dataFormat = URLLoaderDataFormat.TEXT;
 			loader.addEventListener(Event.COMPLETE, loaderCompleteHandler);
 			loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			 * 
+			 */
 			
 			//Create the HTTP request object 
 		     
 		    //var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/timespent/start" );
 			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/timespent/end/3" );
-			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/action/getAttachment/1" );
+			var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/action/getAttachment/1" );
 			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/action/closeAttachment/1" );
-			var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/interactive" );
+			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/interactive" );
 			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/location" );
 			
 				
 			
-		   request.method = URLRequestMethod.POST;
+		   request.method = URLRequestMethod.GET;
 		   request.requestHeaders = new Array
 		   (
-		   		new URLRequestHeader("userId", "")
-				,new URLRequestHeader("trackId", "")
+		   		new URLRequestHeader("userId", "65C68682-5052-52DD-14FB-B07465E37319")
+				,new URLRequestHeader("trackId", "1")
 			);
 		    //Add the URL variables 
 		    var variables:URLVariables = new URLVariables();   
 			//variables.param = '{"latitude":"33.8404","longitude":"170.7399","ipaddress":"192.168.1.1"}';
-			variables.param = '{"episodeId":"d11s","choice":"what?","nextEpisodeId":"d21", "currentStep" : "13"}';      
+			//variables.param = '{"episodeId":"d11s","choice":"what?","nextEpisodeId":"d21", "currentStep" : "13"}';  
+			variables.param = {} ;     
 		    request.data = variables; 
 			
 			
@@ -87,10 +90,24 @@ package {
 			
 			loader.addEventListener(Event.COMPLETE, loaderCompleteHandler);
 			loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
+			loader.addEventListener(HTTPStatusEvent.HTTP_RESPONSE_STATUS, httpResponseHandler);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
 			
 			loader.load( request ) ; 
+		}
+
+		private function httpResponseHandler(event : HTTPStatusEvent) : void 
+		{
+			var urlRequestHeader : URLRequestHeader ; 
+			for( var i : int = 0 ; i < event.responseHeaders.length ; i ++ )
+			{
+				urlRequestHeader = event.responseHeaders[i] ; 
+				if( urlRequestHeader.name == 'Trackheader')
+				{
+					trace('value :' , urlRequestHeader.value)
+				}
+			}
 		}
 		
 		private function loaderCompleteHandler(e:Event):void
@@ -101,7 +118,8 @@ package {
 		
 		private function httpStatusHandler(e:HTTPStatusEvent):void
 		{
-			//trace('e ', e.responseHeaders ) 
+			trace("*****")
+			//if( e.responseHeaders ) trace('e ', e.responseHeaders ) 
 		    trace("httpStatusHandler:" + e.status);
 		
 		}

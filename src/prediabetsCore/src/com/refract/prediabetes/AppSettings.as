@@ -15,11 +15,12 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = false;
+		public static const DEBUG 										: Boolean = false ;
 		public static const INTRO_URL									: String = 'd01_intro_part_1' ; 
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
 		public static var LOGO_ADDRESS 									: String = 'Logo' ; 
+		public static var LOGO_DNZ_ADDRESS 									: String = 'LogoDNZ' ; 
 		
 		public static const BULK_LOADER_ID 								: String  = 'Videos' ; 
 		
@@ -58,6 +59,18 @@ package com.refract.prediabetes {
 		public static var OVERLAY_BODY_DIFF_H_FS						: int = 130 ;
 		public static var OVERLAY_BODY_DIFF_W							: int = OVERLAY_BODY_DIFF_W_NO_FS ; 
 		public static var OVERLAY_BODY_DIFF_H							: int = OVERLAY_BODY_DIFF_H_NO_FS ; 
+		//public static var SCROLLBAR_
+		public static var SCROLLBAR_GAP_H 								: int = 10 ; 
+		public static const SCROLLBAR_BACK_W_NO_FS						: int = 21 ; 
+		public static const SCROLLBAR_TRIGGER_W_NO_FS					: int = 12 ; 
+		public static const SCROLLBAR_BACK_W_FS							: int = 27 ; 
+		public static const SCROLLBAR_TRIGGER_W_FS						: int = 13 ; 
+		public static const SCROLLBAR_BACK_W_RETINA						: int = 38 ; 
+		public static const SCROLLBAR_BACK_W_NO_RETINA					: int = 19 ; 
+		public static const SCROLLBAR_TRIGGER_W_RETINA					: int = 17 ; 
+		public static const SCROLLBAR_TRIGGER_W_NO_RETINA				: int = 8 ; 
+		public static var SCROLLBAR_BACK_W								: int = SCROLLBAR_BACK_W_NO_FS; 
+		public static var SCROLLBAR_TRIGGER_W							: int = SCROLLBAR_TRIGGER_W_NO_FS; 
 		
 		public static var BACK_TO_VIDEO_GAP 							: int = 10 ;  
 		public static var SHOW_HEADER 									: Boolean = false ; 
@@ -162,8 +175,12 @@ package com.refract.prediabetes {
 		
 		private static function onStageResize(evt:Event = null):void
 		{
-			SMSettings.onFullScreenChange() ; 
-			onFullScreenChange() ; 
+			
+			if( DEVICE != DEVICE_TABLET ) 
+			{
+				SMSettings.onFullScreenChange() ; 
+				onFullScreenChange() ; 
+			}
 			
 			
 			var stageW : Number = _stage.stageWidth - AppSettings.RESERVED_SIDE_BORDER * 2 ; 
@@ -181,7 +198,6 @@ package com.refract.prediabetes {
 				totHBusy = VIDEO_HEIGHT + RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT ;
 				diffFree = _stage.stageHeight - totHBusy ; 
 				VIDEO_TOP = RESERVED_HEADER_HEIGHT + ( diffFree / 2 ) ;
-				//_stage.stageHeight/2 - VIDEO_HEIGHT/2 ; //- RESERVED_HEADER_HEIGHT/2 ;
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 				
 			}
@@ -199,6 +215,8 @@ package com.refract.prediabetes {
 				VIDEO_BOTTOM = VIDEO_TOP + VIDEO_HEIGHT;
 				
 			}
+			
+			DispatchManager.dispatchEvent( new Event( Flags.SET_OVERLAY_SIZE )) ;
 		    DispatchManager.dispatchEvent( new Event( Flags.APP_FULLSCREEN )) ;
 		}
 		
@@ -223,6 +241,7 @@ package com.refract.prediabetes {
 				RESERVED_FOOTER_HEIGHT_DEFAULT = 60 ; //34;
 
 				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
+				
 				RESERVED_FOOTER_HEIGHT= RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
 				RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
 				
@@ -230,6 +249,9 @@ package com.refract.prediabetes {
 				OVERLAY_GAP = 100 ; 
 				OVERLAY_BODY_DIFF_W = OVERLAY_BODY_DIFF_W_FS ; 
 				OVERLAY_BODY_DIFF_H = OVERLAY_BODY_DIFF_H_FS ; 
+				
+				SCROLLBAR_BACK_W = SCROLLBAR_BACK_W_FS ;
+				SCROLLBAR_TRIGGER_W = SCROLLBAR_TRIGGER_W_FS ;  
 			}
 			else
 			{
@@ -239,11 +261,13 @@ package com.refract.prediabetes {
 				RESERVED_HEADER_HEIGHT = RESERVED_HEADER_HEIGHT_DEFAULT ; //30 ; //RESERVED_HEADER_HEIGHT_DEFAULT;
 				RESERVED_FOOTER_HEIGHT= RESERVED_FOOTER_HEIGHT_DEFAULT ; //90 ; //RESERVED_FOOTER_HEIGHT_DEFAULT;
 				RESERVED_HEIGHT = RESERVED_FOOTER_HEIGHT + RESERVED_HEADER_HEIGHT;
-				
 				FOOTER_BUTTON_SPACE = 30 ; 
 				OVERLAY_GAP = 50 ; 
 				OVERLAY_BODY_DIFF_W = OVERLAY_BODY_DIFF_W_NO_FS ; 
 				OVERLAY_BODY_DIFF_H = OVERLAY_BODY_DIFF_H_NO_FS ; 
+				
+				SCROLLBAR_BACK_W = SCROLLBAR_BACK_W_NO_FS ;
+				SCROLLBAR_TRIGGER_W = SCROLLBAR_TRIGGER_W_NO_FS ;  
 			}
 		}
 		

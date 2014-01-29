@@ -40,13 +40,8 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		}
 		public function setButton( interaction : Object ) : void
 		{
-			//if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
-				//AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange , false , 5 ) ;
 			if( id != Flags.BACK_TO_VIDEO_BUTTON)
 				DispatchManager.addEventListener(Flags.FADEOUT, onFadeOut ); 
-				
-			//DispatchManager.addEventListener( Flags.APP_FULLSCREEN, onAppFullScreen ) ; 
-			
 			_interaction = interaction ; 
 			text = interaction.copy.main ;
 			name = interaction.iter ; 
@@ -58,7 +53,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 				 AppSettings.stage.addEventListener( Event.RESIZE , onResize) ;
 				 onResize() ;  
 			}
-			buttonAlpha = 1 ; //0.15 ;
+			buttonAlpha = 1 ; 
 			
 			var values : String = interaction.interaction_meta ;
 			var regExp : RegExp =  /-?[a-z]+/g;
@@ -69,8 +64,11 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			if( tempValue == 'true') _value = true ; 
 			else _value = false ; 
 			
-			
-			addEventListener(MouseEvent.CLICK, btPressed); 
+			if( !_interaction.external )
+			{
+				addEventListener(MouseEvent.CLICK, btPressed);	
+			}
+			 
 			addEventListener(MouseEvent.ROLL_OVER, btRollOver); 
 
 			
@@ -87,7 +85,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		}
 		private function onAppFullScreen( evt : Event ) : void
 		{
-			trace('::onApp fullscreen')
 			onFullScreenChange() ; 
 		}
 		private function onFullScreenChange ( evt : FullScreenEvent = null ) : void
@@ -105,10 +102,8 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			}
 			 * 
 			 */
-			minW = SMSettings.CHOICE_BUTTON_WIDTH ; //- subtract  ; 
+			minW = SMSettings.CHOICE_BUTTON_WIDTH ;  
 			minH = SMSettings.CHOICE_BUTTON_HEIGHT ; 
-			
-			//trace('minW ' , minW, ' id :' , id)
 			text = temp ; 
 		}
 		
@@ -120,6 +115,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 				case(MouseEvent.MOUSE_OVER):
 					playSound("SndGeneralRollover");
 					//TweenMax.to(_body,0.4,{tint:overColor});
+					
 					if(_bkgBorder)	TweenMax.to(_bkgBorder,0.5,{tint : SMSettings.CHOICE_BACK_COLOR });
 					if( _bkg ) TweenMax.to( _bkg , 0.5 , {tint : SMSettings.CHOICE_BORDER_COLOR } ) ;
 				break;

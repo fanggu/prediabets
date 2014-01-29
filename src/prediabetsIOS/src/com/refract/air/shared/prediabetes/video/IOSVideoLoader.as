@@ -92,7 +92,6 @@ package com.refract.air.shared.prediabetes.video
 		 
 		override protected function createVideo( nameVideo : String) : void
 		{		
-			trace('CREATE VIDEO :' , nameVideo)
 			SMVars.me.nsStreamTimeAbs = 0 ; 
 			 
 			//showBuffer() ; 

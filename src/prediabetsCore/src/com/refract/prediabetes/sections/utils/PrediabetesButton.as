@@ -183,11 +183,20 @@ package com.refract.prediabetes.sections.utils {
 					_bkg.graphics.beginFill(0x00,0.3);
 					_bkg.graphics.drawRect(0, 0, ww, hh);
 				}
-				_bkg.graphics.beginFill(SMSettings.CHOICE_BACK_COLOR ,_buttonAlpha);
+				
+				var color_back : uint = SMSettings.CHOICE_BACK_COLOR ;
+				var color_border : uint = SMSettings.CHOICE_BORDER_COLOR ;   
+				if(!_copyProps.interaction )
+				{
+					color_border = 0xffffff ; 
+					color_back = 0x000000 ; 
+				}
+				
+				_bkg.graphics.beginFill( color_back ,_buttonAlpha);
 				_bkg.graphics.drawRect(0, 0, ww, hh);
 				
 				_bkgBorder.graphics.clear();
-				_bkgBorder.graphics.lineStyle(2,SMSettings.CHOICE_BORDER_COLOR,1);
+				_bkgBorder.graphics.lineStyle(2, color_border ,1);
 				_bkgBorder.graphics.drawRect(0, 0, ww, hh);
 				_bkgBorder.alpha = 1;
 				

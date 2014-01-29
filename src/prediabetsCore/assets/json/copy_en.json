@@ -62,15 +62,20 @@
     }, 
 
     {
-        "flash_id": "page_findoutmore_subtitle",
-        "copy_en": "Lorem Ipsum",
-        "font": "NEXABOLD",
+        "flash_id": "page_findoutmore_copy_1",
+        "copy_en": "Want to find out more about pre diabetes and diabetes? Here are two great sites:",
+        "font": "NEXALIGHT",
         "colour": "WHITE"
-    }, 
-
+    },
     {
-        "flash_id": "page_findoutmore_copy",
-        "copy_en": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magpteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esspisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.e cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "flash_id": "page_findoutmore_copy_2",
+        "copy_en": "For more about health and wellness - and what you can do about pre diabetes and managing your condition if you have diabetes, please visit:\n<u><a href='http://www.healthmentoronline.com' >www.healthmentoronline.com</a></u>",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_findoutmore_copy_3",
+        "copy_en": "And for even more information on diabetes and to find out how Diabetes New Zealand can help you, please visit: \n<u><a href='http://www.diabetes.org.nz' >www.diabetes.org.nz</a></u>",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     },
@@ -133,13 +138,13 @@
     }, 
     {
         "flash_id": "page_legal_heading_1",
-        "copy_en": "<p><b>Updated 1 January 2014</b></p>",
+        "copy_en": "<p><b>8 January 2014  </b></p>",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_legal_content_1",
-        "copy_en": "<p>The following terms and conditions govern your use of this website service. By using this website you agree to be bound by these terms and conditions. These terms and conditions may change without further notice to you and we recommend you check the terms and conditions when you use the site.</p>\n \n<p>Use of the service is governed by the terms and conditions of this agreement. Please read this agreement carefully before accessing or using the service.</p>\n \n<p>THIS INTERACTIVE APPLICATION DOES NOT PROVIDE MEDICAL ADVICE.  It is intended for information only. It is not a substitute for professional medical advice, diagnosis or treatment. If you think you may have a medical emergency call Emergency 111 immediately. For personal advice please talk with your healthcare professional.</p>",
+        "copy_en": "The following terms and conditions govern your use of this website service. By using this website and interactive application, you agree to be bound by these terms and conditions.\n \nPlease read this agreement carefully before accessing or using the service. \n \nTHIS WEBSITE AND INTERACTIVE APPLICATION DOES NOT PROVIDE MEDICAL ADVICE.  It is intended for information only. We make no recommendations on its applicability to any particular clinical situation. It is not a substitute for professional medical advice, diagnosis or treatment. If you think you may have a medical emergency call Emergency 111 immediately. For personal advice please talk with your healthcare professional. ",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
@@ -151,98 +156,103 @@
     }, 
     {
         "flash_id": "page_legal_content_2",
-        "copy_en": "<p>By accessing this web and mobile-based application you agree to be bound by these terms of use. Your access and use of this site and its services bind you to this agreement. If you do not agree to the Terms and Conditions of use for this site, you may not use the site or its services.</p>\n \n<p>We may modify this agreement at any time. Any modifications made to this agreement will be effective immediately upon posting on the site. By accessing or using the service, you agree to be bound by all of the terms and conditions of the agreement as posted on the service at the time of your access or use. You agree to review the Agreement posted on the service each time you use the service so that you are aware of any modifications made to this agreement.</p>",
+        "copy_en": "By accessing this web and mobile-based application you agree to be bound by these terms of use. Your access and use of this site and its services bind you to this agreement. If you do not agree to the terms and conditions of use for this site, you may not use the site or its services.\n \nWe may modify this agreement at any time. Any modifications made to this agreement will be effective immediately upon posting on the site. By accessing or using the service, you agree to be bound by all of the terms and conditions of the agreement as posted on the service at the time of your access or use. You agree to review the agreement posted on the service each time you use the service so that you are aware of any modifications made to this agreement.",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_legal_heading_3",
-        "copy_en": "<p>Reliance</p>",
+        "copy_en": "<p>Our liability</p>",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_legal_content_3",
-        "copy_en": "<p>All information included on this website is intended for information purposes only and does not represent clinical advice. It is intended to supplement application of both local and national diabetes clinical guidelines. We make no recommendations on its applicability to any particular clinical situation.</p>",
+        "copy_en": "<p>Whilst we endeavour to ensure that information on this website is correct, we cannot guarantee and assume no legal liability or responsibility for the accuracy, currency or completeness of the information available through this website. The information on this website is for personal use only and is provided in good faith. Users who link to another site from this site are subject to the liability policy of the new site.</p>",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_legal_heading_4",
-        "copy_en": "<p>Service delivery</p>",
+        "copy_en": "<p>External websites</p>",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_legal_content_4",
-        "copy_en": "<p>We cannot guarantee that the delivery of this website service will be fault free. If a fault occurs in the service we will attempt to correct the fault as soon as we reasonably can. Your access to the website may be occasionally restricted to allow for repairs or maintenance.</p>",
+        "copy_en": "Where the website contains links to third party resources on the web. We do not endorse, approve or sanction (unless otherwise stated) nor are we responsible for any third party's products, services, acts or omissions.\n \nIt is the responsibility of the user to make their own decisions about the accuracy, currency, reliability and correctness of information contained in any linked external web sites. You will be responsible for your use of any external website.\n \nThis site gives access to external websites Facebook and Twitter. We make no warranties representations or undertakings nor accept any liability or responsibility in connection with the content or use made of any website linked to this website. You must comply with any of the terms and conditions of Facebook and Twitter. You will be responsible for anything which happens on any of your accounts.",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
+
     {
         "flash_id": "page_legal_heading_5",
-        "copy_en": "<p>Password and security</p>",
-        "font": "NEXABOLD",
-        "colour": "WHITE"
-    },
-    {
-        "flash_id": "page_legal_content_5",
-        "copy_en": "<p>These services are for designated users. You will be asked to create a password. You must keep this password confidential and must not disclose it or share it with anyone. Please note that you will be responsible for activities that occur under your password. If you know or suspect that someone else knows your password you should notify us immediately and change your password. You may change your password at any time.</p>",
-        "font": "NEXALIGHT",
-        "colour": "WHITE"
-    }, 
-
-    {
-        "flash_id": "page_legal_heading_6",
-        "copy_en": "<p>Third party sites</p>",
-        "font": "NEXABOLD",
-        "colour": "WHITE"
-    },
-    {
-        "flash_id": "page_legal_content_6",
-        "copy_en": "<p>The website contains links to third party resources on the Web. We do not endorse, approve or sanction (unless otherwise stated) nor are we responsible for any third party's products, services, acts or omissions. There is no association or connection between us and the third party, (unless otherwise stated) save for the provision of the link. We do not act in partnership with nor as agent for or on behalf of the third party to whom we provide links.</p>",
-        "font": "NEXALIGHT",
-        "colour": "WHITE"
-    }, 
-
-    {
-        "flash_id": "page_legal_heading_7",
         "copy_en": "<p>Copyright</p>",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
     {
-        "flash_id": "page_legal_content_7",
-        "copy_en": "<p>The materials on the site are copyrighted by us and/or other applicable rights holders. All design, text and graphics displayed are copyrighted. None of the contents may be copied or incorporated into any other website or other work of any kind, in any form whatsoever.</p>\n \n<p>The service is for your own personal, non-commercial use only. You may not otherwise reproduce, copy, distribute or use any material on this website. Permanent copying and/or storage of material or reproduction or incorporation of any part of it in any other work, in whatever media, is expressly prohibited. Any other use of the materials is strictly prohibited without our prior written permission and the permission of the applicable rights holder(s).</p>\n \n<p>You agree not to hack or reverse engineer, or acquire unauthorised access to, any part of the site, or attempt to do any of the foregoing.</p>",
+        "flash_id": "page_legal_content_5",
+        "copy_en": "The materials on the site are copyrighted by us and/or other applicable rights holders. All design, text and graphics displayed are copyrighted. None of the contents may be copied or incorporated into any other website or other work of any kind, in any form whatsoever.\n \nThe service is for your own personal, non-commercial use only. You may not otherwise reproduce, copy, distribute or use any material on this website. Permanent copying and/or storage of material or reproduction or incorporation of any part of it in any other work, in whatever media, is expressly prohibited. Any other use of the materials is strictly prohibited without our prior written permission and the permission of the applicable rights holder(s).\n \nYou agree not to hack or reverse engineer, or acquire unauthorised access to, any part of the site, or attempt to do any of the foregoing.",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
 
-     {
+
+    {
+        "flash_id": "page_legal_heading_6",
+        "copy_en": "<p>Service delivery</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_content_6",
+        "copy_en": "We cannot guarantee that the delivery of this website service will be fault free. If a fault occurs in the service we will attempt to correct the fault as soon as we reasonably can. Your access to the website may be occasionally restricted to allow for repairs or maintenance.\n \nTo the maximum extent permitted by law, we do not warrant or make any representations as to the security of this site. Nor warrant that the site or the servers which make this site available or electronic communications are free from viruses or any other harmful element.",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_heading_7",
+        "copy_en": "<p>Privacy</p>",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_7",
+        "copy_en": "We treat your privacy seriously and we understand that you would wish to know how we shall use the information we collect from your use of these website services.\n \nWhere you voluntarily provide personal information (e.g. through login, online forms or email requests), we will hold your personal information in accordance with the Privacy Act 1993.\n \nThe Privacy Act 1993 regulates us through the Information Privacy Principles as to how we collect, use, hold, disclose, access, correct, manage and dispose of your personal information.\n \nPrivacy Act 1993 - http://www.privacy.org.nz/privacy-act/",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+    {
         "flash_id": "page_legal_heading_8",
-        "copy_en": "<p>External websites</p>",
+        "copy_en": "<p>Cookies</p>",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
     {
         "flash_id": "page_legal_content_8",
-        "copy_en": "<p>Where materials are available publicly copyright conditions are provided on those websites.</p>\n\n <p>It is the responsibility of the user to make their own decisions about the accuracy, currency, reliability and correctness of information contained in any linked external web sites. You will be responsible for your use of any external website.</p>",
+        "copy_en": "This website service requires users to have cookies enabled. Cookies are small computer files which our site will store in your internet browser, which enable information to be transmitted to and from your internet browser and our site. These are temporary cookies rather than permanent ones, which means that these cookies are deleted or made inactive when you close your internet browser. No critical or sensitive information is stored by cookies and our cookies cannot be used to identify you as an individual. We use temporary cookies to improve the sites accessibility. By using the site, you agree to our use of cookies as described above.",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
-
-     {
+    {
         "flash_id": "page_legal_heading_9",
-        "copy_en": "<p>Our liability</p>",
+        "copy_en": "<p>IP addresses</p>",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
     {
         "flash_id": "page_legal_content_9",
-        "copy_en": "<p>Whilst we endeavour to ensure that information on this website is correct, we cannot guarantee and assume no legal liability or responsibility for the accuracy, currency or completeness of the information available through this website. The information on this website is for personal use only and is provided in good faith. Users who link to another site from this site are subject to the liability policy of the new site.</p>",
+        "copy_en": "We collect and log the Internet Protocol address (IP) of all visitors to this site. An IP address is a number automatically assigned to your computer whenever you access the Internet. IP addresses allow computers and servers to recognise and communicate with one another. We collect IP address information so that we can properly administer our system and gather aggregate information about how our site is being used. This aggregate information may be shared with third parties. To maintain your anonymity, we do not associate IP addresses with records containing personal information. We will use IP address information, however, to personally identify you in order to enforce our legal rights or when required to do so by law enforcement authorities.\n \nInformation that is automatically retrieved about your visit includes -<ul><li>•   your IP address</li><li>•   the pages you accessed on the website and the links you clicked on</li><li>•   the date and time you visited the website</li><li>•   the referring website (if any) through which you clicked through to this website</li><li>•   your operating system (e.g. Windows XP, Mac OSX)</li><li>•   the type of web browser you use (e.g. Internet Explorer, Mozilla Firefox)</li><li>•   other incidental matters such as screen resolution, the release of your installed Flash version and the language setting of your browser.</li></ul>",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
+
+
+
+
+ 
+
 
     {
         "flash_id": "page_legal_heading_10",
@@ -262,16 +272,10 @@
 
     {
         "flash_id": "page_share_title",
-        "copy_en": "TELL YOUR FRIENDS",
-        "font": "BEBASNEUE",
+        "copy_en": "Please share this with your friends",
+        "font": "NEXABOLD",
         "colour": "WHITE"
-    }, {
-        "flash_id": "page_share_subheading",
-        "copy_en": "SHARE LIFESAVER WITH YOUR FRIENDS",
-        "font": "AKZIDENZG_CONDENSED",
-        "colour": "GREY"
-    } , 
-
+    }, 
 
 
      {

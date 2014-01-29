@@ -2,8 +2,7 @@ package com.refract.prediabetes.sections.utils {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
-
-	import org.osmf.logging.Logger;
+	import com.refract.prediabetes.stateMachine.SMSettings;
 
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
@@ -69,53 +68,56 @@ package com.refract.prediabetes.sections.utils {
 		//	}
 		}
 		
-		private function drawContent():void{
-			if(_content.height > _h){
+		private function drawContent():void
+		{
+			if(_content.height > _h)
+			{
 				var pivotHeight:Number = (_h/_content.height)*_h;
-				if(_mask){
+				if(_mask)
+				{
 					_mask.graphics.clear();
-				}else{
+				}
+				else
+				{
 					_mask = new Shape();
 				}
 				_mask.graphics.beginFill(0x0,1);
 				_mask.graphics.drawRect(0, 0, _w-7, _h);
-//				_mask.graphics.drawRect(0, 0, _w-20, _h);
 				
 				if(_pivotLine){
 					_pivotLine.graphics.clear();
 				}else{
 					_pivotLine = new Shape();
 				}
-				_pivotLine.graphics.beginFill(AppSettings.RED,0.5);
-				_pivotLine.graphics.drawRect(0, 0, 7, _h);
+				_pivotLine.graphics.beginFill( 0xc9c9c9 , 1 ) ;
+				_pivotLine.graphics.drawRect(0, 0, AppSettings.SCROLLBAR_BACK_W , _h + AppSettings.SCROLLBAR_GAP_H);
 				
-				if(_pivotTrigger){
+				if(_pivotTrigger)
+				{
 					_pivotTrigger.graphics.clear();
-				}else{
+				}
+				else
+				{
 					_pivotTrigger = new Sprite();
 				}
-				_pivotTrigger.graphics.beginFill(AppSettings.RED,1);
-				_pivotTrigger.graphics.drawRect(0, 0, 7, pivotHeight);
+				_pivotTrigger.graphics.beginFill( SMSettings.CHOICE_BACK_COLOR , 1 ) ;
+				_pivotTrigger.graphics.drawRect(0, 0, AppSettings.SCROLLBAR_TRIGGER_W , pivotHeight);
+				
 				
 				addChild(_content);
 				addChild(_mask);
 				addChild(_pivotLine);
 				addChild(_pivotTrigger);
 				_pivotTrigger.buttonMode = true;
-				_pivotLine.x = _pivotTrigger.x = _w  - 7;//+ 30;
+				_pivotLine.x = _w - 10 ;
+				_pivotTrigger.x = _w - 10 + _pivotLine.width / 2 - _pivotTrigger.width / 2   ;//- 7;//+ 30;
 				_content.mask = _mask;
-				_pivotRect = new Rectangle(_pivotLine.x,0,0,_h-pivotHeight);
-				
-				
+				_pivotRect = new Rectangle( _pivotTrigger.x ,0,0,_h-pivotHeight);
 				_pivotTrigger.y = (_content.y/(-_content.height+_h))*_pivotRect.height;
-				
-				/*
-				graphics.clear();				
-				graphics.lineStyle(1,0xffffff,1);
-				graphics.drawRect(0,0,AppSettings.VIDEO_WIDTH,AppSettings.VIDEO_HEIGHT);
-				 */
-				
-			}else{
+				_pivotLine.y = -AppSettings.SCROLLBAR_GAP_H / 2 ; 
+			}
+			else
+			{
 				addChild(_content);
 			}
 		}
@@ -218,7 +220,6 @@ package com.refract.prediabetes.sections.utils {
 			newPivotY = newPivotY > _pivotRect.height ? _pivotRect.height : newPivotY;
 			
 			scrollTo(newPivotY/_pivotRect.height);
-			
 		}
 		
 		private function pageDown():void{

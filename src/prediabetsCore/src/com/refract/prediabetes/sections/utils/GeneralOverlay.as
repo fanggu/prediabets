@@ -14,10 +14,10 @@ package com.refract.prediabetes.sections.utils {
 		public static var BODY_WIDTH:int = 500 ; //890;
 		public static var BODY_HEIGHT:int = 200;
 		
-		protected var _headerStyle:Object = {fontSize:24};
-		protected var _bodyTitleStyle:Object = {fontSize:15, autoSize:"left", selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-40};
-		protected var _bodySubtitleStyle:Object = {fontSize:24, autoSize:"left",mouseEnabled:true, selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-40};
-		protected var _bodyStyle:Object = {fontSize:15, autoSize:"left",mouseEnabled:true, selectable:true, align:"left",leading:4, wordWrap: true, multiline:true, width:BODY_WIDTH-40};//385
+		protected var _headerStyle:Object ;//= {fontSize:24};
+		protected var _bodyTitleStyle:Object;// = {fontSize:15, autoSize:"left", selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-30};
+		protected var _bodySubtitleStyle:Object;// = {fontSize:24, autoSize:"left",mouseEnabled:true, selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-30};
+		protected var _bodyStyle:Object;// = {fontSize:15, autoSize:"left",mouseEnabled:true, selectable:true, align:"left",leading:4, wordWrap: true, multiline:true, width:BODY_WIDTH-30};//385
 		
 		protected var _header:TextField;
 		
@@ -39,8 +39,31 @@ package com.refract.prediabetes.sections.utils {
 			addEventListener(Event.ADDED_TO_STAGE,init);
 		}
 		
-		protected function init(evt:Event):void{
+		protected function init(evt:Event):void
+		{
 			removeEventListener(Event.ADDED_TO_STAGE,init);
+			trace('AppSettings RETINA : ' , AppSettings.RETINA)
+			var copy_scrollbar_space : int = 30 ; 
+			if( AppSettings.RETINA )
+			{
+				copy_scrollbar_space = copy_scrollbar_space * 2 ; 
+			}
+			_headerStyle = {fontSize:24} ;
+			_bodyTitleStyle =  {fontSize:15, autoSize:"left", selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-copy_scrollbar_space} ;
+			_bodySubtitleStyle = {fontSize:24, autoSize:"left",mouseEnabled:true, selectable:true, wordWrap: true, multiline:true, width:BODY_WIDTH-copy_scrollbar_space} ;
+			_bodyStyle = 
+			{
+				fontSize:15
+				, autoSize:"left"
+				,mouseEnabled:true
+				, selectable:true
+				, align:"left"
+				,leading:4
+				, wordWrap: true
+				, multiline:true
+				, width: BODY_WIDTH-copy_scrollbar_space 
+				, antialias: true
+			} ;
 			
 			if(AppSettings.DEVICE == AppSettings.DEVICE_TABLET){
 				_headerStyle.fontScale = 1.2;
@@ -50,14 +73,16 @@ package com.refract.prediabetes.sections.utils {
 			
 			_body = new Sprite();
 			
-			_bodyTitleStyle.width = _bodySubtitleStyle.width = _bodyStyle.width = BODY_WIDTH-5;
+			//_bodyTitleStyle.width = _bodySubtitleStyle.width = _bodyStyle.width = BODY_WIDTH-5;
 			
 			_scrollerWidth = BODY_WIDTH;
 			_scrollerHeight = BODY_HEIGHT;
 			createContent();
+			
 			stage.addEventListener(Event.RESIZE,onResize);
             SWFAddress.addEventListener(SWFAddressEvent.CHANGE, handleSWFAddress);
 			onResize();
+			
 		}
 
 		
@@ -75,45 +100,6 @@ package com.refract.prediabetes.sections.utils {
 			if(_header){
 				_header.x = _scrollbox.x;
 			}
-		}
-		private function clean() : void
-		{
-			if(_scrollbox){
-				//_scrollbox.destroy();
-			}
-			_body.removeChildren();
-			removeChildren();
-					trace('CLEA :' , BODY_WIDTH)
-			_bodyTitleStyle = 
-			{
-				fontSize:15
-				, autoSize:"left"
-				, selectable:true
-				, wordWrap: true, multiline:true
-				, width:BODY_WIDTH-40};
-		   _bodySubtitleStyle = 
-		   {
-				fontSize:24
-				, autoSize:"left"
-				,mouseEnabled:true
-				, selectable:true
-				, wordWrap: true
-				, multiline:true
-				, width:BODY_WIDTH-40
-			};
-			_bodyStyle = 
-			{
-				fontSize:15
-				, autoSize:"left"
-				,mouseEnabled:true
-				, selectable:true
-				, align:"left"
-				,leading:4
-				, wordWrap: true
-				, multiline:true
-				, width:BODY_WIDTH-40
-			};//385
-		
 		}
 		
 		public function get effectiveHeight():Number

@@ -17,7 +17,7 @@ package com.refract.air.shared.sections.legal {
 		
 		protected override function createContent():void{
 			
-			_bodyTitleStyle.width = _bodySubtitleStyle.width = _bodyStyle.width = _scrollerWidth-5;
+			//_bodyTitleStyle.width = _bodySubtitleStyle.width = _bodyStyle.width = _scrollerWidth-5;
 			
 			super.createContent();
 		}

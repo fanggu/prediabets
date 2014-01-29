@@ -15,26 +15,7 @@
           "d10_both"
       ]
     },
-    "init_button_state" : 
-    {
-        "choice_x" : 50 ,
-        "choice_y" : 80 , 
-        "interaction_meta" : "wrong=false" , 
-        "copy": 
-        {
-            "main": "Click here to talk about stopping diabetes now!"
-        }
-    } ,
-    "close_button_state" : 
-    {
-        "choice_x" : 0 ,
-        "choice_y" : 0 , 
-        "interaction_meta" : "wrong=false" , 
-        "copy": 
-        {
-            "main": "Close and go back to video"
-        }
-    } , 
+   
     "states": 
     {
       "d01": 
@@ -1866,6 +1847,68 @@
           }
         ]
       },
+
+
+
+
+
+
+
+
+
+
+     "init_button_state" : 
+    {
+        "choice_x" : 50 ,
+        "choice_y" : 80 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "Click here to talk about stopping diabetes now!"
+        }
+    } ,
+    "close_button_state" : 
+    {
+        "choice_x" : 0 ,
+        "choice_y" : 0 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "Close and go back to video"
+        }
+    } ,
+    "share_button_facebook" : 
+    {
+        "choice_x" : 0 ,
+        "choice_y" : 0 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "Share on Facebook"
+        }
+    } , 
+    "share_button_twitter" : 
+    {
+        "choice_x" : 0 ,
+        "choice_y" : 0 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "Share on Twitter"
+        }
+    } , 
+    "share_button_google" : 
+    {
+        "choice_x" : 0 ,
+        "choice_y" : 0 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "Share on Google+"
+        }
+    } , 
+
+
 
     "clip_length" :
       {

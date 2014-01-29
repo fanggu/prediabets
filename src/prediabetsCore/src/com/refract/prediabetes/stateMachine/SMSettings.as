@@ -68,6 +68,13 @@ package com.refract.prediabetes.stateMachine {
 		public static const QUESTIONS_FADE_IN             : String = 'Questions_Fade_Up' ; 
 		public static const QUESTIONS_ROLLOVER            : String = 'Questions_Rollover' ; 
 		
+		//****string for Json Objects
+		//**pos choices
+		public static const JSON_CHOICE_X				  : String = 'choice_x' ; 
+		public static const JSON_CHOICE_Y				  : String = 'choice_y' ; 
+		//**exception for overweight button
+		public static const INTERACTION_INTERNAL		  : String = 'interaction_internal' ; 
+		
 		//**fix bug with choice smoker ( as video is too short ) 
 		public static const D_21_M						  : String = 'd21m_choice_smoker' ; 
 		

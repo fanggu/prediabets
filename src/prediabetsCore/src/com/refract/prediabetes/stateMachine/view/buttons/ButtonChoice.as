@@ -94,14 +94,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			style.align = "left";
 			var temp : String = textfield.text ; 
 			TextManager.styleText( SMSettings.FONT_BUTTON , textfield , style) ; 
-			/*
-			var subtract : int = 0 ; 
-			if( id == Flags.BACK_TO_VIDEO_BUTTON )
-			{
-				subtract = AppSettings.BACK_TO_VIDEO_GAP ; 
-			}
-			 * 
-			 */
 			minW = SMSettings.CHOICE_BUTTON_WIDTH ;  
 			minH = SMSettings.CHOICE_BUTTON_HEIGHT ; 
 			text = temp ; 
@@ -140,7 +132,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		private function onFadeOut( evt : Event ) : void
 		{
 			TweenMax.to( this , SMSettings.FADE_OUT_TIME , { alpha : 0 , delay : SMSettings.BUTTON_FADE_DELAY , onComplete : destroy, canBePaused:true } ) ;  	
-			
 			removeEvents() ; 
 			removeEventListener(MouseEvent.CLICK, btPressed); 
 		}
@@ -150,33 +141,21 @@ package com.refract.prediabetes.stateMachine.view.buttons
 			var btObj : CoinVO = new CoinVO() ; 
 			btObj.btName = name ; 
 			btObj.timeChoiceFadeOut = (SMSettings.FADE_OUT_TIME * 1000 )  ; 
-			
-			if( _interaction.interaction_internal)
+			//**exception for overweight button
+			if( _interaction[SMSettings.INTERACTION_INTERNAL])
 			{
 				btObj.interaction_internal  = true ; 
 				btObj.btName = Flags.OVERWEIGHT ; 
 				deActivate() ;
 			}
-			
-			/*
-			if( _value ) 
-			{ 
-				deActivate() ;
-			}
-			else
-			{
-				activate() ; 
-			}	
-			 * 
-			 */		
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.INSERT_COIN, btObj));
 		}
 		
 		
 		public function onResize( evt : Event = null ) : void
 		{
-			x = ( _interaction.choice_x * AppSettings.VIDEO_WIDTH) / 100 - width/2 + AppSettings.VIDEO_LEFT;
-			y = ( _interaction.choice_y * AppSettings.VIDEO_HEIGHT) / 100 + AppSettings.VIDEO_TOP;
+			x = ( _interaction[SMSettings.JSON_CHOICE_X] * AppSettings.VIDEO_WIDTH) / 100 - width/2 + AppSettings.VIDEO_LEFT;
+			y = ( _interaction[SMSettings.JSON_CHOICE_Y] * AppSettings.VIDEO_HEIGHT) / 100 + AppSettings.VIDEO_TOP;
 		}
 		
 		override public function destroy() : void

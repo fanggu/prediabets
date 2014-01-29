@@ -1,4 +1,4 @@
-package com.refract.prediabetes.sections.intro {
+package com.refract.prediabetes.sections {
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.robot.comm.DispatchManager;
 

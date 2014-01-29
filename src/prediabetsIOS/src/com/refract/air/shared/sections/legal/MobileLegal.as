@@ -1,6 +1,6 @@
 package com.refract.air.shared.sections.legal {
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.sections.legal.Legal;
+	import com.refract.prediabetes.sections.Legal;
 
 	import flash.events.Event;
 

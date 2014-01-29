@@ -6,11 +6,11 @@ package com.refract.prediabetes {
 	import com.refract.prediabetes.nav.footer.BackwardButton;
 	import com.refract.prediabetes.nav.footer.PlayPauseButton;
 	import com.refract.prediabetes.nav.footer.SoundButton;
-	import com.refract.prediabetes.sections.findoutmore.FindOutMore;
-	import com.refract.prediabetes.sections.intro.Intro;
-	import com.refract.prediabetes.sections.legal.Legal;
-	import com.refract.prediabetes.sections.overweight.Overweight;
-	import com.refract.prediabetes.sections.social.Share;
+	import com.refract.prediabetes.sections.FindOutMore;
+	import com.refract.prediabetes.sections.Intro;
+	import com.refract.prediabetes.sections.Legal;
+	import com.refract.prediabetes.sections.Overweight;
+	import com.refract.prediabetes.sections.Share;
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMModel;
 	import com.refract.prediabetes.stateMachine.SMView;

@@ -245,7 +245,7 @@ package com.refract.prediabetes.stateMachine
 		
 		private function createInitButton( interaction : Object) : void
 		{
-			_initButton = new ButtonChoice( SMSettings.FONT_BUTTON, { fontSize:26  }, SMSettings.MIN_BUTTON_SIZE, 70  , true , true);
+			_initButton = new ButtonChoice( SMSettings.FONT_BUTTON, { fontSize:26 , interaction : true  }, SMSettings.MIN_BUTTON_SIZE, 70  , true , true);
 			addChild( _initButton ) ; 
 			_initButton.id = Flags.INIT_BUTTON ; 
 			_initButton.visible = false ; 

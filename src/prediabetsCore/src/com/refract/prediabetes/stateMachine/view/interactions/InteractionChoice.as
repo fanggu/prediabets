@@ -29,20 +29,7 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 			interaction = interactionObject ; 
 			iter = interaction.iter ; 
 			addEventListener(Event.ADDED_TO_STAGE, create);
-	//		DispatchManager.addEventListener( Flags.UPDATE_SIZE_BUTTON , onUpdateSizeButton ) ;
-			
-		}
-//		
-	
-//		protected function onUpdateSizeButton(event : Event) : void 
-//		{
-//			if( _btChoice )
-//			{
-//				 _btChoice.minW = SMSettings.CHOICE_BUTTON_WIDTH ; 
-//				 _btChoice.minH = SMSettings.CHOICE_BUTTON_HEIGHT ;   
-//			}
-//		}
-		
+		}	
 		public function onFullScreen( ) : void
 		{
 			_btChoice.onFullScreen() ; 
@@ -65,10 +52,6 @@ package com.refract.prediabetes.stateMachine.view.interactions {
 				addChild( _btChoice ) ; 
 				_btChoice.setButton( interaction ) ; 
 			}
-			
-			
-			//if( _btChoice ) SMVars.me.updateMaxButtonSize(	_btChoice.width ) ; 
-			//showButton() ; 
 		}
 
 		protected function showButton() : void

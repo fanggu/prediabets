@@ -7,7 +7,7 @@ package com.refract.prediabetes
 	import com.refract.prediabetes.nav.Header;
 	import com.refract.prediabetes.nav.Nav;
 	import com.refract.prediabetes.nav.events.FooterEvent;
-	import com.refract.prediabetes.sections.intro.Intro;
+	import com.refract.prediabetes.sections.Intro;
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMView;

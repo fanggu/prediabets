@@ -138,7 +138,7 @@
     }, 
     {
         "flash_id": "page_legal_heading_1",
-        "copy_en": "<p><b>8 January 2014  </b></p>",
+        "copy_en": "8 January 2014",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
@@ -150,7 +150,7 @@
     }, 
     {
         "flash_id": "page_legal_heading_2",
-        "copy_en": "<p>General terms and conditions</p>",
+        "copy_en": "General terms and conditions",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
@@ -162,19 +162,19 @@
     }, 
     {
         "flash_id": "page_legal_heading_3",
-        "copy_en": "<p>Our liability</p>",
+        "copy_en": "Our liability",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_legal_content_3",
-        "copy_en": "<p>Whilst we endeavour to ensure that information on this website is correct, we cannot guarantee and assume no legal liability or responsibility for the accuracy, currency or completeness of the information available through this website. The information on this website is for personal use only and is provided in good faith. Users who link to another site from this site are subject to the liability policy of the new site.</p>",
+        "copy_en": "Whilst we endeavour to ensure that information on this website is correct, we cannot guarantee and assume no legal liability or responsibility for the accuracy, currency or completeness of the information available through this website. The information on this website is for personal use only and is provided in good faith. Users who link to another site from this site are subject to the liability policy of the new site.",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
     {
         "flash_id": "page_legal_heading_4",
-        "copy_en": "<p>External websites</p>",
+        "copy_en": "External websites",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
@@ -187,7 +187,7 @@
 
     {
         "flash_id": "page_legal_heading_5",
-        "copy_en": "<p>Copyright</p>",
+        "copy_en": "Copyright",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
@@ -201,7 +201,7 @@
 
     {
         "flash_id": "page_legal_heading_6",
-        "copy_en": "<p>Service delivery</p>",
+        "copy_en": "Service delivery",
         "font": "NEXABOLD",
         "colour": "WHITE"
     }, 
@@ -213,7 +213,7 @@
     }, 
     {
         "flash_id": "page_legal_heading_7",
-        "copy_en": "<p>Privacy</p>",
+        "copy_en": "Privacy",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
@@ -225,7 +225,7 @@
     }, 
     {
         "flash_id": "page_legal_heading_8",
-        "copy_en": "<p>Cookies</p>",
+        "copy_en": "Cookies",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
@@ -237,32 +237,66 @@
     }, 
     {
         "flash_id": "page_legal_heading_9",
-        "copy_en": "<p>IP addresses</p>",
+        "copy_en": "IP addresses",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
     {
         "flash_id": "page_legal_content_9",
-        "copy_en": "We collect and log the Internet Protocol address (IP) of all visitors to this site. An IP address is a number automatically assigned to your computer whenever you access the Internet. IP addresses allow computers and servers to recognise and communicate with one another. We collect IP address information so that we can properly administer our system and gather aggregate information about how our site is being used. This aggregate information may be shared with third parties. To maintain your anonymity, we do not associate IP addresses with records containing personal information. We will use IP address information, however, to personally identify you in order to enforce our legal rights or when required to do so by law enforcement authorities.\n \nInformation that is automatically retrieved about your visit includes -<ul><li>•   your IP address</li><li>•   the pages you accessed on the website and the links you clicked on</li><li>•   the date and time you visited the website</li><li>•   the referring website (if any) through which you clicked through to this website</li><li>•   your operating system (e.g. Windows XP, Mac OSX)</li><li>•   the type of web browser you use (e.g. Internet Explorer, Mozilla Firefox)</li><li>•   other incidental matters such as screen resolution, the release of your installed Flash version and the language setting of your browser.</li></ul>",
+        "copy_en": "We collect and log the Internet Protocol address (IP) of all visitors to this site. An IP address is a number automatically assigned to your computer whenever you access the Internet. IP addresses allow computers and servers to recognise and communicate with one another. We collect IP address information so that we can properly administer our system and gather aggregate information about how our site is being used. This aggregate information may be shared with third parties. To maintain your anonymity, we do not associate IP addresses with records containing personal information. We will use IP address information, however, to personally identify you in order to enforce our legal rights or when required to do so by law enforcement authorities.\n \nInformation that is automatically retrieved about your visit includes -\n<li>your IP address</li>\n<li>the pages you accessed on the website and the links you clicked on</li>\n<li>the date and time you visited the website</li>\n<li>the referring website (if any) through which you clicked through to this website</li>\n<li>your operating system (e.g. Windows XP, Mac OSX)</li>\n<li>the type of web browser you use (e.g. Internet Explorer, Mozilla Firefox)</li>\n<li>other incidental matters such as screen resolution, the release of your installed Flash version and the language setting of your browser.\n \n Your information is collected and stored on servers which are owned and maintained by or on our behalf. The site has a Secure Socket Layer (SSL) certificate (a means of keeping information secure).</li>",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 
 
 
 
-
- 
-
-
     {
         "flash_id": "page_legal_heading_10",
-        "copy_en": "<p>Law</p>",
+        "copy_en": "How we collect and use personal information",
         "font": "NEXABOLD",
         "colour": "WHITE"
     },
     {
         "flash_id": "page_legal_content_10",
-        "copy_en": "<p>These terms and conditions and any disputes arising from or in connection with them shall be governed by the laws of New Zealand and the parties submit to the exclusive jurisdiction of the New Zealand.</p>",
+        "copy_en": "Through this website we will collect information that can identify you, such as your name, e-mail address, and other similar information when it is voluntarily submitted to us. We will use your information to respond to requests you may make of us; and from time to time, we may refer to your information to better understand your needs and how we can improve our services. We will only keep your information for as long as it is necessary to achieve the purpose for which it was collected, or to comply with our legal obligations.",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+    {
+        "flash_id": "page_legal_heading_11",
+        "copy_en": "What we provide to third parties",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_11",
+        "copy_en": "We may share your personally identifiable information with third parties who we have engaged to help us provide the services. In each case, we will ensure that these third parties have agreed not to use or disclose your personal information except to help us provide the services.\n \nExcept as noted above, we do not provide any third party access to your IP address and email address.\n \nWe may provide third parties with aggregate statistics about our visitors, traffic patterns and related site information. These data reflect site-usage patterns gathered during visits to our website each month, but they do not contain identifying information about any individual member unless that member has given us permission to share that information.",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+    {
+        "flash_id": "page_legal_heading_12",
+        "copy_en": "Provision of the service",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_12",
+        "copy_en": "This website service and interactive application is provided by HealthMentor Online Limited, P O Box 9973, Newmarket, Auckland 1149, New Zealand.\n \n To view any personal information held by us, or if you have any concerns about personal information that we hold, please write to: The Privacy Officer, HealthMentor Online Limited, P O Box 9973, Newmarket, Auckland 1149, New Zealand.",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    }, 
+
+    {
+        "flash_id": "page_legal_heading_13",
+        "copy_en": "New Zealand Law",
+        "font": "NEXABOLD",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_legal_content_13",
+        "copy_en": "These terms and conditions and any disputes arising from or in connection with them shall be governed by the laws of New Zealand and the parties submit to the exclusive jurisdiction of New Zealand.\n \n \n",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     }, 

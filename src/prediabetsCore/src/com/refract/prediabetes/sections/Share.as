@@ -1,4 +1,4 @@
-package com.refract.prediabetes.sections.social 
+package com.refract.prediabetes.sections 
 {
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.assets.TextManager;

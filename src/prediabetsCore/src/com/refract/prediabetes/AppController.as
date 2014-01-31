@@ -87,7 +87,7 @@ package com.refract.prediabetes
 		{
 			if(evt.fullScreen )
 			{
-				//trace('FS CHange :' , evt.fullScreen)
+				
 			}
 		}
 		
@@ -256,8 +256,12 @@ package com.refract.prediabetes
 				TweenMax.to( statusMC , .5 , { delay : 1 , alpha : 0 , onComplete : removeMe , onCompleteParams :[statusMC]} )
 				//TweenMax.to( statusMC , 1.2 , {frame:36} ) ;
 			}
-			statusMC.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 ; //+ statusMC.width/2 ;
-			statusMC.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2 ; // + statusMC.height/2 + 100;
+			if( !AppSettings.RETINA ) statusMC.scaleX = statusMC.scaleY = 0.5 ; 
+			statusMC.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 ; 
+			var adder : int = 0 ; 
+			if( AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
+				adder = -statusMC.height / 2 ; 
+			statusMC.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2 + AppSettings.stage.stageHeight / 4  - statusMC.height / 2 + adder ; // + statusMC.height/2 + 100;
 			
 			statusMC.mouseChildren = false ;
 			statusMC.mouseEnabled = false ; 

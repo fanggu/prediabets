@@ -9,4 +9,6 @@
     <AS3Classpath generateProblems="true" sdkBased="false" type="source" useAsSharedCode="false">src</AS3Classpath>
     <AS3Classpath generateProblems="false" inclusion="complete" sdkBased="false" type="project" useAsSharedCode="false">prediabetesCore</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="true">lib/NativeAlert.ane</AS3Classpath>
+    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="true">lib/com.adobe.extension.Networkinfo.ane</AS3Classpath>
+    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/NetworkInfoActionScriptLibrary.swc</AS3Classpath>
 </AS3Classpath>

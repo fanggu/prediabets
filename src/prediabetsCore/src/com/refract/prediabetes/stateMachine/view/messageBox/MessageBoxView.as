@@ -1,14 +1,15 @@
 package com.refract.prediabetes.stateMachine.view.messageBox {
+	import avmplus.getQualifiedClassName;
+
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
-	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
 	import com.refract.prediabetes.stateMachine.view.StateTxtView;
 	import com.robot.comm.DispatchManager;
 
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 
 	public class MessageBoxView extends Sprite 
 	{
@@ -19,19 +20,37 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 		public function MessageBoxView( valueObject : Object , interaction_meta : String  ) 
 		{
 			_valueObject = valueObject ;
-			_interaction_meta = interaction_meta ; 
+			_interaction_meta = interaction_meta ;
+			addEventListener( Event.ADDED_TO_STAGE , init ) ; 
+		}
+		private function init( evt : Event ) : void
+		{
+			removeEventListener( Event.ADDED_TO_STAGE , init ) ;
+			
+			 
 			_enter = false ;	 
 			var stateObjectText : Object = new Object() ; 
 			stateObjectText.state_txt = _valueObject.copy ; 
 			stateObjectText.state_txt_x = 50 ;
-			stateObjectText.state_txt_y = 50;
+			stateObjectText.state_txt_y = 50 ;
 			
+			mouseEnabled = false ; 
+			mouseChildren = false ; 
+			this.parent.mouseEnabled = false ; 
+			this.parent.mouseChildren = false ; 
+			//stage.addEventListener(MouseEvent.CLICK, onClick);
 			_stateTxtView  = new StateTxtView( stateObjectText ,  true ) ; 
 			addChild( _stateTxtView ) ; 
 			_stateTxtView.visible = false ; 
 			DispatchManager.addEventListener( Event.ENTER_FRAME, run ) ;
 		}
-		
+		/*
+		function onClick(event:MouseEvent):void
+		{
+			trace('clicktarget: ', event.target.name, getQualifiedClassName(event.target));
+		}
+		 * 
+		 */
 		
 		private function run( evt : Event ) : void
 		{
@@ -40,7 +59,7 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 				_enter = true ;
 				show() ;
 			}
-			if( SMVars.me.nsStreamTime > _valueObject.exit || SMVars.me.nsStreamTime < _valueObject.enter )
+			if( SMVars.me.nsStreamTimeAbs > _valueObject.exit || SMVars.me.nsStreamTimeAbs < _valueObject.enter )
 			{
 				if( _enter )
 				{

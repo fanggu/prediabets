@@ -1,9 +1,8 @@
 package {
-	import pl.mateuszmackowiak.nativeANE.NativeDialogEvent;
-	import pl.mateuszmackowiak.nativeANE.alert.NativeAlert;
-
+	import com.adobe.nativeExtensions.Networkinfo.InterfaceAddress;
+	import com.adobe.nativeExtensions.Networkinfo.NetworkInfo;
+	import com.adobe.nativeExtensions.Networkinfo.NetworkInterface;
 	import com.refract.air.shared.AppSettingsIOS;
-	import com.refract.air.shared.data.StoredData;
 	import com.refract.air.shared.prediabetes.assets.AssetsManagerEmbedsIOS;
 	import com.refract.air.shared.prediabetes.nav.footer.BackwardButtonIOS;
 	import com.refract.air.shared.prediabetes.nav.footer.PlayPauseButtonIOS;
@@ -11,13 +10,13 @@ package {
 	import com.refract.air.shared.prediabetes.stateMachine.MobileSMController;
 	import com.refract.air.shared.prediabetes.stateMachine.SMSettingsIOS;
 	import com.refract.air.shared.prediabetes.video.IOSVideoLoader;
-	import com.refract.air.shared.sections.legal.TabletLegal;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
-	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.nav.IOSNav;
 	import com.refract.prediabetes.stateMachine.SMSettings;
+	import com.refract.prediabetes.tracking.Tracking;
+	import com.refract.prediabetes.utils.Buffer;
+	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
 
 	import flash.desktop.NativeApplication;
@@ -25,16 +24,18 @@ package {
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.GeolocationEvent;
-	import flash.events.StatusEvent;
+	import flash.events.HTTPStatusEvent;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.filesystem.File;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestHeader;
 	import flash.sensors.Geolocation;
 	import flash.system.Capabilities;
 	import flash.text.TextField;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
-	import flash.utils.ByteArray;
+	import flash.utils.setTimeout;
 
 	/**
 
@@ -47,6 +48,9 @@ package {
 		
 		protected var _bkg : Loader;
 		private var _geo : Geolocation;
+		private var _txt1 : TextField;
+		private var _txt2 : TextField;
+		private var _buffer : Buffer;
 		
 		
 		public function MainIOS()
@@ -57,38 +61,142 @@ package {
 		protected function onAddedToStage(evt:Event):void
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);	
-			
+			//setTrackingValues() ; 
+			init() ; 
+		}
+		
+		
+		private function init() : void
+		{
 			setAppSettings();
 			setAppClasses();
 			addBkg();
-			start() ; 
+			
+			setTimeout( start , 500 ) ; 
+			//start() ; 
+		}
+		
+		private function trackLocation( evt : Event = null ) : void
+		{
+			//removeChild( _buffer ) ;
+			var objTrack : Object = {} ; 
+			objTrack.type = Tracking.LOCATION  ; 
+			Tracking.track( objTrack ) ; 
+			
+			
+		}
+		
+		
+		private function setTrackingValues() : void
+		{
+			findIPAddress() ; 
+			 
+			var objTrack : Object = {} ; 
+			objTrack.type = Tracking.START ;
+			objTrack.callBack = true ; 
+			DispatchManager.addEventListener( Tracking.HEADER_REGISTERED, onHeaderRegistered );
+			DispatchManager.addEventListener( Tracking.HEADER_NOT_REGISTERED, onHeaderNotRegistered );
+			Tracking.track( objTrack ) ; 
 			/*
-			trace('geolocation:request')
-			if (Geolocation.isSupported)
-			{
-				trace('geolocation supported!')	
-				_geo = new Geolocation(); 
-                if (!_geo.muted) 
-                { 
-                    _geo.addEventListener(GeolocationEvent.UPDATE, geoUpdateHandler); 
-                } 
-                _geo.addEventListener(StatusEvent.STATUS, geoStatusHandler);
-			}
+			var loader:URLLoader = new URLLoader();
+			var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/timespent/start" );
+			request.method = URLRequestMethod.POST;
+			request.requestHeaders = new Array
+		   (
+		   		new URLRequestHeader("userId", "")
+				,new URLRequestHeader("trackId", "")
+			);
+			var variables:URLVariables = new URLVariables();  
+			variables.param = {} ;     
+		    request.data = variables; 
+			loader.addEventListener(Event.COMPLETE, loaderCompleteHandler);
+			loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
+			loader.addEventListener(HTTPStatusEvent.HTTP_RESPONSE_STATUS, httpResponseHandler);
+			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			loader.load( request ) ; 
 			 * 
 			 */
+			
 		}
-
-
-		private function geoStatusHandler(event : StatusEvent) : void 
+		private function onHeaderRegistered( evt : Event ) : void
 		{
-			trace(" geoStatusHandler :" , event.code)
+			trackLocation() ; 
 		}
-
-		private function geoUpdateHandler(event : GeolocationEvent) : void 
+		private function onHeaderNotRegistered( evt : Event ) : void
 		{
-			trace(" geoUpdateHandler altitude:" , event.altitude)
-			trace(" geoUpdateHandler latitude:" , event.latitude)
-			trace(" geoUpdateHandler longitude:" , event.longitude)
+			AppSettings.TRACKING = false ; 
+			init() ; 
+		}
+		private function httpResponseHandler(event : HTTPStatusEvent) : void 
+		{
+			var urlRequestHeader : URLRequestHeader ; 
+			for( var i : int = 0 ; i < event.responseHeaders.length ; i ++ )
+			{
+				urlRequestHeader = event.responseHeaders[i] ; 
+				if( urlRequestHeader.name == 'Trackheader')
+				{
+					var headerObj : Object = JSON.parse(urlRequestHeader.value) ; 
+					Tracking.TRACK_ID = headerObj.trackId ;
+					Tracking.USER_ID = headerObj.userId ;   
+					
+					init() ; 
+				}
+			}
+		}
+		private function loaderCompleteHandler(e:Event):void
+		{
+		    // and here's your response (in your case the JSON)
+		    //trace('---' , e.target.data);
+		}
+		
+		private function httpStatusHandler(e:HTTPStatusEvent):void
+		{
+			trace("*>><<****")
+			//if( e.responseHeaders ) trace('e ', e.responseHeaders ) 
+		    trace("httpStatusHandler:" + e.status);
+		}
+		
+		private function securityErrorHandler(e:SecurityErrorEvent):void
+		{
+		    //trace("securityErrorHandler:" + e.text);
+		}
+		
+		private function ioErrorHandler(e:IOErrorEvent):void
+		{
+		    //trace("ioErrorHandler: " + e.text);
+		}
+		
+		private static function findIPAddress():void
+		{
+		   var networkInfo:NetworkInfo = NetworkInfo.networkInfo; 
+        	var interfaces:Vector.<NetworkInterface> = networkInfo.findInterfaces(); 
+			if( interfaces != null ) 
+	        { 
+	            //trace( "Interface count: " + interfaces.length ); 
+	            for each ( var interfaceObj:NetworkInterface in interfaces ) 
+	            { 
+//	                trace( "\nname: "             + interfaceObj.name ); 
+//	                trace( "display name: "     + interfaceObj.displayName ); 
+//	                trace( "mtu: "                 + interfaceObj.mtu ); 
+//	                trace( "active?: "             + interfaceObj.active ); 
+//	                trace( "hardware address: " + interfaceObj.hardwareAddress ); 
+	              
+	                //trace("# addresses: "     + interfaceObj.addresses.length ); 
+	                for each ( var address:InterfaceAddress in interfaceObj.addresses ) 
+	                { 
+	                    //trace( "  type: "           + address.ipVersion ); 
+	                    //trace( "  address: "         + address.address ); 
+	                    //trace( "  broadcast: "         + address.broadcast ); 
+						if( address.broadcast.length > 0 && interfaceObj.active)
+						{
+							Tracking.IP_ADDRESS = address.broadcast ; 
+							//trace('=== ' , address.broadcast )
+						}
+	                    //trace( "  prefix length: "     + address.prefixLength ); 
+	                } 
+	            }             
+	        } 
 		}
 
 		

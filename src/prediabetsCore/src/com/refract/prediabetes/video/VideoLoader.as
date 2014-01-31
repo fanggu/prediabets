@@ -1,15 +1,12 @@
 package com.refract.prediabetes.video 
 {
-	import com.refract.prediabetes.stateMachine.view.interactions.Interaction;
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
 	import br.com.stimuli.loading.loadingtypes.VideoItem;
 
 	import com.greensock.TweenMax;
-	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
-	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.SMVars;
@@ -17,12 +14,12 @@ package com.refract.prediabetes.video
 	import com.refract.prediabetes.stateMachine.events.ObjectEvent;
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
+	import com.refract.prediabetes.utils.Buffer;
 	import com.robot.comm.DispatchManager;
 
 	import org.bytearray.video.SimpleStageVideo;
 	import org.bytearray.video.events.SimpleStageVideoEvent;
 
-	import flash.display.Bitmap;
 	import flash.display.Graphics;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -43,7 +40,7 @@ package com.refract.prediabetes.video
 
 		protected var _url:String;
 		protected var _currentStep:int = 0;
-		protected var _loader:Sprite;
+		protected var _buffer:Buffer;
 		protected var _standardVideo : Boolean;
 		protected var _netConnection : NetConnection;
 		protected var _netStream : NetStream;
@@ -163,16 +160,18 @@ package com.refract.prediabetes.video
 			_simpleVid.attachNetStream(_netStream);
 			addChild(_simpleVid);
 			
-			_loader = new Sprite();
-			addChild(_loader);
-			
+			_buffer = new Buffer();
+			addChild(_buffer);
+			/*
 			var bmp:Bitmap = AssetManager.getEmbeddedAsset("PoliteLoader") as Bitmap;
-			_loader.addChild(bmp);
+			_buffer.addChild(bmp);
 			bmp.blendMode = "screen";
 			bmp.smoothing = true;
 			bmp.scaleX = bmp.scaleY = 0.77;
 			bmp.x = -bmp.width/2;
 			bmp.y = -bmp.height/2;
+			 * 
+			 */
 			
 			_videoClickListener = new Sprite();
 			addChild(_videoClickListener);
@@ -256,10 +255,10 @@ package com.refract.prediabetes.video
 			{
 				drawVideoClickListener();
 			}
-			if(_loader)
+			if(_buffer)
 			{
-				_loader.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2;
-				_loader.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2;
+				_buffer.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2;
+				_buffer.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT/2;
 			}
 		}
 	
@@ -314,8 +313,6 @@ package com.refract.prediabetes.video
 			if( percent < 5 && !_showBuffer )
 			{ 
 				var clip_length : Number = SMController.me.model.getVideoLength( _nameVideo ) - 200 ; 
-				//trace('SMVars.me.nsStreamTime ' , SMVars.me.nsStreamTime)
-				//trace('clip_length' , clip_length)
 				if( SMVars.me.nsStreamTime <= ( clip_length ) ) 
 				{
 					showBuffer() ;	
@@ -326,15 +323,26 @@ package com.refract.prediabetes.video
 		}
 		private function showBuffer() : void
 		{
-			_showBuffer = true ; 
-			TweenMax.killTweensOf( _loader ) ;
-			TweenMax.to( _loader , .5 , { alpha : 1 , delay : AppSettings.BUFFER_DELAY } ) ; 
+			if( !_showBuffer )
+			{
+				_buffer.off = false; 
+				_showBuffer = true ; 
+				TweenMax.killTweensOf( _buffer ) ;
+				TweenMax.to( _buffer , .5 , { alpha : 1 , delay : AppSettings.BUFFER_DELAY } ) ; 
+			}
 		}
 		protected function hideBuffer() : void
 		{
-			_showBuffer = false ; 
-			TweenMax.killTweensOf( _loader ) ;
-			TweenMax.to( _loader , .5 , { alpha : 0 } ) ; 
+			if( _showBuffer )
+			{
+				_showBuffer = false ; 
+				TweenMax.killTweensOf( _buffer ) ;
+				TweenMax.to( _buffer , .5 , { alpha : 0 , onComplete : invisibleBuffer } ) ; 
+			}
+		}
+		private function invisibleBuffer() : void
+		{
+			_buffer.off = true; 
 		}
 		
 		public function resetURL( ) : void

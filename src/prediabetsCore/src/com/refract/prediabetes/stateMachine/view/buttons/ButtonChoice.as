@@ -156,7 +156,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 		public function onResize( evt : Event = null ) : void
 		{
 			x = ( _interaction[SMSettings.JSON_CHOICE_X] * AppSettings.VIDEO_WIDTH) / 100 - width/2 + AppSettings.VIDEO_LEFT;
-			y = ( _interaction[SMSettings.JSON_CHOICE_Y] * AppSettings.VIDEO_HEIGHT) / 100 + AppSettings.VIDEO_TOP;
+			y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT - this.height * 2 ; //( _interaction[SMSettings.JSON_CHOICE_Y] * AppSettings.VIDEO_HEIGHT) / 100 + AppSettings.VIDEO_TOP;
 		}
 		
 		override public function destroy() : void

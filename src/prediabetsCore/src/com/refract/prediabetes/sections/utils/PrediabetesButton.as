@@ -170,10 +170,7 @@ package com.refract.prediabetes.sections.utils {
 				var ww:Number = _minW > _body.width + _minBkgWidthGap  ? _minW : _body.width + _minBkgWidthGap ;
 				var hh:Number = _minH ; //> _body.height + _minBkgHeightGap ? _minH : _body.height + _minBkgHeightGap ;
 				 
-				if( _copyProps.findoutmore && AppSettings.stage.displayState == StageDisplayState.NORMAL)
-				{
-					ww = ww - 120 ; 
-				}
+				
 				if(!_bkgBorder){
 					_bkgBorder = new Shape();
 					addChildAt(_bkgBorder,0);

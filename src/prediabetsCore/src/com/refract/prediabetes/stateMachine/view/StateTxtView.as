@@ -1,4 +1,6 @@
 package com.refract.prediabetes.stateMachine.view {
+	import avmplus.getQualifiedClassName;
+
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 	import com.refract.prediabetes.AppSettings;
@@ -8,6 +10,7 @@ package com.refract.prediabetes.stateMachine.view {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormatAlign;
@@ -46,6 +49,7 @@ package com.refract.prediabetes.stateMachine.view {
 				create( ) ;
 			}
 		}
+		
 		private function create( ) : void
 		{
 			var myfontSize : int = _fontSize ; 
@@ -61,7 +65,9 @@ package com.refract.prediabetes.stateMachine.view {
 				, wordWrap : true
 				, width : w 
 				, border : false
+				,mouseEnabled : false 
 			} ; 
+			
 			
 			txt = TextManager.makeText( SMSettings.FONT_STATETXT ,  null , _style) ;
 			txt.htmlText = _stateObjectText.state_txt  ; 
@@ -79,7 +85,8 @@ package com.refract.prediabetes.stateMachine.view {
 			alpha = 0 ; 
 			TweenMax.to( this , .25 , { alpha : 1 , ease : Linear.easeNone , canBePaused:true} ) ;
 			
-			mouseEnabled = false ; 
+			 
+			
 			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
 				AppSettings.stage.addEventListener( FullScreenEvent.FULL_SCREEN , onFullScreenChange ) ;
 		}

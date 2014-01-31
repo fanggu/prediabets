@@ -488,6 +488,7 @@ package com.refract.prediabetes.stateMachine {
 		//**progress bar click. 
 		public function progressBarClick( time : Number ) : void
 		{
+			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) ) ; 
 			 _newSlowTime = 0 ; 
 			 if( !_tooslowTimer )
 			 {
@@ -569,7 +570,6 @@ package com.refract.prediabetes.stateMachine {
 		}
 		private function activateTooSlowTimer( clip_length : Number ) : void//clip_length : Number ) : void
 		{
-			trace()
 			var interaction : Object = _model.interaction ; 
 			var future_address : String = interaction.final_state ; 
 			

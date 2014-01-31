@@ -6,8 +6,8 @@
 <booleanAttribute key="DISABLE_COMPILE_PROCESS" value="false"/>
 <booleanAttribute key="KILL_PREVIOUS_VIEWER" value="true"/>
 <stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
-<stringAttribute key="MAIN_CLASS" value="src/PrediabetesCore.as"/>
-<stringAttribute key="OUTPUT" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetsCore.swf"/>
+<stringAttribute key="MAIN_CLASS" value="src/PrediabetesWeb.as"/>
+<stringAttribute key="OUTPUT" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetesWeb.swf"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_EXTERNS" value="false"/>
 <booleanAttribute key="PASS_MAIN_CLASS" value="true"/>
@@ -17,15 +17,15 @@
 <intAttribute key="PLAYER_WIDTH" value="800"/>
 <stringAttribute key="POST_COMPILE_ANT" value=""/>
 <stringAttribute key="PRE_COMPILE_ANT" value=""/>
-<stringAttribute key="PROJECT_NAME" value="prediabetesCore"/>
+<stringAttribute key="PROJECT_NAME" value="prediabetesWeb"/>
 <booleanAttribute key="START_DEBUGGER" value="true"/>
 <booleanAttribute key="START_SWF_ENABLED" value="true"/>
-<stringAttribute key="START_SWF_LOCATION" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetsCore.swf"/>
+<stringAttribute key="START_SWF_LOCATION" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetesWeb.swf"/>
 <stringAttribute key="START_SWF_WITH" value="Adobe Flash Player"/>
 <booleanAttribute key="SUPPRESS_EXCEPTION_POPUP" value="true"/>
 <booleanAttribute key="USE_PROJECT_COMPILER_ARGUMENTS" value="false"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/prediabetesCore"/>
+<listEntry value="/prediabetesWeb"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>

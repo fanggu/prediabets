@@ -1,10 +1,12 @@
 package {
+	import com.flashdynamix.utils.SWFProfiler;
 	import com.refract.prediabetes.AppController;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.assets.FontManager;
 	import com.refract.prediabetes.assets.TextManager;
+	//import com.refract.prediabetes.tracking.Tracking;
 
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -27,6 +29,11 @@ package {
 		{
 			new FontManager();
 			addEventListener( Event.ADDED_TO_STAGE , init ) ; 
+			
+		}
+		private function donothing( evt : Event ) : void
+		{
+			
 		}
 		private function test( evt : Event ) : void
 		{
@@ -64,14 +71,14 @@ package {
 		     
 		    //var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/timespent/start" );
 			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/timespent/end/3" );
-			var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/action/getAttachment/1" );
+			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/action/getAttachment/1" );
 			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/action/closeAttachment/1" );
 			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/interactive" );
-			//var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/location" );
+			var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/location" );
 			
 				
 			
-		   request.method = URLRequestMethod.GET;
+		   request.method = URLRequestMethod.POST;
 		   request.requestHeaders = new Array
 		   (
 		   		new URLRequestHeader("userId", "65C68682-5052-52DD-14FB-B07465E37319")
@@ -79,9 +86,9 @@ package {
 			);
 		    //Add the URL variables 
 		    var variables:URLVariables = new URLVariables();   
-			//variables.param = '{"latitude":"33.8404","longitude":"170.7399","ipaddress":"192.168.1.1"}';
+			variables.param = '{"latitude":"33.8404","longitude":"170.7399","ipaddress":"192.168.1.1"}';
 			//variables.param = '{"episodeId":"d11s","choice":"what?","nextEpisodeId":"d21", "currentStep" : "13"}';  
-			variables.param = {} ;     
+			//variables.param = {} ;     
 		    request.data = variables; 
 			
 			
@@ -113,7 +120,7 @@ package {
 		private function loaderCompleteHandler(e:Event):void
 		{
 		    // and here's your response (in your case the JSON)
-		    trace(e.target.data);
+		    trace('---' , e.target.data);
 		}
 		
 		private function httpStatusHandler(e:HTTPStatusEvent):void
@@ -139,6 +146,10 @@ package {
 		private function init(  evt : Event ) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,init);
+			
+			//trace(' User Id :' , Tracking.USER_ID )
+			//trace(' Track Id :' , Tracking.TRACK_ID )
+			SWFProfiler.init(stage, this);
 			AppSettings.stage = stage ; 
 			
 			

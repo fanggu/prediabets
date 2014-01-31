@@ -297,7 +297,7 @@ package com.refract.prediabetes.nav {
 				
 				_overlayBackground.graphics.clear();
 				_overlayBackground.graphics.lineStyle(2 , SMSettings.CHOICE_BORDER_COLOR ) ;
-				_overlayBackground.graphics.beginFill( SMSettings.CHOICE_BACK_COLOR , .95 );
+				_overlayBackground.graphics.beginFill( SMSettings.CHOICE_BACK_COLOR , .99 );
 				_overlayBackground.graphics.drawRect
 					(
 						0

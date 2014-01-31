@@ -70,13 +70,19 @@
    
     {
         "flash_id": "page_findoutmore_copy_2",
-        "copy_en": "For more about health and wellness - \n as well as what you can do about pre diabetes ( or managing your condition if you have diabetes ), please visit:",
+        "copy_en": "For more about health and wellness - \n as well as what you can do about pre diabetes \n( or managing your condition if you have diabetes ), please visit:",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     },
     {
         "flash_id": "page_findoutmore_copy_3",
         "copy_en": "For even more information on diabetes \nand to find out how Diabetes New Zealand can help you, please visit:",
+        "font": "NEXALIGHT",
+        "colour": "WHITE"
+    },
+    {
+        "flash_id": "page_findoutmore_copy_4",
+        "copy_en": "Both links will open in a new page.",
         "font": "NEXALIGHT",
         "colour": "WHITE"
     },

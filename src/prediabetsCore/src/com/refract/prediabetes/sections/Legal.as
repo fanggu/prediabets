@@ -14,7 +14,8 @@ package com.refract.prediabetes.sections {
 		
 		protected override function createContent():void
 		{	
-			_header = TextManager.makeText("page_legal_title",this,_headerStyle);
+			_header = TextManager.makeText("page_legal_title",this,_headerStyle) ;
+			_header.y = -10 ; 
 			 var i : int = 0 ; 
 			 var l : int = 13 ; 
 			 var bodyTextMemory : TextField ; 

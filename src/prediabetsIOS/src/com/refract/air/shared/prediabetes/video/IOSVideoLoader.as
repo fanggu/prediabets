@@ -96,7 +96,10 @@ package com.refract.air.shared.prediabetes.video
 			 
 			//showBuffer() ; 
 			 
-			
+			//trace('nameVideo :' , nameVideo )
+			//if( nameVideo == 'd03_choice_worry_about')
+				//return ; 
+				
 	  		_url = nameVideo;
 			_nameVideo = nameVideo ; 
 			if(_simpleVidAvailable)
@@ -104,7 +107,7 @@ package com.refract.air.shared.prediabetes.video
 				_failedToPlay = false;
 				var url : String ; 
 				url = getCompleteUrl( _url ) ;
-				if( _url == AppSettings.INTRO_URL && AppSettings.DEVICE == AppSettings.DEVICE_TABLET)
+				if( _url == AppSettings.INTRO_URL )
 				{
 					var ext : String = "flv" ;
 					var videoFileFormatDescriptor : String = "";
@@ -130,19 +133,23 @@ package com.refract.air.shared.prediabetes.video
 				
 				if(videoItem)
 				{
+					trace('-1-')
 					videoItem.pausedAtStart = false;
 				}
 				
 				if( videoItem != null )
 				{
+					trace('-2-')
 					_netStream = videoItem.stream ;
 				}
 				else
 				{
+					trace('-3-')
 					_netStream = _backupNetStream ; 
 				}
 				if(videoItem && !_netStream)
 				{
+					trace('-4-')
     				_bulkLoader.loadNow(url);
     				_netStream = videoItem.stream;
 				}
@@ -164,11 +171,29 @@ package com.refract.air.shared.prediabetes.video
 				
 				if( _wasLoaded )
 				{
+					trace('-5-')
 					_wasLoaded = false ;
+					//_netStream.play(url);
 					_netStream.resume() ;
+					/*
+					if( _netStream.time > 0.1)
+					{
+						_netStream.seek( 0 ) ;
+						_netStream.play(url);
+					}
+					else
+					{
+						_netStream.resume() ;
+					}
+					 * 
+					 */
 				}
 				 else
-				_netStream.play(url);
+				 {
+					trace('-6-')
+					_netStream.play(url);
+				 }
+				
 				
 				onResize();
 				paused = false ;

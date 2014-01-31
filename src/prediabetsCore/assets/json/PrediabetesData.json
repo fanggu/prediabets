@@ -5,11 +5,12 @@
       "module": "1",
       "device": "desktop",
       "start_state": "d01",
-      "init_button_state_address": "d27s",
+      "init_button_state_address": "d02",
       "end_state": "d_end" ,
       "load_init_request" :
       [
           "d02_who_worry_about" , 
+          "d03_choice_worry_about" , 
           "d10m_myself" , 
           "d10s_someone_i_know" , 
           "d10_both"

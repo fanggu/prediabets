@@ -165,15 +165,15 @@ package com.refract.prediabetes.stateMachine.sound {
 		{
 			var address : String = event.stringParam ; 
 			var sound : Sound = AssetManager.getEmbeddedAsset( address ) ; 
-			var soundChannel : SoundChannel = sound.play() ; 
-			soundChannel ; 
+			//var soundChannel : SoundChannel = sound.play() ; 
+			//soundChannel ; 
 		}
 		private function onUpdateFXSound( event : StateEvent ) : void
 		{
 			var address : String = event.stringParam ; 
 			var sound : Sound = AssetManager.getEmbeddedAsset( address ) ; 
-			var soundChannel : SoundChannel = sound.play() ; 
-			soundChannel ; 
+			//var soundChannel : SoundChannel = sound.play() ; 
+			//soundChannel ; 
 		}
 		private function onUpdateLoopSound( event : StateEvent ) : void
 		{

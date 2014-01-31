@@ -43,7 +43,7 @@ package com.refract.prediabetes.nav {
 		private const LEGAL:String = "legal";
 		
 		private var _footerButtons : Dictionary ; 
-		//special buttons
+		//**special buttons
 		private var _backToVideo:ButtonChoice; 
 		private var _playPauseButton : PlayPauseButton ;
 		private var _backwardButton : BackwardButton ;  
@@ -165,13 +165,33 @@ package com.refract.prediabetes.nav {
 		{
 			_barHidden = false ; 
 			TweenMax.killTweensOf( _footerTopLeft ) ; 
-			TweenMax.to( _footerTopLeft , .5 , { y : _endFooterTopLeft_y , alpha : 1 , scaleY : 1 , ease : Quint.easeOut } ) ;
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET )
+			{
+				TweenMax.to( _footerTopLeft , .5 , { y : _endFooterTopLeft_y , alpha : 1 , scaleY : 1 , ease : Quint.easeOut } ) ;
+			}
+			else
+			{
+				_footerTopLeft.mouseEnabled = true ;
+				_footerTopLeft.mouseChildren = true ;
+				TweenMax.to( _footerTopLeft , 1 , { alpha : 1 , alpha : 0 , ease : Quint.easeOut } ) ;
+			}
+			
 		}
 		private function hideNavBar( ) : void
 		{
 			_barHidden = true ;
 			TweenMax.killTweensOf( _footerTopLeft ) ; 
-			TweenMax.to( _footerTopLeft , 1 , { y : 5 , scaleY : 0 , alpha : 0 , ease : Quint.easeOut } ) ;
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET )
+			{
+				TweenMax.to( _footerTopLeft , 1 , { y : 5 , scaleY : 0 , alpha : 0 , ease : Quint.easeOut } ) ;	
+			}
+			else
+			{
+				_footerTopLeft.mouseEnabled = false ;
+				_footerTopLeft.mouseChildren = false ;
+				TweenMax.to( _footerTopLeft , 1 , { alpha : 0 , alpha : 0 , ease : Quint.easeOut } ) ;
+			}
+			
 		}
 		
 		

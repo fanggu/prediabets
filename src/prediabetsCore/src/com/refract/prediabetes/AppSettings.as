@@ -15,7 +15,8 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = true ;
+		public static const DEBUG 										: Boolean = false ;
+		public static var TRACKING										: Boolean = true ; 
 		public static const INTRO_URL									: String = 'd01_intro_part_1' ; 
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
@@ -23,8 +24,8 @@ package com.refract.prediabetes {
 		
 		public static const BULK_LOADER_ID 								: String  = 'Videos' ; 
 		
-		//public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
-		public static var DATA_PATH										: String = "data/" ; 
+		public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		//public static var DATA_PATH										: String = "data/" ; 
 		public static var APP_DATA_PATH 								: String = "file://";
 		public static var BUFFER_DELAY 				  					: Number = 0.3 ; 	  
 
@@ -54,7 +55,7 @@ package com.refract.prediabetes {
 		
 		public static var OVERLAY_BODY_DIFF_W_NO_FS						: int = 50 ;
 		public static var OVERLAY_BODY_DIFF_W_FS						: int = 70 ;
-		public static var OVERLAY_BODY_DIFF_H_NO_FS						: int = 120 ;
+		public static var OVERLAY_BODY_DIFF_H_NO_FS						: int = 110 ;
 		public static var OVERLAY_BODY_DIFF_H_FS						: int = 130 ;
 		public static var OVERLAY_BODY_DIFF_W							: int = OVERLAY_BODY_DIFF_W_NO_FS ; 
 		public static var OVERLAY_BODY_DIFF_H							: int = OVERLAY_BODY_DIFF_H_NO_FS ; 

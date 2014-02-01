@@ -21,6 +21,7 @@ package com.refract.prediabetes.stateMachine {
 	import flash.events.Event;
 	import flash.events.NetStatusEvent;
 	import flash.events.TimerEvent;
+	import flash.utils.setTimeout;
 	/**
 	 * @author robertocascavilla
 	 */
@@ -77,11 +78,11 @@ package com.refract.prediabetes.stateMachine {
 		{ 	
 			createListeners();	
 			SMVars.reset() ;
-
-			
-			
 			dispatchStartEvents() ; 
-			stateMachineTransition();
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				stateMachineTransition();
+			else
+				setTimeout( stateMachineTransition , 3000 ) ; 
 			
 			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) ) ; 
 			
@@ -284,7 +285,7 @@ package com.refract.prediabetes.stateMachine {
 					var url : String = VideoLoader.i.getCompleteUrl( videoName ) ; 
 					_bulkLoader.add( url , {id:url , priority : 1000, type : "video" , pausedAtStart : true }) ; 
  					_bulkLoader.loadNow( url ) ; 
-					_bulkLoader.get( url).addEventListener(BulkLoader.PROGRESS , onAllProgress) ;
+					//_bulkLoader.get( url).addEventListener(BulkLoader.PROGRESS , onAllProgress) ;
 					_bulkLoader.get( url).addEventListener(BulkLoader.COMPLETE , onAllLoaded) ;
 					_bulkLoader.start() ; 
 					 _url = url ; 

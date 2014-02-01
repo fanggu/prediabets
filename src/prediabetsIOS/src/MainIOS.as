@@ -9,12 +9,14 @@ package {
 	import com.refract.air.shared.prediabetes.nav.footer.SoundButtonIOS;
 	import com.refract.air.shared.prediabetes.stateMachine.MobileSMController;
 	import com.refract.air.shared.prediabetes.stateMachine.SMSettingsIOS;
+	import com.refract.air.shared.prediabetes.tracking.TrackingLocation;
+	import com.refract.air.shared.prediabetes.tracking.TrackingStartIOS;
 	import com.refract.air.shared.prediabetes.video.IOSVideoLoader;
 	import com.refract.prediabetes.AppSettings;
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.nav.IOSNav;
 	import com.refract.prediabetes.stateMachine.SMSettings;
-	import com.refract.prediabetes.tracking.Tracking;
+	import com.refract.prediabetes.tracking.TrackingSettings;
 	import com.refract.prediabetes.utils.Buffer;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
@@ -35,13 +37,12 @@ package {
 	import flash.text.TextField;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
-	import flash.utils.setTimeout;
 
 	/**
 
 	 * @author robertocascavilla
 	 */
-	//[SWF( backgroundColor='#000000', frameRate='25')]
+	[SWF( backgroundColor='#000000', frameRate='25')]
 	public class MainIOS extends Sprite 
 	{
 		public static var STORAGE_DIR:File;
@@ -62,6 +63,31 @@ package {
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);	
 			//setTrackingValues() ; 
+			//init() ; 
+			trackStart() ; 
+		}
+		private function trackStart() : void
+		{
+			var trackingStartIOS : TrackingStartIOS = new TrackingStartIOS( ) ; 
+			DispatchManager.addEventListener( TrackingSettings.HEADER_REGISTERED, onTrackingStart)
+			trackingStartIOS.track() ; 
+		}
+		private function onTrackingStart( evt : Event ) : void
+		{
+			if( AppSettings.TRACKING)
+			{
+				var trackingLocation : TrackingLocation = new TrackingLocation() ; 
+				DispatchManager.addEventListener( TrackingSettings.LOCATION_PRIVACY_CLICK, onLocationPrivacy)
+				trackingLocation.track() ; 
+			}
+			else
+			{
+				init() ; 
+			}
+			
+		}
+		private function onLocationPrivacy( evt : Event ) : void
+		{
 			init() ; 
 		}
 		
@@ -71,17 +97,16 @@ package {
 			setAppSettings();
 			setAppClasses();
 			addBkg();
-			
-			setTimeout( start , 500 ) ; 
-			//start() ; 
+			 
+			start() ; 
 		}
 		
 		private function trackLocation( evt : Event = null ) : void
 		{
 			//removeChild( _buffer ) ;
 			var objTrack : Object = {} ; 
-			objTrack.type = Tracking.LOCATION  ; 
-			Tracking.track( objTrack ) ; 
+			objTrack.type = TrackingSettings.LOCATION  ; 
+			TrackingSettings.track( objTrack ) ; 
 			
 			
 		}
@@ -92,11 +117,11 @@ package {
 			findIPAddress() ; 
 			 
 			var objTrack : Object = {} ; 
-			objTrack.type = Tracking.START ;
+			objTrack.type = TrackingSettings.START ;
 			objTrack.callBack = true ; 
-			DispatchManager.addEventListener( Tracking.HEADER_REGISTERED, onHeaderRegistered );
-			DispatchManager.addEventListener( Tracking.HEADER_NOT_REGISTERED, onHeaderNotRegistered );
-			Tracking.track( objTrack ) ; 
+			DispatchManager.addEventListener( TrackingSettings.HEADER_REGISTERED, onHeaderRegistered );
+			DispatchManager.addEventListener( TrackingSettings.HEADER_NOT_REGISTERED, onHeaderNotRegistered );
+			TrackingSettings.track( objTrack ) ; 
 			/*
 			var loader:URLLoader = new URLLoader();
 			var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/timespent/start" );
@@ -137,8 +162,8 @@ package {
 				if( urlRequestHeader.name == 'Trackheader')
 				{
 					var headerObj : Object = JSON.parse(urlRequestHeader.value) ; 
-					Tracking.TRACK_ID = headerObj.trackId ;
-					Tracking.USER_ID = headerObj.userId ;   
+					TrackingSettings.TRACK_ID = headerObj.trackId ;
+					TrackingSettings.USER_ID = headerObj.userId ;   
 					
 					init() ; 
 				}
@@ -190,7 +215,7 @@ package {
 	                    //trace( "  broadcast: "         + address.broadcast ); 
 						if( address.broadcast.length > 0 && interfaceObj.active)
 						{
-							Tracking.IP_ADDRESS = address.broadcast ; 
+							TrackingSettings.IP_ADDRESS = address.broadcast ; 
 							//trace('=== ' , address.broadcast )
 						}
 	                    //trace( "  prefix length: "     + address.prefixLength ); 
@@ -225,11 +250,12 @@ package {
 			 AppSettings.VIDEO_BASE_URL = "video/flv/1024/" ; 
 			 AppSettings.VIDEO_FILE_EXT = ".flv" ;
 			 AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR = "";
+			 //AppSettings.INTRO_URL = 'd01_intro_800flv' ; 
 			 
 			 AppSettings.BUFFER_DELAY = 1 ; 
 
 			  
-			 storeIntroVideoFile() ; 
+			 //IntroVideoFile() ; 
 		}
 		
 		protected function setAppClasses():void

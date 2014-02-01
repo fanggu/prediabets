@@ -70,10 +70,6 @@ package com.refract.prediabetes.video
 			
 			setBulkLoader();
 			addEventListener(Event.ADDED_TO_STAGE, preInit );
-			//loadingOrder = VideoLoader.defaultLoadingOrder;
-			
-			//_bulkLoader.addEventListener(BulkLoader.PROGRESS , onAllProgress) ;
-			//_bulkLoader.get( url).addEventListener(BulkLoader.COMPLETE , onAllLoaded) ;
 		}
 		
 		

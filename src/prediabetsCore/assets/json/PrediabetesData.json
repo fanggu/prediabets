@@ -23,10 +23,10 @@
       {
         "interactions": [
           {
-            "final_state": "d01_part_2",
+            "final_state": "d_none",
             "interaction_type": "none",
             "interaction_meta": "load_vars=[DATE]",
-            "video_name": "d01_intro_part_1",
+            "video_name": "d01_intro",
             "trigger": -1
           }
         ]
@@ -1995,7 +1995,7 @@
           "d26m_no_heart_disease" : 6320 , 
           "dx_dont_know" : 15440 , 
           "dx_dont_want_to_say" : 17840 , 
-          "d01_intro_part_2" : 49480 , 
+          "d01_intro" : 85360 , 
           "d50_q_what_if_overweight" : 5440 , 
           "d25s_yes_heart_disease" : 44840 , 
           "d26s_no_heart_disease" : 6320 , 
@@ -2035,8 +2035,7 @@
           "d31s_a2_wrong_surfing" : 8880 , 
           "d56_q_fruit_juice" : 6400 , 
           "d24s_choice_heart_disease" : 6520 , 
-          "d58_q_gym_sweaty" : 12480 , 
-          "d01_intro_part_1" : 38320 
+          "d58_q_gym_sweaty" : 12480 
       } , 
       "slow_down_states" : 
       [

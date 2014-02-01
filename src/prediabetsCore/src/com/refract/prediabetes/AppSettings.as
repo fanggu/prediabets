@@ -15,9 +15,10 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = false ;
+		public static const DEBUG 										: Boolean = true ;
+		
 		public static var TRACKING										: Boolean = true ; 
-		public static const INTRO_URL									: String = 'd01_intro_part_1' ; 
+		public static var INTRO_URL									: String = '' ; //'d01_intro_part_1' ; 
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
 		public static var LOGO_ADDRESS 									: String = 'Logo' ; 

@@ -27,6 +27,31 @@
             "interaction_type": "none",
             "interaction_meta": "load_vars=[DATE]",
             "video_name": "d01_intro",
+            "message_box": 
+            [
+              {
+                "enter": 30800,
+                "exit": 38366,
+                "copy": "If you don’t have diabetes now,<br></br>you don’t have to get it.",
+                "color": "0xFFFFFF"
+              }  , 
+
+              {
+                "enter": 38866,
+                "exit": 42500,
+                "copy": "If you do something now, <br></br>you can delay it or stop it!",
+                "color": "0xFFFFFF"
+              } 
+              
+              , 
+              {
+                "enter": 43500,
+                "exit": 52200,
+                "copy": "Get a check up. <br></br>Make small changes<br></br> to what you do and eat.",
+                "color": "0xFFFFFF"
+              }
+              
+            ],
             "trigger": -1
           }
         ]
@@ -86,6 +111,7 @@
         ],
         "prev_state": "d02"
       },
+
       "d03_q": {
         "state_txt": "Who are you most worried about?",
         "state_txt_x": 50,
@@ -627,7 +653,29 @@
               "main": "Do you want to live to see your grandkids?"
             },
             "video_name": "d35s_choice_2_other_lines",
-            "message_box": null,
+            "message_box": 
+            [
+                {
+                    "enter" : 20466,
+                    "exit" : 25033 ,
+                    "copy" : "Learn about diabetes." , 
+                    "color" : "0xffffff"
+                } 
+                ,
+                {
+                    "enter" : 25533 ,
+                    "exit" : 31600 ,
+                    "copy" : "Change what they eat and drink." , 
+                    "color" : "0xffffff"
+                } 
+                ,
+                {
+                    "enter" : 32100 ,
+                    "exit" : 36400 ,
+                    "copy" : "Change what they do " , 
+                    "color" : "0xffffff"
+                } 
+            ],  
             "choice_x": 50,
             "choice_y": 35,
             "trigger": -1
@@ -641,7 +689,29 @@
             },
             "video_name": "d35s_choice_2_other_lines",
 
-            "message_box": null,
+            "message_box": 
+            [
+                {
+                    "enter" : 20466,
+                    "exit" : 25033 ,
+                    "copy" : "Learn about diabetes." , 
+                    "color" : "0xffffff"
+                } 
+                ,
+                {
+                    "enter" : 25533 ,
+                    "exit" : 31600 ,
+                    "copy" : "Change what they eat and drink." , 
+                    "color" : "0xffffff"
+                } 
+                ,
+                {
+                    "enter" : 32100 ,
+                    "exit" : 36400 ,
+                    "copy" : "Change what they do " , 
+                    "color" : "0xffffff"
+                } 
+            ],  
             "choice_x": 50,
             "choice_y": 50,
             "trigger": -1
@@ -1369,7 +1439,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "a time bomb inside you"
+              "main": "A time bomb inside you"
             },
             "video_name": "d45_a1_wrong_time_bomb",
             "message_box": null,
@@ -1433,7 +1503,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "one in twenty"
+              "main": "One in twenty"
             },
             "video_name": "d47_a1_wrong_twenty",
             "message_box": null,
@@ -1446,7 +1516,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "one in ten"
+              "main": "One in ten"
             },
             "video_name": "d47_a2_wrong_ten",
 
@@ -1461,7 +1531,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=false",
             "copy": {
-              "main": "one in five"
+              "main": "One in five"
             },
             "video_name": "d47_a3_right_five",
 
@@ -1705,7 +1775,7 @@
                       "enter" : 41500 , 
                       "exit" : 48666 , 
                       "color" : "0xFFFFFF" ,
-                      "copy" : "Changing what you <br></br>do can stop diabetes" 
+                      "copy" : "Changing what you do<br></br>can stop diabetes" 
 
                   }
             ],
@@ -1750,7 +1820,7 @@
             "trigger": -1
           },
           {
-            "final_state": "d60",
+            "final_state": "d_end",
             "interaction_type": "choice",
             "interaction_meta": "wrong=false",
             "copy": {
@@ -1792,28 +1862,13 @@
       },
 
 
-      "d60": {
-        "interactions": [
-          {
-            "final_state": "d_end",
-            "interaction_type": "none",
-            "video_name": "d58_q_gym_sweaty",
-            "message_box": null,
-            "choice_x": 50,
-            "choice_y": 55,
-            "trigger": -1
-          }
-        ]
-      },
-
-
 
 
       "d_end": 
       {
         "interactions": [
           {
-            "final_state": "d03",
+            "final_state": "d_none",
             "interaction_type": "end",
             "interaction_meta": "",
             "copy": "",
@@ -1970,16 +2025,14 @@
           "d53_a3_right_less_pies" : 20520 , 
           "d53_a2_wrong_broccoli" : 11520 , 
           "d27s_choice_overweight" : 14680 , 
-          "d35s_choice_2_other_lines" : 20440 , 
-          "d35s_choice_2_other_lines" : 20440 , 
-          "d35s_choice_2_other_lines" : 20440 , 
+          "d35s_choice_2_other_lines" : 56900 , 
           "d35s_choice_1_dont_like" : 52800 , 
           "d28s_yes_overweight" : 35920 , 
           "d29s_no_overweight" : 60600 , 
           "dx_dont_want_to_say" : 17840 , 
           "dx_dont_want_to_say" : 17840 , 
-          "d49_a1_wrong_of_course" : 13240 , 
-          "d49_a2_right_no" : 21440 , 
+          "d49_a1_wrong_of_course" : 14360 , 
+          "d49_a2_right_no" : 22240 , 
           "d48_q_skip_breakfast" : 9480 , 
           "d28m_yes_overweight" : 20440 , 
           "d29m_no_overweight" : 58480 , 
@@ -2013,7 +2066,7 @@
           "d41_a2_wrong_beer" : 9280 , 
           "d47_a1_wrong_twenty" : 12840 , 
           "d47_a2_wrong_ten" : 14480 , 
-          "d47_a3_right_five" : 29440 , 
+          "d47_a3_right_five" : 30120 , 
           "d30m_q_first_step" : 5720 , 
           "d33m_a1_wrong_thats_true" : 11440 , 
           "d33m_a2_right_load_of_rubbish" : 61560 , 

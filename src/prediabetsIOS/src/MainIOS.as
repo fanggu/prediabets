@@ -1,7 +1,4 @@
 package {
-	import com.adobe.nativeExtensions.Networkinfo.InterfaceAddress;
-	import com.adobe.nativeExtensions.Networkinfo.NetworkInfo;
-	import com.adobe.nativeExtensions.Networkinfo.NetworkInterface;
 	import com.refract.air.shared.AppSettingsIOS;
 	import com.refract.air.shared.prediabetes.assets.AssetsManagerEmbedsIOS;
 	import com.refract.air.shared.prediabetes.nav.footer.BackwardButtonIOS;
@@ -17,7 +14,6 @@ package {
 	import com.refract.prediabetes.nav.IOSNav;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.tracking.TrackingSettings;
-	import com.refract.prediabetes.utils.Buffer;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
 
@@ -26,17 +22,13 @@ package {
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.HTTPStatusEvent;
-	import flash.events.IOErrorEvent;
-	import flash.events.SecurityErrorEvent;
 	import flash.filesystem.File;
 	import flash.net.URLRequest;
-	import flash.net.URLRequestHeader;
-	import flash.sensors.Geolocation;
 	import flash.system.Capabilities;
-	import flash.text.TextField;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.setTimeout;
 
 	/**
 
@@ -48,10 +40,6 @@ package {
 		public static var STORAGE_DIR:File;
 		
 		protected var _bkg : Loader;
-		private var _geo : Geolocation;
-		private var _txt1 : TextField;
-		private var _txt2 : TextField;
-		private var _buffer : Buffer;
 		
 		
 		public function MainIOS()
@@ -61,11 +49,49 @@ package {
 		
 		protected function onAddedToStage(evt:Event):void
 		{
+			//checkWIFI() ; 
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);	
-			//setTrackingValues() ; 
-			//init() ; 
+			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , onDeactivateApp);
 			trackStart() ; 
 		}
+		private function checkWIFI() : void
+		{
+			var vNetworkInterfaces:Object; 
+			if (flash.net.NetworkInfo.isSupported) 
+			{ 
+			  vNetworkInterfaces = getDefinitionByName('flash.net.NetworkInfo')['networkInfo']['findInterfaces'](); 
+			  trace("fall 1" );
+			} 
+			else 
+			{ 
+			  vNetworkInterfaces = getDefinitionByName('com.adobe.nativeExtensions.Networkinfo.NetworkInfo')['networkInfo']['findInterfaces']();
+			  trace("fall 2" );
+			} 
+			
+			var hasWifi: Boolean = false;
+			var hasMobile: Boolean = false;
+			
+			for each (var networkInterface:Object in vNetworkInterfaces) 
+			{ 
+			    if ( networkInterface.active && (networkInterface.name == "en0" || networkInterface.name == "en1") ) hasWifi = true;
+			    if ( networkInterface.active && (networkInterface.name == "pdp_ip0" || networkInterface.name == "pdp_ip1" || networkInterface.name == "pdp_ip2") ) hasMobile = true;
+			
+			    trace( "active: " + networkInterface.active );
+			    trace( "displayName: " + networkInterface.displayName );
+			    trace( "name: " + networkInterface.name );
+			    trace( "hwAddress: " + networkInterface.hardwareAddress );
+			    trace( "--------------------" ); 
+			} 
+			
+			trace( "has Mobile Internet: " + hasMobile );
+			trace( "has Wifi Internet: " + hasWifi );
+		}
+
+		private function onDeactivateApp(event : Event) : void 
+		{
+			NativeApplication.nativeApplication.exit();
+		}
+		
 		private function trackStart() : void
 		{
 			var trackingStartIOS : TrackingStartIOS = new TrackingStartIOS( ) ; 
@@ -77,8 +103,9 @@ package {
 			if( AppSettings.TRACKING)
 			{
 				var trackingLocation : TrackingLocation = new TrackingLocation() ; 
-				DispatchManager.addEventListener( TrackingSettings.LOCATION_PRIVACY_CLICK, onLocationPrivacy)
+				//DispatchManager.addEventListener( TrackingSettings.LOCATION_PRIVACY_CLICK, onLocationPrivacy)
 				trackingLocation.track() ; 
+				setTimeout( init , 200 ) ; 
 			}
 			else
 			{
@@ -86,11 +113,6 @@ package {
 			}
 			
 		}
-		private function onLocationPrivacy( evt : Event ) : void
-		{
-			init() ; 
-		}
-		
 		
 		private function init() : void
 		{
@@ -100,132 +122,7 @@ package {
 			 
 			start() ; 
 		}
-		
-		private function trackLocation( evt : Event = null ) : void
-		{
-			//removeChild( _buffer ) ;
-			var objTrack : Object = {} ; 
-			objTrack.type = TrackingSettings.LOCATION  ; 
-			TrackingSettings.track( objTrack ) ; 
-			
-			
-		}
-		
-		
-		private function setTrackingValues() : void
-		{
-			findIPAddress() ; 
-			 
-			var objTrack : Object = {} ; 
-			objTrack.type = TrackingSettings.START ;
-			objTrack.callBack = true ; 
-			DispatchManager.addEventListener( TrackingSettings.HEADER_REGISTERED, onHeaderRegistered );
-			DispatchManager.addEventListener( TrackingSettings.HEADER_NOT_REGISTERED, onHeaderNotRegistered );
-			TrackingSettings.track( objTrack ) ; 
-			/*
-			var loader:URLLoader = new URLLoader();
-			var request:URLRequest = new URLRequest( "http://healthmentoronline.com:8086/timespent/start" );
-			request.method = URLRequestMethod.POST;
-			request.requestHeaders = new Array
-		   (
-		   		new URLRequestHeader("userId", "")
-				,new URLRequestHeader("trackId", "")
-			);
-			var variables:URLVariables = new URLVariables();  
-			variables.param = {} ;     
-		    request.data = variables; 
-			loader.addEventListener(Event.COMPLETE, loaderCompleteHandler);
-			loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
-			loader.addEventListener(HTTPStatusEvent.HTTP_RESPONSE_STATUS, httpResponseHandler);
-			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-			loader.load( request ) ; 
-			 * 
-			 */
-			
-		}
-		private function onHeaderRegistered( evt : Event ) : void
-		{
-			trackLocation() ; 
-		}
-		private function onHeaderNotRegistered( evt : Event ) : void
-		{
-			AppSettings.TRACKING = false ; 
-			init() ; 
-		}
-		private function httpResponseHandler(event : HTTPStatusEvent) : void 
-		{
-			var urlRequestHeader : URLRequestHeader ; 
-			for( var i : int = 0 ; i < event.responseHeaders.length ; i ++ )
-			{
-				urlRequestHeader = event.responseHeaders[i] ; 
-				if( urlRequestHeader.name == 'Trackheader')
-				{
-					var headerObj : Object = JSON.parse(urlRequestHeader.value) ; 
-					TrackingSettings.TRACK_ID = headerObj.trackId ;
-					TrackingSettings.USER_ID = headerObj.userId ;   
-					
-					init() ; 
-				}
-			}
-		}
-		private function loaderCompleteHandler(e:Event):void
-		{
-		    // and here's your response (in your case the JSON)
-		    //trace('---' , e.target.data);
-		}
-		
-		private function httpStatusHandler(e:HTTPStatusEvent):void
-		{
-			trace("*>><<****")
-			//if( e.responseHeaders ) trace('e ', e.responseHeaders ) 
-		    trace("httpStatusHandler:" + e.status);
-		}
-		
-		private function securityErrorHandler(e:SecurityErrorEvent):void
-		{
-		    //trace("securityErrorHandler:" + e.text);
-		}
-		
-		private function ioErrorHandler(e:IOErrorEvent):void
-		{
-		    //trace("ioErrorHandler: " + e.text);
-		}
-		
-		private static function findIPAddress():void
-		{
-		   var networkInfo:NetworkInfo = NetworkInfo.networkInfo; 
-        	var interfaces:Vector.<NetworkInterface> = networkInfo.findInterfaces(); 
-			if( interfaces != null ) 
-	        { 
-	            //trace( "Interface count: " + interfaces.length ); 
-	            for each ( var interfaceObj:NetworkInterface in interfaces ) 
-	            { 
-//	                trace( "\nname: "             + interfaceObj.name ); 
-//	                trace( "display name: "     + interfaceObj.displayName ); 
-//	                trace( "mtu: "                 + interfaceObj.mtu ); 
-//	                trace( "active?: "             + interfaceObj.active ); 
-//	                trace( "hardware address: " + interfaceObj.hardwareAddress ); 
-	              
-	                //trace("# addresses: "     + interfaceObj.addresses.length ); 
-	                for each ( var address:InterfaceAddress in interfaceObj.addresses ) 
-	                { 
-	                    //trace( "  type: "           + address.ipVersion ); 
-	                    //trace( "  address: "         + address.address ); 
-	                    //trace( "  broadcast: "         + address.broadcast ); 
-						if( address.broadcast.length > 0 && interfaceObj.active)
-						{
-							TrackingSettings.IP_ADDRESS = address.broadcast ; 
-							//trace('=== ' , address.broadcast )
-						}
-	                    //trace( "  prefix length: "     + address.prefixLength ); 
-	                } 
-	            }             
-	        } 
-		}
 
-		
-		
 		protected function setAppSettings():void{
 			//allow multitouch input and prevent auto lock.
 			Multitouch.inputMode = MultitouchInputMode.GESTURE;
@@ -233,10 +130,10 @@ package {
 			
 			//set the global stage and global resize
 			AppSettings.stage = stage;
-			AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; 
+			//AppSettings.DATA_PATH = "http://rob.otlabs.net/stuff/prediabetes/" ; 
 			AppSettings.RESERVED_HEADER_HEIGHT_DEFAULT = 60 ; 
 			AppSettings.FOOTER_VIDEONAV_FIXED = true ; 
-			
+			AppSettings.TYPE_APP = 'iosapp' ; 
 			SMSettings.STATE_TXT_FONT_SIZE = SMSettingsIOS.STATE_TXT_FONT_SIZE_NO_RETINA ; 
 			AppSettings.FOOTER_FONT_SIZE = 19 ;
 			AppSettings.HEADER_FONT_SIZE = 19 ;  
@@ -247,7 +144,7 @@ package {
 			
 			setScreenRatio();
 
-			 AppSettings.VIDEO_BASE_URL = "video/flv/1024/" ; 
+			 AppSettings.VIDEO_BASE_URL = "video/flv/" ; 
 			 AppSettings.VIDEO_FILE_EXT = ".flv" ;
 			 AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR = "";
 			 //AppSettings.INTRO_URL = 'd01_intro_800flv' ; 

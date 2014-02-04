@@ -18,6 +18,7 @@ package com.refract.prediabetes.stateMachine {
 		
 		
 		
+		
 		public static const STATE_TXT_COLOR 			  : uint = 0xffffff ; 
 		 
 		

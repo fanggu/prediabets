@@ -6,6 +6,9 @@ package com.refract.prediabetes.sections
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMSettings;
 	import com.refract.prediabetes.stateMachine.view.buttons.ButtonChoice;
+	import com.refract.prediabetes.tracking.TrackingCloseAttachment;
+	import com.refract.prediabetes.tracking.TrackingGetAttachment;
+	import com.refract.prediabetes.tracking.TrackingSettings;
 
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -30,6 +33,9 @@ package com.refract.prediabetes.sections
 	
 		protected override function createContent():void
 		{
+			var trackAttachment : TrackingGetAttachment = new TrackingGetAttachment() ; 
+			trackAttachment.track( 1 ) ; 
+			
 			_cont = new Sprite() ; 
 			addChild( _cont )
 			///this.y = this.y - 120 ; 
@@ -123,6 +129,8 @@ package com.refract.prediabetes.sections
 		
 		override public function destroy():void
 		{
+			var trackCloseAttachment : TrackingCloseAttachment = new TrackingCloseAttachment() ; 
+			trackCloseAttachment.track( TrackingSettings.ATTACHMENT_ID ) ;
 			super.destroy();
 		}
 

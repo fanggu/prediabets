@@ -7,7 +7,7 @@
 <booleanAttribute key="KILL_PREVIOUS_VIEWER" value="true"/>
 <stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
 <stringAttribute key="MAIN_CLASS" value="src/PrediabetesWeb.as"/>
-<stringAttribute key="OUTPUT" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetesWeb.swf"/>
+<stringAttribute key="OUTPUT" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetesWebBeta.swf"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_EXTERNS" value="false"/>
 <booleanAttribute key="PASS_MAIN_CLASS" value="true"/>
@@ -20,7 +20,7 @@
 <stringAttribute key="PROJECT_NAME" value="prediabetesWeb"/>
 <booleanAttribute key="START_DEBUGGER" value="true"/>
 <booleanAttribute key="START_SWF_ENABLED" value="true"/>
-<stringAttribute key="START_SWF_LOCATION" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetesWeb.swf"/>
+<stringAttribute key="START_SWF_LOCATION" value="/Users/otlabs/io/work/projects/2014/01_prediabets/code/deploy/PrediabetesWebBeta.swf"/>
 <stringAttribute key="START_SWF_WITH" value="Adobe Flash Player"/>
 <booleanAttribute key="SUPPRESS_EXCEPTION_POPUP" value="true"/>
 <booleanAttribute key="USE_PROJECT_COMPILER_ARGUMENTS" value="false"/>

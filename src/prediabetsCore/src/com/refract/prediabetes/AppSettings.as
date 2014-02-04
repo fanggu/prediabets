@@ -15,7 +15,7 @@ package com.refract.prediabetes {
 
 	public class AppSettings 
 	{
-		public static const DEBUG 										: Boolean = true ;
+		public static const DEBUG 										: Boolean = false ;
 		
 		public static var TRACKING										: Boolean = true ; 
 		public static var INTRO_URL									: String = '' ; //'d01_intro_part_1' ; 
@@ -25,17 +25,20 @@ package com.refract.prediabetes {
 		
 		public static const BULK_LOADER_ID 								: String  = 'Videos' ; 
 		
-		public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		//public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;
+		public static var DATA_PATH									  :String = "http://prediabetes.co.nz/data/" ; 
 		//public static var DATA_PATH										: String = "data/" ; 
 		public static var APP_DATA_PATH 								: String = "file://";
 		public static var BUFFER_DELAY 				  					: Number = 0.3 ; 	  
+		public static var TYPE_APP										: String ; 
+		public static const END_LINK_BASE								: String = 'http://healthmentoronline.com/thanks-for-watching?' ; 
 
 		public static const BUTTON_HIT_AREA_ALPHA						: Number = 0;
 		public static const BUTTON_HIT_AREA_EDGE						: int = 10;
 		public static const BUTTON_HIT_AREA_WIDTH						: int = BUTTON_HIT_AREA_EDGE << 1 ;
 		
 		public static var VIDEO_FILE_EXT								: String = ".f4v" ;
-		public static var VIDEO_BASE_URL								: String = "video/f4v/1024/" ;
+		public static var VIDEO_BASE_URL								: String = "video/f4v/" ;
 		public static var VIDEO_FILE_FORMAT_DESCRIPTOR					: String = "";
 		
 		public static const DEVICE_PC									: String = "DEVICE_PC";

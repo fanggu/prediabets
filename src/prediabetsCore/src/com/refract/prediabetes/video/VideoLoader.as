@@ -620,6 +620,7 @@ package com.refract.prediabetes.video
 		public function reattachStageVideo() : void {
 			_simpleVid.reattachStageVideo();
 		//	_simpleVid.toggle(true);
+		
 		}
 		
 		
@@ -637,6 +638,10 @@ package com.refract.prediabetes.video
 		
 		//**to be extended in iOS
 		public function setLoadedTrue() : void{}
+		public function get nameVideo() : String
+		{
+			return _nameVideo ; 
+		}
 		
 	}
 }

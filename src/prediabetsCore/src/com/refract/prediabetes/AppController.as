@@ -4,9 +4,7 @@ package com.refract.prediabetes
 	import com.asual.swfaddress.SWFAddressEvent;
 	import com.greensock.TweenMax;
 	import com.refract.prediabetes.assets.AssetManager;
-	import com.refract.prediabetes.nav.Header;
 	import com.refract.prediabetes.nav.Nav;
-	import com.refract.prediabetes.nav.events.FooterEvent;
 	import com.refract.prediabetes.sections.Intro;
 	import com.refract.prediabetes.stateMachine.SMController;
 	import com.refract.prediabetes.stateMachine.SMSettings;
@@ -18,7 +16,6 @@ package com.refract.prediabetes
 	import com.refract.prediabetes.video.VideoLoader;
 	import com.robot.comm.DispatchManager;
 
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
@@ -111,6 +108,7 @@ package com.refract.prediabetes
 		private function onAppDeactivated(evt:Event = null):void
 		{
 			TweenMax.pauseAll(true,true,true);
+			
 		}	
 			
 		//Create Sound Manager

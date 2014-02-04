@@ -9,8 +9,6 @@ package com.refract.air.shared.prediabetes.tracking {
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
@@ -36,18 +34,10 @@ package com.refract.air.shared.prediabetes.tracking {
 			objTrackRequest.method = URLRequestMethod.POST ; 
 			trackRequest( objTrackRequest ) ; 
 		}
-		override protected function trackRequest( obj : Object ) : void
-		{
-			AppSettings.TRACKING = false ; 
-			TrackingSettings.TRACK_ID = '' ;
-			TrackingSettings.USER_ID = '' ;  
-			super.trackRequest( obj ) ; 
-		}
 		
 		
 		override protected function httpResponseHandler(event : HTTPStatusEvent) : void 
 		{
-			//trace('::httpResponseHandler::')
 			var urlRequestHeader : URLRequestHeader ; 
 			for( var i : int = 0 ; i < event.responseHeaders.length ; i ++ )
 			{
@@ -66,13 +56,16 @@ package com.refract.air.shared.prediabetes.tracking {
 		
 		override protected function loaderCompleteHandler(e:Event):void
 		{
-			//trace('loader complete')
+			var headerObj : Object = JSON.parse(e.target.data) ; 
+			TrackingSettings.TIMESPENT_ID = headerObj.id ; 
+			//trace('complete : ' ,TrackingSettings.TIMESPENT_ID)
 		    DispatchManager.dispatchEvent( new Event( TrackingSettings.HEADER_REGISTERED ) ) ;
 		}
 		
 		override protected function httpStatusHandler(e:HTTPStatusEvent):void
 		{
 		    //trace("httpStatusHandler:" + e.status);
+			//trace('e responseURL' , e.responseURL)
 		}
 		
 		override protected function securityErrorHandler(e:SecurityErrorEvent):void

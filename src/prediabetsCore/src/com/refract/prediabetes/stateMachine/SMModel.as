@@ -18,6 +18,7 @@ package com.refract.prediabetes.stateMachine
 		private var _dictQuestions : Dictionary ;
 		private var _dictPreQuestions : Dictionary ; 
 		private var _dictVideoNames: Dictionary ; 
+		private var _dictTooslowStateActive: Dictionary ; 
 		private var _arrHistory : Array ; 
 		
 		public var arrLoadInitRequest : Array ; 
@@ -57,6 +58,7 @@ package com.refract.prediabetes.stateMachine
 			_dictPreQuestions = new Dictionary( true ) ; 
 			_dictQuestions = new Dictionary( true ) ; 
 			_dictVideoNames = new Dictionary( true ) ; 
+			cleanTooslowState() ; 
 
 			startState = jsonObject.data.meta.start_state ; 
 			initButtonStateAddress = jsonObject.data.meta.init_button_state_address ;
@@ -104,6 +106,21 @@ package com.refract.prediabetes.stateMachine
 			
 			resetHistory() ; 
 		}
+		//**tooslow 
+		public function storeTooslowState(  ) : void
+		{
+			_dictTooslowStateActive[ selectedState ] = true ; 
+		}
+		public function cleanTooslowState( ) : void
+		{
+			_dictTooslowStateActive = new Dictionary( true ) ;
+		}
+		public function getTooslowStateActive( ) : Boolean 
+		{
+			return _dictTooslowStateActive[ selectedState ] ; 
+		}
+		
+		//**History
 		public function storeHistory( historyVO : HistoryVO ) : void
 		{
 			if( _arrHistory.length > 0  ) 
@@ -145,6 +162,8 @@ package com.refract.prediabetes.stateMachine
 		{
 			return _dictVideoNames[ videoName ] ; 
 		}
+		
+		//**Answers
 		public function setAnswer( value : Boolean , address : String ) : void
 		{
 			if( _dictAnswers[address] == null)

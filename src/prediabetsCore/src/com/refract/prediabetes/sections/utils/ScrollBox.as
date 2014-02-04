@@ -154,7 +154,6 @@ package com.refract.prediabetes.sections.utils {
 		private var touchY:Number = 0;
 		
 		private function beginTouchDrag(evt:TouchEvent):void{
-			//trace(Logger.OVERLAY,"touch begin");
 			touchY = evt.stageY;
 			stage.addEventListener(TouchEvent.TOUCH_MOVE,onTouchMove);
 			stage.addEventListener(TouchEvent.TOUCH_END,endTouchDrag);
@@ -171,7 +170,6 @@ package com.refract.prediabetes.sections.utils {
 		}
 		
 		private function endTouchDrag(evt:TouchEvent):void{
-			//trace(Logger.OVERLAY,"ontouchEnd");
 			stage.removeEventListener(TouchEvent.TOUCH_MOVE,onTouchMove);
 			stage.removeEventListener(TouchEvent.TOUCH_END,endTouchDrag);
 		//	touchY = touchY - evt.stageY;

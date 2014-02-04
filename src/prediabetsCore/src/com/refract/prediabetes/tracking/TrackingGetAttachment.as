@@ -3,48 +3,36 @@ package com.refract.prediabetes.tracking {
 
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
-	import flash.events.IOErrorEvent;
-	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
+
 	/**
 	 * @author otlabs
 	 */
-	public class TrackingEnd extends Tracking
-	{
-		public function TrackingEnd() 
+	public class TrackingGetAttachment extends Tracking {
+		public function TrackingGetAttachment() 
 		{
-			
+			super();
 		}
-		public function track() : void
+		public function track( id : int ) : void
 		{
 			var objTrackRequest : TrackingRequestVO = new TrackingRequestVO() ; 
-			objTrackRequest.address = TrackingSettings.END_ADDRESS + TrackingSettings.TIMESPENT_ID ; 
+			objTrackRequest.address = TrackingSettings.ATTACHMENT_GET_ADDRESS + id ; 
 			var variables:URLVariables = new URLVariables();
 			variables.param = {} ; 
 			objTrackRequest.variables = variables ; 
-			objTrackRequest.method = URLRequestMethod.POST ; 
+			objTrackRequest.method = URLRequestMethod.GET ; 
 			trackRequest( objTrackRequest ) ; 
 		}
-		
 		override protected function loaderCompleteHandler(e:Event):void
 		{ 	 
-			
+			var headerObj : Object = JSON.parse(e.target.data) ;
+			TrackingSettings.ATTACHMENT_ID = headerObj.id ; 
 		}
 		
 		override protected function httpStatusHandler(e:HTTPStatusEvent):void
 		{
-		    //trace("end::httpStatusHandler:" + e.status);
-		}
-		
-		override protected function securityErrorHandler(e:SecurityErrorEvent):void
-		{
-		   //trace("securityErrorHandler:" + e.text);
-		}
-		
-		override protected function ioErrorHandler(e:IOErrorEvent):void
-		{
-		    //trace("ioErrorHandler: " + e.text);
+		    //trace("getAttachment:httpStatusHandler:" + e.status);
 		}
 	}
 }

@@ -96,7 +96,8 @@ package com.refract.prediabetes.sections.utils {
 			_scrollbox.x = int(-_scrollbox.contentWidth/2);
 			_scrollbox.y = _header ? int(_header.y + _header.height + 20) : 0;
 			
-			if(_header){
+			if(_header)
+			{
 				_header.x = _scrollbox.x;
 			}
 		}

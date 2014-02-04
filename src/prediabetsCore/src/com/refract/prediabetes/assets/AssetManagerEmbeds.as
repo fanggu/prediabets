@@ -20,10 +20,10 @@ package com.refract.prediabetes.assets {
 		[Embed(source='../../../../../assets/swf/library.swf' , symbol='GeneralRollover')] private var SndGeneralRollover :Class ;//
 
 		
-		[Embed(source='../../../../../assets/sound/BUTTON_SOUND_GOOD.mp3')] private var BUTTON_SOUND_GOOD :Class ;
-		[Embed(source='../../../../../assets/sound/BUTTON_SOUND_WRONG.mp3')] private var BUTTON_SOUND_WRONG :Class ;
-		[Embed(source='../../../../../assets/sound/Questions_Fade-Up.mp3')] private var Questions_Fade_Up :Class ;
-		[Embed(source='../../../../../assets/sound/Questions_Rollover.mp3')] private var Questions_Rollover :Class ;
+		[Embed(source='../../../../../assets/sound/dsfx_01.mp3')] private var BUTTON_SOUND_GOOD :Class ;
+		
+		[Embed(source='../../../../../assets/sound/suono3.mp3')] private var Questions_Fade_Up :Class ;
+		[Embed(source='../../../../../assets/sound/dsfx_02.mp3')] private var Questions_Rollover :Class ;
 /*
 		[Embed(source="../../../../../assets/img/pause_retina.png")] private var Pause : Class;
 		[Embed(source="../../../../../assets/img/play_retina.png")] private var Play : Class;

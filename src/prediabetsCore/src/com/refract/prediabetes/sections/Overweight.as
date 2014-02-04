@@ -2,6 +2,9 @@ package com.refract.prediabetes.sections
 {
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.sections.utils.GeneralOverlay;
+	import com.refract.prediabetes.tracking.TrackingCloseAttachment;
+	import com.refract.prediabetes.tracking.TrackingGetAttachment;
+
 	import flash.text.TextField;
 	public class Overweight extends GeneralOverlay 
 	{
@@ -14,6 +17,9 @@ package com.refract.prediabetes.sections
 		
 		protected override function createContent():void
 		{	
+			var trackAttachment : TrackingGetAttachment = new TrackingGetAttachment() ; 
+			trackAttachment.track( 2 ) ; 
+			
 			_header = TextManager.makeText("page_overweight_title",this,_headerStyle);
 			 var i : int = 0 ; 
 			 var l : int = 2 ; 
@@ -30,6 +36,12 @@ package com.refract.prediabetes.sections
 				bodyTextMemory = bodyText ; 
 			 }
 			super.createContent();
+		}
+		override public function destroy():void
+		{
+			var trackCloseAttachment : TrackingCloseAttachment = new TrackingCloseAttachment() ; 
+			trackCloseAttachment.track( 2 ) ; 
+			super.destroy() ; 
 		}
 		
 	}

@@ -533,19 +533,9 @@ package com.refract.prediabetes.nav {
 		}
 		private function onProgressBar( evt : Event ) : void
 		{
-			//trace('***')
 			var perc : Number ; 
 			if( _tween )
 			{
-				/*
-				
-				removeEventListener( Event.ENTER_FRAME , onProgressBar) ;
-				_progressBarBox.scaleX = 0 ; 
-				_tweenID = new TweenMax( _progressBarBox , _clip_length / 1000 , { scaleX : 1 , ease : Linear.easeNone } ) ; 
-				 * 
-				 */
-				 
-				 //trace('_clip_length :' , _clip_length)
 				 perc = ( SMController.me.getTooSlowTimerTime()   ) / _clip_length ; 
 				 if( perc > 1 )
 				{

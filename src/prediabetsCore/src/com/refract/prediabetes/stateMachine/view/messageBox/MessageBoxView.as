@@ -44,14 +44,6 @@ package com.refract.prediabetes.stateMachine.view.messageBox {
 			_stateTxtView.visible = false ; 
 			DispatchManager.addEventListener( Event.ENTER_FRAME, run ) ;
 		}
-		/*
-		function onClick(event:MouseEvent):void
-		{
-			trace('clicktarget: ', event.target.name, getQualifiedClassName(event.target));
-		}
-		 * 
-		 */
-		
 		private function run( evt : Event ) : void
 		{
 			if( SMVars.me.nsStreamTime > _valueObject.enter && SMVars.me.nsStreamTime < _valueObject.exit && !_enter ) 

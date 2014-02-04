@@ -1,4 +1,6 @@
 package com.refract.prediabetes.tracking {
+	import com.refract.prediabetes.tracking.VO.TrackingRequestVO;
+
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
@@ -6,17 +8,29 @@ package com.refract.prediabetes.tracking {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
+
 	/**
 	 * @author otlabs
 	 */
-	public class Tracking 
-	{
-		protected var _loader : URLLoader ; 
-		public function Tracking()
+	public class TrackingCloseAttachment extends Tracking {
+		public function TrackingCloseAttachment() 
 		{
-				
+			super();
 		}
-		protected function trackRequest( obj : Object ) : void
+		public function track( id ) : void
+		{
+			var objTrackRequest : TrackingRequestVO = new TrackingRequestVO() ; 
+			objTrackRequest.address = TrackingSettings.ATTACHMENT_CLOSE_ADDRESS + id ; 
+			var variables:URLVariables = new URLVariables();
+			variables.param = {} ; 
+			objTrackRequest.variables = variables ; 
+			objTrackRequest.method = URLRequestMethod.POST ; 
+			trackRequest( objTrackRequest ) ; 
+		}
+		
+		override protected function trackRequest( obj : Object ) : void
 		{
 			_loader = new URLLoader();
 			var address : String = TrackingSettings.BASE_ADDRESS + obj.address ; 
@@ -38,24 +52,15 @@ package com.refract.prediabetes.tracking {
 			_loader.load( request ) ; 
 			
 		}
-		protected function httpResponseHandler(event : HTTPStatusEvent) : void { dispose() ; }
-		protected function loaderCompleteHandler(e:Event):void { dispose() ; }
-		protected function httpStatusHandler(e:HTTPStatusEvent):void{ dispose() ; }
-		protected function securityErrorHandler(e:SecurityErrorEvent):void{ dispose() ; }
-		protected function ioErrorHandler(e:IOErrorEvent):void{ dispose() ; }
+		override protected function loaderCompleteHandler(e:Event):void
+		{ 	 
+			
+		}
 		
-		protected function dispose() : void
+		override protected function httpStatusHandler(e:HTTPStatusEvent):void
 		{
-			if( _loader )
-			{
-				_loader.removeEventListener(Event.COMPLETE, loaderCompleteHandler);
-				_loader.removeEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
-				_loader.removeEventListener(HTTPStatusEvent.HTTP_RESPONSE_STATUS, httpResponseHandler);
-				_loader.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-				_loader.removeEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-				_loader = null ; 
-			}
-			 
+		   // trace("Close::httpStatusHandler:" + e.status);
+			
 		}
 	}
 }

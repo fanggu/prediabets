@@ -1,6 +1,8 @@
 package com.refract.prediabetes.sections {
 	import com.refract.prediabetes.assets.TextManager;
 	import com.refract.prediabetes.sections.utils.GeneralOverlay;
+	import com.refract.prediabetes.tracking.TrackingCloseAttachment;
+	import com.refract.prediabetes.tracking.TrackingGetAttachment;
 
 	import flash.text.TextField;
 
@@ -14,6 +16,9 @@ package com.refract.prediabetes.sections {
 		
 		protected override function createContent():void
 		{	
+			var trackAttachment : TrackingGetAttachment = new TrackingGetAttachment() ; 
+			trackAttachment.track( 3 ) ; 
+			
 			_header = TextManager.makeText("page_legal_title",this,_headerStyle) ;
 			_header.y = -10 ; 
 			 var i : int = 0 ; 
@@ -31,6 +36,12 @@ package com.refract.prediabetes.sections {
 				bodyTextMemory = bodyText ; 
 			 }
 			super.createContent();
+		}
+		override public function destroy():void
+		{
+			var trackCloseAttachment : TrackingCloseAttachment = new TrackingCloseAttachment() ; 
+			trackCloseAttachment.track( 3 ) ; 
+			super.destroy() ; 
 		}
 	}
 }

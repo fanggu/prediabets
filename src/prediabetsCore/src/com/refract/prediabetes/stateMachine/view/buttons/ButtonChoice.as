@@ -125,7 +125,7 @@ package com.refract.prediabetes.stateMachine.view.buttons
 
 		private function btRollOver(event : MouseEvent) : void 
 		{
-			DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , SMSettings.QUESTIONS_ROLLOVER) );
+			//DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , SMSettings.QUESTIONS_ROLLOVER) );
 		}
 		
 		private function onFadeOut( evt : Event ) : void

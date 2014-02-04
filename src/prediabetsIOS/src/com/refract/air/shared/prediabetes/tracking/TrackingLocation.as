@@ -10,6 +10,7 @@ package com.refract.air.shared.prediabetes.tracking {
 	import flash.events.Event;
 	import flash.events.GeolocationEvent;
 	import flash.events.HTTPStatusEvent;
+	import flash.events.StatusEvent;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
 	import flash.sensors.Geolocation;
@@ -26,36 +27,63 @@ package com.refract.air.shared.prediabetes.tracking {
 		}
 		public function track() : void
 		{
-			trace('track location')
 			findIPAddress() ; 
 			startGeoLocation() ; 
 		}
 		private function startGeoLocation() : void
 		{
-			trace('start geo location')
-			_geo = new Geolocation(); 
+			trace('start geolocation')
 			if (Geolocation.isSupported)
 			{ 
-				_geo.addEventListener(GeolocationEvent.UPDATE, geoUpdateHandler);
+				trace('geolocation is supported')
+				_geo = new Geolocation(); 
+				trace('_get muted :' , _geo.muted)
+				/*
+                if (!_geo.muted) 
+                { 
+					trace('geo is not muted')
+                    _geo.addEventListener(GeolocationEvent.UPDATE, geoUpdateHandler); 
+                } 
+				else
+				{
+					trace('geo is muted')
+					//DispatchManager.dispatchEvent( new Event( TrackingSettings.LOCATION_PRIVACY_CLICK)) ;
+					
+				}
+				 * 
+				 */
+				 _geo.addEventListener(StatusEvent.STATUS, geoStatusHandler);
+				 _geo.addEventListener(GeolocationEvent.UPDATE, geoUpdateHandler);
+                
+				//DispatchManager.dispatchEvent( new Event( TrackingSettings.LOCATION_PRIVACY_CLICK)) ;
 			}
+		}
+		
+		
+
+		private function geoStatusHandler(event : StatusEvent) : void 
+		{	
+			//trace('geo status handler')
+			if( _geo.muted ) DispatchManager.dispatchEvent( new Event( TrackingSettings.LOCATION_PRIVACY_CLICK)) ;
 		}
 		private function geoUpdateHandler(event : GeolocationEvent) : void 
 		{
-			trace('perchenomichiami?')
-			DispatchManager.dispatchEvent( new Event( TrackingSettings.LOCATION_PRIVACY_CLICK)) ;
-			_geo.removeEventListener( GeolocationEvent.UPDATE, geoUpdateHandler) ; 
-			_geo = null ; 
-
-			var objTrackRequest : TrackingRequestVO = new TrackingRequestVO() ; 
-			objTrackRequest.address = TrackingSettings.LOCATION_ADDRESS ; 
-			var variables:URLVariables = new URLVariables();
-			variables.param = '{"latitude":"' + event.latitude + '","longitude":"' + event.longitude + '","ipaddress":"' + TrackingSettings.IP_ADDRESS + '"}';
-			objTrackRequest.variables = variables ; 
-			objTrackRequest.method = URLRequestMethod.POST ; 
-			
-			//variables.param = '{"latitude":"33.8404","longitude":"170.7399","ipaddress":"192.168.1.1"}';
-		    
-			trackRequest( objTrackRequest ) ; 
+			//DispatchManager.dispatchEvent( new Event( TrackingSettings.LOCATION_PRIVACY_CLICK)) ;
+			//trace('geo update handler')
+			_geo.removeEventListener( GeolocationEvent.UPDATE, geoUpdateHandler) ;
+			if( !_geo.muted)
+			{
+				var objTrackRequest : TrackingRequestVO = new TrackingRequestVO() ; 
+				objTrackRequest.address = TrackingSettings.LOCATION_ADDRESS ; 
+				var variables:URLVariables = new URLVariables();
+				variables.param = '{"latitude":"' + event.latitude + '","longitude":"' + event.longitude + '","ipaddress":"' + TrackingSettings.IP_ADDRESS + '"}';
+				objTrackRequest.variables = variables ; 
+				objTrackRequest.method = URLRequestMethod.POST ; 
+				
+				//variables.param = '{"latitude":"33.8404","longitude":"170.7399","ipaddress":"192.168.1.1"}';
+			    
+				trackRequest( objTrackRequest ) ; 
+			}
 		}
 		
 		private static function findIPAddress():void
@@ -97,12 +125,22 @@ package com.refract.air.shared.prediabetes.tracking {
 		override protected function loaderCompleteHandler(e:Event):void
 		{
 			trace('loader complete')
-		    
+		    dispose() ; 
 		}
 		
 		override protected function httpStatusHandler(e:HTTPStatusEvent):void
 		{
 		    trace("httpStatusHandler:" + e.status);
+			dispose() ;
+		}
+		
+		override protected function dispose() : void
+		{
+			 
+			if( _geo ) _geo = null ; 
+			trace('dispose::')
+			super.dispose() ; 
+			
 		}
 	}
 }

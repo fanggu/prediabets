@@ -13,6 +13,9 @@ package com.refract.prediabetes.stateMachine {
 	import com.refract.prediabetes.stateMachine.events.StateEvent;
 	import com.refract.prediabetes.stateMachine.flags.Flags;
 	import com.refract.prediabetes.stateMachine.timer.SMTimer;
+	import com.refract.prediabetes.tracking.TrackingEnd;
+	import com.refract.prediabetes.tracking.TrackingInteractive;
+	import com.refract.prediabetes.tracking.TrackingSettings;
 	import com.refract.prediabetes.video.VideoLoader;
 	import com.robot.comm.DispatchManager;
 
@@ -21,6 +24,8 @@ package com.refract.prediabetes.stateMachine {
 	import flash.events.Event;
 	import flash.events.NetStatusEvent;
 	import flash.events.TimerEvent;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	import flash.utils.setTimeout;
 	/**
 	 * @author robertocascavilla
@@ -53,6 +58,7 @@ package com.refract.prediabetes.stateMachine {
 		private var _url : String;
 		private var _choiceTimerActive : Boolean ;
 		private var _storeChoiceObject : Object;
+		private var _initSlowVideo : int ; 
 		
 		public function SMController()
 		{
@@ -103,15 +109,33 @@ package com.refract.prediabetes.stateMachine {
 		
 		public function end() : void
 		{
+			trace('-end-')
+			if( AppSettings.TRACKING)
+			{
+				var trackingEnd : TrackingEnd = new TrackingEnd() ; 
+				trackingEnd.track() ; 
+			}
 			var endObject : Object = new Object() ; 
 			
 			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI) ) ;
 			DispatchManager.dispatchEvent(new Event(Flags.HIDE_FOOTER_PLAY_PAUSE) ) ;
 			DispatchManager.dispatchEvent( new ObjectEvent( Flags.STATE_MACHINE_END, endObject ) ) ; 
+			
+			var link : String = 
+				AppSettings.END_LINK_BASE 
+				+ 'uid=' 
+				+ TrackingSettings.USER_ID 
+				+ '&tid=' 
+				+ TrackingSettings.TRACK_ID
+				+'&ref='
+				+ AppSettings.TYPE_APP ; 
+			
+			navigateToURL(new URLRequest(link) , '_blank');  
 		}
 		
 		private function initValues() : void
 		{
+			_initSlowVideo = 0 ; 
 			_videoFreeze = false ; 
 			_activateMessageBox = false ; 
 			_choiceTimerActive = false ; 
@@ -231,6 +255,9 @@ package com.refract.prediabetes.stateMachine {
 					_model.selectedInteraction = int(coinObj.btName);
 					var interaction : Object = _model.interaction ; 
 					
+					//**button pressed -> remove tooslow history
+					_model.cleanTooslowState() ; 
+					
 					requestVideos( _model.getState( interaction.final_state  ) ) ;
 					requestVideos( _model.getState( _model.getState( interaction.final_state  ).interactions[0].final_state ) ) ;
 					
@@ -322,6 +349,20 @@ package com.refract.prediabetes.stateMachine {
 			clenBulkLoader() ; 
 			var interaction : Object = _model.interaction;
 			var videoName : String  = interaction.video_name ; 
+			
+			//**tracking
+			if( _model.interaction.copy )
+			{
+				var episodeId : String  = VideoLoader.i.nameVideo ; 
+				var choice : String = '' ; 
+				var nextEpisodeId : String = _model.interaction.video_name ;
+				choice = _model.interaction.copy.main ; 
+				TrackingSettings.CURRENT_STEP ++ ; 
+				var trackingInteractive : TrackingInteractive = new TrackingInteractive() ; 
+				trackingInteractive.track( episodeId , choice , nextEpisodeId , TrackingSettings.CURRENT_STEP.toString() ) ; 
+			}
+			//**end tracking
+					
 			if( videoName.length > 0)
 			{
 				//setClipLength() ; 
@@ -436,9 +477,25 @@ package com.refract.prediabetes.stateMachine {
 				break ;
 				
 				case _model.startState : 
+					_initSlowVideo = 0 ; 
 					_model.resetHistory() ; 
 					DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_INIT_BUTTON , _model.initButtonState) ) ;
 				break ;
+				case 'd24s' :
+				case 'd24m' :
+				case 'd30s' :
+				case 'd30m' : 
+					_initSlowVideo = 1 ; 
+				break ; 
+					
+				case 'd21s' : 
+				case 'd21s_q' : 
+				case 'd21m' : 
+				case 'd21m_q' :
+				case 'd11m' :
+				case 'd11m_q' :
+					_initSlowVideo = 0 ; 
+				break ; 
 			}
 		}
 		protected function updateState( address : String , cleanUI : Boolean = true) : void
@@ -462,17 +519,15 @@ package com.refract.prediabetes.stateMachine {
 			_model.selectedState = address ;  
     		controlTooSlowState() ; 
 			createInteractions( );
-
-			 DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , SMSettings.QUESTIONS_FADE_IN) );			
+			 		
 			 if( AppSettings.DEBUG ) DispatchManager.dispatchEvent(new StateEvent(Flags.UPDATE_DEBUG_PANEL_STATE, _model.selectedState ));
 
 			requestVideos( _model.state ) ; 
 			if( _model.state.state_txt ) if( _model.state.state_txt.length > 0)
 			{
+				DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_FX_SOUND , SMSettings.QUESTIONS_FADE_IN) );	
 				DispatchManager.dispatchEvent(new ObjectEvent(Flags.UPDATE_VIEW_STATE_TEXT, _model.state) ) ;
 			}
-			
-			//VideoLoader.i.deactivateClickPause() ; 
 		}
 
 		
@@ -519,6 +574,7 @@ package com.refract.prediabetes.stateMachine {
 		//**listener for backward funcionality
 		private function onBackwardState( evt : Event ) : void
 		{
+			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) )  ; 
 			DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );
 			switch( true )
 			{
@@ -598,7 +654,7 @@ package com.refract.prediabetes.stateMachine {
 		private function createTooSlowTimer( totalTime : Number ) : void
 		{
 			removeTooSlowTimer() ;
-			_tooslowTimer = new SMTimer( totalTime , 1) ; 
+			_tooslowTimer = new SMTimer( totalTime  , 1) ; 
 			_tooslowTimer.start() ;
 			_tooslowTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTooSlowTimerComplete );	
 		}
@@ -616,19 +672,22 @@ package com.refract.prediabetes.stateMachine {
 				_tooslowIter++ ; 
 				if( _tooslowIter > _model.slowStates.length-1 )
 				{
-					_tooslowIter = 0 ; 
+					_tooslowIter = _initSlowVideo ; 
 				}
 			}
 			
 		}
 		private function onTooSlowTimerComplete( evt : TimerEvent ) : void
-		{			
-			removeTimers() ; 
-			updateState( SMSettings.STATE_SLOW ) ; 
+		{
+			if( !_model.getTooslowStateActive( ))
+			{
+				_model.storeTooslowState( ) ; 		
+				removeTimers() ; 
+				updateState( SMSettings.STATE_SLOW ) ;
+			}
 		}
 		
 
-		
 		private function removeTimers() : void
 		{
 			DispatchManager.removeEventListener( Event.ENTER_FRAME , scheduler) ;

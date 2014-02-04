@@ -119,7 +119,7 @@ package com.refract.prediabetes.stateMachine {
 			
 			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI) ) ;
 			DispatchManager.dispatchEvent(new Event(Flags.HIDE_FOOTER_PLAY_PAUSE) ) ;
-			DispatchManager.dispatchEvent( new ObjectEvent( Flags.STATE_MACHINE_END, endObject ) ) ; 
+			//DispatchManager.dispatchEvent( new ObjectEvent( Flags.STATE_MACHINE_END, endObject ) ) ; 
 			
 			var link : String = 
 				AppSettings.END_LINK_BASE 
@@ -268,7 +268,7 @@ package com.refract.prediabetes.stateMachine {
 					_transitionTimer.addEventListener(TimerEvent.TIMER_COMPLETE, answerDelayedCompleted );
 					
 					DispatchManager.dispatchEvent(new Event( Flags.FADEOUT ) ); 
-					DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_BUTTON_SOUND , SMSettings.BUTTON_SOUND_GOOD) );
+					//DispatchManager.dispatchEvent(new StateEvent( Flags.UPDATE_BUTTON_SOUND , SMSettings.BUTTON_SOUND_GOOD) );
 				 	//answerDelayedCompleted() ; 
 				break ;
 			}

@@ -21,7 +21,7 @@ package com.refract.prediabetes.tracking {
 			var variables:URLVariables = new URLVariables();
 			variables.param = {} ; 
 			objTrackRequest.variables = variables ; 
-			objTrackRequest.method = URLRequestMethod.GET ; 
+			objTrackRequest.method = URLRequestMethod.POST ; 
 			trackRequest( objTrackRequest ) ; 
 		}
 		override protected function loaderCompleteHandler(e:Event):void

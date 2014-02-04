@@ -130,7 +130,7 @@ package com.refract.prediabetes.sections
 		override public function destroy():void
 		{
 			var trackCloseAttachment : TrackingCloseAttachment = new TrackingCloseAttachment() ; 
-			trackCloseAttachment.track( TrackingSettings.ATTACHMENT_ID ) ;
+			trackCloseAttachment.track(  ) ;
 			super.destroy();
 		}
 

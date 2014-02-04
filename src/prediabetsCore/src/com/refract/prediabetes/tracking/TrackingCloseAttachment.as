@@ -19,10 +19,10 @@ package com.refract.prediabetes.tracking {
 		{
 			super();
 		}
-		public function track( id ) : void
+		public function track(  ) : void
 		{
 			var objTrackRequest : TrackingRequestVO = new TrackingRequestVO() ; 
-			objTrackRequest.address = TrackingSettings.ATTACHMENT_CLOSE_ADDRESS + id ; 
+			objTrackRequest.address = TrackingSettings.ATTACHMENT_CLOSE_ADDRESS + TrackingSettings.ATTACHMENT_ID; 
 			var variables:URLVariables = new URLVariables();
 			variables.param = {} ; 
 			objTrackRequest.variables = variables ; 

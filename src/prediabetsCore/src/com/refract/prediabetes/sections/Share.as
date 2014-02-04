@@ -9,10 +9,15 @@ package com.refract.prediabetes.sections
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.external.ExternalInterface;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	import flash.text.TextField;
 	public class Share extends Sprite 
 	{
 		private var _bodyTitleStyle : Object;
+		private var videoInfo : Object;
+		private var address : String;
 		public function Share() 
 		{
 			name = 'SHARE' ; 
@@ -67,6 +72,10 @@ package com.refract.prediabetes.sections
 			
 			stage.addEventListener(Event.RESIZE, onResize);
 			onResize();
+			
+			//**test
+			videoInfo ={} ; 
+			address ='ciao' ; 
 		}
 
 		private function onSharePress(event : MouseEvent) : void 
@@ -75,19 +84,126 @@ package com.refract.prediabetes.sections
 			{
 				case 'facebook' : 
 					trace('-facebook-')
+					shareFB() ; 
 				break ;
 				case 'twitter' : 
 					trace('-twitter-')
+					shareTwitter() ; 
 				break ;
 				case 'google' : 
 					trace('-google-')
+					shareGoogle() ; 
 				break ;
 				default :
 					trace('default')
 			}
 		}
-
-
+		
+		
+		public function openPage(url:String, linkWindow:String = "_blank", popUpDimensions:Array = null):void 
+		{
+            if (linkWindow == "_popup" && ExternalInterface.available) {
+                var dimensions:Array = [800,600];
+                ExternalInterface.call("window.open('" + url + "','PopUpWindow','width=" + dimensions[0] + ",height=" + dimensions[1] + ",toolbar=yes,scrollbars=yes')");
+            } else {
+                // Use JS to bypass popup blockers if ExternalInterface is available
+                var window:String = linkWindow == "_popup" ? "_blank" : linkWindow;
+                if (ExternalInterface.available) {
+                    ExternalInterface.call('window.open("' + url + '","' + window + '")');
+                } else {
+                    //request a blank page
+                    navigateToURL(new URLRequest(url), window);
+                }
+            }
+        }
+		
+		
+		
+		
+		// FACEBOOK
+        private function shareFB(e:Event = null ):void
+        {
+            //openPage('http://www.facebook.com/sharer/sharer.php?t=A+cool+video&u='+escape("http://flepstudio.org/utilita/VideoPlayer/IronMan2.mov"),"_popup");
+            openPage('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprediabetes.co.nz' , "_popup" ) ; 
+        }
+        
+        // TWITTER
+        private function shareTwitter(e:Event = null ):void
+        {
+            //openPage('https://twitter.com/intent/tweet?source=webclient&text=A+cool+video%3A+'+escape("http://flepstudio.org/utilita/VideoPlayer/IronMan2.mov"),"_popup");
+            openPage('https://twitter.com/intent/tweet?url=http%3A%2F%2Fprediabetes.co.nz' , "_popup" ) ; 
+        }
+        
+        // MAIL
+        private function shareMail(e:Event):void
+        {
+            var request:URLRequest = new URLRequest("mailto:"+address+"?subject="+videoInfo.videoTitle+"&body="+"\n\n Video Link: "+videoInfo.videoLink);            
+            navigateToURL(request, "_self");
+        }
+        
+        // TUMBLR
+        private function shareTumblr(e:Event):void
+        {
+            openPage("http://www.tumblr.com/share/link?url=" + escape(videoInfo.videoLink) + "&name=" + escape(videoInfo.videoTitle) + "&description=" + escape(videoInfo.videoArtist),'_popup');
+        }
+        
+        // STUMBLE UPON
+        private function shareSU(e:Event):void
+        {
+            openPage("http://www.stumbleupon.com/submit?url="+escape(videoInfo.videoLink)+"&title="+escape(videoInfo.videoTitle));
+        }
+        
+        // GOOGLE +
+        private function shareGoogle(e:Event = null ):void
+        {
+            //openPage("https://m.google.com/app/plus/x/?v=compose&content="+escape(videoInfo.videoLink),"_popup");
+            openPage('https://plus.google.com/share?url=http%3A%2F%2Fprediabetes.co.nz' , "_popup") ; 
+        }
+        
+        // LinkedIn
+        private function shareLinkedIn(e:Event):void
+        {
+            openPage("http://www.linkedin.com/shareArticle?mini=true&url=CONTENT-URL&title="+escape(videoInfo.videoArtist)+"&summary="+escape(videoInfo.videoArtist)+"&source="+escape(videoInfo.videoTitle),'_popup');
+        }
+        
+        // DIGG
+        private function shareDigg(e:Event):void
+        {
+            openPage("http://digg.com/submit?phase=2&url="+escape(videoInfo.videoLink)+"&title="+escape(videoInfo.videoTitle)+"&bodytext="+''+"&topic="+escape(videoInfo.videoArtist));
+        }
+        
+        //BEBO
+        private function shareBebo(e:Event):void
+        {
+            openPage("http://www.bebo.com/c/share?Url="+escape(videoInfo.videoLink)+"&Title="+escape(videoInfo.videoTitle),'_popup');
+        }
+        
+        //ORKUT
+        private function shareOrkut(e:Event):void
+        {   
+            openPage("http://www.orkut.com/FavoriteVideos.aspx?u="+escape(videoInfo.videoLink),'_popup');
+        }
+        
+        //REDDIT
+        private function shareReddit(e:Event):void
+        {
+            openPage("http://www.reddit.com/submit?url="+escape(videoInfo.videoLink),'_popup');
+        }
+        
+        // DELICIOUS
+        private function shareDelicious(e:Event):void
+        {
+            openPage("http://www.delicious.com/save?v=5&jump=close&url="+escape(videoInfo.videoLink)+"&title="+escape(videoInfo.videoTitle));
+        }
+        
+        // MYSPACE
+        private function shareMySpace(e:Event):void
+        {
+            openPage("http://www.myspace.com/Modules/PostTo/Pages/?t="+escape(videoInfo.videoTitle)+"&c="+escape(videoInfo.videoArtist)+"&u="+escape(videoInfo.videoLink)+"&l="+escape(videoInfo.videoLink),'_popup');
+        }
+		
+		
+		
 		private function onResize(evt:Event = null):void{
 			
 			this.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 - this.width / 2 ;

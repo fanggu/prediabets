@@ -22,7 +22,7 @@ package com.refract.prediabetes.assets {
 		
 		[Embed(source='../../../../../assets/sound/dsfx_01.mp3')] private var BUTTON_SOUND_GOOD :Class ;
 		
-		[Embed(source='../../../../../assets/sound/suono3.mp3')] private var Questions_Fade_Up :Class ;
+		[Embed(source='../../../../../assets/sound/final/whosh.mp3')] private var Questions_Fade_Up :Class ;
 		[Embed(source='../../../../../assets/sound/dsfx_02.mp3')] private var Questions_Rollover :Class ;
 /*
 		[Embed(source="../../../../../assets/img/pause_retina.png")] private var Pause : Class;

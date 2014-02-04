@@ -37,13 +37,7 @@ package {
 		}
 		private function setTrackingValues() : void
 		{
-			trace('---SET TRACKING VALUES')
 			var parameters : Object = LoaderInfo(this.root.loaderInfo).parameters ;
-			trace('parameters ' , parameters.uid)
-			for( var mc in parameters)
-			{
-				trace('mc ' , mc)
-			}
 			if( parameters.uid )
 			{
 				var paramUserId:Object = parameters.uid;
@@ -53,16 +47,7 @@ package {
 				TrackingSettings.USER_ID = paramUserId.toString() ; 
 				TrackingSettings.TRACK_ID = paramTrackId.toString() ;
 				TrackingSettings.TIMESPENT_ID = paramTimespentId.toString() ; 
-				
-				trace('--TrackingSettings.USER_ID :' , TrackingSettings.USER_ID)
-				trace('--TrackingSettings.TRACK_ID :' , TrackingSettings.TRACK_ID)
-				trace('--TrackingSettings.TIMESPENT_ID :' , TrackingSettings.TIMESPENT_ID)
-				//var trackingStartWeb : TrackingStartWeb = new TrackingStartWeb() ; 
-				//trackingStartWeb.track() ; 
-			}
-			 
+			} 
 		}
-		
-		
 	}
 }

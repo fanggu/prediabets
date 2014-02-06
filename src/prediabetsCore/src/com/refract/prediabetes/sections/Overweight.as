@@ -4,6 +4,7 @@ package com.refract.prediabetes.sections
 	import com.refract.prediabetes.sections.utils.GeneralOverlay;
 	import com.refract.prediabetes.tracking.TrackingCloseAttachment;
 	import com.refract.prediabetes.tracking.TrackingGetAttachment;
+	import com.refract.prediabetes.tracking.TrackingSettings;
 
 	import flash.text.TextField;
 	public class Overweight extends GeneralOverlay 
@@ -40,7 +41,7 @@ package com.refract.prediabetes.sections
 		override public function destroy():void
 		{
 			var trackCloseAttachment : TrackingCloseAttachment = new TrackingCloseAttachment() ; 
-			trackCloseAttachment.track(  ) ; 
+			trackCloseAttachment.track( TrackingSettings.ATTACHMENT_ID ) ; 
 			super.destroy() ; 
 		}
 		

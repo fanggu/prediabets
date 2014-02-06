@@ -35,7 +35,7 @@ package com.refract.prediabetes.video
 		private static var _i : VideoLoader;
 		
 		private var _lastPos : Number;
-		private var _metaActive : Boolean ; 
+		protected var _metaActive : Boolean ; 
 		private var _iterMetaFixBug : int ;
 
 		protected var _url:String;
@@ -557,7 +557,7 @@ package com.refract.prediabetes.video
 			return url ; 
 		}
 		
-		private function setBulkLoader():void{
+		protected function setBulkLoader():void{
 			_bulkLoader = BulkLoader.getLoader(AppSettings.BULK_LOADER_ID);
 			if(_bulkLoader == null){
 				_bulkLoader = new BulkLoader( AppSettings.BULK_LOADER_ID , 3 ) ;
@@ -574,6 +574,7 @@ package com.refract.prediabetes.video
 			{
 				_bulkLoader.add(url,{id:url,type:"video",pausedAtStart:true});
 				_bulkLoader.start();
+				
 			}
 		}
 		

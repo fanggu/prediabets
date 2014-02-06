@@ -31,7 +31,7 @@ package com.refract.prediabetes.nav.footer {
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		private function init(evt:Event):void
+		protected function init(evt:Event = null ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			

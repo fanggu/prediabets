@@ -28,6 +28,8 @@ package {
 			setTrackingValues() ; 
 			setAppSettings( ) ; 
 			
+			AppSettings.SHARE_REDIRECT = 'http://prediabetes.co.nz/thanksforsharingWeb.html' ;
+			
 			var mainCore : PrediabetesCore = new PrediabetesCore(); 
 			addChild ( mainCore ) ;
 		}
@@ -37,7 +39,7 @@ package {
 		}
 		private function setTrackingValues() : void
 		{
-			var parameters : Object = LoaderInfo(this.root.loaderInfo).parameters ;
+			var parameters : Object = LoaderInfo(this.root.parent.loaderInfo).parameters ;
 			if( parameters.uid )
 			{
 				var paramUserId:Object = parameters.uid;

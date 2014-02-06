@@ -1,4 +1,6 @@
 package com.refract.prediabetes.stateMachine.view {
+	import com.greensock.TweenMax;
+	import com.greensock.easing.Quint;
 	import com.refract.prediabetes.AppSettings;
 
 	import flash.display.Sprite;
@@ -12,7 +14,8 @@ package com.refract.prediabetes.stateMachine.view {
 		private var _borderTop : Sprite ; 
 		private var _borderBottom : Sprite ; 
 		private var _borderLeft : Sprite ; 
-		private var _borderRight : Sprite ; 
+		private var _borderRight : Sprite ;
+		private var _first : Boolean;
 		
 		public function BorderView() 
 		{
@@ -21,11 +24,12 @@ package com.refract.prediabetes.stateMachine.view {
 		
 		private function init( evt : Event ) : void
 		{
-			
 			removeEventListener(Event.ADDED_TO_STAGE , init );
-			
+			_first = true ;  
 			AppSettings.stage.addEventListener(Event.RESIZE, onResize );
 			createBorders() ; 
+			
+			
 		}
 		private function createBorders() : void
 		{
@@ -40,6 +44,7 @@ package com.refract.prediabetes.stateMachine.view {
 			addChild( _borderRight ) ; 
 			
 			onDrawBorders() ; 
+			_first = false ; 
 		}
 		private function onDrawBorders() : void
 		{
@@ -88,6 +93,23 @@ package com.refract.prediabetes.stateMachine.view {
 				, w
 				, h
 			) ; 
+			
+			if( _first )
+			{
+				 animateIn() ; 
+			}
+		}
+		private function animateIn() : void
+		{
+			var w : int = AppSettings.stage.stageWidth - AppSettings.VIDEO_LEFT - AppSettings.VIDEO_WIDTH ;
+			_borderLeft.scaleX = 0 ; 
+			_borderRight.x = AppSettings.stage.stageWidth ; 
+			_borderBottom.y = AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT  + 300  ; 
+			_borderTop.scaleY = 0 ; 
+			TweenMax.to(_borderLeft , 1 , { scaleX : 1 , ease : Quint.easeOut , delay : .6 } ) ; 
+			TweenMax.to(_borderRight , 1 , { x : AppSettings.stage.stageWidth-w , ease : Quint.easeOut , delay : .6 } ) ; 
+			TweenMax.to(_borderTop , 1 , { scaleY : 1 , ease : Quint.easeOut , delay : 0 } ) ; 
+			TweenMax.to(_borderBottom , 1 , { y : AppSettings.VIDEO_TOP + AppSettings.VIDEO_HEIGHT  , ease : Quint.easeOut , delay : .1 } ) ;
 		}
 		private function drawBorder( spr : Sprite , pos_x : int , pos_y : int , w : int , h : int ) : void
 		{

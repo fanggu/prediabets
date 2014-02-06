@@ -146,8 +146,6 @@ package com.refract.prediabetes.stateMachine.view.buttons
 				btObj.interaction_internal  = true ; 
 				btObj.btName = Flags.OVERWEIGHT ; 
 				
-				//deActivate() ;
-				
 			}
 			DispatchManager.dispatchEvent(new ObjectEvent(Flags.INSERT_COIN, btObj));
 		}

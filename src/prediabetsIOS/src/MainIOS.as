@@ -1,4 +1,7 @@
 package {
+	import flash.events.TimerEvent;
+	import pl.mateuszmackowiak.nativeANE.alert.NativeAlert;
+
 	import com.refract.air.shared.AppSettingsIOS;
 	import com.refract.air.shared.prediabetes.assets.AssetsManagerEmbedsIOS;
 	import com.refract.air.shared.prediabetes.nav.footer.BackwardButtonIOS;
@@ -13,12 +16,15 @@ package {
 	import com.refract.prediabetes.ClassFactory;
 	import com.refract.prediabetes.nav.IOSNav;
 	import com.refract.prediabetes.stateMachine.SMSettings;
+	import com.refract.prediabetes.stateMachine.flags.Flags;
+	import com.refract.prediabetes.stateMachine.timer.SMTimer;
 	import com.refract.prediabetes.tracking.TrackingSettings;
 	import com.robot.comm.DispatchManager;
 	import com.robot.geom.Box;
 
 	import flash.desktop.NativeApplication;
 	import flash.desktop.SystemIdleMode;
+	import flash.display.BitmapData;
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -40,6 +46,8 @@ package {
 		public static var STORAGE_DIR:File;
 		
 		protected var _bkg : Loader;
+		private var _wifiChecked : Boolean;
+		private var _timerWifi : SMTimer;
 		
 		
 		public function MainIOS()
@@ -49,23 +57,35 @@ package {
 		
 		protected function onAddedToStage(evt:Event):void
 		{
-			//checkWIFI() ; 
-			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);	
-			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , onDeactivateApp);
-			trackStart() ; 
+			_wifiChecked = false ; 
+			_timerWifi= new SMTimer( 5000 , int.MAX_VALUE)
+			_timerWifi.start() ; 
+			_timerWifi.addEventListener( TimerEvent.TIMER , checkWIFI ) ; 
+			checkWIFI(); 
 		}
-		private function checkWIFI() : void
+		private function wifiChecked() : void
 		{
+			if( !_wifiChecked )
+			{
+				_wifiChecked = true ; 
+				this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);	
+				//NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , onDeactivateApp);
+				trackStart() ; 
+			}
+		}
+		private function checkWIFI( evt : TimerEvent = null ) : void
+		{
+			
 			var vNetworkInterfaces:Object; 
 			if (flash.net.NetworkInfo.isSupported) 
 			{ 
 			  vNetworkInterfaces = getDefinitionByName('flash.net.NetworkInfo')['networkInfo']['findInterfaces'](); 
-			  trace("fall 1" );
+			  //trace("fall 1" );
 			} 
 			else 
 			{ 
 			  vNetworkInterfaces = getDefinitionByName('com.adobe.nativeExtensions.Networkinfo.NetworkInfo')['networkInfo']['findInterfaces']();
-			  trace("fall 2" );
+			  //trace("fall 2" );
 			} 
 			
 			var hasWifi: Boolean = false;
@@ -75,27 +95,50 @@ package {
 			{ 
 			    if ( networkInterface.active && (networkInterface.name == "en0" || networkInterface.name == "en1") ) hasWifi = true;
 			    if ( networkInterface.active && (networkInterface.name == "pdp_ip0" || networkInterface.name == "pdp_ip1" || networkInterface.name == "pdp_ip2") ) hasMobile = true;
-			
-			    trace( "active: " + networkInterface.active );
-			    trace( "displayName: " + networkInterface.displayName );
-			    trace( "name: " + networkInterface.name );
-			    trace( "hwAddress: " + networkInterface.hardwareAddress );
-			    trace( "--------------------" ); 
+//			
+//			    trace( "active: " + networkInterface.active );
+//			    trace( "displayName: " + networkInterface.displayName );
+//			    trace( "name: " + networkInterface.name );
+//			    trace( "hwAddress: " + networkInterface.hardwareAddress );
+//			    trace( "--------------------" ); 
 			} 
 			
-			trace( "has Mobile Internet: " + hasMobile );
-			trace( "has Wifi Internet: " + hasWifi );
+//			trace( "has Mobile Internet: " + hasMobile );
+//			trace( "has Wifi Internet: " + hasWifi );
+			
+			if( !hasMobile && !hasWifi ) 
+			{
+				_timerWifi.stop() ; 
+				DispatchManager.dispatchEvent( new Event ( Flags.FREEZE ) )  ; 
+				NativeAlert.show( "It looks your internet connection is not working. Please try again later" , "" , "Ok" ,'' ,  nativeAlertClick);
+			}
+			else
+			{
+				wifiChecked() ;
+			}
+		}
+		private function nativeAlertClick( evt : Event) : void
+		{
+			NativeAlert.dispose(); 
+			
+			var crashingBitmaps:Array = []
+		    do {
+		        var bm:BitmapData = new BitmapData ( 2048, 2048, Math.floor( Math.random() * uint.MAX_VALUE ) );
+		        crashingBitmaps.push( bm );
+		    } while ( true );
+	
 		}
 
+  
 		private function onDeactivateApp(event : Event) : void 
 		{
-			NativeApplication.nativeApplication.exit();
+			//NativeApplication.nativeApplication.exit();
 		}
 		
 		private function trackStart() : void
 		{
 			var trackingStartIOS : TrackingStartIOS = new TrackingStartIOS( ) ; 
-			DispatchManager.addEventListener( TrackingSettings.HEADER_REGISTERED, onTrackingStart)
+			DispatchManager.addEventListener( TrackingSettings.HEADER_REGISTERED, onTrackingStart) ; 
 			trackingStartIOS.track() ; 
 		}
 		private function onTrackingStart( evt : Event ) : void
@@ -137,8 +180,9 @@ package {
 			SMSettings.STATE_TXT_FONT_SIZE = SMSettingsIOS.STATE_TXT_FONT_SIZE_NO_RETINA ; 
 			AppSettings.FOOTER_FONT_SIZE = 19 ;
 			AppSettings.HEADER_FONT_SIZE = 19 ;  
-			AppSettings.FOOTER_FIX_MENU_TABLET_POSITION = 15 ; 
+			
 			AppSettings.HEADER_FIX_COPY_TABLET_POSITION = 40 ; 
+			AppSettings.SHARE_REDIRECT = 'http://prediabetes.co.nz/thanksforsharingIOS.html' ; 
 			
 			
 			
@@ -149,7 +193,7 @@ package {
 			 AppSettings.VIDEO_FILE_FORMAT_DESCRIPTOR = "";
 			 //AppSettings.INTRO_URL = 'd01_intro_800flv' ; 
 			 
-			 AppSettings.BUFFER_DELAY = 1 ; 
+			 AppSettings.BUFFER_DELAY = .1 ; 
 
 			  
 			 //IntroVideoFile() ; 
@@ -209,6 +253,9 @@ package {
 				AppSettings.SCROLLBAR_BACK_W = AppSettings.SCROLLBAR_BACK_W_RETINA ; 
 				AppSettings.SCROLLBAR_TRIGGER_W = AppSettings.SCROLLBAR_TRIGGER_W_RETINA ; 
 				AppSettings.SCROLLBAR_GAP_H = AppSettings.SCROLLBAR_GAP_H * 2 ; 
+				AppSettings.FOOTER_FIX_MENU_TABLET_POSITION =  -10 ;
+				
+				AppSettings.VIDEO_NAV_BUTTON_SPACE = 50 ;
 			}
 			else
 			{
@@ -228,7 +275,7 @@ package {
 				
 				AppSettingsIOS.TOP_HEIGHT_BAR = AppSettingsIOS.TOP_HEIGHT_BAR / 2; 
 				AppSettings.HEADER_FIX_COPY_TABLET_POSITION = AppSettings.HEADER_FIX_COPY_TABLET_POSITION / 2; 
-				AppSettings.FOOTER_FIX_MENU_TABLET_POSITION = AppSettings.FOOTER_FIX_MENU_TABLET_POSITION / 2; 
+				AppSettings.FOOTER_FIX_MENU_TABLET_POSITION =  0 ; 
 				
 				//AppSettings.VIDEO_NAV_SIDE = AppSettingsIOS.VIDEO_NAV_SIDE_RETINA ; 
 				//AppSettings.VIDEO_NAV_HEIGHT = AppSettingsIOS.VIDEO_NAV_HEIGHT_RETINA ; 
@@ -236,6 +283,8 @@ package {
 				
 				AppSettings.SCROLLBAR_BACK_W = AppSettings.SCROLLBAR_BACK_W_NO_RETINA ; 
 				AppSettings.SCROLLBAR_TRIGGER_W = AppSettings.SCROLLBAR_TRIGGER_W_NO_RETINA ; 
+				
+				AppSettings.VIDEO_NAV_BUTTON_SPACE = 25 ;
 			}
 			AppSettings.RESERVED_HEIGHT = AppSettings.RESERVED_FOOTER_HEIGHT + AppSettings.RESERVED_HEADER_HEIGHT;
 

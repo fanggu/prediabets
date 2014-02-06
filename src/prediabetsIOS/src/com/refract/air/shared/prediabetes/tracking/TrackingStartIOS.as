@@ -58,7 +58,6 @@ package com.refract.air.shared.prediabetes.tracking {
 		{
 			var headerObj : Object = JSON.parse(e.target.data) ; 
 			TrackingSettings.TIMESPENT_ID = headerObj.id ; 
-			//trace('complete : ' ,TrackingSettings.TIMESPENT_ID)
 		    DispatchManager.dispatchEvent( new Event( TrackingSettings.HEADER_REGISTERED ) ) ;
 		}
 		

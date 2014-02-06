@@ -58,7 +58,8 @@ package com.refract.prediabetes.nav
 			stage.addEventListener(Event.RESIZE,onResize);
 			onResize();
 			
-			
+			this.alpha = 0 ; 
+			TweenMax.to( this , 1 , { alpha : 1 , delay : 1 } ) ; 
 		}
 		
 		

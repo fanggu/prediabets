@@ -23,7 +23,8 @@ package com.refract.air.shared.prediabetes.nav.footer {
 		}
 		override protected function init( evt : Event = null ) : void
 		{
-			_fixHitArea_w = 20 ;
+			_fixHitArea_w = 50 ;
+			_fixHitArea_h = 50 ;
 			_fixHitArea_x = 5 ;  
 			super.init( evt ) ; 	
 			

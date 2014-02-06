@@ -111,6 +111,8 @@ package com.refract.prediabetes {
 		
 		public static var MOUSE_MOVE_H									: int = -60 ; 
 		
+		public static var SHARE_REDIRECT								: String = '' ; 
+		
 		 
 		//**Colors
 		public static var RED:int = 0xc45252;

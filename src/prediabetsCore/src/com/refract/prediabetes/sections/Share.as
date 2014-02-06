@@ -83,15 +83,15 @@ package com.refract.prediabetes.sections
 			switch( event.target.name)
 			{
 				case 'facebook' : 
-					trace('-facebook-')
+					
 					shareFB() ; 
 				break ;
 				case 'twitter' : 
-					trace('-twitter-')
+					
 					shareTwitter() ; 
 				break ;
 				case 'google' : 
-					trace('-google-')
+					
 					shareGoogle() ; 
 				break ;
 				default :
@@ -103,7 +103,7 @@ package com.refract.prediabetes.sections
 		public function openPage(url:String, linkWindow:String = "_blank", popUpDimensions:Array = null):void 
 		{
             if (linkWindow == "_popup" && ExternalInterface.available) {
-                var dimensions:Array = [800,600];
+                var dimensions:Array = [400,300];
                 ExternalInterface.call("window.open('" + url + "','PopUpWindow','width=" + dimensions[0] + ",height=" + dimensions[1] + ",toolbar=yes,scrollbars=yes')");
             } else {
                 // Use JS to bypass popup blockers if ExternalInterface is available
@@ -124,8 +124,10 @@ package com.refract.prediabetes.sections
         private function shareFB(e:Event = null ):void
         {
             //openPage('http://www.facebook.com/sharer/sharer.php?t=A+cool+video&u='+escape("http://flepstudio.org/utilita/VideoPlayer/IronMan2.mov"),"_popup");
-            openPage('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprediabetes.co.nz' , "_popup" ) ; 
-        }
+            //openPage('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprediabetes.co.nz' , "_popup" ) ; 
+            openPage("https://www.facebook.com/dialog/feed?app_id=639244382790610&display=popup&link=http://prediabetes.co.nz&picture=http://prediabetes.co.nz/img/fb_icon.JPG&name=Pre%20Diabetes%20-%20What%20you%20can%20do&caption=I%20just%20learned%20how%20to%20stop%20getting%20diabetes.%20It%20is%20easy%20and%20free.&message=&redirect_uri=" + AppSettings.SHARE_REDIRECT  , '_popup') ; 
+            //openPage('https://www.facebook.com/dialog/feed?app_id=180855035393924&caption=I%20just%20learned%20what%20to%20do%20if%20someone%20chokes%20or%20has%20a%20cardiac%20arrest%20-%20by%20playing%20Lifesaver.%20It%27s%20free%20and%20fun%20&description=Lifesaver%20is%20a%20game-in-a-film%20which%20gets%20you%20to%20make%20the%20choices%20you%27d%20have%20to%20make%20in%20a%20real%20emergency.&display=popup&e2e=%7B%7D&link=https%3A%2F%2Flife-saver.org.uk%2F&locale=en_US&name=Save%20someone%27s%20life%20-%20play%20Lifesaver&next=https%3A%2F%2Fs-static.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D29%23cb%3Dfa3bc34fc%26domain%3Dlife-saver.org.uk%26origin%3Dhttps%253A%252F%252Flife-saver.org.uk%252Ff2b3c8597%26relation%3Dopener%26frame%3Dfc53c6238%26result%3D%2522xxRESULTTOKENxx%2522&picture=http%3A%2F%2Fcdn.life-saver.org.uk%2Fdata%2Fimages%2Fls_share.jpg&sdk=joey') ;     
+        }	
         
         // TWITTER
         private function shareTwitter(e:Event = null ):void

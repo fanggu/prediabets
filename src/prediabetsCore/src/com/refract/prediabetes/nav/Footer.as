@@ -121,7 +121,17 @@ package com.refract.prediabetes.nav {
 			}
 			
 			onResize();
+			
+			animateIn() ; 
 		}
+		private function animateIn() : void
+		{
+			_footerBottom.alpha = 0 ; 
+			TweenMax.to( _footerBottom , .5 , { alpha : 1 , delay : 1} ) ; 
+			
+			_footerTopLeft.alpha = 0 ; 
+			TweenMax.to( _footerTopLeft , .5 , { alpha : 1 , delay : 1 })  ;
+ 		}
 		private function onRun( evt : Event ) : void
 		{
 			_iterShowNav ++ ; 
@@ -291,11 +301,13 @@ package com.refract.prediabetes.nav {
 				footerHeight = footerHeight / 2;
 				posContainerAdder = footerHeight ;
 				_footerBackTop.height = footerHeight ; 
-				_footerBackTop.alpha = 1 ; 
+				//_footerBackTop.alpha = 1 ; 
 			}
-			_footerBackBottom = new Box( stage.stageWidth , footerHeight  , 0xffffff ) ;
+			_footerBackBottom = new Box( stage.stageWidth , footerHeight  , 0xffffff) ;
 			
+			_footerBackBottom.alpha = 0 ; 
 			_footerBackBottom.y = 0 + posContainerAdder  ;
+			//_footerBackBottom.y = _footerBackBottom.y + 200 ; 
 			_footerBackTop.y = -footerHeight + posContainerAdder ;
 			_footerBackCont = new Sprite() ; 
 			_footerBackCont.addChild( _footerBackBottom ) ; 
@@ -358,7 +370,9 @@ package com.refract.prediabetes.nav {
 				{
 					 prevButton = _footerBottom.getChildAt( i - 1 ) as PrediabetesButton ;
 					var button : PrediabetesButton = _footerBottom.getChildAt( i ) as PrediabetesButton ; 
-					button.x = prevButton.x  + prevButton.width + AppSettings.FOOTER_BUTTON_SPACE ;
+					var divider : Number = 1 ; 
+					if( AppSettings.DEVICE == AppSettings.DEVICE_TABLET ) divider = 2.5 ;
+					button.x = prevButton.x  + prevButton.width + AppSettings.FOOTER_BUTTON_SPACE / divider ;
 					//button.y = ( (-i) * _buttonSpace )  //+ prevButton.width ; 
 				}
 			}
@@ -396,7 +410,8 @@ package com.refract.prediabetes.nav {
 			_footerTopLeft.addChild( _backwardButton );
 			_backwardButton.id = BACKWARD_BUTTON;
 			_backwardButton.visible = true;
-			_backwardButton.x =  _backwardButton.width ; 
+			if( AppSettings.DEVICE != AppSettings.DEVICE_TABLET)
+				_backwardButton.x =  _backwardButton.width ;  
 			
 			_backwardButton.y =  _footerTopBackground.y + AppSettings.VIDEO_NAV_PROGRESS_BAR_Y_POS ; 
 			
@@ -419,7 +434,7 @@ package com.refract.prediabetes.nav {
 			_footerTopLeft.addChild(_progressBar);
 			_progressBar.y = _footerTopBackground.y + AppSettings.VIDEO_NAV_HEIGHT / 2 - AppSettings.VIDEO_NAV_PROGRESS_BAR_HEIGHT / 2;   
 
-			var fix_x : int = snd.x + snd.width + AppSettings.VIDEO_NAV_BUTTON_SPACE  ;
+			var fix_x : int = snd.x + snd.width + AppSettings.VIDEO_NAV_BUTTON_SPACE / 1.5  ;
 			_progressBarBox = new Sprite() ;  
 			_progressBarBoxHitArea = new Sprite();
 			_progressBarBoxHitArea.alpha = 0 ; 

@@ -5,6 +5,7 @@ package com.refract.air.shared.prediabetes.nav.footer {
 
 	import flash.display.Loader;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 
@@ -14,6 +15,12 @@ package com.refract.air.shared.prediabetes.nav.footer {
 	public class SoundButtonIOS extends SoundButton {
 		public function SoundButtonIOS() {
 			super();
+		}
+		override protected function init( evt : Event = null ) : void
+		{
+			_fixHitArea_w = 50 ; 
+			_fixHitArea_h = 50 ; 
+			super.init( evt )  ; 
 		}
 		override protected function createStates() : void
 		{

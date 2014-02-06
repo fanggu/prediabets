@@ -4,7 +4,6 @@ package {
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.ProgressEvent;
 	import flash.net.URLRequest;
 
 	[SWF(width='800', height='500', backgroundColor='#000000', frameRate='60')]
@@ -25,7 +24,7 @@ package {
 			_buffer = new Buffer() ; 
 			addChild( _buffer ) ; 
 			
-			stage.addEventListener(Event.RESIZE, onResize)
+			stage.addEventListener(Event.RESIZE, onResize ) ; 
 			onResize() ; 
 			
 			
@@ -47,13 +46,6 @@ package {
 			removeChild( _buffer )
 		    addChild(loadEvent.currentTarget.content);
 		}
-		/*
-		private function onProgressHandler(mProgress:ProgressEvent) : void
-		{
-			var percent:Number = mProgress.bytesLoaded/mProgress.bytesTotal;
-			trace(percent);
-		}
-		 * 
-		 */
+	
 	}
 }

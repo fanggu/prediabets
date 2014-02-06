@@ -20,11 +20,11 @@ package com.refract.air.shared.prediabetes.nav.footer {
 		
 		override protected function init( evt : Event ) : void
 		{
-			if( AppSettings.RETINA)
-			{
-				_fixHitArea_w = 20 ; 
-				_fixHitArea_h = 20 ; 
-			}
+			//if( AppSettings.RETINA)
+			//{
+				_fixHitArea_w = 50 ; 
+				_fixHitArea_h = 50 ; 
+			//}
 			super.init( evt ) ; 
 		}
 		override protected function createStates() : void

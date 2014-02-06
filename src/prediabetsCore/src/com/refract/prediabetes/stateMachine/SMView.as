@@ -40,6 +40,7 @@ package com.refract.prediabetes.stateMachine
 		private var _messageBoxContView : Sprite;
 		private var _closeButton : Sprite;
 		private var _initButton : ButtonChoice ; 
+		private var _endButton : ButtonChoice ; 
 		
 		public function SMView()
 		{
@@ -88,7 +89,10 @@ package com.refract.prediabetes.stateMachine
 		{
 			DispatchManager.addEventListener(Flags.STATE_MACHINE_START, onStart );
 			DispatchManager.addEventListener(Flags.CREATE_INIT_BUTTON, onAddInitButton);
+			DispatchManager.addEventListener(Flags.CREATE_END_BUTTON, onAddEndButton);
 			DispatchManager.addEventListener(Flags.REMOVE_INIT_BUTTON, onRemoveInitButton);
+			DispatchManager.addEventListener(Flags.REMOVE_END_BUTTON, onRemoveEndButton);
+			
 		}
 		
 		protected function createListeners() : void
@@ -260,6 +264,7 @@ package com.refract.prediabetes.stateMachine
 		}
 		private function onRemoveInitButton( evt : Event = null ) : void
 		{ 
+			
 			if( _initButton )
 			{
 				_initButton.dispose() ; 
@@ -268,6 +273,34 @@ package com.refract.prediabetes.stateMachine
 				_initButton= null; 
 			}
 		}
+		
+		private function onAddEndButton( evt : ObjectEvent ) : void
+		{
+			if( !_endButton ) createEndButton( evt.object )
+			_endButton.visible = true ; 
+			_endButton.alpha = 0 ; 
+			TweenMax.to( _endButton , .5 , { alpha : 1 , delay : 0 } ) ; 
+		}
+		private function createEndButton( interaction : Object) : void
+		{
+			_endButton = new ButtonChoice( SMSettings.FONT_BUTTON, { fontSize:26 , interaction : true  }, SMSettings.MIN_BUTTON_SIZE, 70  , true , true);
+			addChild( _endButton ) ; 
+			_endButton.id = Flags.END_BUTTON ; 
+			_endButton.visible = false ; 
+			_endButton.setButton( interaction ) ; 
+		}
+		private function onRemoveEndButton( evt : Event ) : void
+		{
+			if( _endButton )
+			{
+				_endButton.dispose() ; 
+				if( _endButton.parent ) 
+					_endButton.parent.removeChild( _endButton ) ; 
+				_endButton= null; 
+			}
+		}
+		
+		
 	
 		private function onUpdateVideo( evt : StateEvent) : void
 		{

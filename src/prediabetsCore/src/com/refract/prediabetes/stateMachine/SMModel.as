@@ -29,6 +29,7 @@ package com.refract.prediabetes.stateMachine
 		public var endState : String ;
 		public var slowStates : Array ; 
 		public var initButtonState : Object ; 
+		public var endButtonState : Object ; 
 		public var closeButtonState : Object ; 
 		public var shareButtonFacebookState : Object ; 
 		public var shareButtonTwitterState : Object ; 
@@ -92,6 +93,9 @@ package com.refract.prediabetes.stateMachine
 			
 			initButtonState = jsonObject.data.init_button_state ; 
 			initButtonState.iter = Flags.INIT_BUTTON ; 
+			
+			endButtonState = jsonObject.data.end_button_state ; 
+			endButtonState.iter = Flags.END_BUTTON ; 
 			
 			closeButtonState = jsonObject.data.close_button_state ; 
 			closeButtonState.iter = Flags.BACK_TO_VIDEO_BUTTON ; 

@@ -109,18 +109,22 @@ package com.refract.prediabetes.stateMachine {
 		
 		public function end() : void
 		{
-			trace('-end-')
 			if( AppSettings.TRACKING)
 			{
 				var trackingEnd : TrackingEnd = new TrackingEnd() ; 
 				trackingEnd.track() ; 
 			}
-			var endObject : Object = new Object() ; 
 			
 			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI) ) ;
 			DispatchManager.dispatchEvent(new Event(Flags.HIDE_FOOTER_PLAY_PAUSE) ) ;
 			//DispatchManager.dispatchEvent( new ObjectEvent( Flags.STATE_MACHINE_END, endObject ) ) ; 
 			
+			goThankyouPage() ; 
+			
+			DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_END_BUTTON , _model.endButtonState) ) ;
+		}
+		private function goThankyouPage() : void
+		{
 			var link : String = 
 				AppSettings.END_LINK_BASE 
 				+ 'uid=' 
@@ -130,7 +134,7 @@ package com.refract.prediabetes.stateMachine {
 				+'&ref='
 				+ AppSettings.TYPE_APP ; 
 			
-			navigateToURL(new URLRequest(link) , '_blank');  
+			navigateToURL(new URLRequest(link) , '_self');  
 		}
 		
 		private function initValues() : void
@@ -228,7 +232,12 @@ package com.refract.prediabetes.stateMachine {
 		//**Activate State Machine.
 		private function onInsertCoin( evt : ObjectEvent) : void
 		{	
+			
+			//if( _frozen)
+				//DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE  ) ) ; 
+				
 			VideoLoader.i.pauseVideo() ; 
+			
 			var coinObj : CoinVO = evt.object as CoinVO; 
 			DispatchManager.dispatchEvent( new Event(Flags.CLEAR_SOUNDS ) ) ;
 			switch( coinObj.btName )
@@ -238,9 +247,13 @@ package com.refract.prediabetes.stateMachine {
 					DispatchManager.dispatchEvent(new Event( Flags.DEACTIVATE_VIDEO_RUN ) ) ; 
 					stateMachineTransition();
 				break ;
-				case Flags.INIT_BUTTON : 					 
+				case Flags.INIT_BUTTON : 
+					DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE  ) ) ;					 
 					updateState(_model.initButtonStateAddress ) ; 
 					DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_INIT_BUTTON ) ) ; 
+				break ;
+				case Flags.END_BUTTON : 				 
+					 goThankyouPage() ; 
 				break ;
 				case Flags.BACK_TO_VIDEO_BUTTON : 					 
 					//**do nothing
@@ -464,11 +477,13 @@ package com.refract.prediabetes.stateMachine {
 		}
 		public function goStartState( ) : void
 		{
+			DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_END_BUTTON ) ) ; 
 			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE) ) ; 
 			updateState( _model.startState ) ; 
 		}
 		private function checkAddress(  ) : void
 		{
+			trace('check address??')
 			var address : String = _model.selectedState ;
 			switch( address )
 			{				
@@ -477,6 +492,7 @@ package com.refract.prediabetes.stateMachine {
 				break ;
 				
 				case _model.startState : 
+					
 					_initSlowVideo = 0 ; 
 					_model.resetHistory() ; 
 					DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_INIT_BUTTON , _model.initButtonState) ) ;

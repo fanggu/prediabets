@@ -94,6 +94,9 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const CREATE_INIT_BUTTON 						: String = 'createInitButton';
 		public static const REMOVE_INIT_BUTTON						: String = 'removeInitButton' ; 
 		
+		public static const CREATE_END_BUTTON						: String = 'createEndButton' ; 
+		public static const REMOVE_END_BUTTON						: String = 'removeEndButton' ; 
+		
 		
 		public static const SHOW_FOOTER_PLAY_PAUSE					: String = 'SHOW_FOOTER_PLAY_PAUSE';
 		public static const HIDE_FOOTER_PLAY_PAUSE					: String = 'HIDE_FOOTER_PLAY_PAUSE';
@@ -102,6 +105,7 @@ package com.refract.prediabetes.stateMachine.flags {
 		public static const CHOICE 									: String = 'choice' ;
 		public static const NONE 									: String = 'none' ;
 		public static const INIT_BUTTON 							: String = 'initButton' ;
+		public static const END_BUTTON 								: String = 'endButton' ;
 		public static const BACK_TO_VIDEO_BUTTON 					: String = 'backToVideoButton' ;  
 		
 		//DEBUG

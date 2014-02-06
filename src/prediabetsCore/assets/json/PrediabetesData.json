@@ -203,7 +203,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Don't Know"
+              "main": "Don't know"
             },
             "video_name": "dx_dont_know",
             "choice_x": 50,
@@ -277,7 +277,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Don't Know"
+              "main": "Don't know"
             },
             "video_name": "dx_dont_know",
             "message_box": null,
@@ -353,7 +353,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Don't Know"
+              "main": "Don't know"
             },
             "video_name": "dx_dont_know",
             "message_box": null,
@@ -444,7 +444,7 @@
                 {
                     "enter" : 34700 , 
                     "exit" : 41700 , 
-                    "copy": "Mãori, Everyone’s risk of diabetes <br></br>increases as they get older",
+                    "copy": "Everyone’s risk of diabetes <br></br>increases as they get older",
                     "color": "0xFFFFFF"
                 }
 
@@ -474,7 +474,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Not sure what overweight means?"
+              "main": "Not sure what overweight means."
             },
             "video_name": "dx_dont_want_to_say",
             "message_box": null,
@@ -672,7 +672,7 @@
                 {
                     "enter" : 32100 ,
                     "exit" : 36400 ,
-                    "copy" : "Change what they do " , 
+                    "copy" : "Change what they do." , 
                     "color" : "0xffffff"
                 } 
             ],  
@@ -708,7 +708,7 @@
                 {
                     "enter" : 32100 ,
                     "exit" : 36400 ,
-                    "copy" : "Change what they do " , 
+                    "copy" : "Change what they do." , 
                     "color" : "0xffffff"
                 } 
             ],  
@@ -745,7 +745,7 @@
                 {
                     "enter" : 32100 ,
                     "exit" : 36400 ,
-                    "copy" : "Change what they do " , 
+                    "copy" : "Change what they do." , 
                     "color" : "0xffffff"
                 } 
             ],  
@@ -782,7 +782,7 @@
                 {
                     "enter" : 28300,
                     "exit" : 32600 ,
-                    "copy" : "Change what they do " , 
+                    "copy" : "Change what they do." , 
                     "color" : "0xffffff"
                 } 
             ],
@@ -846,7 +846,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Don't Know"
+              "main": "Don't know"
             },
             "video_name": "dx_dont_know",
             "message_box": null,
@@ -988,7 +988,7 @@
             "interaction_type": "choice",
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Don't Know"
+              "main": "Don't know"
             },
             "video_name": "dx_dont_know",
             "message_box": null,
@@ -1109,7 +1109,7 @@
             "interaction_internal" : "true" , 
             "interaction_meta": "wrong=true",
             "copy": {
-              "main": "Not sure what overweight means?"
+              "main": "Not sure what overweight means."
             },
             "video_name": "dx_dont_want_to_say",
             "message_box": null,
@@ -1540,7 +1540,7 @@
                 {
                     "enter" : 17866 , 
                     "exit" : 25566 , 
-                    "copy": "Stop diabetes by changing <br></br>what you eat and drink <br></br>(And having less of it!)",
+                    "copy": "Stop diabetes by changing <br></br>what you eat and drink <br></br>(and having less of it!)",
                     "color": "0xFFFFFF"
                 }
             ],
@@ -1775,7 +1775,7 @@
                       "enter" : 41500 , 
                       "exit" : 48666 , 
                       "color" : "0xFFFFFF" ,
-                      "copy" : "Changing what you do<br></br>can stop diabetes" 
+                      "copy" : "Changing what you do<br></br>can stop diabetes." 
 
                   }
             ],
@@ -1921,6 +1921,17 @@
         "copy": 
         {
             "main": "Click here to talk about stopping diabetes now!"
+        }
+    } ,
+     "end_button_state" : 
+    {
+
+        "choice_x" : 50 ,
+        "choice_y" : 80 , 
+        "interaction_meta" : "wrong=false" , 
+        "copy": 
+        {
+            "main": "Thank you for watching"
         }
     } ,
     "close_button_state" : 

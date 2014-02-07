@@ -44,13 +44,10 @@ package {
 			
 			stage.align = StageAlign.TOP_LEFT; 
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			
-			//SoundMixer.soundTransform = new SoundTransform(0);
 	
 			var bytes : ByteArray = AssetManager.getEmbeddedAsset("CopyJSON") as ByteArray;
 			TextManager.parseData(bytes.readUTFBytes(bytes.length));
 			
-			//AppSettings.RETINA = false ; 
 			startApp() ; 
 		}
 

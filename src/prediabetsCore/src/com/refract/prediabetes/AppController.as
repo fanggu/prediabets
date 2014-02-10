@@ -51,10 +51,12 @@ package com.refract.prediabetes
 			createStateMachine();	
 			createUI();
 			createNav();
+			
 			DispatchManager.addEventListener( Flags.DRAW_VIDEO_STATUS ,onDrawVideoStatus  ) ;
 			DispatchManager.addEventListener(Flags.START_MOVIE , onStartMovie  );
 			DispatchManager.addEventListener(Flags.APP_ACTIVATE, onAppActivated);
 			DispatchManager.addEventListener(Flags.APP_DEACTIVATE, onAppDeactivated);
+			
 			initSWFAddress();
 		}
 
@@ -66,8 +68,6 @@ package com.refract.prediabetes
 			//*state machine main view
 			_smView = new ClassFactory.SM_VIEW();
 			_main.addChildAt( _smView, 0 );
-			
-			
 		}
 		
 		//**Create UI
@@ -76,16 +76,6 @@ package com.refract.prediabetes
 			_ui = new Sprite();
 			_main.addChild(_ui);
 			SMSettings.init() ; 	
-			_main.stage.addEventListener(FullScreenEvent.FULL_SCREEN,onFSChange);
-		}
-		
-		//**FS management
-		private function onFSChange(evt:FullScreenEvent):void
-		{
-			if(evt.fullScreen )
-			{
-				
-			}
 		}
 		
 		//**Create Nav
@@ -93,13 +83,11 @@ package com.refract.prediabetes
 			_nav = new ClassFactory.NAV();
 			_main.addChild(_nav);
 			DispatchManager.addEventListener(Nav.NO_MORE_OVERLAYS,onNoMoreOverlays);
-
 		}
 			
 		//**on App Active and Deactive
 		private function onAppActivated(evt:Event = null):void{
 			TweenMax.resumeAll();
-			
 			if(VideoLoader.i){
 				VideoLoader.i.reattachStageVideo();
 			}
@@ -214,7 +202,6 @@ package com.refract.prediabetes
 			{
 				DispatchManager.dispatchEvent(new Event(Flags.UN_FREEZE));
 			}
-		//	_nav.addOverlay(ClassFactory.INTRO);
 		}		
 		
 		
@@ -244,15 +231,12 @@ package com.refract.prediabetes
 				statusMC = AssetManager.getEmbeddedAsset('GreenPlay') ;
 				if( _smView )_smView.addChild( statusMC ) ;
 				TweenMax.to( statusMC , .5 , { delay : 1 , alpha : 0 , onComplete : removeMe , onCompleteParams :[statusMC]} )
-				//statusMC.gotoAndStop(1) ;
-				//TweenMax.to( statusMC , 1.2 , {frame:36} ) ;
 			}
 			else
 			{
 				statusMC = AssetManager.getEmbeddedAsset('RedPause') ;
 				if( _smView )_smView.addChild( statusMC ) ;
 				TweenMax.to( statusMC , .5 , { delay : 1 , alpha : 0 , onComplete : removeMe , onCompleteParams :[statusMC]} )
-				//TweenMax.to( statusMC , 1.2 , {frame:36} ) ;
 			}
 			if( !AppSettings.RETINA ) statusMC.scaleX = statusMC.scaleY = 0.5 ; 
 			statusMC.x = AppSettings.VIDEO_LEFT + AppSettings.VIDEO_WIDTH/2 ; 
@@ -326,7 +310,6 @@ package com.refract.prediabetes
 			setState(event.pathNames);
         }
 		
-
 		
 		//**GET AND SET
 		public static function get i():AppController
@@ -337,27 +320,5 @@ package com.refract.prediabetes
 		{
 			return _nav;
 		}
-		
-		/*
-		public function get nextStoryState() : String 
-		{ 
-			return _nextStoryState; 
-		}
-		public function set nextStoryState(nextStoryState : String) : void 
-		{ 
-			_nextStoryState = nextStoryState; 
-		}
-		
-		public function get nextStory():int 
-		{
-			return _nextStory;
-		}
-		public function set nextStory(story:int):void 
-		{ 
-			_nextStory = story;
-		}
-		 * 
-		 */
-		
 	}
 }

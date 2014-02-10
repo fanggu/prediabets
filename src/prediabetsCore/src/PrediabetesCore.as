@@ -6,22 +6,12 @@ package {
 	import com.refract.prediabetes.assets.AssetManager;
 	import com.refract.prediabetes.assets.FontManager;
 	import com.refract.prediabetes.assets.TextManager;
-	import com.refract.prediabetes.tracking.TrackingInteractive;
 
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	import flash.events.HTTPStatusEvent;
-	import flash.events.IOErrorEvent;
-	import flash.events.SecurityErrorEvent;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
-	import flash.net.URLRequestHeader;
-	import flash.net.URLRequestMethod;
-	import flash.net.URLVariables;
 	import flash.utils.ByteArray;
-	import flash.utils.setTimeout;
 	//import com.refract.prediabetes.tracking.Tracking;
 
 

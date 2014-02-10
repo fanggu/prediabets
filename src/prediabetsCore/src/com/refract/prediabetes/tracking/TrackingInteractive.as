@@ -25,7 +25,8 @@ package com.refract.prediabetes.tracking {
 		}
 		override protected function loaderCompleteHandler(e:Event):void
 		{ 	 
-			
+			//trace(e.target)
+			//trace(e.target.data)
 		}
 		
 		override protected function httpStatusHandler(e:HTTPStatusEvent):void

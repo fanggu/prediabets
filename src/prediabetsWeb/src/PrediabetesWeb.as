@@ -45,6 +45,7 @@ package {
 				var paramUserId:Object = parameters.uid;
 				var paramTrackId:Object = parameters.tid;
 				var paramTimespentId : Object = parameters.timespentId ; 
+				trace('paramTimespentId.toString() ' , paramTimespentId.toString())
 				
 				TrackingSettings.USER_ID = paramUserId.toString() ; 
 				TrackingSettings.TRACK_ID = paramTrackId.toString() ;

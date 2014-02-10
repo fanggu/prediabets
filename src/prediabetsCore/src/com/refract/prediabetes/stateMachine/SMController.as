@@ -109,19 +109,25 @@ package com.refract.prediabetes.stateMachine {
 		
 		public function end() : void
 		{
-			if( AppSettings.TRACKING)
-			{
-				var trackingEnd : TrackingEnd = new TrackingEnd() ; 
-				trackingEnd.track() ; 
-			}
+			
+			var trackingEnd : TrackingEnd = new TrackingEnd(  ) ; 
+			var callBackObj : Object = {} ; 
+			callBackObj.callBack = callBackEnd ; 
+			callBackObj.scope = this ; 
+			trackingEnd.track( callBackObj ) ; 
+			
 			
 			DispatchManager.dispatchEvent(new Event(Flags.UPDATE_UI) ) ;
 			DispatchManager.dispatchEvent(new Event(Flags.HIDE_FOOTER_PLAY_PAUSE) ) ;
 			//DispatchManager.dispatchEvent( new ObjectEvent( Flags.STATE_MACHINE_END, endObject ) ) ; 
 			
-			goThankyouPage() ; 
+			//setTimeout( goThankyouPage , 500 )  ; 
 			
 			DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_END_BUTTON , _model.endButtonState) ) ;
+		}
+		public function callBackEnd( ) : void
+		{
+			goThankyouPage() ; 
 		}
 		private function goThankyouPage() : void
 		{
@@ -483,7 +489,6 @@ package com.refract.prediabetes.stateMachine {
 		}
 		private function checkAddress(  ) : void
 		{
-			trace('check address??')
 			var address : String = _model.selectedState ;
 			switch( address )
 			{				

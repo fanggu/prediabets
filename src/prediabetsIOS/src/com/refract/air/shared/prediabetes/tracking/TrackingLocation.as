@@ -92,27 +92,27 @@ package com.refract.air.shared.prediabetes.tracking {
         	var interfaces:Vector.<NetworkInterface> = networkInfo.findInterfaces(); 
 			if( interfaces != null ) 
 	        { 
-	            //trace( "Interface count: " + interfaces.length ); 
+	            trace( "Interface count: " + interfaces.length ); 
 	            for each ( var interfaceObj:NetworkInterface in interfaces ) 
 	            { 
-//	                trace( "\nname: "             + interfaceObj.name ); 
-//	                trace( "display name: "     + interfaceObj.displayName ); 
-//	                trace( "mtu: "                 + interfaceObj.mtu ); 
-//	                trace( "active?: "             + interfaceObj.active ); 
-//	                trace( "hardware address: " + interfaceObj.hardwareAddress ); 
+	                trace( "\nname: "             + interfaceObj.name ); 
+	                trace( "display name: "     + interfaceObj.displayName ); 
+	                trace( "mtu: "                 + interfaceObj.mtu ); 
+	                trace( "active?: "             + interfaceObj.active ); 
+	                trace( "hardware address: " + interfaceObj.hardwareAddress ); 
 	              
-	                //trace("# addresses: "     + interfaceObj.addresses.length ); 
+	                trace("# addresses: "     + interfaceObj.addresses.length ); 
 	                for each ( var address:InterfaceAddress in interfaceObj.addresses ) 
 	                { 
-	                    //trace( "  type: "           + address.ipVersion ); 
-	                    //trace( "  address: "         + address.address ); 
-	                    //trace( "  broadcast: "         + address.broadcast ); 
+	                    trace( "  type: "           + address.ipVersion ); 
+	                    trace( "  address: "         + address.address ); 
+	                    trace( "  broadcast: "         + address.broadcast ); 
 						if( address.broadcast.length > 0 && interfaceObj.active)
 						{
 							TrackingSettings.IP_ADDRESS = address.broadcast ; 
-							//trace('=== ' , address.broadcast )
+							trace('=== ' , address.broadcast )
 						}
-	                    //trace( "  prefix length: "     + address.prefixLength ); 
+	                    trace( "  prefix length: "     + address.prefixLength ); 
 	                } 
 	            }             
 	        } 

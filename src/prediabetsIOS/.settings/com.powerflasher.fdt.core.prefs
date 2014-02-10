@@ -2,7 +2,7 @@ AnePlatforms//Id.lib/NativeAlert.ane=pl.mateuszmackowiak.nativeANE.NativeAlert
 AnePlatforms//Id.lib/com.adobe.extension.Networkinfo.ane=com.adobe.Networkinfo
 AnePlatforms//Platforms.lib/NativeAlert.ane=iPhone-ARM,iPhone-x86,Windows-x86,Android-ARM,default
 AnePlatforms//Platforms.lib/com.adobe.extension.Networkinfo.ane=iPhone-ARM
-AnesChanged=92
+AnesChanged=96
 com.powerflasher.fdt.core.CompatiblePlayers=AIR_Debug_Launcher
 com.powerflasher.fdt.core.CompilerArguments=-static-link-runtime-shared-libraries\=true\n-target-player\={playerVersion}\n-library-path+\="{flexSDK}/frameworks/locale/en_US"\n-default-size\=550,400
 com.powerflasher.fdt.core.DefaultOutputFolder=bin
@@ -14,7 +14,7 @@ com.powerflasher.fdt.core.PassMainclass=true
 com.powerflasher.fdt.core.PassRsls=false
 com.powerflasher.fdt.core.PassSwcs=true
 com.powerflasher.fdt.core.PlatformType=MOBILE
-com.powerflasher.fdt.core.PlayerVersion=11.9
+com.powerflasher.fdt.core.PlayerVersion=12.0
 com.powerflasher.fdt.core.ProjectTypeHint=AIR Mobile
 com.powerflasher.fdt.core.Runtime=AIR
 com.powerflasher.fdt.core.SdkName=Flex 4.6.0 (2)
@@ -43,12 +43,12 @@ com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.58x58=assets/icons/prediabetes_ic
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.72x72=assets/icons/prediabetes_icon_72.PNG
 com.powerflasher.fdt.core.mobile.iOS.MOBILE.DESCRIPTOR=bin/prediabectsIOS-app.xml
 com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/prediabectsIOS-app.xml > prediabectsIOS-app.xml;bin/prediabectsIOS.swf > prediabectsIOS.swf;assets/Default@2x.png > Default@2x.png;assets/video;assets/img;
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=../../cert/Certificates_dev.p12
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=../../cert/Certificates_distr.p12
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=../../cert/prediabetes_ipad_dev.mobileprovision
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE.RELEASE=../../cert/prediabetes_ipad_distr.mobileprovision
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD=sIeHvkKXVzuHij6UAo7ejw\=\=
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD.RELEASE=sIeHvkKXVzuHij6UAo7ejw\=\=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=../../cert_refract/Certificates_dev.p12
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=../../cert_refract/Certificates_distr.p12
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=../../cert_refract/prediabetes_dev.mobileprovision
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE.RELEASE=../../cert_refract/prediabetes_appstore.mobileprovision
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD=HLM3yk7H/nc\=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD.RELEASE=HLM3yk7H/nc\=
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.REMEMBER.PWD=true
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.REMEMBER.PWD.RELEASE=true
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.USE.DIFEERENT.PROFILES=true

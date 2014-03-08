@@ -22,7 +22,7 @@ package com.refract.prediabetes {
 		public static var APP_VIDEO_BASE_URL 							: String ; 
 		public static var LOCALE										: String = "en";
 		public static var LOGO_ADDRESS 									: String = 'Logo' ; 
-		
+			
 		public static const BULK_LOADER_ID 								: String  = 'Videos' ; 
 		
 		//public static var DATA_PATH									  :String = "http://rob.otlabs.net/stuff/prediabetes/" ; //"data/" ;

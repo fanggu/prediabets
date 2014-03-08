@@ -121,7 +121,7 @@ package com.refract.prediabetes.stateMachine {
 			DispatchManager.dispatchEvent(new Event(Flags.HIDE_FOOTER_PLAY_PAUSE) ) ;
 			//DispatchManager.dispatchEvent( new ObjectEvent( Flags.STATE_MACHINE_END, endObject ) ) ; 
 			
-			//setTimeout( goThankyouPage , 500 )  ; 
+			setTimeout( goThankyouPage , 500 )  ; 
 			
 			DispatchManager.dispatchEvent( new ObjectEvent ( Flags.CREATE_END_BUTTON , _model.endButtonState) ) ;
 		}
@@ -595,6 +595,7 @@ package com.refract.prediabetes.stateMachine {
 		//**listener for backward funcionality
 		private function onBackwardState( evt : Event ) : void
 		{
+			DispatchManager.dispatchEvent( new Event ( Flags.REMOVE_END_BUTTON ) ) ; 
 			DispatchManager.dispatchEvent( new Event( Flags.UN_FREEZE ) )  ; 
 			DispatchManager.dispatchEvent( new Event( Flags.DEACTIVATE_VIDEO_RUN ) );
 			switch( true )
